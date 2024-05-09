@@ -6,7 +6,11 @@ const withPWA = withPWAInit({
   dest: "public",
 });
 
-const nextConfig = {};
+const nextConfig = {
+  sassOptions: {
+    includePaths: ["styles"],
+  },
+};
 
 export default withPWA({
   nextConfig,

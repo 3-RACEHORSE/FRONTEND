@@ -1,0 +1,39 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.login-main-container {
+  height: 100vh;
+
+  background: linear-gradient(to bottom, #52ebb6, #c8ffec);
+}
+
+.login-main-frame {
+  // background-color: red;
+  height: 400px;
+  width: 250px;
+  @include center-position;
+  @include center-element(column, space-evenly, center);
+}
+
+.login-main-btn {
+  background-color: rgba(0, 0, 0, 0.069);
+  height: 50px;
+  width: 250px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 20px;
+}
