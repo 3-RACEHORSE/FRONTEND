@@ -1,0 +1,28 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.nav-main-container {
+  position: fixed;
+  bottom: 0;
+  background: rgb(255, 255, 255);
+  padding: 5px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 0.5px solid rgb(217, 217, 217);
+}
