@@ -1,6 +1,7 @@
 export default interface ImageComponentProps {
   src: string;
-  width: string;
-  height: string;
-  margin?: string;
+  width: number;
+  height: number;
+  marginLeft?: string;
+  marginRight?: string;
 }

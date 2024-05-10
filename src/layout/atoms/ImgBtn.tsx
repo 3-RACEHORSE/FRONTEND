@@ -6,13 +6,21 @@ export default function ImgBtn({
   src,
   width,
   height,
-  margin,
+  marginLeft,
+  marginRight,
 }: ImageComponentProps) {
   const imageStyle: React.CSSProperties = {
-    width: width,
-    height: height,
-    margin: margin,
+    marginLeft: marginLeft,
+    marginRight: marginRight,
   };
 
-  return <img src={src} style={imageStyle} alt="이미지" />;
+  return (
+    <Image
+      src={src}
+      width={width}
+      height={height}
+      style={imageStyle}
+      alt="이미지"
+    />
+  );
 }
