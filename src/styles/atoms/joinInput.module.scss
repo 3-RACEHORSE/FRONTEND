@@ -1,0 +1,26 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.input {
+  // background-color: red;
+  width: 70%;
+  outline: none;
+  color: #5a5a5a;
+  border-bottom: 1px solid #d4d4d4;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

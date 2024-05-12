@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/layout/nav.module.scss";
-import ImgBtn from "../atoms/ImgBtn";
+import ImgBtn from "../../atoms/button/ImgBtn";
 
 export default function NavBar() {
   const HomeBtn = "/images/navbar/homeBtn.png";

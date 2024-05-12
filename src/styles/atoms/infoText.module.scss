@@ -1,0 +1,23 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.text {
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 40px;
+}
