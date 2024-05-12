@@ -1,0 +1,33 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.join-main-container {
+  // background-color: red;
+  height: 100vh;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.title-main-container {
+  background-color: red;
+  height: 100vh;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.join-phone-frame {
+  display: flex;
+}
