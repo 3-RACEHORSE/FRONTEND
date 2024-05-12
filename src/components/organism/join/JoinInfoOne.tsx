@@ -3,15 +3,33 @@
 import React, { useState, ChangeEvent } from "react";
 import InputWithButtonOne from "../../molecules/InputWithButtonOne";
 import Text from "../../atoms/Text/InfoText";
-import styles from "@/styles/organism/joinInfoOne.module.scss";
 import AuthWithText from "@/components/molecules/AuthWithText";
+import WatchList from "@/components/molecules/WatchList";
+import watchListData from "@/constants/watchListData";
+import SendBtn from "@/components/atoms/button/SendBtn";
 
 export default function DataFetcher() {
   const [inputValueOne, setInputValueOne] = useState<string>("");
   const [inputValueTwo, setInputValueTwo] = useState<string>("");
+  const [apple, setApple] = useState<{ [index: number]: string }[]>([]);
+  const [buttonStates, setButtonStates] = useState(watchListData);
 
-  const [data, setData] = useState<any>(null);
+  //활성화된 버튼 체크 및 양식에 맞춰, 적용
+  const handleToggle = (index: number) => {
+    const updatedButtons = buttonStates.map((button, i) =>
+      i === index ? { ...button, isActive: !button.isActive } : button
+    );
+    setButtonStates(updatedButtons);
 
+    const activeButtons = updatedButtons.filter((button) => button.isActive);
+    const formattedActiveButtons = activeButtons.reduce((acc, cur) => {
+      acc[cur.index] = cur.label;
+      return acc;
+    }, {} as { [index: number]: string });
+    setApple([formattedActiveButtons]);
+  };
+
+  //input 값 추적
   const handleChangeOne = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValueOne(event.target.value);
   };
@@ -23,6 +41,7 @@ export default function DataFetcher() {
   const fetchData = () => {
     // 이 부분에 API 호출 로직
     console.log(inputValueOne, inputValueTwo);
+    console.log(apple);
   };
 
   return (
@@ -41,7 +60,6 @@ export default function DataFetcher() {
           onClick={fetchData}
           buttonText="전송"
         />
-        {data && <div>{JSON.stringify(data)}</div>}
       </div>
       <Text title="인증" />
       <div>
@@ -51,8 +69,12 @@ export default function DataFetcher() {
           onClick={fetchData}
           buttonText="전송"
         />
-        {data && <div>{JSON.stringify(data)}</div>}
       </div>
+
+      {/* 관심목록 */}
+      <Text title="관심목록을 선택해주세요🙌" />
+      <WatchList buttons={buttonStates} onClick={handleToggle} />
+      <SendBtn onClick={fetchData} buttonText="가입하기" />
     </>
   );
 }

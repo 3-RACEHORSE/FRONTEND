@@ -1,17 +1,17 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import styles from "@/styles/atoms/certificationBtn.module.scss";
+import styles from "@/styles/atoms/sendBtn.module.scss";
 
 interface ButtonProps {
   onClick: () => void;
-  children: ReactNode;
+  buttonText: string;
 }
 
-export default function CertificationBtn({ onClick, children }: ButtonProps) {
+export default function SendBtn({ onClick, buttonText }: ButtonProps) {
   return (
     <button className={styles["button"]} onClick={onClick}>
-      {children}
+      {buttonText}
     </button>
   );
 }

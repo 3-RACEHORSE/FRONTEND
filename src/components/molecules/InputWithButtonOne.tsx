@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent } from "react";
 import JoinInput from "../atoms/input/JoinInput";
-import Button from "../atoms/button/CertificationBtn";
+import CertificationBtn from "../atoms/button/CertificationBtn";
 
 interface InputWithButtonProps {
   value: string;
@@ -20,7 +20,7 @@ export default function InputWithButtonOne({
   return (
     <div>
       <JoinInput value={value} onChange={onChange} />
-      <Button onClick={onClick}>{buttonText}</Button>
+      <CertificationBtn onClick={onClick}>{buttonText}</CertificationBtn>
     </div>
   );
 }
