@@ -27,3 +27,18 @@
   padding-right: 30px;
   margin-top: 25px;
 }
+
+.main-header-layout {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 999;
+}
+.main-header-container {
+  // background: rgb(228, 17, 17);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 40px;
+}
