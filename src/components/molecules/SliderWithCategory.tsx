@@ -8,8 +8,12 @@ export default function SliderWithCategory() {
     <nav className="flex flex-col justify-center overflow-x-auto">
       <ul className="flex">
         <img
-          src="/images/header/slider.png"
-          style={{ height: "20px", marginTop: "9px", marginLeft: "5px" }}
+          src="/images/header/slider1.png"
+          style={{
+            height: "17px",
+            marginTop: "11px",
+            marginLeft: "10px",
+          }}
         />
 
         <CategoryText title="디자인" />

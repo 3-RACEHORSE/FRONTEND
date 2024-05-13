@@ -1,0 +1,90 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.main-article-container {
+  // background-color: beige;
+  padding: 3%;
+  // background-color: #00ee67;
+}
+
+.value-container {
+  // background-color: red;
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  margin-right: 13px;
+}
+
+.row {
+  // background-color: red;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  justify-content: space-between;
+  width: 48.3%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0.5px rgba(0, 0, 0, 0.2); /* 가로 오프셋, 세로 오프셋, 흐림 정도, 쉐도우 퍼짐, 색상 */
+}
+
+.column2 {
+  display: flex;
+  justify-content: space-between;
+  width: 31.5%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0.5px rgba(0, 0, 0, 0.2); /* 가로 오프셋, 세로 오프셋, 흐림 정도, 쉐도우 퍼짐, 색상 */
+  padding: 3%;
+  margin-top: 10px;
+}
+
+.value-container {
+  // background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.bold-text {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.green-text {
+  font-weight: bold;
+  font-size: 12px;
+  color: #00ee67;
+  justify-content: end;
+}
+
+.gray-text {
+  font-weight: bold;
+  font-size: 13px;
+  color: #6c6c6c;
+}
+
+.center-text {
+  font-weight: bold;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

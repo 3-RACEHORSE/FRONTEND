@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Image from "next/image";
-import imageData from "@/constants/data";
+import bannerData from "@/constants/bannerData";
 
 function MainBanner() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -27,7 +27,7 @@ function MainBanner() {
           onChange={handleChange}
           showIndicators={false}
         >
-          {imageData.map((image, index) => (
+          {bannerData.map((image, index) => (
             <div key={index} style={{ position: "relative" }}>
               <Image
                 src={image.url}
