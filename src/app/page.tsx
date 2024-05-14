@@ -8,6 +8,7 @@ import styles from "@/styles/main/main.module.scss";
 import BoardTitle from "@/components/organism/main/BoardTitle";
 import SimpleBoardObject from "@/components/organism/main/SimpleBoardObject";
 import CategoryText from "@/components/atoms/Text/CategoryText";
+import Footer from "@/components/organism/layout/Footer";
 
 export default async function Home() {
   const session = await auth(); // session 호출 추가
@@ -60,7 +61,8 @@ export default async function Home() {
         </ul>
       </div>
 
-      {/* <NavBar /> */}
+      <Footer />
+      <NavBar />
     </main>
   );
 }

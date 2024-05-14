@@ -15,11 +15,13 @@ export default function SimpleBoardInfo({
   content,
   minPrice,
 }: BoardProps) {
+  const minPrcie = minPrice ? `✅최소 ${minPrice}` : "";
+
   return (
     <>
       <SimpleBoardTextOne title={title} />
       <SimpleBoardTextTwo content={content} />
-      <SimpleBoardTextThree minPrice={minPrice} />
+      <SimpleBoardTextThree minPrice={minPrcie} />
     </>
   );
 }

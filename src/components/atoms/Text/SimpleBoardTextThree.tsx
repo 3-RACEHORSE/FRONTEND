@@ -6,5 +6,5 @@ interface TextProps {
 }
 
 export default function SimpleBoardTextThree({ minPrice }: TextProps) {
-  return <p className={styles["boardMinPrice"]}>✅최소 {minPrice}</p>;
+  return <p className={styles["boardMinPrice"]}>{minPrice}</p>;
 }
