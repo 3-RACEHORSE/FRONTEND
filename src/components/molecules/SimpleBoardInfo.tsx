@@ -1,20 +1,25 @@
 import React, { ChangeEvent } from "react";
-import TitleText from "../atoms/Text/TitleText";
-import BusinessCard from "../atoms/icon/Approval";
-import styles from "@/styles/molecules/iconWithText.module.scss";
-import CheckMark from "../atoms/icon/CheckMark";
+import SimpleBoardTextOne from "../atoms/Text/SimpleBoardTextOne";
+import SimpleBoardTextTwo from "../atoms/Text/SimpleBoardTextTwo";
+import SimpleBoardTextThree from "../atoms/Text/SimpleBoardTextThree";
 
 interface BoardProps {
   category?: string;
-  title: string;
+  title?: string;
+  content?: string;
   src?: string;
   minPrice?: string;
 }
 export default function SimpleBoardInfo({
-  category,
   title,
-  src,
+  content,
   minPrice,
 }: BoardProps) {
-  return <></>;
+  return (
+    <>
+      <SimpleBoardTextOne title={title} />
+      <SimpleBoardTextTwo content={content} />
+      <SimpleBoardTextThree minPrice={minPrice} />
+    </>
+  );
 }

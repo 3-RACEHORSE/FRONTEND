@@ -3,6 +3,8 @@
 import React from "react";
 import styles from "@/styles/main/main.module.scss";
 import BoardInfo from "@/components/molecules/SimpleBoardInfo";
+import SimpleBoardInfo from "@/components/molecules/SimpleBoardInfo";
+import ImgWithCategory from "@/components/molecules/ImgWithCategory";
 
 interface BoardProps {
   category?: string;
@@ -21,13 +23,8 @@ export default function SimpleBoardObject({
 }: BoardProps) {
   return (
     <div className={styles["flexBox"]}>
-      <div className={styles["boardContainer"]}>
-        <img src={src} alt="" className={styles["boardImage"]} />
-        <div className={styles["categoryLabel"]}>{category}</div>
-      </div>
-      <p className={styles["boardTitle"]}>{title}</p>
-      <p className={styles["boardContent"]}>{content}</p>
-      <p className={styles["boardMinPrice"]}>✅최소 {minPrice}</p>
+      <ImgWithCategory src={src} category={category} />
+      <SimpleBoardInfo title={title} content={content} minPrice={minPrice} />
     </div>
   );
 }
