@@ -1,0 +1,39 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.footer-layout {
+  bottom: 0;
+  left: 0;
+  background-color: #f1f1f1;
+  height: 27vh;
+  width: 100%;
+  padding: 3%;
+  padding-top: 5.5%;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* 오래된 버전의 브라우저에서 호환성을 위해 추가 */
+  margin-top: 50px;
+}
+.footer-text1 {
+  font-size: 12px;
+  color: #1b1a1a;
+}
+.footer-text2 {
+  font-size: 12px;
+  margin-top: 20px;
+  color: #1b1a1a;
+}
