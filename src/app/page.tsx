@@ -15,7 +15,7 @@ export default async function Home() {
   console.log(session);
 
   return (
-    <main className={styles["main"]}>
+    <main>
       <Header />
       <MainBanner />
       <MainArticle />

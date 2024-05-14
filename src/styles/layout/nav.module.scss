@@ -16,7 +16,7 @@
 }
 
 .nav-main-container {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   background: #ffffff;
   padding-bottom: 28px;
@@ -26,4 +26,26 @@
   display: flex;
   justify-content: space-evenly;
   border-top: 0.5px solid rgb(217, 217, 217);
+}
+
+.nav-iconWithText-container {
+  // background-color: red;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.nav-iconWithText-container-text {
+  font-size: 11px;
+  color: #adadad;
+  font-weight: 500;
+}
+.nav-iconWithText-container-text-true {
+  font-size: 11px;
+  color: #000000;
+  font-weight: 800;
 }
