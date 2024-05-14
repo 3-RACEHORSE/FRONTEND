@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-
 import styles from "@/styles/layout/nav.module.scss";
 import FHome from "@/components/atoms/icon/false/FHome";
 import FList from "@/components/atoms/icon/false/FList";

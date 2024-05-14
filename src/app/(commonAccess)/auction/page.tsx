@@ -11,8 +11,7 @@ export default function Page() {
       <div className={styles["ddd"]}></div>
       <div className={styles["ddd"]}></div>
       <div className={styles["aaa"]}></div>
-
-      <NavBar />
+      {/* <NavBar /> */}
     </main>
   );
 }
