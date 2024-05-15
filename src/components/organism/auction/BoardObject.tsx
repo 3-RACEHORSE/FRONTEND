@@ -1,15 +1,34 @@
 "use client";
 
 import React, { useState, ChangeEvent } from "react";
+import BoardInfo from "@/components/molecules/BoardInfo";
 import styles from "@/styles/organism/boardObject.module.scss";
 import Image from "next/image";
 
-export default function BoardObject() {
+interface BoardProps {
+  src?: string;
+  title: string;
+  detail?: string;
+  category?: string;
+  minPrice?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export default function BoardObject({
+  src,
+  title,
+  detail,
+  category,
+  minPrice,
+  startDate,
+  endDate,
+}: BoardProps) {
   return (
     <div className={styles["boardObject-container"]}>
       <div className={styles["boardObject-element1"]}>
         <img
-          src={"/dummy/profile.jpg"}
+          src={src}
           alt={""}
           style={{
             border: "1px solid #e3e3e3",
@@ -19,23 +38,14 @@ export default function BoardObject() {
           }}
         />
       </div>
-      <div className={styles["boardObject-element2"]}>
-        <p className={styles["boardObject-element2-text1"]}>G사 CTO 멘토링</p>
-        <p className={styles["boardObject-element2-text2"]}>
-          시니어 경력 17년차 프론트엔드 개발자..
-        </p>
-        <div className={styles["boardObject-element2-layout"]}>
-          <div className={styles["boardObject-element2-tag1"]}>
-            세무·법무·노무
-          </div>
-          <div className={styles["boardObject-element2-tag2"]}>
-            ✅최소 9,999
-          </div>
-        </div>
-        <p className={styles["boardObject-element2-text3"]}>
-          9999.99.99 {"~"} 9999.99.99
-        </p>
-      </div>
+      <BoardInfo
+        title={title}
+        detail={detail}
+        category={category}
+        minPrice={minPrice}
+        startDate={startDate}
+        endDate={endDate}
+      />
     </div>
   );
 }
