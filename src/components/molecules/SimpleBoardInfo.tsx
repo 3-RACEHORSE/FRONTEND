@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ChangeEvent } from "react";
 import SimpleBoardTextOne from "../atoms/Text/SimpleBoardTextOne";
 import SimpleBoardTextTwo from "../atoms/Text/SimpleBoardTextTwo";

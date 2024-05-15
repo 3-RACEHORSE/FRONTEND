@@ -19,21 +19,25 @@
   bottom: 0;
   left: 0;
   background-color: #f1f1f1;
-  height: 27vh;
+  height: 20vh;
   width: 100%;
   padding: 3%;
-  padding-top: 5.5%;
-
   word-wrap: break-word;
   overflow-wrap: break-word; /* 오래된 버전의 브라우저에서 호환성을 위해 추가 */
   margin-top: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .footer-text1 {
   font-size: 12px;
-  color: #1b1a1a;
+  font-weight: 500;
+  color: #5c5c5c;
 }
 .footer-text2 {
   font-size: 12px;
   margin-top: 20px;
-  color: #1b1a1a;
+  font-weight: 500;
+  color: #5c5c5c;
 }

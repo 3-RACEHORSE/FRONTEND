@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ChangeEvent } from "react";
 import TitleText from "../atoms/Text/TitleText";
 import BusinessCard from "../atoms/icon/Approval";

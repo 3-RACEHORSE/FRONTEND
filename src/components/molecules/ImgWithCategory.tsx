@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ChangeEvent } from "react";
 import styles from "@/styles/main/main.module.scss";
 
