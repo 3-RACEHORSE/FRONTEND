@@ -10,7 +10,7 @@ export default function Page() {
     <main className={styles["login-main-frame"]}>
       <Image src={LoginLogo} alt="" width={500} height={500} />
       <LoginBtn />
-      {/* <NavBar /> */}
+      <NavBar />
     </main>
   );
 }

@@ -2,14 +2,17 @@
 
 import { usePathname } from "next/navigation";
 import styles from "@/styles/layout/nav.module.scss";
-import FHome from "@/components/atoms/icon/false/FHome";
-import FList from "@/components/atoms/icon/false/FList";
-import FSaved from "@/components/atoms/icon/false/FSaved";
-import FChat from "@/components/atoms/icon/false/FChat";
-import FMy from "@/components/atoms/icon/false/FMy";
-import THome from "@/components/atoms/icon/true/THome";
-import TList from "@/components/atoms/icon/true/TList";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+
+// Dynamic import for icons
+const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
+const FList = dynamic(() => import("@/components/atoms/icon/false/FList"));
+const FSaved = dynamic(() => import("@/components/atoms/icon/false/FSaved"));
+const FChat = dynamic(() => import("@/components/atoms/icon/false/FChat"));
+const FMy = dynamic(() => import("@/components/atoms/icon/false/FMy"));
+const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
+const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));
 
 export default function NavBar() {
   const pathNmae = usePathname();
