@@ -7,11 +7,11 @@ export default function Page() {
   return (
     <main>
       <Header />
-      <div className={styles["ddd"]}></div>
+      {/* <div className={styles["ddd"]}></div>
       <div className={styles["ddd"]}></div>
       <div className={styles["ddd"]}></div>
       <div className={styles["aaa"]}></div>
-      <NavBar />
+      <NavBar /> */}
     </main>
   );
 }
