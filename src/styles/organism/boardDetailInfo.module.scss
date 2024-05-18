@@ -1,0 +1,50 @@
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.boardDetailInfo-container {
+  //   background-color: red;
+  width: 100%;
+  padding: 3%;
+}
+
+.title {
+  padding: 2%;
+  background-color: #ebebeb;
+  color: #5d5d5d;
+  font-weight: bold;
+  border-radius: 7px;
+  @include center-element;
+  font-size: 13px;
+}
+
+.list-title {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(199, 199, 199);
+}
+.list-title-text {
+  // background-color: yellow;
+  font-size: 11px;
+  font-weight: 500;
+  color: #5d5d5d;
+}
+
+.list-element-layout {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(224, 224, 224);
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.flex {
+  // background-color: yellow;
+  font-size: 13px;
+  font-weight: bold;
+}

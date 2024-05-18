@@ -5,7 +5,11 @@ import BackBtn from "@/components/atoms/button/BackBtn";
 import TitleText from "@/components/atoms/Text/TitleText";
 import Gap from "@/components/atoms/etc/Gap";
 
-export default function BackHeader() {
+interface TextProps {
+  title: string;
+}
+
+export default function BackHeader({ title }: TextProps) {
   const handleBack = () => {
     console.log("d");
   };
@@ -14,7 +18,7 @@ export default function BackHeader() {
     <>
       <header className={styles["header-main-container"]}>
         <BackBtn onClick={handleBack} />
-        <TitleText title="회원가입" />
+        <TitleText title={title} />
         <Gap width={30} height={30} />
       </header>
     </>
