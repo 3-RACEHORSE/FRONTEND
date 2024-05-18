@@ -35,7 +35,9 @@ export default function BoardDetail() {
         </div>
       </div>
       <div className={styles["boardDetail-element2"]}>
-        <p className={styles["boardDetail-element2-content1"]}>최소 경매가</p>
+        <p className={styles["boardDetail-element2-content1"]}>
+          세무·법무·노무 / 최소 경매가
+        </p>
         <p className={styles["boardDetail-element2-content2"]}>99,999 원</p>
         <p className={styles["boardDetail-element2-content3"]}>
           G사 CTO 멘토링

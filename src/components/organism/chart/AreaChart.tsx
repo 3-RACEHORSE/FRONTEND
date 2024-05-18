@@ -5,11 +5,11 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const data = {
   labels: [
-    "9999.99.99.99",
-    "9999.99.99.99",
-    "9999.99.99.99",
-    "9999.99.99.99",
-    "9999.99.99.99",
+    "9999.99.99",
+    "9999.99.99",
+    "9999.99.99",
+    "9999.99.99",
+    "9999.99.99",
   ],
   datasets: [
     {
@@ -67,7 +67,7 @@ const options: any = {
 
 const AreaChart = () => {
   return (
-    <div>
+    <div style={{ paddingBottom: "15px" }}>
       <Line data={data} options={options} plugins={[ChartDataLabels]} />
     </div>
   );
