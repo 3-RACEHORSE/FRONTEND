@@ -29,7 +29,7 @@ export default function BoardDetail() {
               9999.99.99 까지
             </p>
             <p className={styles["boardDetail-element1-content-info2"]}>
-              7시간 이후 마감
+              7시간 남음🕛
             </p>
           </div>
         </div>

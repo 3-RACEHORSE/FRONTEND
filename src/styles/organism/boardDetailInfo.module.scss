@@ -1,0 +1,25 @@
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.boardDetailInfo-container {
+  //   background-color: red;
+  width: 100%;
+  padding: 3%;
+}
+
+.title {
+  padding: 2%;
+  background-color: #ebebeb;
+  color: #5d5d5d;
+  font-weight: bold;
+  border-radius: 7px;
+  @include center-element;
+  font-size: 13px;
+}
