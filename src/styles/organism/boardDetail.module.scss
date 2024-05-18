@@ -74,3 +74,26 @@
   font-weight: bold;
   @include center-element;
 }
+.boardDetail-element2 {
+  //   background-color: red;
+  width: 100%;
+  padding: 3%;
+}
+.boardDetail-element2-content1 {
+  font-size: 13px;
+}
+.boardDetail-element2-content2 {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.boardDetail-element2-content3 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: rgb(57, 57, 57);
+}
+.boardDetail-element2-content4 {
+  font-size: 13px;
+  color: gray;
+}
