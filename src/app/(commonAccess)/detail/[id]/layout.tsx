@@ -10,7 +10,7 @@ export default function Layout({ children }: Props) {
     <div>
       <BackHeader title="상세페이지" />
       {children}
-      <NavBar />
+      {/* <NavBar /> */}
     </div>
   );
 }

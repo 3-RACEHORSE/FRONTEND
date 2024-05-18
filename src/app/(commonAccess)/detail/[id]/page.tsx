@@ -1,9 +1,11 @@
 import Image from "next/image";
-import styles from "@/styles/auction/auction.module.scss";
-import Header from "@/components/organism/layout/Header";
-import NavBar from "@/components/organism/layout/NavBar";
-import BoardObject from "@/components/organism/auction/BoardObject";
+
+import BoardDetail from "@/components/organism/boardDetail/BoardDetail";
 
 export default function Page() {
-  return <main>보드입니다.</main>;
+  return (
+    <main>
+      <BoardDetail />
+    </main>
+  );
 }
