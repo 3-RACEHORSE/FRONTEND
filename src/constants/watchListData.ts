@@ -12,7 +12,7 @@ const watchListData = [
   { index: 11, label: "직업역량 레슨", isActive: false },
   { index: 12, label: "운세", isActive: false },
   { index: 13, label: "심리상담", isActive: false },
-  { index: 14, label: "취미 레슨", isActive: false },
+  { index: 14, label: "취미·레슨", isActive: false },
 ];
 
 export default watchListData;

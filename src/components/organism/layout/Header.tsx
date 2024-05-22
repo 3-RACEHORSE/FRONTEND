@@ -10,19 +10,25 @@ import SearchWithAlarm from "@/components/molecules/SearchWithAlarm";
 import SliderWithCategory from "@/components/molecules/SliderWithCategory";
 import { usePathname } from "next/navigation";
 import BoardCategory from "@/components/molecules/BoardCategory";
+import Link from "next/link";
 
 export default function Header() {
-  const pathNmae = usePathname();
-  console.log("pathNmae", pathNmae);
+  const pathName = usePathname();
+  console.log("pathNmae", pathName);
 
   return (
     <header className={styles["main-header-layout"]}>
       <div className={styles["main-header-container"]}>
         <SearchWithAlarm />
       </div>
-
       {/* 추후 수정 필요 */}
-      {pathNmae === "/" ? <SliderWithCategory /> : <BoardCategory />}
+      {pathName === "/" ? (
+        <SliderWithCategory />
+      ) : pathName.startsWith("/auction") ? (
+        <BoardCategory />
+      ) : (
+        <></>
+      )}
     </header>
   );
 }
