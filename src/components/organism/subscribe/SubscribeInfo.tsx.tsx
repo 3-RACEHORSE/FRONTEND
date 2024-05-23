@@ -6,10 +6,13 @@ import IconWithTitle from "@/components/molecules/IconWithTitle";
 import CategoryText from "@/components/atoms/Text/CategoryText";
 import SubscribeList from "@/components/organism/subscribe/SubscribeObject";
 
-export default function SubScribeInfo() {
+interface SubScribeInfoProps {
+  title: string;
+}
+export default function SubScribeInfo({ title }: SubScribeInfoProps) {
   return (
     <div>
-      <IconWithTitle title="✅구독" />
+      <IconWithTitle title={title} />
     </div>
   );
 }
