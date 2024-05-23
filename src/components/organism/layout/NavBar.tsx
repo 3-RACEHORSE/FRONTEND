@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import styles from "@/styles/layout/nav.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import TSaved from "@/components/atoms/icon/true/TSaved";
 
 // Dynamic import for icons
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
@@ -64,10 +65,25 @@ export default function NavBar() {
         </Link>
 
         {/* 버튼3 */}
-        <div className={styles["nav-iconWithText-container"]}>
-          <FSaved />
-          <div className={styles["nav-iconWithText-container-text"]}>SAVED</div>
-        </div>
+        <Link href="/subscribe">
+          <div className={styles["nav-iconWithText-container"]}>
+            {pathNmae === "/subscribe" ? (
+              <>
+                <TSaved />
+                <div className={styles["nav-iconWithText-container-text-true"]}>
+                  SAVED
+                </div>
+              </>
+            ) : (
+              <>
+                <FSaved />
+                <div className={styles["nav-iconWithText-container-text"]}>
+                  SAVED
+                </div>
+              </>
+            )}
+          </div>
+        </Link>
 
         {/* 버튼4 */}
         <div className={styles["nav-iconWithText-container"]}>
