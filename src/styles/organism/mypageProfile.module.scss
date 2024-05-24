@@ -133,3 +133,33 @@
   font-size: 12px;
   font-weight: 500;
 }
+
+.btn-container2 {
+  display: flex;
+  // background-color: red;
+  justify-content: space-between;
+  width: 100%;
+  // padding: 3%;
+  margin-top: 10%;
+}
+
+.button1 {
+  width: 48%;
+  aspect-ratio: 5 / 1;
+  border-radius: 7px;
+  background-color: rgb(68, 48, 48);
+  font-size: 14px;
+  color: #ffffff;
+  background: black;
+}
+
+.button2 {
+  width: 48%;
+  aspect-ratio: 5 / 1;
+  border-radius: 7px;
+  background-color: rgb(68, 48, 48);
+  font-size: 14px;
+  color: #000000;
+  background: rgb(255, 255, 255);
+  border: 1px solid #000000;
+}
