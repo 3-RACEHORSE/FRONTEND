@@ -5,6 +5,7 @@ import styles from "@/styles/layout/nav.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import TSaved from "@/components/atoms/icon/true/TSaved";
+import TMy from "@/components/atoms/icon/true/TMy";
 
 // Dynamic import for icons
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
@@ -91,11 +92,25 @@ export default function NavBar() {
           <div className={styles["nav-iconWithText-container-text"]}>CHAT</div>
         </div>
 
-        {/* 버튼5 */}
-        <div className={styles["nav-iconWithText-container"]}>
-          <FMy />
-          <div className={styles["nav-iconWithText-container-text"]}>MY</div>
-        </div>
+        <Link href="/mypage">
+          <div className={styles["nav-iconWithText-container"]}>
+            {pathNmae === "/mypage" ? (
+              <>
+                <TMy />
+                <div className={styles["nav-iconWithText-container-text-true"]}>
+                  MY
+                </div>
+              </>
+            ) : (
+              <>
+                <FMy />
+                <div className={styles["nav-iconWithText-container-text"]}>
+                  MY
+                </div>
+              </>
+            )}
+          </div>
+        </Link>
       </nav>
     </>
   );

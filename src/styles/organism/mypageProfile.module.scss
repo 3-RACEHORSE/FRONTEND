@@ -1,0 +1,135 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.mypage-container {
+  //   background-color: red;
+  border-bottom: 5px solid #f0f0f0;
+}
+
+.mypage-profile {
+  //   background-color: blue;
+  display: flex;
+  padding-left: 3%;
+}
+
+.profile-img {
+  width: 30%;
+  aspect-ratio: 1 / 1;
+  border-radius: 100px;
+  border: 2px solid #e3e3e3;
+}
+
+.profile-info {
+  //   background-color: aqua;
+  width: 60%;
+  aspect-ratio: 2 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 3%;
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profile-element1 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.profile-element2 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 6%;
+}
+
+.category-container {
+  width: 100%;
+  //   background-color: aqua;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.category-container p {
+  width: fit-content;
+  background-color: white;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 7px;
+  font-size: 11px;
+  margin-left: 3%;
+  margin-top: 2%;
+  border: 1px solid #e3e3e3;
+}
+
+.btn-container {
+  display: flex;
+  //   background-color: red;
+  justify-content: space-between;
+  width: 100%;
+  padding: 3%;
+}
+
+.btn-container button {
+  width: 48%;
+  aspect-ratio: 6 / 1;
+  border-radius: 7px;
+  background-color: rgb(68, 48, 48);
+  font-size: 12px;
+  color: #ffffff;
+  background: black;
+}
+
+.setting-container {
+  // background: blue;
+  width: 100%;
+  padding-bottom: 2%;
+  border-bottom: 5px solid #f0f0f0;
+}
+
+.setting-element1 {
+  // background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5%;
+  padding-bottom: 3%;
+}
+
+.setting-element2 {
+  // background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.setting-element-layout {
+  // background: rgb(216, 25, 25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+}
+
+.setting-element-layout p {
+  font-size: 12px;
+  font-weight: 500;
+}
