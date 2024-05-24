@@ -47,11 +47,11 @@ export default function MypageProfile() {
         <div className={styles["setting-element1"]}>
           <div className={styles["setting-element-layout"]}>
             <PiUserLight style={{ width: "25px", height: "25px" }} />
-            <p>계정관리</p>
+            <p>로그아웃</p>
           </div>
           <div className={styles["setting-element-layout"]}>
             <PiMoneyWavyThin style={{ width: "25px", height: "25px" }} />
-            <p>경매</p>
+            <p>나의경매</p>
           </div>
           <div className={styles["setting-element-layout"]}>
             <CiViewList style={{ width: "25px", height: "25px" }} />
@@ -73,6 +73,9 @@ export default function MypageProfile() {
             />
             <p>공지사항</p>
           </div>
+        </div>
+        <div style={{ padding: "2.5%" }}>
+          <img src="/images/banner/adv1.png"></img>
         </div>
       </div>
     </>
