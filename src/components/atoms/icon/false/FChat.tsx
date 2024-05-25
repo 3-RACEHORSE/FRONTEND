@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { RiChat1Line } from "react-icons/ri";
 

@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "@/styles/layout/header.module.scss";
 import TitleText from "@/components/atoms/Text/TitleText";
 import Gap from "@/components/atoms/etc/Gap";

@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { GoHome } from "react-icons/go";
 
