@@ -10,6 +10,7 @@ import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import useJoinHook from "@/hooks/useJoinHook";
 
 interface DataFetcherProps {
   email: string;
@@ -25,16 +26,23 @@ export default function DataFetcher({
 }: DataFetcherProps) {
   const router = useRouter();
 
-  const [inputValueOne, setInputValueOne] = useState<string>("");
-  const [checkValid1, setCheckValid1] = useState<boolean>(false);
-
-  const [inputValueTwo, setInputValueTwo] = useState<string>("");
-  const [checkValid2, setCheckValid2] = useState<boolean>(false);
-
-  const [apple, setApple] = useState<{ [index: number]: string }[]>([]);
-  const [buttonStates, setButtonStates] = useState(watchListData);
+  const {
+    inputValueOne,
+    setInputValueOne,
+    checkValid1,
+    setCheckValid1,
+    inputValueTwo,
+    setInputValueTwo,
+    checkValid2,
+    setCheckValid2,
+    apple,
+    setApple,
+    buttonStates,
+    setButtonStates,
+  } = useJoinHook();
 
   // 로그인 유효성 검사 api
+
   const handleLoginValid = async () => {
     try {
       const res = await fetch(
