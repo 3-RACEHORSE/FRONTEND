@@ -9,6 +9,7 @@ import watchListData from "@/constants/watchListData";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 interface DataFetcherProps {
   email: string;
@@ -22,6 +23,8 @@ export default function DataFetcher({
   snsType,
   snsId,
 }: DataFetcherProps) {
+  const router = useRouter();
+
   const [inputValueOne, setInputValueOne] = useState<string>("");
   const [checkValid1, setCheckValid1] = useState<boolean>(false);
 
@@ -50,6 +53,7 @@ export default function DataFetcher({
       );
       if (res.status === 200) {
         console.log("회원가입된 사람");
+        router.push("/");
       }
       if (res.status === 404) {
         console.log("회원가입이 필요한 사람");
@@ -171,7 +175,7 @@ export default function DataFetcher({
           confirmButtonText: "확인",
         }).then((result) => {
           if (result.isConfirmed) {
-            console.log("회원가입 완료");
+            router.push("/login");
           }
         });
       }
