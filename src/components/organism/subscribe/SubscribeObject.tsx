@@ -1,15 +1,17 @@
-"use client";
-
-import React, { ChangeEvent } from "react";
 import Image from "next/image";
 import styles from "@/styles/subscribe/subscribe.module.scss";
 
-export default function SubscribeObject() {
+interface SubscribeProps {
+  src: string;
+  name?: string;
+}
+
+export default function SubscribeObject({ src, name }: SubscribeProps) {
   return (
     <div className={styles["flexBox"]}>
       <div className={styles["element-container"]}>
         <Image
-          src="/dummy/profile.jpg"
+          src={src}
           alt=""
           width={100}
           height={100}
@@ -19,7 +21,7 @@ export default function SubscribeObject() {
             marginLeft: "3%",
           }}
         />
-        <p>CHO</p>
+        <p>{name}</p>
       </div>
     </div>
   );

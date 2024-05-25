@@ -9,17 +9,17 @@ export default function Page() {
       <SubScribeInfo title="✅구독" />
       <div className="flex flex-col justify-center w-full h-200">
         <div className="flex overflow-x-auto">
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
-          <SubscribeObject />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
+          <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
         </div>
       </div>
       {/* <SubScribeInfo title="✅북마크" /> */}

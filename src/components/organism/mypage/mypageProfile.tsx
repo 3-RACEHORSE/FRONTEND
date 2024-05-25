@@ -1,9 +1,4 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
 import styles from "@/styles/organism/mypageProfile.module.scss";
-import IconWithTitle from "@/components/molecules/IconWithTitle";
-import IconWithTextOne from "@/components/molecules/IconWithTitle";
 import { PiUserLight } from "react-icons/pi";
 import { PiMoneyWavyThin } from "react-icons/pi";
 import { CiViewList } from "react-icons/ci";
