@@ -8,7 +8,7 @@ export default function LoginBtn() {
   const onClick = async () => {
     await signIn("google", {
       redirect: true,
-      callbackUrl: "/", // 추후 변경 필요
+      callbackUrl: "/loginvalid", // 추후 변경 필요
     });
   };
 
