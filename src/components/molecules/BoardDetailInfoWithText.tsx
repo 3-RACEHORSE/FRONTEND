@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "@/styles/organism/boardDetail.module.scss";
 
 interface BoardDetailProps {

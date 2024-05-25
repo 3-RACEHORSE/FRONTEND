@@ -1,6 +1,3 @@
-"use client";
-
-import React, { ChangeEvent } from "react";
 import styles from "@/styles/organism/profileDetail.module.scss";
 interface ProfileTextProps {
   title: string;

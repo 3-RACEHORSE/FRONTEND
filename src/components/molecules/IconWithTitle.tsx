@@ -1,6 +1,3 @@
-"use client";
-
-import React, { ChangeEvent } from "react";
 import BoardTitleText from "../atoms/Text/BoardTitleText";
 import ImageTag from "@/components/atoms/etc/ImageTag";
 

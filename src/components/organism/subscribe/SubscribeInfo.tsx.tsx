@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/organism/profileInfo.module.scss";
 import IconWithTitle from "@/components/molecules/IconWithTitle";

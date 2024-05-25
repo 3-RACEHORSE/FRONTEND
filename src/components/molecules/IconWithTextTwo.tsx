@@ -1,6 +1,3 @@
-"use client";
-
-import React, { ChangeEvent } from "react";
 import TitleText from "../atoms/Text/TitleText";
 import BusinessCard from "../atoms/icon/Approval";
 import styles from "@/styles/molecules/iconWithText.module.scss";

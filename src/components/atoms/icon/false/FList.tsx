@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { RiFileList2Line } from "react-icons/ri";
 

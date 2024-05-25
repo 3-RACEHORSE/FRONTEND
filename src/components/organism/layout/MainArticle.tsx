@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "@/styles/layout/mainArticle.module.scss";
 import BusinessCard from "@/components/atoms/icon/Approval";
 import IconWithTextOne from "@/components/molecules/IconWithTextOne";

@@ -1,6 +1,3 @@
-"use client";
-
-import React, { useState, ChangeEvent } from "react";
 import styles from "@/styles/organism/boardDetailInfo.module.scss";
 import AreaChart from "@/components/organism/chart/AreaChart";
 

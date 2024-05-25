@@ -1,6 +1,3 @@
-// SimpleBoardObject.tsx
-"use client";
-
 import React from "react";
 import styles from "@/styles/main/main.module.scss";
 import BoardInfo from "@/components/molecules/SimpleBoardInfo";

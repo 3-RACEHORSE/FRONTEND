@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "@/styles/organism/boardDetailBar.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
