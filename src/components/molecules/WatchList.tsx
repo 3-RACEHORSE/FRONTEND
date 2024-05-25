@@ -12,9 +12,6 @@ export default function WatchList({
   buttons,
   onClick,
 }: ToggleButtonGroupProps) {
-  const fetchData = () => {
-    console.log("d");
-  };
   return (
     <div className={styles["list-container"]}>
       {buttons &&
