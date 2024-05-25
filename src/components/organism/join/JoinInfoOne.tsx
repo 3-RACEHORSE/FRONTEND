@@ -8,6 +8,7 @@ import WatchList from "@/components/molecules/WatchList";
 import watchListData from "@/constants/watchListData";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
+import Swal from "sweetalert2";
 
 interface DataFetcherProps {
   email: string;
@@ -50,6 +51,9 @@ export default function DataFetcher({
       if (res.status === 200) {
         console.log("회원가입된 사람");
       }
+      if (res.status === 404) {
+        console.log("회원가입이 필요한 사람");
+      }
     } catch (error) {
       console.error("API 통신 오류:", error);
       return false;
@@ -79,7 +83,19 @@ export default function DataFetcher({
 
       if (res.status === 200) {
         console.log("전화 인증 완료");
+        Swal.fire({
+          title: "문자를 확인해주세요!",
+          icon: "success",
+          confirmButtonText: "확인",
+        });
         setCheckValid1(!checkValid1);
+      }
+      if (res.status === 400) {
+        Swal.fire({
+          title: "다시 작성해주세요!",
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     } catch (error) {
       console.error("API 통신 오류:", error);
@@ -105,8 +121,19 @@ export default function DataFetcher({
       );
 
       if (res.status === 200) {
-        console.log("코드 인증 완료");
+        Swal.fire({
+          title: "승인 되었습니다!",
+          icon: "success",
+          confirmButtonText: "확인",
+        });
         setCheckValid2(!checkValid2);
+      }
+      if (res.status === 400) {
+        Swal.fire({
+          title: "다시 작성해주세요!",
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     } catch (error) {
       console.error("API 통신 오류:", error);
@@ -138,6 +165,15 @@ export default function DataFetcher({
 
       if (res.status === 200) {
         console.log("회원가입 완료");
+        Swal.fire({
+          title: "회원가입을 축하드립니다!",
+          icon: "success",
+          confirmButtonText: "확인",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            console.log("회원가입 완료");
+          }
+        });
       }
     } catch (error) {
       console.error("API 통신 오류:", error);
@@ -204,6 +240,14 @@ export default function DataFetcher({
       <Text title="관심목록을 선택해주세요🙌" />
       <WatchList buttons={buttonStates} onClick={handleToggle} />
 
+      {/* 지워야할것- 임시 가입 */}
+      {/* {Object.keys(apple[0] || {}).length !== 0 ? (
+        <SendBtn onClick={handleJoin} buttonText="가입하기" />
+      ) : (
+        <SendBtnInValid buttonText="가입하기" />
+      )} */}
+
+      {/* 적용해야할것- 원본 가입 */}
       {Object.keys(apple[0] || {}).length !== 0 && checkValid2 ? (
         <SendBtn onClick={handleJoin} buttonText="가입하기" />
       ) : (
