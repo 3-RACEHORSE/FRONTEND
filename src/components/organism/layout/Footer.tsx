@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "@/styles/layout/footer.module.scss";
 import SimpleBoardTextTwo from "@/components/atoms/Text/SimpleBoardTextTwo";
 import InfoText from "@/components/atoms/Text/InfoText";

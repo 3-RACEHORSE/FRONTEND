@@ -1,6 +1,3 @@
-"use client";
-
-import React, { useState, ChangeEvent } from "react";
 import styles from "@/styles/organism/boardDetail.module.scss";
 import BoardDetailInfoWithText from "@/components/molecules/BoardDetailInfoWithText";
 

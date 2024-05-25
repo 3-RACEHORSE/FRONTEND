@@ -1,7 +1,3 @@
-"use client";
-
-import React, { ChangeEvent } from "react";
-
 import styles from "@/styles/molecules/iconWithText.module.scss";
 import Approval from "../atoms/icon/Approval";
 
