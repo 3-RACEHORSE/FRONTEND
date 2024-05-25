@@ -10,7 +10,7 @@ export const {
   signOut,
 } = NextAuth({
   pages: {
-    signIn: "/loginvalid",
+    signIn: "/join",
   },
   providers: [
     GoogleProvider({

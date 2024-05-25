@@ -26,16 +26,13 @@ export default function LoginValid({ email, snsType, snsId }: LoginValidProps) {
           }),
         }
       );
-      if (res.status === 400) {
+      if (res.status === 200) {
+        console.log("회원가입된 사람");
+      }
+
+      if (res.status === 404) {
         console.log("존재안함");
       }
-      // const data = await res.json();
-      // console.log(data);
-      // if (response.status === 200) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
     } catch (error) {
       console.error("API 통신 오류:", error);
       return false;

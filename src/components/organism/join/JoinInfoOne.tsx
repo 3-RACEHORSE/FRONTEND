@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import InputWithButtonOne from "../../molecules/InputWithButtonOne";
 import Text from "../../atoms/Text/InfoText";
 import AuthWithText from "@/components/molecules/AuthWithText";
@@ -8,11 +8,51 @@ import WatchList from "@/components/molecules/WatchList";
 import watchListData from "@/constants/watchListData";
 import SendBtn from "@/components/atoms/button/SendBtn";
 
-export default function DataFetcher() {
+interface DataFetcherProps {
+  email: string;
+  name: string;
+  snsType: string;
+  snsId: string;
+}
+export default function DataFetcher({
+  email,
+  name,
+  snsType,
+  snsId,
+}: DataFetcherProps) {
   const [inputValueOne, setInputValueOne] = useState<string>("");
   const [inputValueTwo, setInputValueTwo] = useState<string>("");
   const [apple, setApple] = useState<{ [index: number]: string }[]>([]);
   const [buttonStates, setButtonStates] = useState(watchListData);
+
+  const handleLoginValid = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/non-authorization/users/login`,
+        {
+          method: "POST", // 또는 "POST" 등 필요한 메서드로 변경
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            snsType: snsType,
+            snsId: snsId,
+          }),
+        }
+      );
+      if (res.status === 200) {
+        console.log("회원가입된 사람");
+      }
+    } catch (error) {
+      console.error("API 통신 오류:", error);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    handleLoginValid();
+  }, []);
 
   //활성화된 버튼 체크 및 양식에 맞춰, 적용
   const handleToggle = (index: number) => {
@@ -47,10 +87,10 @@ export default function DataFetcher() {
   return (
     <>
       <div>
-        <AuthWithText title="아이디(이메일)" value="값" />
+        <AuthWithText title="아이디(이메일)" value={email} />
       </div>
       <div>
-        <AuthWithText title="이름" value="값" />
+        <AuthWithText title="이름" value={name} />
       </div>
       <Text title="전화번호" />
       <div>
