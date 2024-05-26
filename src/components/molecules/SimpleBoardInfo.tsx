@@ -7,8 +7,8 @@ import SimpleBoardTextThree from "../atoms/Text/SimpleBoardTextThree";
 
 interface BoardProps {
   category?: string;
-  title?: string;
-  content?: string;
+  title: string;
+  content: string;
   src?: string;
   minPrice?: string;
 }
