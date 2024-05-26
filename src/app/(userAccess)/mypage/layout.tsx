@@ -9,12 +9,5 @@ import TextHeader from "@/components/organism/layout/TextHeader";
 type Props = { children: ReactNode };
 
 export default function Layout({ children }: Props) {
-  return (
-    <div>
-      <TextHeader title="마이페이지" />
-      {children}
-      <Footer />
-      <NavBar />
-    </div>
-  );
+  return <div>{children}</div>;
 }
