@@ -1,5 +1,5 @@
 import IconWithTitle from "@/components/molecules/IconWithTitle";
-import ProfileWithText from "@/components/molecules/ProfileWithText";
+import ProfileWithTextEvent from "@/components/molecules/ProfileWithTextEvent";
 import BackHeader from "@/components/organism/layout/BackHeader";
 import Footer from "@/components/organism/layout/Footer";
 import ResumeEdit from "@/components/organism/resume/ResumeEdit";
@@ -46,7 +46,7 @@ export default async function Page() {
           item: { job: string; year: any; month: any },
           index: Key | null | undefined
         ) => (
-          <ProfileWithText
+          <ProfileWithTextEvent
             key={index}
             title={item.job}
             info1={`${item.year}년 ${item.month}개월`}
@@ -65,7 +65,7 @@ export default async function Page() {
           item: { certification_name: string; issue_date: any; agency: any },
           index: Key | null | undefined
         ) => (
-          <ProfileWithText
+          <ProfileWithTextEvent
             key={index}
             title={item.certification_name}
             info1={item.agency}

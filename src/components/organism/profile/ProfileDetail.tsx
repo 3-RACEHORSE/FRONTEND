@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from "react";
 import styles from "@/styles/organism/profileDetail.module.scss";
 import IconWithTitle from "@/components/molecules/IconWithTitle";
 import ProfileWithText from "@/components/molecules/ProfileWithText";
-import SimpleBoardInfo from "@/components/molecules/SimpleBoardInfo";
-import ImgWithCategory from "@/components/molecules/ImgWithCategory";
-import SimpleBoardObject from "../main/SimpleBoardObject";
 
 export default function ProfileDetail() {
   return (
