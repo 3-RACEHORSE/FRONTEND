@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 // import { stringify } from "querystring";
 // import { json } from "stream/consumers";
+import { cookies } from "next/headers";
 
 export const {
   handlers: { GET, POST },
@@ -47,13 +48,14 @@ export const {
           }
         );
         const data = await res.json();
-        console.log("리스판스", res.status);
-        console.log("데이터", data.statusCodeValue);
 
         // console.log("상태", data.status);
         if (data.statusCodeValue === 200) {
-          // console.log("엑세스 토큰!", res.headers.get("authorization"));
-          // console.log("유유아이디!", res.headers.get("uuid"));
+          const authorization: any = res.headers.get("authorization");
+          const uuid: any = res.headers.get("uuid");
+          cookies().set("authorization", authorization);
+          cookies().set("uuid", uuid);
+
           console.log("로그인되었습니다.");
           // return "/";
           return true;
