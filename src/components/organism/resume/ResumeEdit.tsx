@@ -6,11 +6,21 @@ import { Switch } from "@/components/ui/switch";
 import IconWithTitle from "@/components/molecules/IconWithTitle";
 import ProfileWithText from "@/components/molecules/ProfileWithText";
 import ResumeWithInputOne from "@/components/molecules/ResumeWithInputOne";
+import { cookies } from "next/headers";
+import ResumeWithInputTwo from "@/components/molecules/ResumeWithInputTwo";
+interface authorizationProps {
+  authorization: any;
+  uuid: any;
+}
 
-export default function ResumeEdit() {
+export default function ResumeEdit({
+  authorization,
+  uuid,
+}: authorizationProps) {
   const [toggle, setToggle] = useState<boolean>(false);
   const [career1, setCareer1] = useState<string>("");
   const [career2, setCareer2] = useState<string>("");
+  const [career3, setCareer3] = useState<string>("");
 
   const [certify1, setCertify1] = useState<string>("");
   const [certify2, setCertify2] = useState<string>("");
@@ -29,6 +39,10 @@ export default function ResumeEdit() {
     setCareer2(event.target.value);
     console.log(career2);
   };
+  const handleCareerChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCareer3(event.target.value);
+    console.log(career3);
+  };
 
   //자격 input
   const handleCertifyChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,21 +60,26 @@ export default function ResumeEdit() {
 
   //경력 보내는 api함수
   const handleSendCareer = async () => {
-    // try {
-    //   const res = await fetch(
-    //     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/non-authorization/users/signup`,
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ title: "foo", body: "bar", userId: 1 }),
-    //     }
-    //   );
-    //   const data = await res.json();
-    // } catch (error) {
-    //   console.error("Error:", error);
-    // }
+    console.log(authorization, uuid);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/career`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+            uuid,
+          },
+          body: JSON.stringify({ job: career1, year: 7, month: 7 }),
+        }
+      );
+      //   const data = await res.json();
+      //   console.log(data);
+      console.log(res.status);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   //경력 보내는 api함수
@@ -80,12 +99,12 @@ export default function ResumeEdit() {
               title="경력추가"
               onChange={handleCareerChange1}
             />
-            <ResumeWithInputOne
-              title="기간"
-              onChange={handleCareerChange2}
+            <ResumeWithInputTwo
+              title="연 월"
+              onChange1={handleCareerChange2}
+              onChange2={handleCareerChange3}
               style={{ marginTop: "15px" }}
             />
-
             <button className={styles["btn1"]} onClick={handleSendCareer}>
               추가
             </button>
@@ -118,21 +137,6 @@ export default function ResumeEdit() {
           </>
         )}
       </div>
-
-      <IconWithTitle
-        title="🔗CAREER"
-        detail="사용자님 경력 정보입니다.(터치하며 삭제)"
-      />
-      <ProfileWithText title="전기배선사" info1="5년5개월" />
-      <IconWithTitle
-        title="🔗CERTIFICATE"
-        detail="사용자님 자격 정보입니다..(터치하며 삭제)"
-      />
-      <ProfileWithText
-        title="전기기사"
-        info1="한국안전공사"
-        info2="9999.99.99"
-      />
     </main>
   );
 }

@@ -1,3 +1,13 @@
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
 .resume-container {
   // background-color: #f3e8c7;
 
@@ -16,14 +26,14 @@
 .input-title {
   width: 100%;
   outline: none;
-  color: #5a5a5a;
+  color: #868686;
   font-size: 13px;
   padding-bottom: 7px;
 }
 
 .resume-title-content {
   font-size: 15px;
-  color: #d4d4d4;
+  color: #868686;
   font-weight: bold;
 }
 
@@ -37,6 +47,24 @@
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 3%;
+}
+
+.input2 {
+  // background-color: red;
+  width: 42%;
+  outline: none;
+  color: #5a5a5a;
+  border: 2px solid #d4d4d4;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 3%;
+}
+
+.content {
+  @include center-element;
+  font-size: 14px;
+  color: #d4d4d4;
 }
 
 .btn1 {
