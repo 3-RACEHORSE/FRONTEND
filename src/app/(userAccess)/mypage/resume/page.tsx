@@ -19,6 +19,7 @@ async function getUserPofileData() {
       },
     }
   );
+  console.log(res.status);
   if (!res.ok) {
     throw new Error("Network Error");
   }
