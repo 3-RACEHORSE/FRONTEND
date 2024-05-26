@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 
 export default async function Page() {
   const session = await auth();
+  console.log("유저세션", session?.user);
 
   return (
     <>

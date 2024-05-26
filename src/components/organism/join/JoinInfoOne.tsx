@@ -50,7 +50,6 @@ export default function DataFetcher({
   useLoginValidation(email, snsType, snsId);
 
   //가입하기
-  // 가입하기
   const handleJoinClick = async () => {
     handleJoin(snsId, snsType, email, name, inputValueOne, apple, router);
   };

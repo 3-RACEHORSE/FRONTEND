@@ -9,10 +9,11 @@ import BoardTitle from "@/components/organism/main/BoardTitle";
 import SimpleBoardObject from "@/components/organism/main/SimpleBoardObject";
 import CategoryText from "@/components/atoms/Text/CategoryText";
 import Footer from "@/components/organism/layout/Footer";
+import { auth } from "@/auth";
 
 export default async function Home() {
-  // const session = await auth(); // session 호출 추가
-  // console.log(session);
+  const session = await auth(); // session 호출 추가
+  console.log(session);
 
   return (
     <main>

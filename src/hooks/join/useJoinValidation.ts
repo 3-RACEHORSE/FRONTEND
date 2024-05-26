@@ -24,9 +24,16 @@ const useLoginValidation = (email: string, snsType: string, snsId: string) => {
       );
       if (res.status === 200) {
         console.log("회원가입된 사람");
+        console.log("반환 헤더2", res);
+
+        // const access_token: any = res?.headers.get("Authorization");
+        // const uuid: any = res?.headers.get("Uuid");
+        // console.log(access_token, uuid);
+        // Cookies.set("access_token", access_token);
+        // Cookies.set("uuid", uuid);
+
         router.push("/");
-      }
-      if (res.status === 404) {
+      } else if (res.status === 201) {
         console.log("회원가입이 필요한 사람");
       }
     } catch (error) {
