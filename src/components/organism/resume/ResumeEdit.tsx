@@ -66,8 +66,8 @@ export default function ResumeEdit({
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authorization,
-            uuid,
+            authorization: `Bearer ${authorization}`, // Add Bearer if needed
+            uuid: `${uuid}`,
           },
           body: JSON.stringify({
             job: career1,
@@ -87,6 +87,7 @@ export default function ResumeEdit({
   //자격 보내는 api함수
   const handleSendCertify = async () => {
     console.log(authorization, uuid);
+    console.log(career1, career2, career3);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/qualification`,
@@ -94,13 +95,13 @@ export default function ResumeEdit({
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authorization,
-            uuid,
+            authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
           },
           body: JSON.stringify({
-            name: career1,
-            issueDate: career3,
-            agency: career2,
+            name: certify1,
+            issueDate: certify3,
+            agency: certify2,
           }),
         }
       );
