@@ -1,9 +1,12 @@
+import Swal from "sweetalert2";
+
 export const sendCareer = async (
   authorization: string,
   uuid: string,
   career1: string,
   career2: string,
-  career3: string
+  career3: string,
+  router: any
 ) => {
   try {
     const res = await fetch(
@@ -22,7 +25,17 @@ export const sendCareer = async (
         }),
       }
     );
-    console.log(res.status);
+    if (res.status === 200) {
+      Swal.fire({
+        title: "추가되었습니다!",
+        icon: "success",
+        confirmButtonText: "확인",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.refresh();
+        }
+      });
+    }
   } catch (error) {
     console.error("Error:", error);
   }
@@ -33,7 +46,8 @@ export const sendCertify = async (
   uuid: string,
   certify1: string,
   certify2: string,
-  certify3: string
+  certify3: string,
+  router: any
 ) => {
   try {
     const res = await fetch(
@@ -52,7 +66,17 @@ export const sendCertify = async (
         }),
       }
     );
-    console.log(res.status);
+    if (res.status === 200) {
+      Swal.fire({
+        title: "추가되었습니다!",
+        icon: "success",
+        confirmButtonText: "확인",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.refresh();
+        }
+      });
+    }
   } catch (error) {
     console.error("Error:", error);
   }

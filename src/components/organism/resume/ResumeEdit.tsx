@@ -11,6 +11,7 @@ import {
   sendCareer,
   sendCertify,
 } from "@/utils/resumeEdit/handleSendCareerAndCertify";
+import { useRouter } from "next/navigation";
 
 interface authorizationProps {
   authorization: any;
@@ -21,6 +22,7 @@ export default function ResumeEdit({
   authorization,
   uuid,
 }: authorizationProps) {
+  const router = useRouter();
   const [toggle, setToggle] = useState<boolean>(false);
 
   const handleToggle = () => {
@@ -49,12 +51,19 @@ export default function ResumeEdit({
 
   // 경력 보내는 API 함수
   const handleSendCareer = async () => {
-    await sendCareer(authorization, uuid, career1, career2, career3);
+    await sendCareer(authorization, uuid, career1, career2, career3, router);
   };
 
   // 자격 보내는 API 함수
   const handleSendCertify = async () => {
-    await sendCertify(authorization, uuid, certify1, certify2, certify3);
+    await sendCertify(
+      authorization,
+      uuid,
+      certify1,
+      certify2,
+      certify3,
+      router
+    );
   };
 
   return (

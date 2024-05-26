@@ -1,6 +1,9 @@
 "use client";
 
 import styles from "@/styles/organism/profileDetail.module.scss";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
+
 interface ProfileTextProps {
   title: string;
   info1: string;
@@ -18,8 +21,9 @@ export default function ProfileWithTextEvent({
   uuid,
   type,
 }: ProfileTextProps) {
+  const router = useRouter();
+
   const handleDeleteCareer = async () => {
-    console.log(type, title);
     try {
       const endpoint = type === "career" ? "career" : "qualification";
       const url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/${endpoint}`;
@@ -35,8 +39,16 @@ export default function ProfileWithTextEvent({
         body: JSON.stringify(body),
       });
 
-      if (res.ok) {
-        console.log(res.status);
+      if (res.status === 200) {
+        Swal.fire({
+          title: "삭제되었습니다!",
+          icon: "success",
+          confirmButtonText: "확인",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.refresh();
+          }
+        });
       }
     } catch (error) {
       console.error("Error:", error);
