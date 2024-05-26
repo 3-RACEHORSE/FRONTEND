@@ -49,6 +49,9 @@ export default async function Page() {
             key={index}
             title={item.job}
             info1={`${item.year}년 ${item.month}개월`}
+            authorization={authorization}
+            uuid={uuid}
+            type="career"
           />
         )
       )}
@@ -66,6 +69,9 @@ export default async function Page() {
             title={item.certification_name}
             info1={item.agency}
             info2={item.issue_date}
+            authorization={authorization}
+            uuid={uuid}
+            type="qualification"
           />
         )
       )}
