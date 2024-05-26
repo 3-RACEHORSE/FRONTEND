@@ -3,11 +3,9 @@
 import { useState } from "react";
 import styles from "@/styles/organism/resumeEdit.module.scss";
 import { Switch } from "@/components/ui/switch";
-import IconWithTitle from "@/components/molecules/IconWithTitle";
-import ProfileWithText from "@/components/molecules/ProfileWithText";
 import ResumeWithInputOne from "@/components/molecules/ResumeWithInputOne";
-import { cookies } from "next/headers";
 import ResumeWithInputTwo from "@/components/molecules/ResumeWithInputTwo";
+
 interface authorizationProps {
   authorization: any;
   uuid: any;
@@ -71,7 +69,11 @@ export default function ResumeEdit({
             authorization,
             uuid,
           },
-          body: JSON.stringify({ job: career1, year: 7, month: 7 }),
+          body: JSON.stringify({
+            job: career1,
+            year: career2,
+            month: career3,
+          }),
         }
       );
       //   const data = await res.json();
@@ -82,8 +84,31 @@ export default function ResumeEdit({
     }
   };
 
-  //경력 보내는 api함수
-  const handleSendCertify = async () => {};
+  //자격 보내는 api함수
+  const handleSendCertify = async () => {
+    console.log(authorization, uuid);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/qualification`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+            uuid,
+          },
+          body: JSON.stringify({
+            name: career1,
+            issueDate: career3,
+            agency: career2,
+          }),
+        }
+      );
+      console.log(res.status);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <main>
