@@ -11,15 +11,30 @@ import CategoryText from "@/components/atoms/Text/CategoryText";
 import Footer from "@/components/organism/layout/Footer";
 import { auth } from "@/auth";
 
-export default async function Home() {
-  const session = await auth(); // session 호출 추가
-  console.log(session);
+async function getMainStatistic() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/statistic`
+    // {
+    //   next: { revalidate: 86400 },
+    // }
+  );
+  if (!res.ok) {
+    throw new Error("Network Error");
+  }
+  const data = await res.json();
+  return data;
+}
 
+export default async function Home() {
+  // const session = await auth(); // session 호출 추가
+  // console.log(session);
+  const data = await getMainStatistic();
+  console.log(data);
   return (
     <main>
       <Header />
       <MainBanner />
-      <MainArticle />
+      <MainArticle data={data} />
       <div className={styles["infoBar"]}>
         <div className={styles["infoText"]}>경매 통계(금일)</div>
         <div className={styles["detailLink"]}>상세보기</div>
