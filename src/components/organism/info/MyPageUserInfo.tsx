@@ -6,12 +6,23 @@ import Text from "@/components/atoms/Text/InfoText";
 import InputWithButtonOne from "@/components/molecules/InputWithButtonOne";
 import { handleSendPhoneNum } from "@/utils/join/handleSendPhoneNum";
 import useJoinHook from "@/hooks/join/useJoinHook";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
+interface MypageUserInfoProps {
+  src?: string;
+  name?: string;
+  handle?: string;
+  phoneNum?: string;
+}
 
-export default function MyPageUserInfo() {
+export default function MyPageUserInfo({
+  src,
+  name = "",
+  handle = "",
+  phoneNum = "",
+}: MypageUserInfoProps) {
   const {
     inputNameValue,
     setInputNameValue,
@@ -27,6 +38,12 @@ export default function MyPageUserInfo() {
     checkValid2,
     setCheckValid2,
   } = useJoinHook();
+
+  useEffect(() => {
+    setInputNameValue(name);
+    setInputHandleValue(handle);
+    setInputValueOne(phoneNum);
+  }, []);
 
   //이름
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -106,12 +123,15 @@ export default function MyPageUserInfo() {
           </div>
         </>
       )}
-      {/* 로그인 버튼 유효*/}
-      {checkValid2 ? (
+      {/* 수정 버튼 유효*/}
+      {/* {checkValid2 ? (
         <SendBtn onClick={handleEditClick} buttonText="수정하기" />
       ) : (
         <SendBtnInValid buttonText="수정하기" />
-      )}
+      )} */}
+      {/* 임시 수정 버튼 유효*/}
+
+      <SendBtn buttonText="수정하기" onClick={handleEditClick} />
     </main>
   );
 }
