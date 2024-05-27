@@ -15,24 +15,32 @@
   align-items: $align-items;
 }
 
-.login-main-container {
-  height: 100vh;
-  background: linear-gradient(to bottom, #52ebb6, #c8ffec);
-}
+// .login-main-container {
+//   height: 100vh;
+//   // background: linear-gradient(to bottom, #52ebb6, #c8ffec);
+// }
 
 .login-main-frame {
   // background-color: red;
-  height: 400px;
-  width: 250px;
-  @include center-position;
-  @include center-element(column, space-evenly, center);
+  width: 100%;
+  @include center-element;
+  padding-top: 21vh;
 }
 
 .login-main-btn {
-  background-color: rgba(0, 0, 0, 0.069);
+  background: linear-gradient(to right, #30e2ef, #8aede7, #7ae5c0);
   height: 50px;
   width: 250px;
   color: white;
   border-radius: 7px;
   margin-top: 30px;
+  box-shadow: 0px 0px 4px 2px #e1e1e1;
+}
+
+.login-btn-frame {
+  // background-color: rgb(159, 144, 144);
+  width: 100%;
+  color: white;
+  border-radius: 7px;
+  @include center-element;
 }

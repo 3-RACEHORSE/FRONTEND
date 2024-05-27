@@ -21,9 +21,9 @@ export default function LoginBtn() {
       <button className={styles["login-main-btn"]} onClick={onClick}>
         Get started with Google
       </button>
-      <button className={styles["login-main-btn"]} onClick={onClick2}>
+      {/* <button className={styles["login-main-btn"]} onClick={onClick2}>
         로그아웃
-      </button>
+      </button> */}
     </>
   );
 }

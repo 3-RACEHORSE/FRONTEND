@@ -8,6 +8,7 @@ async function getUserPofileData() {
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
   console.log(authorization, uuid);
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/myprofile`,
     {
