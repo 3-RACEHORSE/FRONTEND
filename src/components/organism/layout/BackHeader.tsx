@@ -4,14 +4,17 @@ import styles from "@/styles/layout/header.module.scss";
 import BackBtn from "@/components/atoms/button/BackBtn";
 import TitleText from "@/components/atoms/Text/TitleText";
 import Gap from "@/components/atoms/etc/Gap";
+import { useRouter } from "next/navigation";
 
 interface TextProps {
   title: string;
 }
 
 export default function BackHeader({ title }: TextProps) {
+  const router = useRouter();
+
   const handleBack = () => {
-    console.log("d");
+    router.back();
   };
 
   return (

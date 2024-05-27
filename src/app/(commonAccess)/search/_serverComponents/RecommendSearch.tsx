@@ -1,3 +1,5 @@
+"use client";
+
 const recommendKeywords = [
   "디자인",
   "IT·프로그래밍",
@@ -26,7 +28,7 @@ const keywordStyle = {
   fontSize: "14px",
 };
 
-export default async function RecommendSearch() {
+export default function RecommendSearch() {
   return (
     <>
       <div style={{ padding: "3%" }}>

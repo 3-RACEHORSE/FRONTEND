@@ -2,6 +2,7 @@ import React from "react";
 import styles from "@/styles/organism/mypageProfile.module.scss";
 import SettingWithBtn from "@/components/molecules/SettingWithBtn";
 import CallWithText from "@/components/molecules/CallWithText";
+import Link from "next/link";
 
 interface MypageProfileProps {
   src?: string;
@@ -42,8 +43,12 @@ export default function MypageProfile({
           ))}
         </div>
         <div className={styles["btn-container"]}>
-          <button>프로필 관리</button>
-          <button>이력서 관리</button>
+          <Link href="/mypage/info" className={styles["btn-layout"]}>
+            <button>프로필 관리</button>
+          </Link>
+          <Link href="/mypage/resume" className={styles["btn-layout"]}>
+            <button>이력서 관리</button>
+          </Link>
         </div>
       </div>
       {/* 선택 버튼 */}
