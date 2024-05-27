@@ -6,16 +6,18 @@ import CallWithText from "@/components/molecules/CallWithText";
 interface MypageProfileProps {
   src?: string;
   name?: string;
-  follower?: string;
-  following?: string;
+  handle?: string;
+  email?: string;
+  phoneNum?: string;
   categories?: string[];
 }
 
 export default function MypageProfile({
   src,
   name,
-  follower,
-  following,
+  handle,
+  email,
+  phoneNum,
   categories = [],
 }: MypageProfileProps) {
   return (
@@ -25,11 +27,12 @@ export default function MypageProfile({
         <div className={styles["mypage-profile"]}>
           <img src={src} alt="" className={styles["profile-img"]} />
           <div className={styles["profile-info"]}>
-            <p className={styles["profile-name"]}>{name}</p>
             <div style={{ display: "flex" }}>
-              <p className={styles["profile-element1"]}>팔로워 {follower}</p>
-              <p className={styles["profile-element2"]}>팔로잉 {following}</p>
+              <p className={styles["profile-name"]}>{name}</p>
+              <p className={styles["profile-element1"]}>{handle}</p>
             </div>
+            <p className={styles["profile-element2"]}>{email}</p>
+            <p className={styles["profile-element2"]}>{phoneNum}</p>
           </div>
         </div>
         {/* 카테고리 */}

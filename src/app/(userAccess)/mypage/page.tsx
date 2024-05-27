@@ -1,28 +1,47 @@
-import BoardObject from "@/components/organism/auction/BoardObject";
 import Footer from "@/components/organism/layout/Footer";
 import NavBar from "@/components/organism/layout/NavBar";
 import TextHeader from "@/components/organism/layout/TextHeader";
 import MypageProfile from "@/components/organism/mypage/mypageProfile";
-import SubScribeInfo from "@/components/organism/subscribe/SubscribeInfo.tsx";
+import { cookies } from "next/headers";
 
-import SubscribeObject from "@/components/organism/subscribe/SubscribeObject";
+async function getUserPofileData() {
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
+  console.log(authorization, uuid);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/myprofile`,
+    {
+      headers: {
+        authorization: `Bearer ${authorization}`, // Add Bearer if needed
+        uuid: `${uuid}`,
+      },
+    }
+  );
+  console.log(res.status);
+  if (!res.ok) {
+    throw new Error("Network Error");
+  }
+  const data = await res.json();
+  return data;
+}
 
-export default function Page() {
+export default async function Page() {
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
+
+  const data = await getUserPofileData();
+  console.log(data);
+
   return (
     <main>
       <TextHeader title="마이페이지" />
       <MypageProfile
-        src="/dummy/profile.jpg"
-        name="CHO"
-        follower="99"
-        following="99"
-        categories={[
-          "디자인",
-          "IT·프로그래밍",
-          "세무·법무·노무",
-          "취업·입시",
-          "취미·레슨",
-        ]}
+        src={data.profileImage}
+        name={data.name}
+        handle={data.handle}
+        email={data.email}
+        phoneNum={data.phoneNum}
+        categories={data.watchList}
       />
       <Footer />
       <NavBar />

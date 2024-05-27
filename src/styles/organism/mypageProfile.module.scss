@@ -49,14 +49,17 @@
 }
 
 .profile-element1 {
-  font-size: 14px;
+  // background-color: red;
+  font-size: 12px;
   font-weight: 500;
+  margin-left: 3%;
+  color: hsl(0, 0%, 72%);
+  @include center-element(flex, center, end);
 }
 
 .profile-element2 {
   font-size: 14px;
   font-weight: 500;
-  margin-left: 6%;
 }
 
 .category-container {
