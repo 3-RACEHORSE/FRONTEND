@@ -5,12 +5,12 @@ import styles from "@/styles/organism/resumeEdit.module.scss";
 import { Switch } from "@/components/ui/switch";
 import ResumeWithInputOne from "@/components/molecules/ResumeWithInputOne";
 import ResumeWithInputTwo from "@/components/molecules/ResumeWithInputTwo";
-import useCareerState from "@/hooks/resumeEdit/useCareerState";
-import useCertifyState from "@/hooks/resumeEdit/useCertifyState";
+import useCareerState from "@/hooks/resume/useCareerState";
+import useCertifyState from "@/hooks/resume/useCertifyState";
 import {
   sendCareer,
   sendCertify,
-} from "@/utils/resumeEdit/handleSendCareerAndCertify";
+} from "@/utils/resume/handleSendCareerAndCertify";
 import { useRouter } from "next/navigation";
 
 interface authorizationProps {

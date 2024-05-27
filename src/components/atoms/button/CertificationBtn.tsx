@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 import styles from "@/styles/atoms/certificationBtn.module.scss";
 
 interface ButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactNode;
 }
 

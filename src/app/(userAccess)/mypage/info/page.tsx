@@ -1,8 +1,8 @@
+import MyPageUserInfo from "@/components/organism/info/MyPageUserInfo";
+import BackHeader from "@/components/organism/layout/BackHeader";
 import Footer from "@/components/organism/layout/Footer";
-import NavBar from "@/components/organism/layout/NavBar";
-import TextHeader from "@/components/organism/layout/TextHeader";
-import MypageProfile from "@/components/organism/mypage/MypageProfile";
 import { cookies } from "next/headers";
+import { Key } from "react";
 
 async function getUserPofileData() {
   const authorization = cookies().get("authorization")?.value;
@@ -11,7 +11,6 @@ async function getUserPofileData() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/myprofile`,
     {
-      cache: "no-store",
       headers: {
         authorization: `Bearer ${authorization}`, // Add Bearer if needed
         uuid: `${uuid}`,
@@ -35,17 +34,16 @@ export default async function Page() {
 
   return (
     <main>
-      <TextHeader title="마이페이지" />
-      <MypageProfile
+      <BackHeader title="마이페이지 / 회원정보 관리" />
+      <MyPageUserInfo
         src={data.profileImage}
         name={data.name}
         handle={data.handle}
-        email={data.email}
         phoneNum={data.phoneNum}
-        categories={data.watchList}
+        authorization={authorization}
+        uuid={uuid}
       />
-      <Footer />
-      <NavBar />
+      {/* <Footer /> */}
     </main>
   );
 }

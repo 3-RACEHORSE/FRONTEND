@@ -7,8 +7,9 @@ import CertificationBtn from "../atoms/button/CertificationBtn";
 interface InputWithButtonProps {
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClick: () => void;
-  buttonText: string;
+  onClick?: () => void;
+  buttonText?: string;
+  type?: boolean;
 }
 
 export default function InputWithButtonOne({
@@ -16,11 +17,18 @@ export default function InputWithButtonOne({
   onChange,
   onClick,
   buttonText,
+  type,
 }: InputWithButtonProps) {
   return (
     <div>
-      <JoinInput value={value} onChange={onChange} />
-      <CertificationBtn onClick={onClick}>{buttonText}</CertificationBtn>
+      <JoinInput
+        style={type ? { width: "100%" } : undefined}
+        value={value}
+        onChange={onChange}
+      />
+      {!type && (
+        <CertificationBtn onClick={onClick}>{buttonText}</CertificationBtn>
+      )}
     </div>
   );
 }

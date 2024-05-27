@@ -4,9 +4,17 @@ import { useState } from "react";
 import watchListData from "@/constants/watchListData";
 
 const useJoinHook = () => {
+  //이름
+  const [inputNameValue, setInputNameValue] = useState<string>("");
+
+  //핸들
+  const [inputHandleValue, setInputHandleValue] = useState<string>("");
+
+  //전화인증
   const [inputValueOne, setInputValueOne] = useState<string>("");
   const [checkValid1, setCheckValid1] = useState<boolean>(false);
 
+  //인증코드
   const [inputValueTwo, setInputValueTwo] = useState<string>("");
   const [checkValid2, setCheckValid2] = useState<boolean>(false);
 
@@ -14,6 +22,11 @@ const useJoinHook = () => {
   const [buttonStates, setButtonStates] = useState(watchListData);
 
   return {
+    inputNameValue,
+    setInputNameValue,
+    inputHandleValue,
+    setInputHandleValue,
+
     inputValueOne,
     setInputValueOne,
     checkValid1,
