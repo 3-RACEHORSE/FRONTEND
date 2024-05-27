@@ -43,7 +43,7 @@ export default async function Page() {
         authorization={authorization}
         uuid={uuid}
       />
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }
