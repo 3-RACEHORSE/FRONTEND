@@ -11,6 +11,7 @@ async function getUserPofileData() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/myprofile`,
     {
+      cache: "no-store",
       headers: {
         authorization: `Bearer ${authorization}`, // Add Bearer if needed
         uuid: `${uuid}`,

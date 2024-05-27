@@ -10,11 +10,16 @@ import { ChangeEvent, useEffect } from "react";
 import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+import { handleEditMyInfo } from "@/utils/info/handleEditMyInfo";
 interface MypageUserInfoProps {
   src?: string;
   name?: string;
   handle?: string;
   phoneNum?: string;
+  authorization?: any;
+  uuid?: any;
 }
 
 export default function MyPageUserInfo({
@@ -22,7 +27,12 @@ export default function MyPageUserInfo({
   name = "",
   handle = "",
   phoneNum = "",
+  authorization,
+  uuid,
 }: MypageUserInfoProps) {
+  const router = useRouter();
+  const initPhoneNum = phoneNum;
+
   const {
     inputNameValue,
     setInputNameValue,
@@ -67,7 +77,14 @@ export default function MyPageUserInfo({
 
   //수정하기 api
   const handleEditClick = async () => {
-    console.log(inputNameValue, inputHandleValue, inputValueOne, inputValueTwo);
+    await handleEditMyInfo(
+      authorization,
+      uuid,
+      inputNameValue,
+      inputHandleValue,
+      inputValueOne,
+      router
+    );
   };
 
   return (
@@ -123,15 +140,12 @@ export default function MyPageUserInfo({
           </div>
         </>
       )}
-      {/* 수정 버튼 유효*/}
-      {/* {checkValid2 ? (
+
+      {initPhoneNum === inputValueOne || checkValid2 ? (
         <SendBtn onClick={handleEditClick} buttonText="수정하기" />
       ) : (
         <SendBtnInValid buttonText="수정하기" />
-      )} */}
-      {/* 임시 수정 버튼 유효*/}
-
-      <SendBtn buttonText="수정하기" onClick={handleEditClick} />
+      )}
     </main>
   );
 }

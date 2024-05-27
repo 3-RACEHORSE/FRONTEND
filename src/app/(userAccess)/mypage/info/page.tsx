@@ -40,6 +40,8 @@ export default async function Page() {
         name={data.name}
         handle={data.handle}
         phoneNum={data.phoneNum}
+        authorization={authorization}
+        uuid={uuid}
       />
       <Footer />
     </main>
