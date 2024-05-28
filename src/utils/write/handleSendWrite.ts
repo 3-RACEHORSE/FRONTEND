@@ -48,11 +48,12 @@ export const handleSendWrite = async (
         title: "추가되었습니다!",
         icon: "success",
         confirmButtonText: "확인",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push("/auction/all");
-        }
       });
+      // .then((result) => {
+      //   if (result.isConfirmed) {
+      //     router.push("/auction/all");
+      //   }
+      // });
     }
   } catch (error) {
     console.error("Error:", error);
