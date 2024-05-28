@@ -92,11 +92,12 @@ export default function WritePage() {
   const closeModal = () => {
     setIsModalOpen(false);
     setCurrentImageIndex(null);
+    setImages((prevImages) => prevImages.slice(0, -1));
   };
 
-  const openModalForImage = (index: number) => {
-    setCurrentImageIndex(index);
-    setIsModalOpen(true);
+  const deleteImage = (index: number) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    setCurrentImageIndex(null);
   };
   console.log(images);
 
@@ -133,33 +134,32 @@ export default function WritePage() {
       </div>
 
       {/* 사진관련 */}
-      <div className={styles["container2"]}>
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          onChange={handleImageUpload}
-          className={styles["fileInput"]}
-        />
-        {images.map((image, index) => (
-          <div key={index} className={styles["imageContainer"]}>
-            {image.croppedSrc ? (
-              <img
-                src={image.croppedSrc}
-                alt={`Cropped ${index}`}
-                className={styles["image"]}
-                onClick={() => openModalForImage(index)}
-              />
-            ) : (
-              <img
-                src={image.src}
-                alt={`Original ${index}`}
-                className={styles["image"]}
-                onClick={() => openModalForImage(index)}
-              />
-            )}
-          </div>
-        ))}
+      <p style={{ height: "2vh" }} />
+      <input
+        type="file"
+        accept="image/*"
+        multiple
+        onChange={handleImageUpload}
+        className={styles["fileInput"]}
+      />
+      <div className={styles["flex-container"]}>
+        <ul className={styles["overflow-scroll"]}>
+          {images.map((image, index) => (
+            <div key={index} className={styles["imageContainer"]}>
+              {image.croppedSrc ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={image.croppedSrc}
+                  alt={`Cropped ${index}`}
+                  className={styles["imageObject"]}
+                  onClick={() => deleteImage(index)}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+        </ul>
       </div>
 
       {/* Cropper 모달 */}
@@ -175,12 +175,14 @@ export default function WritePage() {
               ref={cropperRef}
               zoomable={false}
             />
-            <button onClick={handleCrop} className={styles["cropButton"]}>
-              확인
-            </button>
-            <button onClick={closeModal} className={styles["cropButton"]}>
-              취소
-            </button>
+            <div className={styles["cropperBtnContainer"]}>
+              <button onClick={handleCrop} className={styles["cropButton1"]}>
+                확인
+              </button>
+              <button onClick={closeModal} className={styles["cropButton2"]}>
+                취소
+              </button>
+            </div>
           </div>
         )}
       </Modal>
