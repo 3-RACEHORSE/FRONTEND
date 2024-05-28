@@ -16,13 +16,13 @@ import watchListData from "@/constants/watchListData";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import Modal from "./Modal";
-
 import AWS from "aws-sdk";
+import Swal from "sweetalert2";
 
 // AWS SDK 설정
 AWS.config.update({
-  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.NEXT_PUBLIC_REACT_APP_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.NEXT_PUBLIC_REACT_APP_AWS_SECRET_ACCESS_KEY,
   region: "ap-northeast-2",
 });
 
@@ -62,7 +62,11 @@ interface ImageData {
   croppedSrc: string | null;
 }
 
-export default function WritePage() {
+interface WritePageProps {
+  authorization: any;
+  uuid: any;
+}
+export default function WritePage({ authorization, uuid }: WritePageProps) {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [minPrice, setMinPrice] = useState<string>("");
@@ -148,6 +152,50 @@ export default function WritePage() {
   };
   console.log(images);
 
+  //게시글 전송 api
+  const handleSendCertify = async () => {
+    // apple1은 images의 첫 번째 배열의 copperedSrc 값만 담는 배열
+    const thumbnail = [images[0].croppedSrc];
+
+    // apple2는 images의 첫 번째 배열을 제외하고 나머지 copperedSrc 값만 담는 배열
+    const imagesList = images.slice(1).map((item) => item.croppedSrc);
+    console.log(title, content, category, minPrice, thumbnail, imagesList);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/authorization/auction`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
+          },
+          body: JSON.stringify({
+            title: title,
+            content: content,
+            category: category,
+            minimumBiddingPrice: minPrice,
+            thumbnail: thumbnail,
+            images: imagesList,
+          }),
+        }
+      );
+      if (res.status === 200) {
+        Swal.fire({
+          title: "추가되었습니다!",
+          icon: "success",
+          confirmButtonText: "확인",
+        });
+        // .then((result) => {
+        //   if (result.isConfirmed) {
+        //     router.refresh();
+        //   }
+        // });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <main className={styles["container"]}>
       <div className={styles["adv"]}>천마인력에 글을 등록해 보세요!🙌</div>
@@ -211,6 +259,10 @@ export default function WritePage() {
           🔗첫 번째 사진이 대표 이미지로 지정됩니다.
         </p>
       </div>
+
+      <button className={styles["btn1"]} onClick={handleSendCertify}>
+        추가
+      </button>
 
       {/* Cropper 모달 */}
       <Modal isOpen={isModalOpen}>

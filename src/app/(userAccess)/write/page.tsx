@@ -7,10 +7,13 @@ import WritePage from "@/components/organism/write/WritePage";
 import { cookies } from "next/headers";
 
 export default async function Page() {
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
+
   return (
     <main>
       <BackHeader title="게시글 작성" />
-      <WritePage />
+      <WritePage authorization={authorization} uuid={uuid} />
     </main>
   );
 }
