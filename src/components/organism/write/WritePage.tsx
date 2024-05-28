@@ -17,6 +17,46 @@ import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import Modal from "./Modal";
 
+import AWS from "aws-sdk";
+
+// AWS SDK 설정
+AWS.config.update({
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2",
+});
+
+const s3 = new AWS.S3();
+
+const uploadImageToS3 = async (
+  croppedCanvas: HTMLCanvasElement
+): Promise<string> => {
+  try {
+    // 이미지 데이터를 base64로 인코딩
+    const base64Data = croppedCanvas
+      .toDataURL()
+      .replace(/^data:image\/\w+;base64,/, "");
+    const buf = Buffer.from(base64Data, "base64");
+    // S3에 업로드할 때 사용할 설정
+    const params = {
+      Bucket: "cheonma",
+      Key: `images/${Date.now()}.png`, // 이미지 파일 이름 설정
+      Body: buf,
+      ACL: "public-read", // 업로드된 이미지를 공개적으로 접근할 수 있도록 설정
+      ContentType: "image/png", // 이미지 파일 타입 지정
+    };
+    console.log(params);
+    // S3에 이미지 업로드 요청
+    const { Location } = await s3.upload(params).promise();
+
+    // 업로드된 이미지의 URL 반환
+    return Location;
+  } catch (error) {
+    console.error("Error uploading image to S3:", error);
+    throw error;
+  }
+};
+
 interface ImageData {
   src: string;
   croppedSrc: string | null;
@@ -76,16 +116,23 @@ export default function WritePage() {
     const cropper = cropperRef.current?.cropper;
     if (cropper && currentImageIndex !== null) {
       const croppedCanvas = cropper.getCroppedCanvas();
-      const newCroppedSrc = croppedCanvas.toDataURL();
-      //이쪽 위 아래 로직이 이미지 넣는 로직이다. ㅇㅇㅇ 여기서 s3 처리
-      setImages((prevImages) =>
-        prevImages.map((image, index) =>
-          index === currentImageIndex
-            ? { ...image, croppedSrc: newCroppedSrc }
-            : image
-        )
-      );
-      setIsModalOpen(false);
+      console.log("사진 이미지", croppedCanvas);
+      // 이미지를 S3에 업로드하고 URL을 얻어옴
+      uploadImageToS3(croppedCanvas)
+        .then((imageUrl) => {
+          // 업로드된 이미지의 URL을 사용하여 이미지 데이터 업데이트
+          setImages((prevImages) =>
+            prevImages.map((image, index) =>
+              index === currentImageIndex
+                ? { ...image, croppedSrc: imageUrl }
+                : image
+            )
+          );
+          setIsModalOpen(false);
+        })
+        .catch((error) => {
+          console.error("Error handling crop:", error);
+        });
     }
   };
 
@@ -160,6 +207,9 @@ export default function WritePage() {
             </div>
           ))}
         </ul>
+        <p className={styles["info"]}>
+          🔗첫 번째 사진이 대표 이미지로 지정됩니다.
+        </p>
       </div>
 
       {/* Cropper 모달 */}

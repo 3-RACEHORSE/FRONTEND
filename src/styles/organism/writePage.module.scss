@@ -77,6 +77,10 @@
   align-items: center;
 }
 
+.info {
+  font-size: 11px;
+  color: #cdcdcd;
+}
 .fileInput {
   width: 100%;
   // background-color: blue;
@@ -132,7 +136,7 @@
   width: 100px;
 }
 .imageObject {
-  margin-top: 20px;
+  margin-top: 5px;
   border: 2px solid #30e2ef;
   padding: 3%;
   border-radius: 5px;
