@@ -15,6 +15,12 @@ import {
 import watchListData from "@/constants/watchListData";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import Modal from "./Modal";
+
+interface ImageData {
+  src: string;
+  croppedSrc: string | null;
+}
 
 export default function WritePage() {
   const [title, setTitle] = useState<string>("");
@@ -22,52 +28,77 @@ export default function WritePage() {
   const [minPrice, setMinPrice] = useState<string>("");
   const [category, setCategory] = useState<string>("");
 
-  //제목 input 추적
   const handleInputTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
-  //내용 input 추적
   const handleInputContent = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setContent(event.target.value);
   };
 
-  //최소가격 input 추적
   const handleInputMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMinPrice(event.target.value);
-    console.log(minPrice);
   };
 
-  //카테고리
   const handleSelectChange = (value: string) => {
     setCategory(value);
   };
 
-  //사진관련
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [croppedImageSrc, setCroppedImageSrc] = useState<string | null>(null);
+  const [images, setImages] = useState<ImageData[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
+    null
+  );
   const cropperRef = useRef<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    const files = event.target.files;
+    if (files) {
+      const newImages: ImageData[] = [];
+      Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          newImages.push({ src: reader.result as string, croppedSrc: null });
+          if (newImages.length === files.length) {
+            setImages((prevImages) => [...prevImages, ...newImages]);
+            setCurrentImageIndex(images.length); // 현재 인덱스를 새로 추가된 첫 번째 이미지로 설정
+            setIsModalOpen(true);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
     }
   };
 
   const handleCrop = () => {
     const cropper = cropperRef.current?.cropper;
-    if (cropper) {
+    if (cropper && currentImageIndex !== null) {
       const croppedCanvas = cropper.getCroppedCanvas();
-      setCroppedImageSrc(croppedCanvas.toDataURL());
+      const newCroppedSrc = croppedCanvas.toDataURL();
+      //이쪽 위 아래 로직이 이미지 넣는 로직이다. ㅇㅇㅇ 여기서 s3 처리
+      setImages((prevImages) =>
+        prevImages.map((image, index) =>
+          index === currentImageIndex
+            ? { ...image, croppedSrc: newCroppedSrc }
+            : image
+        )
+      );
+      setIsModalOpen(false);
     }
   };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentImageIndex(null);
+  };
+
+  const openModalForImage = (index: number) => {
+    setCurrentImageIndex(index);
+    setIsModalOpen(true);
+  };
+  console.log(images);
 
   return (
     <main className={styles["container"]}>
@@ -102,35 +133,57 @@ export default function WritePage() {
       </div>
 
       {/* 사진관련 */}
-      <div className={styles.container2}>
+      <div className={styles["container2"]}>
         <input
           type="file"
           accept="image/*"
+          multiple
           onChange={handleImageUpload}
-          className={styles.fileInput}
+          className={styles["fileInput"]}
         />
-        {imageSrc && !croppedImageSrc && (
-          <div className={styles.cropperContainer}>
+        {images.map((image, index) => (
+          <div key={index} className={styles["imageContainer"]}>
+            {image.croppedSrc ? (
+              <img
+                src={image.croppedSrc}
+                alt={`Cropped ${index}`}
+                className={styles["image"]}
+                onClick={() => openModalForImage(index)}
+              />
+            ) : (
+              <img
+                src={image.src}
+                alt={`Original ${index}`}
+                className={styles["image"]}
+                onClick={() => openModalForImage(index)}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Cropper 모달 */}
+      <Modal isOpen={isModalOpen}>
+        {currentImageIndex !== null && images[currentImageIndex] && (
+          <div className={styles["cropperContainer"]}>
             <Cropper
-              src={imageSrc}
+              src={images[currentImageIndex].src}
               style={{ height: "fit-content", width: "100%" }}
               initialAspectRatio={1}
               aspectRatio={1}
               guides={false}
               ref={cropperRef}
-              zoomable={false} // 확대와 축소 비활성화
+              zoomable={false}
             />
-            <button onClick={handleCrop} className={styles.cropButton}>
+            <button onClick={handleCrop} className={styles["cropButton"]}>
               확인
+            </button>
+            <button onClick={closeModal} className={styles["cropButton"]}>
+              취소
             </button>
           </div>
         )}
-        {croppedImageSrc && (
-          <div className={styles.imageContainer}>
-            <img src={croppedImageSrc} alt="Cropped" className={styles.image} />
-          </div>
-        )}
-      </div>
+      </Modal>
     </main>
   );
 }
