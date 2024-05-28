@@ -15,6 +15,7 @@ export const config = {
     "/mypage:path*",
     "/mypage/resume:path*",
     "/mypage/info:path*",
+    "/write:path*",
     "/join:path*",
   ],
 };

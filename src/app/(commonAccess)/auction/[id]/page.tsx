@@ -4,6 +4,7 @@ import Header from "@/components/organism/layout/Header";
 import NavBar from "@/components/organism/layout/NavBar";
 import BoardObject from "@/components/organism/auction/BoardObject";
 import Link from "next/link";
+import WriteBar from "@/components/organism/layout/WriteBar";
 
 export default function Page() {
   return (
@@ -56,6 +57,7 @@ export default function Page() {
         startDate="9999.99.99"
         endDate="9999.99.99"
       />
+      <WriteBar />
       <NavBar />
     </main>
   );
