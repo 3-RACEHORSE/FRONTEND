@@ -1,0 +1,62 @@
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.container {
+  padding: 3%;
+}
+
+.adv {
+  width: 100%;
+  aspect-ratio: 7 / 1;
+  background: linear-gradient(to right, #30e2ef, #7ae5c0);
+  border-radius: 7px;
+  @include center-element;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.input-title {
+  width: 100%;
+  outline: none;
+  color: #868686;
+  font-size: 13px;
+  padding-bottom: 7px;
+}
+
+.textarea {
+  // background-color: red;
+  width: 100%;
+  outline: none;
+  color: #5a5a5a;
+  border: 2px solid #d4d4d4;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 3%;
+  resize: none; /* 크기 조정 방지 */
+  aspect-ratio: 3 / 1;
+}
+
+.layout1 {
+  width: 47%;
+}
+
+.input2 {
+  // background-color: #30e2ef;
+  width: 100%;
+  outline: none;
+  color: #4ef8d9;
+  font-weight: bold;
+  border: 2px solid #d4d4d4;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
