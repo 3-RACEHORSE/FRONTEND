@@ -1,0 +1,34 @@
+@mixin center-position($top: 50%, $left: 50%) {
+  position: relative;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.icon {
+  position: fixed;
+  bottom: 0;
+  background: #00000094;
+  padding: 10px;
+  padding-left: 13px;
+  padding-right: 13px;
+  border-radius: 20px;
+  right: 0;
+  width: fit-content;
+  z-index: 999;
+  margin-bottom: 12vh;
+  margin-right: 2vh;
+  @include center-element;
+  color: white;
+  font-size: 15px;
+}
