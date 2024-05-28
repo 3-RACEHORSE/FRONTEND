@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/organism/layout/NavBar";
+import AuthSession from "@/AuthSession";
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={noto.className}>{children}</body>
+      <body className={noto.className}>
+        <AuthSession>{children}</AuthSession>
+      </body>
     </html>
   );
 }

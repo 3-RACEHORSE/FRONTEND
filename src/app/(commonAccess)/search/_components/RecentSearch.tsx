@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-function RecentSearch() {
+export default function RecentSearch() {
   const [recentSearches, setRecentSearches] = useState([]);
 
   useEffect(() => {
@@ -66,5 +66,3 @@ function RecentSearch() {
     </>
   );
 }
-
-export default RecentSearch;
