@@ -155,11 +155,20 @@ export default function WritePage({ authorization, uuid }: WritePageProps) {
   //게시글 전송 api
   const handleSendCertify = async () => {
     // apple1은 images의 첫 번째 배열의 copperedSrc 값만 담는 배열
-    const thumbnail = [images[0].croppedSrc];
+    const thumbnail = images[0].croppedSrc;
 
     // apple2는 images의 첫 번째 배열을 제외하고 나머지 copperedSrc 값만 담는 배열
     const imagesList = images.slice(1).map((item) => item.croppedSrc);
-    console.log(title, content, category, minPrice, thumbnail, imagesList);
+    console.log(
+      title,
+      content,
+      category,
+      minPrice,
+      thumbnail,
+      imagesList,
+      authorization,
+      uuid
+    );
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/authorization/auction`,
@@ -260,8 +269,8 @@ export default function WritePage({ authorization, uuid }: WritePageProps) {
         </p>
       </div>
 
-      <button className={styles["btn1"]} onClick={handleSendCertify}>
-        추가
+      <button className={styles["sendBtn"]} onClick={handleSendCertify}>
+        작성 완료
       </button>
 
       {/* Cropper 모달 */}

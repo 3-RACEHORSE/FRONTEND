@@ -9,6 +9,7 @@ import { cookies } from "next/headers";
 export default async function Page() {
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
+  console.log(authorization, uuid);
 
   return (
     <main>
