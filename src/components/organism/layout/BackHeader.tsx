@@ -5,6 +5,7 @@ import BackBtn from "@/components/atoms/button/BackBtn";
 import TitleText from "@/components/atoms/Text/TitleText";
 import Gap from "@/components/atoms/etc/Gap";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface TextProps {
   title: string;
@@ -12,9 +13,13 @@ interface TextProps {
 
 export default function BackHeader({ title }: TextProps) {
   const router = useRouter();
-
+  const pathName = usePathname();
   const handleBack = () => {
-    router.back();
+    if (pathName === "/join") {
+      router.push("/");
+    } else {
+      router.back();
+    }
   };
 
   return (
