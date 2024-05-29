@@ -33,12 +33,12 @@ export default function BoardInfo({
       <div className={styles["boardObject-element2"]}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p className={styles["boardObject-element2-text1"]}>{title}</p>
-          <p className={styles["boardObject-element2-bookmark"]}>
-            <form action={myAction}>
+          <form action={myAction}>
+            <p className={styles["boardObject-element2-bookmark"]}>
               {/* <Switch checked={isBookmarked} onClick={handleToggle} /> */}
               <Switch type="submit" />
-            </form>
-          </p>
+            </p>
+          </form>
         </div>
         <p className={styles["boardObject-element2-text2"]}>{detail}</p>
         <div className={styles["boardObject-element2-layout"]}>
