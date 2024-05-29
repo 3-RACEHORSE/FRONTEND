@@ -9,7 +9,15 @@ import Link from "next/link";
 
 export default function BoardCategory() {
   const pathNmae = usePathname();
+  let pathWithoutAuction = decodeURIComponent(
+    pathNmae.replace("/auction/", "")
+  );
+
   console.log("auction pathNmae", pathNmae);
+
+  if (pathNmae === "/auction/all") {
+    pathWithoutAuction = "검색";
+  }
   return (
     <div className={styles["boardCategory-container"]}>
       <Link
@@ -26,31 +34,18 @@ export default function BoardCategory() {
           </div>
         )}
       </Link>
-      {/* <Link
-        href="/auction/subscribe"
-        className={styles["boardCategory-container-element"]}
-      >
-        {pathNmae === "/auction/subscribe" ? (
-          <div className={styles["boardCategory-container-element-valid"]}>
-            구독
-          </div>
-        ) : (
-          <div className={styles["boardCategory-container-element-invalid"]}>
-            구독
-          </div>
-        )}
-      </Link> */}
+
       <Link
-        href="/auction/category"
+        href="/search"
         className={styles["boardCategory-container-element"]}
       >
-        {pathNmae === "/auction/category" ? (
+        {pathNmae === `/auction/${encodeURIComponent(pathWithoutAuction)}` ? (
           <div className={styles["boardCategory-container-element-valid"]}>
-            카테고리
+            {pathWithoutAuction}
           </div>
         ) : (
           <div className={styles["boardCategory-container-element-invalid"]}>
-            카테고리
+            {pathWithoutAuction}
           </div>
         )}
       </Link>

@@ -13,23 +13,25 @@ import watchListData from "@/constants/watchListData";
 
 export default function Page() {
   const pathName = usePathname();
-  let queryKey: (string | undefined)[] = ["object"];
-  let keyword: string | undefined;
-  //동적으로 쿼리 변경
-  if (pathName === "/auction/all") {
-    queryKey = ["object"];
-  } else if (pathName.startsWith("/auction/")) {
-    keyword = pathName.replace("/auction/", "");
-    console.log(keyword, "입니다.");
-    queryKey = ["object", keyword];
-    console.log("queryKey", queryKey);
-  }
-  const category = watchListData.find(
-    (item) => encodeURIComponent(item.label) === keyword
-  );
-  console.log("카테고리 검색 여부", category);
 
   const { ref, inView } = useInView();
+
+  //동적으로 쿼리 변경
+  let queryKey: (string | undefined)[] = ["object"];
+  let keyword: string | undefined;
+  if (pathName === "/auction/all") {
+    // 전체검색
+    queryKey = ["object"];
+  } else if (pathName.startsWith("/auction/")) {
+    // 카테고리 또는 search 검색
+    keyword = pathName.replace("/auction/", "");
+    queryKey = ["object", keyword];
+  }
+  const category = watchListData.find(
+    // 카테고리인지 search인지 구분
+    (item) => encodeURIComponent(item.label) === keyword
+  );
+
   const fetchListData = async ({ pageParam }: { pageParam: number }) => {
     let url;
 
