@@ -79,6 +79,7 @@ export default function Page() {
         minPrice={object.minimumBiddingPrice}
         startDate={object.createdAt}
         endDate={object.endedAt}
+        auctionUuid={object.auctionUuid}
         innerRef={index === objects.length - 1 ? ref : undefined}
       />
     ))

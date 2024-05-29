@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "@/styles/organism/boardObject.module.scss";
 import { Switch } from "@/components/ui/switch";
-import { myAction } from "@/lib/action";
+import { toggleValid } from "@/utils/auction/toggleValid";
 interface BoardProps {
   title: string;
   detail?: string;
@@ -11,6 +11,7 @@ interface BoardProps {
   minPrice?: string;
   startDate?: string;
   endDate?: string;
+  auctionUuid?: string;
 }
 export default function BoardInfo({
   title,
@@ -19,26 +20,31 @@ export default function BoardInfo({
   minPrice,
   startDate,
   endDate,
+  auctionUuid,
 }: BoardProps) {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  // const handleToggle = (e: { preventDefault: () => void }) => {
-  //   e.preventDefault(); // 이벤트 캡쳐링 막음
-  //   setIsBookmarked(!isBookmarked);
-  //   console.log(!isBookmarked);
-  // };
+  const handleToggle = (e: { preventDefault: () => void }) => {
+    e.preventDefault(); // 이벤트 캡쳐링 막음
+    console.log("클라이언트 사이드에서 실행되는 것");
+    setIsBookmarked(!isBookmarked);
+    console.log(!isBookmarked);
+    toggleValid({ auctionUuid });
+  };
 
   return (
     <>
       <div className={styles["boardObject-element2"]}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p className={styles["boardObject-element2-text1"]}>{title}</p>
-          <form action={myAction}>
-            <p className={styles["boardObject-element2-bookmark"]}>
-              {/* <Switch checked={isBookmarked} onClick={handleToggle} /> */}
-              <Switch type="submit" />
-            </p>
-          </form>
+          <p className={styles["boardObject-element2-bookmark"]}>
+            {/* <Switch checked={isBookmarked} onClick={handleToggle} /> */}
+            <Switch
+              type="submit"
+              checked={isBookmarked}
+              onClick={handleToggle}
+            />
+          </p>
         </div>
         <p className={styles["boardObject-element2-text2"]}>{detail}</p>
         <div className={styles["boardObject-element2-layout"]}>

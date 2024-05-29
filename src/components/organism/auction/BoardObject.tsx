@@ -14,6 +14,7 @@ interface BoardProps {
   minPrice?: string;
   startDate?: string;
   endDate?: string;
+  auctionUuid?: string;
   innerRef?: React.Ref<HTMLParagraphElement>;
 }
 
@@ -25,6 +26,7 @@ export default function BoardObject({
   minPrice,
   startDate,
   endDate,
+  auctionUuid,
   innerRef,
 }: BoardProps) {
   return (
@@ -48,6 +50,7 @@ export default function BoardObject({
         minPrice={minPrice}
         startDate={startDate}
         endDate={endDate}
+        auctionUuid={auctionUuid}
       />
     </div>
   );
