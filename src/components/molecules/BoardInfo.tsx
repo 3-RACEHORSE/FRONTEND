@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "@/styles/organism/boardObject.module.scss";
 import { Switch } from "@/components/ui/switch";
-
+import { myAction } from "@/lib/action";
 interface BoardProps {
   title: string;
   detail?: string;
@@ -22,11 +22,11 @@ export default function BoardInfo({
 }: BoardProps) {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  const handleToggle = (e: { preventDefault: () => void }) => {
-    e.preventDefault(); // 이벤트 캡쳐링 막음
-    setIsBookmarked(!isBookmarked);
-    console.log(!isBookmarked);
-  };
+  // const handleToggle = (e: { preventDefault: () => void }) => {
+  //   e.preventDefault(); // 이벤트 캡쳐링 막음
+  //   setIsBookmarked(!isBookmarked);
+  //   console.log(!isBookmarked);
+  // };
 
   return (
     <>
@@ -34,7 +34,10 @@ export default function BoardInfo({
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p className={styles["boardObject-element2-text1"]}>{title}</p>
           <p className={styles["boardObject-element2-bookmark"]}>
-            <Switch checked={isBookmarked} onClick={handleToggle} />
+            <form action={myAction}>
+              {/* <Switch checked={isBookmarked} onClick={handleToggle} /> */}
+              <Switch type="submit" />
+            </form>
           </p>
         </div>
         <p className={styles["boardObject-element2-text2"]}>{detail}</p>
