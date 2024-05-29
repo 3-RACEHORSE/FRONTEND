@@ -8,13 +8,30 @@ import Header from "@/components/organism/layout/Header";
 import WriteBar from "@/components/organism/layout/WriteBar";
 import NavBar from "@/components/organism/layout/NavBar";
 import BoardObject from "@/components/organism/auction/BoardObject";
+import { usePathname } from "next/navigation";
 
 export default function Page() {
+  const pathName = usePathname();
+  let queryKey: (string | undefined)[] = ["object"];
+  let keyword: string | undefined;
+
+  //동적으로 쿼리 변경
+  if (pathName === "/auction/all") {
+    queryKey = ["object"];
+  } else if (pathName.startsWith("/auction/")) {
+    keyword = pathName.replace("/auction/", "");
+    console.log(keyword, "입니다.");
+    queryKey = ["object", keyword];
+    console.log("queryKey", queryKey);
+  }
+
   const { ref, inView } = useInView();
   const fetchListData = async ({ pageParam }: { pageParam: number }) => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?page=${pageParam}`
-    );
+    const url =
+      pathName === "/auction/all"
+        ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?page=${pageParam}`
+        : `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
+    const res = await fetch(url);
     const data = await res.json();
 
     return data.searchAllAuctions;
@@ -22,7 +39,7 @@ export default function Page() {
 
   //추후, search 구현 필요
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["object"],
+    queryKey, // 위의 로직에서 path에 따라 변경
     queryFn: fetchListData,
     initialPageParam: 0,
     staleTime: 1000 * 20 * 20,
@@ -39,6 +56,7 @@ export default function Page() {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
+  console.log(data);
   const content = data?.pages.map((objects: boardObject[]) =>
     objects.map((object, index) => (
       <BoardObject

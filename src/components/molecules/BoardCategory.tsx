@@ -26,7 +26,7 @@ export default function BoardCategory() {
           </div>
         )}
       </Link>
-      <Link
+      {/* <Link
         href="/auction/subscribe"
         className={styles["boardCategory-container-element"]}
       >
@@ -39,7 +39,7 @@ export default function BoardCategory() {
             구독
           </div>
         )}
-      </Link>
+      </Link> */}
       <Link
         href="/auction/category"
         className={styles["boardCategory-container-element"]}

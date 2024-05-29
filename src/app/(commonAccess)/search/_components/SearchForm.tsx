@@ -2,8 +2,11 @@
 
 import React, { useState } from "react";
 import SearchList from "./SearchList";
+import { useRouter } from "next/navigation";
 
 function SearchForm() {
+  const router = useRouter();
+
   const [searchText, setSearchText] = useState("");
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
@@ -17,14 +20,26 @@ function SearchForm() {
   };
 
   const handleSaveToLocalStorage = () => {
+    // 로컬 스토리지에서 검색 기록 가져오기
+    const storedSearchHistory: string | null =
+      localStorage.getItem("searchHistory");
+    const previousSearchHistory: string[] = storedSearchHistory
+      ? JSON.parse(storedSearchHistory)
+      : [];
+
     // 현재 검색어를 검색 기록에 추가
-    const newSearchHistory = [searchText, ...searchHistory]; // 배열의 앞쪽에 저장
+    const newSearchHistory: string[] = [searchText, ...previousSearchHistory];
+
+    // 상태 업데이트
     setSearchHistory(newSearchHistory);
 
     // 로컬 스토리지에 검색 기록 저장
     localStorage.setItem("searchHistory", JSON.stringify(newSearchHistory));
 
     console.log("검색어가 로컬 스토리지에 저장되었습니다:", searchText);
+
+    // 추가 작업: 페이지 이동 및 검색어 저장
+    router.push(`/auction/${searchText}`);
   };
 
   return (
@@ -40,7 +55,7 @@ function SearchForm() {
         />
         <div
           className='"pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'
-          // style={{background:'red'}}
+          // style={{ background: "red" }}
           onClick={handleSaveToLocalStorage}
         >
           <svg
