@@ -9,12 +9,12 @@ import WriteBar from "@/components/organism/layout/WriteBar";
 import NavBar from "@/components/organism/layout/NavBar";
 import BoardObject from "@/components/organism/auction/BoardObject";
 import { usePathname } from "next/navigation";
+import watchListData from "@/constants/watchListData";
 
 export default function Page() {
   const pathName = usePathname();
   let queryKey: (string | undefined)[] = ["object"];
   let keyword: string | undefined;
-
   //동적으로 쿼리 변경
   if (pathName === "/auction/all") {
     queryKey = ["object"];
@@ -24,13 +24,22 @@ export default function Page() {
     queryKey = ["object", keyword];
     console.log("queryKey", queryKey);
   }
+  const category = watchListData.find(
+    (item) => encodeURIComponent(item.label) === keyword
+  );
+  console.log("카테고리 검색 여부", category);
 
   const { ref, inView } = useInView();
   const fetchListData = async ({ pageParam }: { pageParam: number }) => {
-    const url =
-      pathName === "/auction/all"
-        ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?page=${pageParam}`
-        : `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
+    let url;
+
+    if (pathName === "/auction/all") {
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?page=${pageParam}`;
+    } else if (category) {
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?category=${keyword}&page=${pageParam}`;
+    } else {
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
+    }
     const res = await fetch(url);
     const data = await res.json();
 
