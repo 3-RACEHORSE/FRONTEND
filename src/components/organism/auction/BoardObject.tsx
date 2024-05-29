@@ -11,6 +11,7 @@ interface BoardProps {
   minPrice?: string;
   startDate?: string;
   endDate?: string;
+  innerRef?: React.Ref<HTMLParagraphElement>;
 }
 
 export default function BoardObject({
@@ -21,9 +22,10 @@ export default function BoardObject({
   minPrice,
   startDate,
   endDate,
+  innerRef,
 }: BoardProps) {
   return (
-    <div className={styles["boardObject-container"]}>
+    <div className={styles["boardObject-container"]} ref={innerRef}>
       <div className={styles["boardObject-element1"]}>
         <img
           src={src}
