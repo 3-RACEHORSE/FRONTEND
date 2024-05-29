@@ -20,14 +20,8 @@ export default function Page() {
     return data.searchAllAuctions;
   };
 
-  const {
-    data,
-    status,
-    error,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
+  //추후, search 구현 필요
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["object"],
     queryFn: fetchListData,
     initialPageParam: 0,
@@ -39,43 +33,27 @@ export default function Page() {
     },
   });
 
-  const content = data?.pages.map((objects: boardObject[]) =>
-    objects.map((object, index) => {
-      if (objects.length == index + 1) {
-        return (
-          <BoardObject
-            key={object.auctionUuid}
-            src={object.thumbnail}
-            title={object.title}
-            detail={object.content}
-            category={object.category}
-            minPrice={object.minimumBiddingPrice}
-            startDate={object.createdAt}
-            endDate={object.endedAt}
-            innerRef={ref}
-          />
-        );
-      }
-      return (
-        <BoardObject
-          key={object.auctionUuid}
-          src={object.thumbnail}
-          title={object.title}
-          detail={object.content}
-          category={object.category}
-          minPrice={object.minimumBiddingPrice}
-          startDate={object.createdAt}
-          endDate={object.endedAt}
-        />
-      );
-    })
-  );
-
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, fetchNextPage]);
+
+  const content = data?.pages.map((objects: boardObject[]) =>
+    objects.map((object, index) => (
+      <BoardObject
+        key={object.auctionUuid}
+        src={object.thumbnail}
+        title={object.title}
+        detail={object.content}
+        category={object.category}
+        minPrice={object.minimumBiddingPrice}
+        startDate={object.createdAt}
+        endDate={object.endedAt}
+        innerRef={index === objects.length - 1 ? ref : undefined}
+      />
+    ))
+  );
 
   return (
     <main>

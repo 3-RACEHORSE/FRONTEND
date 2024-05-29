@@ -23,10 +23,9 @@ export default function BoardObject({
   startDate,
   endDate,
   innerRef,
-  ...props
 }: BoardProps) {
   return (
-    <div className={styles["boardObject-container"]} ref={innerRef} {...props}>
+    <div className={styles["boardObject-container"]} ref={innerRef}>
       <div className={styles["boardObject-element1"]}>
         <img
           src={src}
