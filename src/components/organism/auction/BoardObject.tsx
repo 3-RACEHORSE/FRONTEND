@@ -3,10 +3,11 @@
 import React, { useState, ChangeEvent } from "react";
 import BoardInfo from "@/components/molecules/BoardInfo";
 import styles from "@/styles/organism/boardObject.module.scss";
-import Image from "next/image";
-import { auth } from "@/auth";
 
 interface BoardProps {
+  authorization?: any; // 토큰
+  uuid?: any; //유유아이디
+  isSession: boolean; // 로그인 되어있는지의 여부
   src?: string;
   title: string;
   detail?: string;
@@ -15,10 +16,14 @@ interface BoardProps {
   startDate?: string;
   endDate?: string;
   auctionUuid?: string;
+  isSubscribed?: boolean; // 구독되어있는지의 여부
   innerRef?: React.Ref<HTMLParagraphElement>;
 }
 
 export default function BoardObject({
+  authorization,
+  uuid,
+  isSession,
   src,
   title,
   detail,
@@ -27,6 +32,7 @@ export default function BoardObject({
   startDate,
   endDate,
   auctionUuid,
+  isSubscribed,
   innerRef,
 }: BoardProps) {
   return (
@@ -44,6 +50,9 @@ export default function BoardObject({
         />
       </div>
       <BoardInfo
+        authorization={authorization}
+        uuid={uuid}
+        isSession={isSession} // 로그인 되어있는지
         title={title}
         detail={detail}
         category={category}
@@ -51,6 +60,7 @@ export default function BoardObject({
         startDate={startDate}
         endDate={endDate}
         auctionUuid={auctionUuid}
+        isSubscribed={isSubscribed}
       />
     </div>
   );

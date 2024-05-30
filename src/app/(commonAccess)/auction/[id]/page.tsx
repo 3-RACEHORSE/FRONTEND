@@ -2,7 +2,7 @@
 
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { boardObject } from "@/lib/interface/boardObject";
 import Header from "@/components/organism/layout/Header";
 import WriteBar from "@/components/organism/layout/WriteBar";
@@ -10,6 +10,7 @@ import NavBar from "@/components/organism/layout/NavBar";
 import BoardObject from "@/components/organism/auction/BoardObject";
 import { usePathname } from "next/navigation";
 import watchListData from "@/constants/watchListData";
+import { sessionValid } from "@/utils/session/sessionValid";
 
 export default function Page() {
   const pathName = usePathname();
@@ -42,7 +43,15 @@ export default function Page() {
     } else {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
     }
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      method: "GET", // 요청 방법 설정
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${authorization}`,
+        uuid: `${uuid}`,
+      },
+    });
+
     const data = await res.json();
 
     return data.searchAllAuctions;
@@ -69,11 +78,33 @@ export default function Page() {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  console.log(data);
+  //로그인 되어있는지 여부 검사
+  const [authorization, setAuthorization] = useState<any>(null); // 토큰
+  const [uuid, setUuid] = useState<any>(null); // uuid
+  const [isSession, setIsSession] = useState<boolean>(false); // 로그인 여부
+
+  const handleSession = async () => {
+    const loginValid = await sessionValid();
+    if (loginValid) {
+      // 로그인 되어있을때
+      setAuthorization(loginValid.authorization);
+      setUuid(loginValid.uuid);
+      setIsSession(loginValid.valid);
+    }
+  };
+
+  useEffect(() => {
+    handleSession();
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  }, []);
+
   const content = data?.pages.map((objects: boardObject[]) =>
     objects.map((object, index) => (
       <BoardObject
         key={object.auctionUuid}
+        authorization={authorization}
+        uuid={uuid}
+        isSession={isSession} // 로그인 되어있는지
         src={object.thumbnail}
         title={object.title}
         detail={object.content}
@@ -82,6 +113,7 @@ export default function Page() {
         startDate={object.createdAt}
         endDate={object.endedAt}
         auctionUuid={object.auctionUuid}
+        isSubscribed={object.isSubscribed} // 북마크 구독 여부
         innerRef={index === objects.length - 1 ? ref : undefined}
       />
     ))
