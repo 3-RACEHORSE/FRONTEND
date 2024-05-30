@@ -44,5 +44,6 @@ export async function toggleValid({
     }
   } catch (error) {
     console.error("Error:", error);
+    //400 에러 => 자신 경매는 북마크 안되는 분기 처리
   }
 }

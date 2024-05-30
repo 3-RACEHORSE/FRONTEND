@@ -43,18 +43,23 @@ export default function Page() {
     } else {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
     }
-    const res = await fetch(url, {
-      method: "GET", // 요청 방법 설정
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${authorization}`,
-        uuid: `${uuid}`,
-      },
-    });
 
-    const data = await res.json();
-
-    return data.searchAllAuctions;
+    if (isSession) {
+      const res = await fetch(url, {
+        method: "GET", // 요청 방법 설정
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${authorization}`,
+          uuid: `${uuid}`,
+        },
+      });
+      const data = await res.json();
+      return data.auctionAndIsSubscribedDtos;
+    } else {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.auctionAndIsSubscribedDtos;
+    }
   };
 
   //추후, search 구현 필요
@@ -98,33 +103,33 @@ export default function Page() {
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   }, []);
 
-  // console.log(authorization, uuid, isSession);
+  console.log(authorization, uuid, isSession);
 
-  // const content = data?.pages.map((objects: boardObject[]) =>
-  //   objects.map((object, index) => (
-  //     <BoardObject
-  //       key={object.auctionUuid}
-  //       authorization={authorization}
-  //       uuid={uuid}
-  //       isSession={isSession} // 로그인 되어있는지
-  //       src={object.thumbnail}
-  //       title={object.title}
-  //       detail={object.content}
-  //       category={object.category}
-  //       minPrice={object.minimumBiddingPrice}
-  //       startDate={object.createdAt}
-  //       endDate={object.endedAt}
-  //       auctionUuid={object.auctionUuid}
-  //       isSubscribed={object.isSubscribed} // 북마크 구독 여부
-  //       innerRef={index === objects.length - 1 ? ref : undefined}
-  //     />
-  //   ))
-  // );
+  const content = data?.pages.map((objects: boardObject[]) =>
+    objects.map((object, index) => (
+      <BoardObject
+        key={object.auctionUuid}
+        authorization={authorization}
+        uuid={uuid}
+        isSession={isSession} // 로그인 되어있는지
+        src={object.thumbnail}
+        title={object.title}
+        detail={object.content}
+        category={object.category}
+        minPrice={object.minimumBiddingPrice}
+        startDate={object.createdAt}
+        endDate={object.endedAt}
+        auctionUuid={object.auctionUuid}
+        // isSubscribed={object.isSubscribed} // 북마크 구독 여부
+        innerRef={index === objects.length - 1 ? ref : undefined}
+      />
+    ))
+  );
 
   return (
     <main>
       <Header />
-      {/* {content} */}
+      {content}
       <WriteBar />
       <NavBar />
     </main>
