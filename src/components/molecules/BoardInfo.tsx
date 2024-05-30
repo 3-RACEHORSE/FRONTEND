@@ -4,9 +4,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/organism/boardObject.module.scss";
 import { Switch } from "@/components/ui/switch";
 import { toggleValid } from "@/utils/auction/toggleValid";
-import { handleIsBookmarked } from "@/utils/auction/handleIsBookmarked";
 import Swal from "sweetalert2";
-import { sessionValid } from "@/utils/session/sessionValid";
 
 interface BoardProps {
   authorization?: any; // 토큰
@@ -41,7 +39,12 @@ export default function BoardInfo({
     e.preventDefault(); // 이벤트 캡쳐링 막음
     setIsBookmarked(!isBookmarked);
 
-    const text = await toggleValid({ auctionUuid, isBookmarked });
+    const text = await toggleValid({
+      authorization,
+      uuid,
+      auctionUuid,
+      isBookmarked,
+    });
     console.log("서버엑션의 결과값", text);
     if (text === "등록") {
       Swal.fire({

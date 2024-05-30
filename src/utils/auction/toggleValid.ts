@@ -1,20 +1,16 @@
-"use server";
-
-import { auth } from "@/auth";
-import { cookies } from "next/headers";
-
 interface toggleValidProps {
+  authorization: any;
+  uuid: any;
   auctionUuid?: any;
   isBookmarked?: boolean;
 }
 
 export async function toggleValid({
+  authorization,
+  uuid,
   auctionUuid,
   isBookmarked,
 }: toggleValidProps) {
-  const authorization = cookies().get("authorization")?.value;
-  const uuid = cookies().get("uuid")?.value;
-  console.log("받은 Auction uuid", auctionUuid);
   //북마크 여부에 따른 method 변경
   let METHOD;
   if (isBookmarked) {

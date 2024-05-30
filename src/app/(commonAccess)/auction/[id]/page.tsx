@@ -98,31 +98,33 @@ export default function Page() {
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   }, []);
 
-  const content = data?.pages.map((objects: boardObject[]) =>
-    objects.map((object, index) => (
-      <BoardObject
-        key={object.auctionUuid}
-        authorization={authorization}
-        uuid={uuid}
-        isSession={isSession} // 로그인 되어있는지
-        src={object.thumbnail}
-        title={object.title}
-        detail={object.content}
-        category={object.category}
-        minPrice={object.minimumBiddingPrice}
-        startDate={object.createdAt}
-        endDate={object.endedAt}
-        auctionUuid={object.auctionUuid}
-        isSubscribed={object.isSubscribed} // 북마크 구독 여부
-        innerRef={index === objects.length - 1 ? ref : undefined}
-      />
-    ))
-  );
+  // console.log(authorization, uuid, isSession);
+
+  // const content = data?.pages.map((objects: boardObject[]) =>
+  //   objects.map((object, index) => (
+  //     <BoardObject
+  //       key={object.auctionUuid}
+  //       authorization={authorization}
+  //       uuid={uuid}
+  //       isSession={isSession} // 로그인 되어있는지
+  //       src={object.thumbnail}
+  //       title={object.title}
+  //       detail={object.content}
+  //       category={object.category}
+  //       minPrice={object.minimumBiddingPrice}
+  //       startDate={object.createdAt}
+  //       endDate={object.endedAt}
+  //       auctionUuid={object.auctionUuid}
+  //       isSubscribed={object.isSubscribed} // 북마크 구독 여부
+  //       innerRef={index === objects.length - 1 ? ref : undefined}
+  //     />
+  //   ))
+  // );
 
   return (
     <main>
       <Header />
-      {content}
+      {/* {content} */}
       <WriteBar />
       <NavBar />
     </main>
