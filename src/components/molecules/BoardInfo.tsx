@@ -29,13 +29,12 @@ export default function BoardInfo({
 
   const handleToggle = async (e: { preventDefault: () => void }) => {
     e.preventDefault(); // 이벤트 캡쳐링 막음
-    console.log("클라이언트 사이드에서 실행되는 것");
     setIsBookmarked(!isBookmarked);
-    console.log(!isBookmarked);
-    // 추가적인 절달 로직 필요
-    const text = await toggleValid({ auctionUuid });
 
-    if (text === "성공") {
+    // 추가적인 절달 로직 필요
+    const text = await toggleValid({ auctionUuid, isBookmarked });
+    console.log("서버엑션의 결과값", text);
+    if (text === "등록") {
       Swal.fire({
         title: "추가되었습니다!",
         icon: "success",
@@ -43,10 +42,17 @@ export default function BoardInfo({
         timer: 500,
       });
     }
-    console.log(text, "의 값입니다");
+    if (text === "취소") {
+      Swal.fire({
+        title: "취소되었습니다!!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 500,
+      });
+    }
   };
 
-  //시작시 , 세션 있는지 여부 검사
+  //마운트 시, 세션 있는지 여부 검사
   const [isSession, setIsSession] = useState(false);
 
   const handleSession = async () => {
@@ -57,15 +63,12 @@ export default function BoardInfo({
     handleSession();
   }, []);
 
-  console.log("세션 여부입니다.", isSession);
-
   return (
     <>
       <div className={styles["boardObject-element2"]}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p className={styles["boardObject-element2-text1"]}>{title}</p>
           <p className={styles["boardObject-element2-bookmark"]}>
-            {/* <Switch checked={isBookmarked} onClick={handleToggle} /> */}
             {isSession ? (
               <Switch
                 type="submit"
