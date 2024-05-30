@@ -10,7 +10,7 @@ interface toggleValidProps {
 export async function toggleValid(auctionUuid: toggleValidProps) {
   const session = await auth();
   if (!session) {
-    return "실패(세션없음)";
+    return "세션없음";
   }
 
   const authorization = cookies().get("authorization")?.value;

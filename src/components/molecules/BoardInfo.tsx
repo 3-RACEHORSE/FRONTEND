@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/organism/boardObject.module.scss";
 import { Switch } from "@/components/ui/switch";
 import { toggleValid } from "@/utils/auction/toggleValid";
 import Swal from "sweetalert2";
+import { sessionValid } from "@/utils/session/sessionValid";
 
 interface BoardProps {
   title: string;
@@ -33,6 +34,7 @@ export default function BoardInfo({
     console.log(!isBookmarked);
     // 추가적인 절달 로직 필요
     const text = await toggleValid({ auctionUuid });
+
     if (text === "성공") {
       Swal.fire({
         title: "추가되었습니다!",
@@ -44,6 +46,19 @@ export default function BoardInfo({
     console.log(text, "의 값입니다");
   };
 
+  //시작시 , 세션 있는지 여부 검사
+  const [isSession, setIsSession] = useState(false);
+
+  const handleSession = async () => {
+    setIsSession(await sessionValid());
+  };
+
+  useEffect(() => {
+    handleSession();
+  }, []);
+
+  console.log("세션 여부입니다.", isSession);
+
   return (
     <>
       <div className={styles["boardObject-element2"]}>
@@ -51,11 +66,15 @@ export default function BoardInfo({
           <p className={styles["boardObject-element2-text1"]}>{title}</p>
           <p className={styles["boardObject-element2-bookmark"]}>
             {/* <Switch checked={isBookmarked} onClick={handleToggle} /> */}
-            <Switch
-              type="submit"
-              checked={isBookmarked}
-              onClick={handleToggle}
-            />
+            {isSession ? (
+              <Switch
+                type="submit"
+                checked={isBookmarked}
+                onClick={handleToggle}
+              />
+            ) : (
+              <></>
+            )}
           </p>
         </div>
         <p className={styles["boardObject-element2-text2"]}>{detail}</p>
