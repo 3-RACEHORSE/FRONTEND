@@ -47,7 +47,7 @@ export default function NavBar() {
         {/* 버튼2 */}
         <Link href="/auction/all">
           <div className={styles["nav-iconWithText-container"]}>
-            {pathNmae === "/auction/all" ? (
+            {pathNmae.startsWith("/auction") ? (
               <>
                 <TList />
                 <div className={styles["nav-iconWithText-container-text-true"]}>
