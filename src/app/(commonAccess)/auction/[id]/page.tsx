@@ -56,7 +56,9 @@ export default function Page() {
     staleTime: 1000 * 20 * 20,
     gcTime: 300 * 1000,
     getNextPageParam: (lastPage, allPages) => {
-      const nextPage = lastPage.length ? allPages.length + 1 : undefined;
+      // 페이지 로직 수정 필요
+      const nextPage = lastPage.length ? allPages.length : undefined;
+      console.log("페이지 값", nextPage);
       return nextPage;
     },
   });

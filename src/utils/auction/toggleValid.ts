@@ -37,19 +37,6 @@ export async function toggleValid(auctionUuid: toggleValidProps) {
     if (res.ok) {
       console.log("성공");
     }
-    if (res.status === 200) {
-      console.log("성공");
-      Swal.fire({
-        title: "등록되었습니다!",
-        icon: "success",
-        confirmButtonText: "확인",
-      });
-      // .then((result) => {
-      //   if (result.isConfirmed) {
-      //     router.push("/auction/all");
-      //   }
-      // });
-    }
   } catch (error) {
     console.error("Error:", error);
   }
