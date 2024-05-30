@@ -62,6 +62,19 @@ export default function BoardInfo({
         timer: 500,
       });
     }
+    if (text === "본인") {
+      Swal.fire({
+        title: "본인글은, 구독하지 못합니다!",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 500,
+      }).then((result) => {
+        // 본인글 구독 못하게 하는 로직
+        if (result.isConfirmed) {
+          setIsBookmarked(!isBookmarked);
+        }
+      });
+    }
   };
 
   return (
