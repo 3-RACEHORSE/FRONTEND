@@ -4,6 +4,7 @@ import withPWAInit from "@ducanh2912/next-pwa";
 
 const withPWA = withPWAInit({
   dest: "public",
+  disable: process.env.NODE_ENV === "development", // workbox 안나오게
 });
 
 const nextConfig = {

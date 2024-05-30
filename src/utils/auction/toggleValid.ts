@@ -1,56 +1,50 @@
-"use server";
-
-import { auth } from "@/auth";
-import Swal from "sweetalert2";
-import { cookies } from "next/headers";
-
 interface toggleValidProps {
-  auctionUuid?: string;
+  authorization: any;
+  uuid: any;
+  auctionUuid?: any;
+  isBookmarked?: boolean;
 }
 
-export async function toggleValid(auctionUuid: toggleValidProps) {
-  const session = await auth();
-  if (!session) {
-    return console.log("세선없음");
+export async function toggleValid({
+  authorization,
+  uuid,
+  auctionUuid,
+  isBookmarked,
+}: toggleValidProps) {
+  //북마크 여부에 따른 method 변경
+  let METHOD;
+  if (isBookmarked) {
+    METHOD = "PATCH";
+  } else {
+    METHOD = "POST";
   }
+  console.log(METHOD);
 
-  const authorization = cookies().get("authorization")?.value;
-  const uuid = cookies().get("uuid")?.value;
-
-  // console.log(auctionUuid, authorization, uuid);
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/subscription/auction`,
       {
-        method: "POST",
+        method: `${METHOD}`,
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${authorization}`,
           uuid: `${uuid}`,
         },
         body: JSON.stringify({
-          auctionUuid: auctionUuid.auctionUuid,
+          auctionUuid: auctionUuid,
         }),
       }
     );
 
-    if (res.ok) {
-      console.log("성공");
+    if (res.ok && METHOD === "POST") {
+      return "등록";
     }
-    if (res.status === 200) {
-      console.log("성공");
-      Swal.fire({
-        title: "등록되었습니다!",
-        icon: "success",
-        confirmButtonText: "확인",
-      });
-      // .then((result) => {
-      //   if (result.isConfirmed) {
-      //     router.push("/auction/all");
-      //   }
-      // });
+    if (res.ok && METHOD === "PATCH") {
+      return "취소";
     }
   } catch (error) {
     console.error("Error:", error);
+    //400 에러 => 자신 경매는 북마크 안되는 분기 처리 이름을, 본인
+    return "본인";
   }
 }
