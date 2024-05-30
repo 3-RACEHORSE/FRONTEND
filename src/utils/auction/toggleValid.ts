@@ -1,7 +1,6 @@
 "use server";
 
 import { auth } from "@/auth";
-import Swal from "sweetalert2";
 import { cookies } from "next/headers";
 
 interface toggleValidProps {
@@ -11,7 +10,7 @@ interface toggleValidProps {
 export async function toggleValid(auctionUuid: toggleValidProps) {
   const session = await auth();
   if (!session) {
-    return console.log("세선없음");
+    return "실패(세션없음)";
   }
 
   const authorization = cookies().get("authorization")?.value;
@@ -35,7 +34,7 @@ export async function toggleValid(auctionUuid: toggleValidProps) {
     );
 
     if (res.ok) {
-      console.log("성공");
+      return "성공";
     }
   } catch (error) {
     console.error("Error:", error);

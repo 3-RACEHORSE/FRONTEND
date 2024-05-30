@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import styles from "@/styles/organism/boardObject.module.scss";
 import { Switch } from "@/components/ui/switch";
 import { toggleValid } from "@/utils/auction/toggleValid";
+import Swal from "sweetalert2";
+
 interface BoardProps {
   title: string;
   detail?: string;
@@ -24,12 +26,22 @@ export default function BoardInfo({
 }: BoardProps) {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  const handleToggle = (e: { preventDefault: () => void }) => {
+  const handleToggle = async (e: { preventDefault: () => void }) => {
     e.preventDefault(); // 이벤트 캡쳐링 막음
     console.log("클라이언트 사이드에서 실행되는 것");
     setIsBookmarked(!isBookmarked);
     console.log(!isBookmarked);
-    toggleValid({ auctionUuid });
+    // 추가적인 절달 로직 필요
+    const text = await toggleValid({ auctionUuid });
+    if (text === "성공") {
+      Swal.fire({
+        title: "추가되었습니다!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 500,
+      });
+    }
+    console.log(text, "의 값입니다");
   };
 
   return (
