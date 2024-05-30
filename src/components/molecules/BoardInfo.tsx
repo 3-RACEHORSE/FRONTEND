@@ -24,7 +24,7 @@ interface BoardProps {
 export default function BoardInfo({
   authorization,
   uuid,
-  isSession,
+  isSession, // 로그인 여부
   title,
   detail,
   category,
@@ -32,9 +32,9 @@ export default function BoardInfo({
   startDate,
   endDate,
   auctionUuid,
-  isSubscribed,
+  isSubscribed, // 구독 여부
 }: BoardProps) {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(isSubscribed); // boolean
 
   //북마크 등록 api => 이것도 추후 설정 필요
   const handleToggle = async (e: { preventDefault: () => void }) => {
@@ -61,47 +61,21 @@ export default function BoardInfo({
     }
   };
 
-  //마운트 시, 세션 있는지 여부 검사
-  // const [isSession, setIsSession] = useState(false);
-
-  // const handleSession = async () => {
-  //   setIsSession(await sessionValid());
-  // };
-
-  // useEffect(() => {
-  //   handleSession();
-  // }, []);
-
-  // 마운트 이후, 북마크 여부 확인
-  // const handleBookmark = async () => {
-  //   console.log(
-  //     "북마크 되어있는지 여부",
-  //     await handleIsBookmarked({ auctionUuid })
-  //   );
-  //   if (await handleIsBookmarked({ auctionUuid })) {
-  //     setIsBookmarked(true);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleBookmark();
-  // }, [isSession]);
-
   return (
     <>
       <div className={styles["boardObject-element2"]}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p className={styles["boardObject-element2-text1"]}>{title}</p>
           <p className={styles["boardObject-element2-bookmark"]}>
-            {/* {isSession ? ( */}
-            <Switch
-              type="submit"
-              checked={isBookmarked}
-              onClick={handleToggle}
-            />
-            {/* ) : (
+            {isSession ? (
+              <Switch
+                type="submit"
+                checked={isBookmarked}
+                onClick={handleToggle}
+              />
+            ) : (
               <></>
-            )} */}
+            )}
           </p>
         </div>
         <p className={styles["boardObject-element2-text2"]}>{detail}</p>
