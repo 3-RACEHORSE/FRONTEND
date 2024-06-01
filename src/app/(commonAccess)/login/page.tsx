@@ -17,12 +17,12 @@ export default function Page() {
     <main>
       <BackHeader title={"LOGIN"} />
       <div className={styles["login-main-frame"]}>
-        <Image
+        {/* <Image
           src={isDarkMode ? `${LoginLogoDark}` : `${LoginLogo}`}
           alt=""
           width={220}
           height={220}
-        />
+        /> */}
       </div>
       <div className={styles["login-btn-frame"]}>
         <LoginBtn />

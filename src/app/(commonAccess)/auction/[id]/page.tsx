@@ -45,20 +45,24 @@ export default function Page() {
     }
 
     if (isSession) {
+      console.log(isSession, authorization, "로그인 리스트 출력1");
       const res = await fetch(url, {
         method: "GET", // 요청 방법 설정
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${authorization}`,
+          authorization: `${authorization}`,
           uuid: `${uuid}`,
         },
       });
       const data = await res.json();
+      console.log(data);
       return data.auctionAndIsSubscribedDtos;
     } else {
+      console.log(isSession, authorization, "로그인 리스트 출력2");
+
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
+      console.log("받은 데이터 값입니다", data);
       return data.auctionAndIsSubscribedDtos;
     }
   };
@@ -68,8 +72,9 @@ export default function Page() {
     queryKey, // 위의 로직에서 path에 따라 변경
     queryFn: fetchListData,
     initialPageParam: 0,
-    staleTime: 1000 * 20 * 20,
-    gcTime: 300 * 1000,
+    staleTime: 0, // 1000 * 20 * 20
+    // gcTime: 1000, // 300 * 1000
+
     getNextPageParam: (lastPage, allPages) => {
       // 페이지 로직 수정 필요
       const nextPage = lastPage.length ? allPages.length : undefined;
@@ -121,7 +126,7 @@ export default function Page() {
         startDate={object.createdAt}
         endDate={object.endedAt}
         auctionUuid={object.auctionUuid}
-        // isSubscribed={object.isSubscribed} // 북마크 구독 여부
+        isSubscribed={object.subscribed} // 북마크 구독 여부
         innerRef={index === objects.length - 1 ? ref : undefined}
       />
     ))

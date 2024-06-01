@@ -18,7 +18,7 @@ function MainBanner() {
   //다크모드
   const isDarkMode = useDarkMode();
 
-  const bannerDataToUse = isDarkMode ? bannerDataDark : bannerData;
+  // const bannerDataToUse = isDarkMode ? bannerDataDark : bannerData;
 
   return (
     <div style={{ position: "relative", overflow: "hidden" }}>
