@@ -58,6 +58,7 @@ export default function Page() {
     } else {
       const res = await fetch(url);
       const data = await res.json();
+      console.log(data);
       return data.auctionAndIsSubscribedDtos;
     }
   };
