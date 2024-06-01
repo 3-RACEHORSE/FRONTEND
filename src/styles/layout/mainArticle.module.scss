@@ -39,6 +39,7 @@
 }
 
 .column {
+  background-color: var(--color-element);
   display: flex;
   justify-content: space-between;
   width: 48.3%;
@@ -47,6 +48,7 @@
 }
 
 .column2 {
+  background-color: var(--color-element);
   display: flex;
   justify-content: space-between;
   width: 31.5%;

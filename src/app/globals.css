@@ -92,8 +92,10 @@
     --color-primary: #fff;
     --color-button: #00ff4c;
     --color-paragraph: #8a8a8a;
-    --color-button-text: rgb(0, 0, 0);
-    --color-background: #000;
+    /* --color-button-text: rgb(0, 0, 0); */
+    --color-background: #151515; /*배경색*/
+    --color-element: #242424;
+    --color-text: #ffffff;
   }
 
   * {
