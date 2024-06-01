@@ -10,5 +10,5 @@ export interface boardObject {
   auctionUuid: string;
   title: string;
   content: string;
-  isSubscribed: boolean;
+  subscribed: boolean;
 }

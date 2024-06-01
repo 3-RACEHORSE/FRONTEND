@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Alarm() {
   return (
     <Link href={"/"}>
-      <GoBell size={27} color="#000000" />
+      <GoBell size={27} />
     </Link>
   );
 }

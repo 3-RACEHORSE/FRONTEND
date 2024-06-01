@@ -25,3 +25,7 @@
   border-radius: 50px;
   background-color: #f1f1f1;
 }
+
+body[data-theme="dark"] .input {
+  background-color: var(--color-element);
+}

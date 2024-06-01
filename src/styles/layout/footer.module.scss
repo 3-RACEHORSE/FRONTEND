@@ -30,14 +30,44 @@
   flex-direction: column;
   justify-content: center;
 }
+body[data-theme="dark"] .footer-layout {
+  bottom: 0;
+  left: 0;
+  background-color: rgb(14, 14, 14);
+  height: 20vh;
+  width: 100%;
+  padding: 3%;
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* 오래된 버전의 브라우저에서 호환성을 위해 추가 */
+  margin-top: 50px;
+  color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .footer-text1 {
   font-size: 12px;
   font-weight: 500;
   color: #5c5c5c;
 }
+
 .footer-text2 {
   font-size: 12px;
   margin-top: 20px;
   font-weight: 500;
   color: #5c5c5c;
+}
+
+body[data-theme="dark"] .footer-text1 {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9e9e9e;
+}
+
+body[data-theme="dark"] .footer-text2 {
+  font-size: 12px;
+  margin-top: 20px;
+  font-weight: 500;
+  color: #9e9e9e;
 }

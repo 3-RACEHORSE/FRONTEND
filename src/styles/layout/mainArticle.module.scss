@@ -39,6 +39,7 @@
 }
 
 .column {
+  background-color: var(--color-element);
   display: flex;
   justify-content: space-between;
   width: 48.3%;
@@ -47,6 +48,7 @@
 }
 
 .column2 {
+  background-color: var(--color-element);
   display: flex;
   justify-content: space-between;
   width: 31.5%;
@@ -79,6 +81,12 @@
   font-weight: bold;
   font-size: 13px;
   color: #6c6c6c;
+}
+
+body[data-theme="dark"] .gray-text {
+  font-weight: bold;
+  color: #bcbcbc;
+  font-size: 13px;
 }
 
 .center-text {

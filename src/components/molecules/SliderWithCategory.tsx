@@ -1,23 +1,33 @@
 "use client";
 
-import React, { ChangeEvent } from "react";
-import SearchInput from "../atoms/input/SearchInput";
-import Alarm from "../atoms/icon/Alarm";
+import React, { useEffect, useState } from "react";
 import CategoryText from "../atoms/Text/CategoryText";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 export default function SliderWithCategory() {
+  const isDarkMode = useDarkMode();
+  const [logoSrc, setLogoSrc] = useState("");
+
+  useEffect(() => {
+    setLogoSrc(
+      isDarkMode
+        ? "/images/header/slider_dark.png"
+        : "/images/header/slider.png"
+    );
+  }, [isDarkMode]);
+
   return (
     <nav className="flex flex-col justify-center overflow-x-auto">
       <ul className="flex">
         <img
-          src="/images/header/slider1.png"
+          src={logoSrc}
+          alt="logo"
           style={{
             height: "17px",
             marginTop: "11px",
             marginLeft: "10px",
           }}
         />
-
         <CategoryText title="디자인" />
         <CategoryText title="IT·프로그래밍" />
         <CategoryText title="영상·사진·음향" />
