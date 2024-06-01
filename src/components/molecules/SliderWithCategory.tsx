@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import SearchInput from "../atoms/input/SearchInput";
-import Alarm from "../atoms/icon/Alarm";
 import CategoryText from "../atoms/Text/CategoryText";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
@@ -12,7 +10,7 @@ export default function SliderWithCategory() {
   return (
     <nav className="flex flex-col justify-center overflow-x-auto">
       <ul className="flex">
-        <img
+        {/* <img
           src={
             isDarkMode
               ? "/images/header/slider_dark.png"
@@ -23,7 +21,7 @@ export default function SliderWithCategory() {
             marginTop: "11px",
             marginLeft: "10px",
           }}
-        />
+        /> */}
 
         <CategoryText title="디자인" />
         <CategoryText title="IT·프로그래밍" />

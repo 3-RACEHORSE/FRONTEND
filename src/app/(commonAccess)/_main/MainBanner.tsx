@@ -34,16 +34,21 @@ function MainBanner() {
           onChange={handleChange}
           showIndicators={false}
         >
-          {bannerDataToUse.map((image, index) => (
-            <div key={index} style={{ position: "relative" }}>
-              <Image
-                src={image.url}
-                alt={image.alt}
-                width={1000}
-                height={1000}
-              />
-            </div>
-          ))}
+          {bannerData.map(
+            (
+              image,
+              index // 추후 bannerDataToUse로 바꿔야함
+            ) => (
+              <div key={index} style={{ position: "relative" }}>
+                <Image
+                  src={image.url}
+                  alt={image.alt}
+                  width={1000}
+                  height={1000}
+                />
+              </div>
+            )
+          )}
         </Carousel>
       </div>
     </div>
