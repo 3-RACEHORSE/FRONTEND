@@ -50,3 +50,15 @@
   color: #000000;
   font-weight: 800;
 }
+
+body[data-theme="dark"] .nav-main-container {
+  border-top: 0.5px solid #242424;
+}
+
+body[data-theme="dark"] .nav-iconWithText-container-text {
+  color: rgb(123, 123, 123);
+}
+
+body[data-theme="dark"] .nav-iconWithText-container-text-true {
+  color: #ffffff;
+}
