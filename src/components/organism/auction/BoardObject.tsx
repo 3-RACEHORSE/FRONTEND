@@ -7,7 +7,7 @@ import styles from "@/styles/organism/boardObject.module.scss";
 interface BoardProps {
   authorization?: any; // 토큰
   uuid?: any; //유유아이디
-  isSession: boolean; // 로그인 되어있는지의 여부
+  isSession?: boolean; // 로그인 되어있는지의 여부
   src?: string;
   title: string;
   detail?: string;

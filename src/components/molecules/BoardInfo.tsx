@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 interface BoardProps {
   authorization?: any; // 토큰
   uuid?: any; //유유아이디
-  isSession: boolean; // 로그인 되어있는지의 여부
+  isSession?: boolean; // 로그인 되어있는지의 여부
   title: string;
   detail?: string;
   category?: string;

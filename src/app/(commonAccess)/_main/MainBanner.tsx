@@ -16,9 +16,16 @@ function MainBanner() {
   };
 
   //다크모드
+  const [currentBannerData, setCurrentBannerData] = useState(bannerData);
   const isDarkMode = useDarkMode();
 
-  // const bannerDataToUse = isDarkMode ? bannerDataDark : bannerData;
+  useEffect(() => {
+    if (isDarkMode) {
+      setCurrentBannerData(bannerDataDark);
+    } else {
+      setCurrentBannerData(bannerData);
+    }
+  }, [isDarkMode]);
 
   return (
     <div style={{ position: "relative", overflow: "hidden" }}>
@@ -34,7 +41,7 @@ function MainBanner() {
           onChange={handleChange}
           showIndicators={false}
         >
-          {bannerData.map(
+          {currentBannerData.map(
             (
               image,
               index // 추후 bannerDataToUse로 바꿔야함

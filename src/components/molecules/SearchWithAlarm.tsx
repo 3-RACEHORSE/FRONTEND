@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SearchInput from "../atoms/input/SearchInput";
 import Alarm from "../atoms/icon/Alarm";
 import Link from "next/link";
@@ -9,12 +9,20 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 
 export default function SearchWithAlarm() {
-  const savedMode = Cookies.get("mode");
-  const initialState = savedMode === "light" ? false : true;
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [logoSrc, setLogoSrc] = useState("/images/header/logo.png");
 
   useEffect(() => {
-    setIsDarkMode(initialState);
+    const savedMode = Cookies.get("mode");
+    if (!savedMode) {
+      Cookies.set("mode", "light");
+    } else if (savedMode === "dark") {
+      setIsDarkMode(true);
+      setLogoSrc("/images/header/logo.png");
+    } else {
+      setIsDarkMode(false);
+      setLogoSrc("/images/header/logoD.png");
+    }
   }, []);
 
   const darkModeHandler = () => {
@@ -22,14 +30,14 @@ export default function SearchWithAlarm() {
     const newMode = isDarkMode ? "light" : "dark";
     document.body.setAttribute("data-theme", newMode);
     Cookies.set("mode", newMode);
+    setLogoSrc(
+      newMode === "dark"
+        ? "/images/header/logo.png"
+        : "/images/header/logoD.png"
+    );
   };
 
   console.log("현재 모드는", isDarkMode);
-
-  const logoSrc = isDarkMode
-    ? "/images/header/logo.png"
-    : "/images/header/logoD.png";
-  const logoAlt = isDarkMode ? "logo" : "logoD";
 
   return (
     <>
@@ -37,9 +45,10 @@ export default function SearchWithAlarm() {
         src={logoSrc}
         width={30}
         height={30}
-        alt={logoAlt}
+        alt="logo"
         onClick={darkModeHandler}
       />
+      {/* <button onClick={darkModeHandler}>다크모드</button> */}
       <SearchInput />
       <Alarm />
     </>
