@@ -17,7 +17,7 @@ export default function WatchListBtn({
   return (
     <div
       onClick={onClick}
-      style={{ backgroundColor: isActive ? "#52ebb6" : "#dcdcdc" }}
+      style={{ backgroundColor: isActive ? "#52ebb6" : "#ffffff" }}
       className={styles["button"]}
     >
       {label}

@@ -6,12 +6,14 @@ import TitleText from "@/components/atoms/Text/TitleText";
 import Gap from "@/components/atoms/etc/Gap";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 interface TextProps {
   title: string;
 }
 
 export default function BackHeader({ title }: TextProps) {
+  useDarkMode();
   const router = useRouter();
   const pathName = usePathname();
   const handleBack = () => {

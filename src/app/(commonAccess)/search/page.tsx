@@ -10,7 +10,6 @@ import Alarm from "@/components/atoms/icon/Alarm";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
-import { useEffect, useState } from "react";
 
 export default function Page() {
   useDarkMode(); // 하위요소에서 호출 가능
