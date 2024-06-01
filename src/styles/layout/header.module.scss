@@ -44,3 +44,17 @@
   padding-left: 5%;
   padding-right: 5%;
 }
+
+.slider {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  white-space: nowrap;
+  font-weight: bold;
+  color: #2f2f2f;
+}
+
+body[data-theme="dark"] .slider {
+  color: #ffffff;
+}

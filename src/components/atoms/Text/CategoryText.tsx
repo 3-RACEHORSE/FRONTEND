@@ -1,16 +1,9 @@
 import React, { ReactNode } from "react";
-
+import styles from "@/styles/layout/header.module.scss";
 interface TextProps {
   title: string;
 }
 
 export default function CategoryText({ title }: TextProps) {
-  return (
-    <li
-      style={{ fontWeight: "bold", color: "#2f2f2f" }}
-      className="px-4 py-2 whitespace-nowrap"
-    >
-      {title}
-    </li>
-  );
+  return <li className={styles["slider"]}>{title}</li>;
 }

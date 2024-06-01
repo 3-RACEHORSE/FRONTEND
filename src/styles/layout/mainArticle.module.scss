@@ -83,6 +83,12 @@
   color: #6c6c6c;
 }
 
+body[data-theme="dark"] .gray-text {
+  font-weight: bold;
+  color: #bcbcbc;
+  font-size: 13px;
+}
+
 .center-text {
   font-weight: bold;
   font-size: 12px;

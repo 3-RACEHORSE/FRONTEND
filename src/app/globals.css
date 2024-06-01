@@ -95,16 +95,12 @@
     /* --color-button-text: rgb(0, 0, 0); */
     --color-background: #151515; /*배경색*/
     --color-element: #242424;
-    --color-text: #ffffff;
+    --color-text: #c2c2c2;
+    --color-title-text: #ffffff;
   }
 
   * {
     box-sizing: border-box;
-  }
-  /* 버튼과 바디 등 필요한 변수들을 설정해줌으로써 값 지정해주기  */
-  button {
-    background-color: var(--color-background);
-    color: var(--color-primary);
   }
 
   body {

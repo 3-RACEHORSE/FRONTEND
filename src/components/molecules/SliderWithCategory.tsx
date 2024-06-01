@@ -1,16 +1,39 @@
 "use client";
 
-import React, { ChangeEvent } from "react";
+import React, { useEffect, useState } from "react";
 import SearchInput from "../atoms/input/SearchInput";
 import Alarm from "../atoms/icon/Alarm";
 import CategoryText from "../atoms/Text/CategoryText";
 
 export default function SliderWithCategory() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const handleDarkModeChange = () => {
+      const isDark = document.body.getAttribute("data-theme") === "dark";
+      setIsDarkMode(isDark);
+    };
+
+    handleDarkModeChange();
+
+    const observer = new MutationObserver(handleDarkModeChange);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <nav className="flex flex-col justify-center overflow-x-auto">
       <ul className="flex">
         <img
-          src="/images/header/slider1.png"
+          src={
+            isDarkMode
+              ? "/images/header/slider_dark.png"
+              : "/images/header/slider.png"
+          }
           style={{
             height: "17px",
             marginTop: "11px",

@@ -1,5 +1,6 @@
 import BoardTitleText from "../atoms/Text/BoardTitleText";
 import ImageTag from "@/components/atoms/etc/ImageTag";
+import styles from "@/styles/atoms/boardTitleText.module.scss";
 
 interface IconWithTextnProps {
   title: string;
@@ -14,30 +15,11 @@ export default function IconWithTextOne({
 }: IconWithTextnProps) {
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          paddingLeft: "3%",
-          paddingRight: "3%",
-          paddingTop: "3%",
-          alignItems: "center",
-          borderTop: "1px solid #e3e3e3",
-          marginTop: "8px",
-        }}
-      >
+      <div className={styles["container"]}>
         <BoardTitleText title={title} />
         <ImageTag src={src} />
       </div>
-      <div
-        style={{
-          paddingLeft: "3%",
-          color: "rgb(171, 171, 171)",
-          fontSize: "12px",
-        }}
-      >
-        {detail}
-      </div>
+      <div className={styles["detail"]}>{detail}</div>
     </>
   );
 }

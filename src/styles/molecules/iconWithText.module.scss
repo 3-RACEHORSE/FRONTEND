@@ -31,3 +31,9 @@
   color: #6c6c6c;
   font-weight: bold;
 }
+
+body[data-theme="dark"] .iconWithText-container-text {
+  font-size: 13px;
+  color: #bcbcbc;
+  font-weight: bold;
+}

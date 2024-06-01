@@ -15,9 +15,39 @@
   align-items: $align-items;
 }
 
+.container {
+  display: flex;
+  width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 3%;
+  align-items: center;
+  border-top: 1px solid #e3e3e3;
+  margin-top: 8px;
+}
+
+body[data-theme="dark"] .container {
+  display: flex;
+  width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 3%;
+  align-items: center;
+  border-top: 1px solid #2c2c2c;
+  margin-top: 8px;
+}
+
 .text {
-  //   background-color: red;
+  // background-color: red;
   font-weight: bolder;
-  color: #000000;
+  // color: #000000;
+  color: var(--color-title-text);
   @include center-element;
+}
+
+.detail {
+  padding-left: 3%;
+  color: rgb(171, 171, 171);
+  // color: var(--color-text);
+  font-size: 12px;
 }
