@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Image from "next/image";
 import bannerData from "@/constants/bannerData";
+import bannerDataDark from "@/constants/bannerDataDark";
 
 function MainBanner() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -12,6 +13,28 @@ function MainBanner() {
   const handleChange = (index: number) => {
     setCurrentIndex(index);
   };
+
+  //다크모드
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const handleDarkModeChange = () => {
+      const isDark = document.body.getAttribute("data-theme") === "dark";
+      setIsDarkMode(isDark);
+    };
+
+    handleDarkModeChange();
+
+    const observer = new MutationObserver(handleDarkModeChange);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const bannerDataToUse = isDarkMode ? bannerDataDark : bannerData;
 
   return (
     <div style={{ position: "relative", overflow: "hidden" }}>
@@ -27,7 +50,7 @@ function MainBanner() {
           onChange={handleChange}
           showIndicators={false}
         >
-          {bannerData.map((image, index) => (
+          {bannerDataToUse.map((image, index) => (
             <div key={index} style={{ position: "relative" }}>
               <Image
                 src={image.url}

@@ -73,3 +73,11 @@
   color: rgb(162, 162, 162);
   font-size: 12px;
 }
+
+body[data-theme="dark"] .boardContent {
+  color: rgb(171, 171, 171);
+}
+
+body[data-theme="dark"] .boardMinPrice {
+  color: rgb(206, 206, 206);
+}

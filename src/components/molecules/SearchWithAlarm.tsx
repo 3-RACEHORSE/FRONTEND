@@ -23,7 +23,9 @@ export default function SearchWithAlarm() {
     <>
       <Image
         // className={styles["button"]}
-        src="/images/header/logo.png"
+        src={
+          isDarkMode ? "/images/header/logo.png" : "/images/header/logoD.png"
+        }
         width={30}
         height={30}
         alt="few"
