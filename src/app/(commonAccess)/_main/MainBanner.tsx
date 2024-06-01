@@ -6,6 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Image from "next/image";
 import bannerData from "@/constants/bannerData";
 import bannerDataDark from "@/constants/bannerDataDark";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 function MainBanner() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -15,24 +16,7 @@ function MainBanner() {
   };
 
   //다크모드
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const handleDarkModeChange = () => {
-      const isDark = document.body.getAttribute("data-theme") === "dark";
-      setIsDarkMode(isDark);
-    };
-
-    handleDarkModeChange();
-
-    const observer = new MutationObserver(handleDarkModeChange);
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const isDarkMode = useDarkMode();
 
   const bannerDataToUse = isDarkMode ? bannerDataDark : bannerData;
 

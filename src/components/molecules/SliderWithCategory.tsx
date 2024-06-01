@@ -4,26 +4,10 @@ import React, { useEffect, useState } from "react";
 import SearchInput from "../atoms/input/SearchInput";
 import Alarm from "../atoms/icon/Alarm";
 import CategoryText from "../atoms/Text/CategoryText";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 export default function SliderWithCategory() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const handleDarkModeChange = () => {
-      const isDark = document.body.getAttribute("data-theme") === "dark";
-      setIsDarkMode(isDark);
-    };
-
-    handleDarkModeChange();
-
-    const observer = new MutationObserver(handleDarkModeChange);
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const isDarkMode = useDarkMode();
 
   return (
     <nav className="flex flex-col justify-center overflow-x-auto">
