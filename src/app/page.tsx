@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Header from "@/components/organism/layout/Header";
 import NavBar from "@/components/organism/layout/NavBar";
 import MainBanner from "@/app/(commonAccess)/_main/MainBanner";
@@ -16,7 +15,7 @@ import {
 } from "@/utils/main/handleMainListData";
 
 export default async function Home() {
-  // git action을 위한 주석
+  // git action을 위한 주석2
 
   // const session = await auth(); // session 호출 추가
   // console.log(session);
