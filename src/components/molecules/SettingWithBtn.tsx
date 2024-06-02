@@ -40,7 +40,7 @@ export default function SettingWithBtn() {
         </div>
       </div>
       <div style={{ padding: "2.5%" }}>
-        <img src="/images/banner/adv1.png" />
+        <img src="/images/banner/adv1.png" style={{ borderRadius: "5px" }} />
       </div>
     </div>
   );
