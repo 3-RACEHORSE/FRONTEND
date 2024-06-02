@@ -24,3 +24,8 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+body[data-theme="dark"] .input {
+  background: var(--color-background);
+  color: white;
+}

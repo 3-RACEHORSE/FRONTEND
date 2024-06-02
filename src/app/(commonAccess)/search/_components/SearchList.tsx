@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import styles from "@/styles/organism/search.module.scss";
 
 function SearchList() {
   const items = [
@@ -15,37 +16,14 @@ function SearchList() {
   ];
 
   return (
-    <>
-      <div
-        className="bg-[#ffffff] p-[10px]"
-        style={{
-          width: "100%",
-          height: "calc(100% - 80px)",
-          position: "fixed",
-          bottom: "0",
-          right: "0",
-          zIndex: "999",
-        }}
-      >
-        {items.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              padding: "5px",
-              paddingBottom: "10px",
-              paddingTop: "10px",
-              display: "flex",
-              justifyContent: "space-between",
-              borderBottom: "1px solid #d4d4d4",
-              fontSize: "12px",
-            }}
-          >
-            <p>{item}</p>
-            <span>↖</span>
-          </div>
-        ))}
-      </div>
-    </>
+    <div className={styles["fixed-container"]}>
+      {items.map((item, index) => (
+        <div key={index} className={styles["search-keyword"]}>
+          <p>{item}</p>
+          <span>↖</span>
+        </div>
+      ))}
+    </div>
   );
 }
 

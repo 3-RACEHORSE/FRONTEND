@@ -1,4 +1,6 @@
-"use client";
+// "use client";
+
+import styles from "@/styles/organism/search.module.scss";
 
 const recommendKeywords = [
   "디자인",
@@ -17,20 +19,9 @@ const recommendKeywords = [
   "취미·레슨",
 ];
 
-const keywordStyle = {
-  background: "#f1f1f1",
-  borderRadius: "15px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "fit-content",
-  padding: "7px",
-  fontSize: "14px",
-};
-
 export default function RecommendSearch() {
   return (
-    <>
+    <div>
       <div style={{ padding: "3%" }}>
         <h2 style={{ fontSize: "13px", fontWeight: "bold" }}>카테고리</h2>
       </div>
@@ -50,11 +41,11 @@ export default function RecommendSearch() {
                 paddingTop: "2%",
               }}
             >
-              <div style={keywordStyle}>{keyword}</div>
+              <div className={styles["keywordStyle"]}>{keyword}</div>
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -62,3 +62,16 @@
   color: #232323;
   font-size: 14px;
 }
+
+//다크모드
+body[data-theme="dark"] .detail-conatiner {
+  background-color: var(--color-element);
+}
+
+body[data-theme="dark"] .detail-conatiner-e1 {
+  color: white;
+}
+
+body[data-theme="dark"] .detail-conatiner p {
+  color: white;
+}

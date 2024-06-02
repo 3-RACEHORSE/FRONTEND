@@ -8,8 +8,12 @@ import RecommendSearch from "@/app/(commonAccess)/search/_serverComponents/Recom
 import RecentSearch from "./_components/RecentSearch";
 import Alarm from "@/components/atoms/icon/Alarm";
 import { useRouter } from "next/navigation";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 export default function Page() {
+  useDarkMode(); // 하위요소에서 호출 가능
+
   const router = useRouter();
 
   const handleBack = () => {
@@ -17,16 +21,12 @@ export default function Page() {
   };
 
   return (
-    <>
+    <main>
       <header className={styles["main-header-layout"]}>
         <div className={styles["main-header-container"]}>
-          <Image
-            className={styles["button"]}
-            src="/images/header/back.png"
-            width={20}
-            height={20}
-            alt="few"
+          <IoMdArrowRoundBack
             onClick={handleBack}
+            style={{ width: "30px", height: "30px" }}
           />
           <SearchForm />
           <Alarm />
@@ -35,6 +35,6 @@ export default function Page() {
 
       <RecentSearch />
       <RecommendSearch />
-    </>
+    </main>
   );
 }
