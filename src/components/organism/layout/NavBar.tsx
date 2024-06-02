@@ -18,7 +18,7 @@ const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));
 
 export default function NavBar() {
   const pathNmae = usePathname();
-  console.log("pathNmae", pathNmae);
+  // console.log("pathNmae", pathNmae);
 
   return (
     <>
