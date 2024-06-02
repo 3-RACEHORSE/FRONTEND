@@ -4,13 +4,9 @@ import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { boardObject } from "@/lib/interface/boardObject";
-import Header from "@/components/organism/layout/Header";
-import WriteBar from "@/components/organism/layout/WriteBar";
-import NavBar from "@/components/organism/layout/NavBar";
 import BoardObject from "@/components/organism/auction/BoardObject";
 import { usePathname } from "next/navigation";
 import watchListData from "@/constants/watchListData";
-import { sessionValid } from "@/utils/session/sessionValid";
 
 interface ScrollProps {
   authorization?: any;

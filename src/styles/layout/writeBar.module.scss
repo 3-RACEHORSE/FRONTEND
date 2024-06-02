@@ -32,3 +32,11 @@
   color: white;
   font-size: 14px;
 }
+
+//다크모드
+body[data-theme="dark"] .icon {
+  background: #ffffff;
+  color: black;
+  font-weight: bold;
+}
+// #30e2ef, #8aede7, #7ae5c0

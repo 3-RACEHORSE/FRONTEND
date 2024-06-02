@@ -19,6 +19,19 @@ interface BoardProps {
   auctionUuid?: string;
   isSubscribed?: boolean; // 구독되어있는지의 여부
 }
+
+const convertUToKST = (utcDateStr?: string): string => {
+  if (!utcDateStr) return "";
+  const utcDate = new Date(utcDateStr);
+  const kstDate = new Date(utcDate.getTime() + 9 * 60 * 60 * 1000);
+  const year = kstDate.getFullYear();
+  const month = String(kstDate.getMonth() + 1).padStart(2, "0");
+  const day = String(kstDate.getDate()).padStart(2, "0");
+  const hours = String(kstDate.getHours()).padStart(2, "0");
+  const minutes = String(kstDate.getMinutes()).padStart(2, "0");
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
+
 export default function BoardInfo({
   authorization,
   uuid,
@@ -102,7 +115,7 @@ export default function BoardInfo({
           </div>
         </div>
         <p className={styles["boardObject-element2-text3"]}>
-          {startDate} {"~"} {endDate}
+          {convertUToKST(startDate)} {"~"} {convertUToKST(endDate)}
         </p>
       </div>
     </>
