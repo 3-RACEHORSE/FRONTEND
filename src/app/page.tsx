@@ -38,7 +38,7 @@ export default async function Home() {
         title="HOT 경매글 📢"
         detail="지금 가장 인기있는 경매글을 찾아보세요!"
       />
-      <div className="flex flex-col justify-center w-full h-200">
+      <div className="flex flex-col justify-center w-30 h-200">
         <ul className="flex overflow-x-auto">
           {data2.map((item: any) => (
             <SimpleBoardObject
@@ -58,7 +58,7 @@ export default async function Home() {
         title="높은 입찰가 경매글 📢"
         detail="전체 경매에서 TOP10을 확인하세요!"
       />
-      <div className="flex flex-col justify-center w-full h-200">
+      <div className="flex flex-col justify-center w-30 h-200">
         <ul className="flex overflow-x-auto">
           {data3.map((item: any) => (
             <SimpleBoardObject
@@ -78,7 +78,7 @@ export default async function Home() {
         title="요즘 뜨는 분야 📢"
         detail="나도 오늘부터 개발자! 맥북 사러가자~"
       />
-      <div className="flex flex-col justify-center w-full h-200">
+      <div className="flex flex-col justify-center w-30 h-200">
         <ul className="flex overflow-x-auto">
           {data4.map((item: any) => (
             <SimpleBoardObject

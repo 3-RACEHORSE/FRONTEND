@@ -104,9 +104,9 @@
   }
 
   body {
-    width: 100vw;
+    /* width: 100vw; */
     height: 100vh;
-    overflow: scroll;
+    /* overflow: scroll; */
     margin: 0;
     background-color: var(--color-background);
     color: var(--color-primary);
