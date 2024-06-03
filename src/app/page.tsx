@@ -19,6 +19,7 @@ export default async function Home() {
 
   // const session = await auth(); // session 호출 추가
   // console.log(session);
+  // promise all
   const data1 = await getMainStatistic();
   const data2 = await getMainHotActionList();
   const data3 = await getMainHighBiddingList();

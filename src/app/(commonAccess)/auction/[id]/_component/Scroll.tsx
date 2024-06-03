@@ -8,6 +8,7 @@ import BoardObject from "@/components/organism/auction/BoardObject";
 import { usePathname } from "next/navigation";
 import watchListData from "@/constants/watchListData";
 import Link from "next/link";
+import { title } from "process";
 
 interface ScrollProps {
   authorization?: any;
@@ -79,7 +80,7 @@ export default function Scroll({
     queryKey, // 위의 로직에서 path에 따라 변경
     queryFn: fetchListData,
     initialPageParam: 0,
-    staleTime: 1000 * 20 * 2, // 1000 * 20 * 20
+    staleTime: 1000 * 20 * 20, // 1000 * 20 * 20
     gcTime: 300 * 1000, // 300 * 1000
 
     getNextPageParam: (lastPage, allPages) => {

@@ -175,6 +175,11 @@
   background-color: red;
 }
 
+.selectBar {
+  height: 63%;
+  border: 2px solid #d4d4d4;
+}
+
 .sendBtn {
   background-color: #52ebb6;
   width: 100%;
@@ -183,4 +188,20 @@
   color: #ffffff;
   box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.075);
   margin-top: 70px;
+}
+
+//다크모드
+body[data-theme="dark"] .textarea {
+  background-color: var(--color-background);
+  color: white;
+}
+
+body[data-theme="dark"] .input2 {
+  background-color: var(--color-background);
+  color: white;
+}
+
+body[data-theme="dark"] .selectBar {
+  background-color: var(--color-background);
+  color: white;
 }

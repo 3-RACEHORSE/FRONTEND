@@ -1,11 +1,29 @@
-import Image from "next/image";
-
 import BoardDetail from "@/components/organism/boardDetail/BoardDetail";
 import BoardDetailBar from "@/components/organism/layout/BoardDetailBar";
 import BoardDetailInfo from "@/components/organism/boardDetail/BoardDetailInfo";
 import Footer from "@/components/organism/layout/Footer";
+import { headers } from "next/headers";
 
-export default function Page() {
+// import { usePathname } from "next/navigation";
+
+// export async function getDetailInfoData() {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/${}`
+//   );
+//   if (!res.ok) {
+//     throw new Error("Network Error");
+//   }
+//   const data = await res.json();
+//   return data;
+// }
+
+export default async function Page() {
+  // const data = await getDetailInfoData();
+  // console.log(data)
+  // const headersList = headers();
+  // console.log(headersList);
+  // const regex = /\/detail\/([^?]+)/;
+  // console.log(match);
   return (
     <main>
       <BoardDetail
