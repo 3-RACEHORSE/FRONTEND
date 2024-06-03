@@ -5,7 +5,7 @@ import styles from "@/styles/organism/boardObject.module.scss";
 import { Switch } from "@/components/ui/switch";
 import { toggleValid } from "@/utils/auction/toggleValid";
 import Swal from "sweetalert2";
-
+import { convertUToKST } from "@/utils/common/convertUToKST";
 interface BoardProps {
   authorization?: any; // 토큰
   uuid?: any; //유유아이디
@@ -20,17 +20,17 @@ interface BoardProps {
   isSubscribed?: boolean; // 구독되어있는지의 여부
 }
 
-const convertUToKST = (utcDateStr?: string): string => {
-  if (!utcDateStr) return "";
-  const utcDate = new Date(utcDateStr);
-  const kstDate = new Date(utcDate.getTime() + 9 * 60 * 60 * 1000);
-  const year = kstDate.getFullYear();
-  const month = String(kstDate.getMonth() + 1).padStart(2, "0");
-  const day = String(kstDate.getDate()).padStart(2, "0");
-  const hours = String(kstDate.getHours()).padStart(2, "0");
-  const minutes = String(kstDate.getMinutes()).padStart(2, "0");
-  return `${year}-${month}-${day} ${hours}:${minutes}`;
-};
+// const convertUToKST = (utcDateStr?: string): string => {
+//   if (!utcDateStr) return "";
+//   const utcDate = new Date(utcDateStr);
+//   const kstDate = new Date(utcDate.getTime() + 9 * 60 * 60 * 1000);
+//   const year = kstDate.getFullYear();
+//   const month = String(kstDate.getMonth() + 1).padStart(2, "0");
+//   const day = String(kstDate.getDate()).padStart(2, "0");
+//   const hours = String(kstDate.getHours()).padStart(2, "0");
+//   const minutes = String(kstDate.getMinutes()).padStart(2, "0");
+//   return `${year}-${month}-${day} ${hours}:${minutes}`;
+// };
 
 export default function BoardInfo({
   authorization,
@@ -46,6 +46,9 @@ export default function BoardInfo({
   isSubscribed, // 구독 여부
 }: BoardProps) {
   const [isBookmarked, setIsBookmarked] = useState(isSubscribed); // boolean
+
+  const startTime = convertUToKST(startDate);
+  const endTime = convertUToKST(endDate);
 
   //북마크 등록 api => 이것도 추후 설정 필요
   const handleToggle = async (e: { preventDefault: () => void }) => {
@@ -115,7 +118,7 @@ export default function BoardInfo({
           </div>
         </div>
         <p className={styles["boardObject-element2-text3"]}>
-          {convertUToKST(startDate)} {"~"} {convertUToKST(endDate)}
+          {startTime} {"~"} {endTime}
         </p>
       </div>
     </>

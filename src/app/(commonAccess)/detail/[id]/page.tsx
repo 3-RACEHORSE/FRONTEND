@@ -2,6 +2,7 @@ import BoardDetail from "@/components/organism/boardDetail/BoardDetail";
 import BoardDetailBar from "@/components/organism/layout/BoardDetailBar";
 import BoardDetailInfo from "@/components/organism/boardDetail/BoardDetailInfo";
 import Footer from "@/components/organism/layout/Footer";
+import CurrentTime from "@/hooks/detail/useCureentTime";
 
 interface DetailProps {
   pathName?: any; // 토큰
@@ -37,12 +38,24 @@ export default async function Page(props: any) {
 
   console.log(imageData);
 
+  // const currentTime = useCurrentTime();
+
+  //초 계산
+  function parseDateStringToMilliseconds(dateString: string): number {
+    return new Date(dateString).getTime();
+  }
+  const endMilliseconds: number = parseDateStringToMilliseconds(
+    data.readOnlyAuction.endedAt
+  );
+
+  console.log(endMilliseconds);
   return (
     <main>
+      <CurrentTime endedAtMilliseconds={endMilliseconds + 32400000} />
       <BoardDetail
         title="마감시간"
         detail="마감시간 이후, 최고 금액의 입찰자와 매칭이 됩니다."
-        detailDate="9999.99.99"
+        detailDate={data.readOnlyAuction.endedAt}
         deadLine="7"
         category={category}
         price={data.readOnlyAuction.minimumBiddingPrice}
