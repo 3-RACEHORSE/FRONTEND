@@ -7,6 +7,7 @@ import { boardObject } from "@/lib/interface/boardObject";
 import BoardObject from "@/components/organism/auction/BoardObject";
 import { usePathname } from "next/navigation";
 import watchListData from "@/constants/watchListData";
+import Link from "next/link";
 
 interface ScrollProps {
   authorization?: any;
@@ -98,22 +99,23 @@ export default function Scroll({
 
   const content = data?.pages.map((objects: boardObject[]) =>
     objects.map((object, index) => (
-      <BoardObject
-        key={object.auctionUuid}
-        authorization={authorization}
-        uuid={uuid}
-        isSession={isSession} // 로그인 되어있는지
-        src={object.thumbnail}
-        title={object.title}
-        detail={object.content}
-        category={object.category}
-        minPrice={object.minimumBiddingPrice}
-        startDate={object.createdAt}
-        endDate={object.endedAt}
-        auctionUuid={object.auctionUuid}
-        isSubscribed={object.subscribed} // 북마크 구독 여부
-        innerRef={index === objects.length - 1 ? ref : undefined}
-      />
+      <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
+        <BoardObject
+          authorization={authorization}
+          uuid={uuid}
+          isSession={isSession} // 로그인 되어있는지
+          src={object.thumbnail}
+          title={object.title}
+          detail={object.content}
+          category={object.category}
+          minPrice={object.minimumBiddingPrice}
+          startDate={object.createdAt}
+          endDate={object.endedAt}
+          auctionUuid={object.auctionUuid}
+          isSubscribed={object.subscribed} // 북마크 구독 여부
+          innerRef={index === objects.length - 1 ? ref : undefined}
+        />
+      </Link>
     ))
   );
 
