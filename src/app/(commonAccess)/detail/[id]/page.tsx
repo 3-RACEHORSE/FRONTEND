@@ -24,6 +24,19 @@ export default async function Page(props: any) {
   console.log("pathName", pathName, "받은 데이터", data);
 
   const category = `${data.readOnlyAuction.category} / 최소 경매가`;
+
+  //이미지 합치기
+  const allImages = [data.thumbnail, ...data.images];
+
+  // imageData 배열 생성
+  const imageData = allImages.map((url, index) => ({
+    alt: `image${index + 1}`,
+    url: url,
+    index: index + 1,
+  }));
+
+  console.log(imageData);
+
   return (
     <main>
       <BoardDetail
@@ -35,6 +48,7 @@ export default async function Page(props: any) {
         price={data.readOnlyAuction.minimumBiddingPrice}
         boardTitle={data.readOnlyAuction.title}
         boardContent={data.readOnlyAuction.content}
+        imageData={imageData}
       />
       <BoardDetailInfo />
       <Footer />

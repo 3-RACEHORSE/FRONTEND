@@ -6,7 +6,6 @@ import styles from "@/styles/main/main.module.scss";
 import BoardTitle from "@/components/organism/main/BoardTitle";
 import SimpleBoardObject from "@/components/organism/main/SimpleBoardObject";
 import Footer from "@/components/organism/layout/Footer";
-import { auth } from "@/auth";
 import {
   getMainStatistic,
   getMainHotActionList,
