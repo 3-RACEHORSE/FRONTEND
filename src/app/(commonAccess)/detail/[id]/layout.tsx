@@ -4,7 +4,6 @@ import BoardDetailBar from "@/components/organism/layout/BoardDetailBar";
 import { ReactNode } from "react";
 
 type Props = { children: ReactNode };
-
 export default function Layout({ children }: Props) {
   return (
     <div>
