@@ -44,6 +44,7 @@ export default async function Page(props: any) {
         isSession={isSession}
         auctionUuid={pathName}
         handle={data.handle}
+        sellerUuid={data.readOnlyAuction.sellerUuid}
       />
     </main>
   );

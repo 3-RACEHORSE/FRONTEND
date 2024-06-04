@@ -84,3 +84,9 @@
   border-radius: 5px;
   @include center-element;
 }
+
+//다크모드
+body[data-theme="dark"] .element {
+  border: 1px solid white;
+  background-color: var(--color-background);
+}

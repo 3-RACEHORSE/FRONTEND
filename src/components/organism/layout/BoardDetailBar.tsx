@@ -7,6 +7,7 @@ interface BoardDetailBarProps {
   isSession: any;
   auctionUuid: any;
   handle: any;
+  sellerUuid: any;
 }
 
 export default function BoardDetailBar({
@@ -14,6 +15,7 @@ export default function BoardDetailBar({
   isSession,
   auctionUuid,
   handle,
+  sellerUuid,
 }: BoardDetailBarProps) {
   const FSaved = dynamic(() => import("@/components/atoms/icon/false/FSaved"));
   const TSaved = dynamic(() => import("@/components/atoms/icon/true/TSaved"));
@@ -27,7 +29,10 @@ export default function BoardDetailBar({
               {subscribed && <TSaved />}
               {!subscribed && <FSaved />}
             </div>
-            <Link href="/profile/1" className={styles["button-container1"]}>
+            <Link
+              href={`/profile/${handle}`}
+              className={styles["button-container1"]}
+            >
               <p className={styles["info1"]}>판매자 정보 </p>
               <p className={styles["info2"]}>판매자 정보를 확인하세요!</p>
             </Link>
