@@ -5,6 +5,7 @@ import Footer from "@/components/organism/layout/Footer";
 import { combineImg } from "@/utils/detail/combineImg";
 import { getDetailListData } from "@/utils/detail/handleDetailListData";
 import { cookies } from "next/headers";
+import { auth } from "@/auth";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
@@ -14,6 +15,15 @@ export default async function Page(props: any) {
 
   const data = await getDetailListData(pathName, authorization, uuid);
   console.log("pathName", pathName, "받은 데이터", data);
+
+  const session = await auth();
+  let isSession;
+
+  if (session) {
+    isSession = true;
+  } else {
+    isSession = false;
+  }
 
   return (
     <main>
@@ -29,7 +39,7 @@ export default async function Page(props: any) {
       />
       <BoardDetailInfo />
       <Footer />
-      <BoardDetailBar subscribed={data.subscribed} />
+      <BoardDetailBar subscribed={data.subscribed} isSession={isSession} />
     </main>
   );
 }
