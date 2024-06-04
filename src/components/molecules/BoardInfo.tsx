@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { toggleValid } from "@/utils/auction/toggleValid";
 import Swal from "sweetalert2";
 import { convertUToKST } from "@/utils/common/convertUToKST";
+import { truncateText } from "@/utils/common/truncateText";
 interface BoardProps {
   authorization?: any; // 토큰
   uuid?: any; //유유아이디
@@ -85,7 +86,9 @@ export default function BoardInfo({
     <>
       <div className={styles["boardObject-element2"]}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p className={styles["boardObject-element2-text1"]}>{title}</p>
+          <p className={styles["boardObject-element2-text1"]}>
+            {truncateText(title, 12)}
+          </p>
           <p className={styles["boardObject-element2-bookmark"]}>
             {isSession ? (
               <Switch
@@ -98,7 +101,9 @@ export default function BoardInfo({
             )}
           </p>
         </div>
-        <p className={styles["boardObject-element2-text2"]}>{detail}</p>
+        <p className={styles["boardObject-element2-text2"]}>
+          {truncateText(detail || "", 20)}
+        </p>
         <div className={styles["boardObject-element2-layout"]}>
           <div className={styles["boardObject-element2-tag1"]}>{category}</div>
           <div className={styles["boardObject-element2-tag2"]}>
