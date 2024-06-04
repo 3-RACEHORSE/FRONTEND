@@ -4,15 +4,12 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 interface BoardDetailProps {
   title: string;
   detail?: string;
-  detailDate?: string;
-  deadLine?: string;
+  endTime?: string;
   category?: string;
   price?: string;
   boardTitle?: string;
@@ -27,8 +24,7 @@ interface BoardDetailProps {
 export default function BoardDetail({
   title,
   detail,
-  detailDate,
-  deadLine,
+  endTime,
   category,
   price,
   boardTitle,
@@ -52,8 +48,7 @@ export default function BoardDetail({
       <BoardDetailInfoWithText
         title={title}
         detail={detail}
-        detailDate={detailDate}
-        deadLine={deadLine}
+        endTime={endTime}
         category={category}
         price={price}
         boardTitle={boardTitle}

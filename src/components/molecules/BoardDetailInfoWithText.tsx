@@ -1,10 +1,12 @@
+import RemainTime from "@/app/(commonAccess)/detail/[id]/_component/RemainTime";
 import styles from "@/styles/organism/boardDetail.module.scss";
+import { convertUToKST } from "@/utils/common/convertUToKST";
+import { uToMilliseconds } from "@/utils/detail/uToMilliseconds";
 
 interface BoardDetailProps {
   title: string;
   detail?: string;
-  detailDate?: string;
-  deadLine?: string;
+  endTime?: any;
   category?: string;
   price?: string;
   boardTitle?: string;
@@ -14,8 +16,7 @@ interface BoardDetailProps {
 export default function BoardDetailInfoWithText({
   title,
   detail,
-  detailDate,
-  deadLine,
+  endTime,
   category,
   price,
   boardTitle,
@@ -31,10 +32,13 @@ export default function BoardDetailInfoWithText({
           </div>
           <div className={styles["boardDetail-element1-content-info"]}>
             <p className={styles["boardDetail-element1-content-info1"]}>
-              {detailDate} 까지
+              {convertUToKST(endTime)} 까지
             </p>
             <p className={styles["boardDetail-element1-content-info2"]}>
-              {deadLine}시간 남음🕛
+              <RemainTime
+                endedAtMilliseconds={uToMilliseconds(endTime) + 32400000}
+              />
+              남음🕛
             </p>
           </div>
         </div>

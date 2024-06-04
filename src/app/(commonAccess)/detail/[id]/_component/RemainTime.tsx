@@ -14,7 +14,7 @@ const formatTime = (milliseconds: number) => {
   return `${hours}시간 ${minutes}분 ${seconds}초`;
 };
 
-export default function CurrentTime({ endedAtMilliseconds }: TimeProps) {
+export default function RemainTime({ endedAtMilliseconds }: TimeProps) {
   const [currentTime, setCurrentTime] = useState<number>(new Date().getTime());
 
   useEffect(() => {
