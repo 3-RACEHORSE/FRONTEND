@@ -79,6 +79,10 @@
   width: 100%;
   padding: 3%;
 }
+.boardDetail-element2-content {
+  font-size: 15px;
+}
+
 .boardDetail-element2-content1 {
   font-size: 13px;
 }
@@ -96,4 +100,27 @@
 .boardDetail-element2-content4 {
   font-size: 13px;
   color: gray;
+}
+
+//다크모드
+body[data-theme="dark"] .boardDetail-element1-content {
+  background-color: var(--color-element);
+  box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
+}
+
+body[data-theme="dark"] .deadline {
+  background: #000000;
+  color: #ffffff;
+}
+
+body[data-theme="dark"] .boardDetail-element2-content1 {
+  color: rgb(189, 189, 189);
+}
+
+body[data-theme="dark"] .boardDetail-element2-content3 {
+  color: rgb(255, 255, 255);
+}
+
+body[data-theme="dark"] .boardDetail-element2-content4 {
+  color: rgb(189, 189, 189);
 }

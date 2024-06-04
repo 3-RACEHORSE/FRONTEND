@@ -109,9 +109,7 @@ export default function WritePage({ authorization, uuid }: WritePageProps) {
         <div className={styles["layout1"]}>
           <p className={styles["input-title"]}>카테고리</p>
           <Select onValueChange={handleSelectChange}>
-            <SelectTrigger
-              style={{ height: "63%", border: "2px solid #d4d4d4" }}
-            >
+            <SelectTrigger className={styles["selectBar"]}>
               <SelectValue placeholder="선택하세요" />
             </SelectTrigger>
             <SelectContent>

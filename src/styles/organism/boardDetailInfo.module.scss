@@ -48,3 +48,9 @@
   font-size: 13px;
   font-weight: bold;
 }
+
+//다크모드
+body[data-theme="dark"] .title {
+  background-color: var(--color-element);
+  color: #a1a1a1;
+}

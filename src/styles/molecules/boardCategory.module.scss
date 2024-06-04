@@ -27,7 +27,7 @@
 
   @include center-element;
   font-weight: bold;
-  color: #ababab;
+  // color: #ababab;
 }
 
 .boardCategory-container-element-invalid {
@@ -48,6 +48,17 @@
   padding-bottom: 5%;
   @include center-element;
   font-weight: bold;
-  color: #000000;
+  // color: #000000;
   border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+body[data-theme="dark"] .boardCategory-container-element-valid {
+  // color: #ffffff;
+  border-bottom: 2px solid white;
+}
+
+body[data-theme="dark"] .boardCategory-container-element-invalid {
+  // color: #ffffff;
+  border-bottom: 2px solid var(--color-element);
+  color: var(--color-element);
 }
