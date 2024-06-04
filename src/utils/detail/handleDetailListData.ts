@@ -1,23 +1,28 @@
 export async function getDetailListData(
+  session: any,
   pathName: any,
-  authorization: string | undefined,
-  uuid: string | undefined
+  authorization: any,
+  uuid: any
 ) {
-  console.log("상세페이지의 기본값", pathName, authorization, uuid);
+  //분기 처리 1 =>  로그인, 2=> 로그인x
+  if (session) {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/${pathName}`,
+      {
+        headers: {
+          authorization: `Bearer ${authorization}`,
+          uuid: `${uuid}`,
+        },
+      }
+    );
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/${pathName}`,
-    {
-      // headers: {
-      //   authorization: `Bearer ${authorization}`,
-      //   uuid: `${uuid}`,
-      // },
-    }
-  );
-  if (!res.ok) {
-    throw new Error("Network Error");
+    const data = await res.json();
+    return data;
   }
-  const data = await res.json();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/${pathName}`
+  );
 
+  const data = await res.json();
   return data;
 }

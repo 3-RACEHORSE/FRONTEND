@@ -6,25 +6,24 @@ import { combineImg } from "@/utils/detail/combineImg";
 import { getDetailListData } from "@/utils/detail/handleDetailListData";
 import { cookies } from "next/headers";
 import { auth } from "@/auth";
+import { sessionValid } from "@/utils/session/sessionValid";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
 
-  //남은 쿠키 있을수도 있으니 삭제 요망
-  const authorization = cookies().get("authorization")?.value;
-  const uuid = cookies().get("uuid")?.value;
-
-  const data = await getDetailListData(pathName, authorization, uuid);
-  console.log("pathName", pathName, "받은 데이터", data);
-
   const session = await auth();
-  let isSession;
+  let isSession = false;
+  let authorization;
+  let uuid;
 
   if (session) {
     isSession = true;
-  } else {
-    isSession = false;
+    authorization = cookies().get("authorization")?.value;
+    uuid = cookies().get("uuid")?.value;
   }
+
+  const data = await getDetailListData(session, pathName, authorization, uuid);
+  console.log("pathName", pathName, "받은 데이터", data);
 
   return (
     <main>
@@ -40,11 +39,12 @@ export default async function Page(props: any) {
       />
       <BoardDetailInfo />
       <Footer />
-      {/* <BoardDetailBar
+      <BoardDetailBar
         subscribed={data.subscribed}
         isSession={isSession}
         auctionUuid={pathName}
-      /> */}
+        handle={data.handle}
+      />
     </main>
   );
 }

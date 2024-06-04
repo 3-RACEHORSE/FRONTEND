@@ -3,15 +3,17 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 interface BoardDetailBarProps {
-  subscribed: boolean;
-  isSession: boolean;
+  subscribed: any;
+  isSession: any;
   auctionUuid: any;
+  handle: any;
 }
 
 export default function BoardDetailBar({
   subscribed,
   isSession,
   auctionUuid,
+  handle,
 }: BoardDetailBarProps) {
   const FSaved = dynamic(() => import("@/components/atoms/icon/false/FSaved"));
   const TSaved = dynamic(() => import("@/components/atoms/icon/true/TSaved"));
@@ -37,7 +39,10 @@ export default function BoardDetailBar({
         )}
         {!isSession && (
           <>
-            <Link href="/profile/1" className={styles["button-container3"]}>
+            <Link
+              href={`/profile/${handle}`}
+              className={styles["button-container3"]}
+            >
               <p className={styles["info1"]}>판매자 정보 </p>
               <p className={styles["info2"]}>판매자 정보를 확인하세요!</p>
             </Link>
