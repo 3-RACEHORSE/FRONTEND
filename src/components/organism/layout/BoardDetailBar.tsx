@@ -2,14 +2,20 @@ import styles from "@/styles/organism/boardDetailBar.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-export default function BoardDetailBar() {
+interface BoardDetailBarProps {
+  subscribed: boolean;
+}
+
+export default function BoardDetailBar({ subscribed }: BoardDetailBarProps) {
   const FSaved = dynamic(() => import("@/components/atoms/icon/false/FSaved"));
+  const TSaved = dynamic(() => import("@/components/atoms/icon/true/TSaved"));
 
   return (
     <>
       <nav className={styles["nav-container"]}>
         <div className={styles["nav-iconWithText-container"]}>
-          <FSaved />
+          {subscribed && <TSaved />}
+          {!subscribed && <FSaved />}
         </div>
         <Link href="/profile/1" className={styles["button-container1"]}>
           <p className={styles["info1"]}>판매자 정보 </p>

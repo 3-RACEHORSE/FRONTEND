@@ -29,7 +29,7 @@ export default async function Page(props: any) {
       />
       <BoardDetailInfo />
       <Footer />
-      <BoardDetailBar />
+      <BoardDetailBar subscribed={data.subscribed} />
     </main>
   );
 }
