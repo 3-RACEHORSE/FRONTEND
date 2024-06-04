@@ -8,10 +8,10 @@ export async function getDetailListData(
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/${pathName}`,
     {
-      headers: {
-        authorization: `Bearer ${authorization}`,
-        uuid: `${uuid}`,
-      },
+      // headers: {
+      //   authorization: `Bearer ${authorization}`,
+      //   uuid: `${uuid}`,
+      // },
     }
   );
   if (!res.ok) {

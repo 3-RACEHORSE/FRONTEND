@@ -5,11 +5,13 @@ import Link from "next/link";
 interface BoardDetailBarProps {
   subscribed: boolean;
   isSession: boolean;
+  auctionUuid: any;
 }
 
 export default function BoardDetailBar({
   subscribed,
   isSession,
+  auctionUuid,
 }: BoardDetailBarProps) {
   const FSaved = dynamic(() => import("@/components/atoms/icon/false/FSaved"));
   const TSaved = dynamic(() => import("@/components/atoms/icon/true/TSaved"));

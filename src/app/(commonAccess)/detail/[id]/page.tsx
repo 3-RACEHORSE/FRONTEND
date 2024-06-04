@@ -10,6 +10,7 @@ import { auth } from "@/auth";
 export default async function Page(props: any) {
   const pathName = props.params.id;
 
+  //남은 쿠키 있을수도 있으니 삭제 요망
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
 
@@ -39,7 +40,11 @@ export default async function Page(props: any) {
       />
       <BoardDetailInfo />
       <Footer />
-      <BoardDetailBar subscribed={data.subscribed} isSession={isSession} />
+      {/* <BoardDetailBar
+        subscribed={data.subscribed}
+        isSession={isSession}
+        auctionUuid={pathName}
+      /> */}
     </main>
   );
 }
