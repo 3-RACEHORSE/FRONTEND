@@ -34,12 +34,13 @@ export default function BoardDetailInfoWithText({
             <p className={styles["boardDetail-element1-content-info1"]}>
               {convertUToKST(endTime)} 까지
             </p>
-            <p className={styles["boardDetail-element1-content-info2"]}>
+
+            <div className={styles["boardDetail-element1-content-info2"]}>
               <RemainTime
                 endedAtMilliseconds={uToMilliseconds(endTime) + 32400000}
               />
-              남음🕛
-            </p>
+              🕛
+            </div>
           </div>
         </div>
       </div>
