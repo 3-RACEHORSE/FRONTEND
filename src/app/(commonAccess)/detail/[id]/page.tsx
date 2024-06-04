@@ -4,10 +4,15 @@ import BoardDetailInfo from "@/components/organism/boardDetail/BoardDetailInfo";
 import Footer from "@/components/organism/layout/Footer";
 import { combineImg } from "@/utils/detail/combineImg";
 import { getDetailListData } from "@/utils/detail/handleDetailListData";
+import { cookies } from "next/headers";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
-  const data = await getDetailListData(pathName);
+
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
+
+  const data = await getDetailListData(pathName, authorization, uuid);
   console.log("pathName", pathName, "받은 데이터", data);
 
   return (
