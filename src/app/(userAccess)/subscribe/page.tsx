@@ -2,12 +2,13 @@ import BoardObject from "@/components/organism/auction/BoardObject";
 import SubScribeInfo from "@/components/organism/subscribe/SubscribeInfo.tsx";
 
 import SubscribeObject from "@/components/organism/subscribe/SubscribeObject";
+import HorizontalPage from "@/app/(userAccess)/subscribe/_component/HorizontalPage";
 
 export default function Page() {
   return (
     <main>
       <SubScribeInfo title="✅구독" />
-      <div className="flex flex-col justify-center w-full h-200">
+      {/* <div className="flex flex-col justify-center w-full h-200">
         <div className="flex overflow-x-auto">
           <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
           <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
@@ -21,7 +22,9 @@ export default function Page() {
           <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
           <SubscribeObject src="/dummy/profile.jpg" name="CHO" />
         </div>
-      </div>
+      </div> */}
+      <HorizontalPage />
+
       {/* <SubScribeInfo title="✅북마크" /> */}
 
       <BoardObject
