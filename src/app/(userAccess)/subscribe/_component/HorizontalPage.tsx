@@ -22,7 +22,15 @@ interface Auction {
   subscribed: boolean;
 }
 
-export default function HorizontalPage() {
+interface HorizontalPageProps {
+  authorization: any;
+  uuid: any;
+}
+
+export default function HorizontalPage({
+  authorization,
+  uuid,
+}: HorizontalPageProps) {
   const [auctions, setAuctions] = useState<Auction[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [hasNext, setHasNext] = useState<boolean>(true);
@@ -35,10 +43,17 @@ export default function HorizontalPage() {
   const fetchData = async (page: number) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos?_page=${page}`
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/subscription/seller?page=${page}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
+          },
+        }
       );
-      const data = await response.json();
+      const data = await res.json();
       setAuctions((prevAuctions) => [...prevAuctions, ...data]);
       //   setHasNext(data.hasNext);
     } catch (error) {
@@ -77,8 +92,22 @@ export default function HorizontalPage() {
           >
             {loading ? "Loading..." : "Next"}
           </button> */}
-          <Button variant="outline" size="icon">
-            <ChevronRight className="h-4 w-4" />
+
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleNextPage}
+            disabled={!hasNext || loading}
+            style={{
+              alignContent: "center",
+              marginLeft: "5%",
+              marginRight: "5%",
+              //   background: "red",
+              marginTop: "17px",
+              color: "black",
+            }}
+          >
+            <ChevronRight className="h-4 w-40" />
           </Button>
         </div>
       </div>

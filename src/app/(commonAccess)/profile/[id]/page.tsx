@@ -3,11 +3,16 @@ import ProfileInfo from "@/components/organism/profile/ProfileInfo";
 import ProfileDetail from "@/components/organism/profile/ProfileDetail";
 import SimpleBoardObject from "@/components/organism/main/SimpleBoardObject";
 import { getProfileInfoData } from "@/utils/profile/handleProfileInfoData";
+import { auth } from "@/auth";
+import { cookies } from "next/headers";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
 
   const data1 = await getProfileInfoData(pathName);
+  const session = await auth();
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
 
   return (
     <main>
@@ -15,6 +20,10 @@ export default async function Page(props: any) {
         name={data1.handle}
         src={data1.profileImage}
         categories={data1.watchList}
+        handle={pathName}
+        authorization={authorization}
+        uuid={uuid}
+        type={session ? "server" : "client"}
       />
       <ProfileDetail
         careerInfo={data1.careerInfo}
