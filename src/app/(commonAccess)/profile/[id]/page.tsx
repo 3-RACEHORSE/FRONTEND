@@ -9,11 +9,17 @@ import { cookies } from "next/headers";
 export default async function Page(props: any) {
   const pathName = props.params.id;
 
-  const data1 = await getProfileInfoData(pathName);
   const session = await auth();
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
-  console.log(data1);
+  const data1 = await getProfileInfoData(
+    pathName,
+    session,
+    authorization,
+    uuid
+  );
+
+  console.log("상세데이터", data1);
   return (
     <main>
       <ProfileInfo
@@ -24,12 +30,13 @@ export default async function Page(props: any) {
         authorization={authorization}
         uuid={uuid}
         type={session ? "server" : "client"}
+        follow={data1.subscribed}
       />
       <ProfileDetail
         careerInfo={data1.careerInfo}
         qualificationInfo={data1.qualificationInfo}
       />
-      <div className="flex flex-col justify-center w-full h-200">
+      {/* <div className="flex flex-col justify-center w-full h-200">
         <ul className="flex overflow-x-auto">
           <SimpleBoardObject
             category="세무·법무·노무"
@@ -60,7 +67,7 @@ export default async function Page(props: any) {
             minPrice="9,999"
           />
         </ul>
-      </div>
+      </div> */}
       <Footer />
     </main>
   );

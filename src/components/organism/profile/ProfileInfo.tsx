@@ -11,6 +11,7 @@ interface ProfileInfoProps {
   authorization: any;
   uuid: any;
   type: string;
+  follow: boolean;
 }
 export default function ProfileInfo({
   name,
@@ -20,14 +21,13 @@ export default function ProfileInfo({
   authorization,
   uuid,
   type,
+  follow,
 }: ProfileInfoProps) {
-  console.log(type);
-
   //구독여부
-  const [follow, setFollow] = useState<boolean>(false);
+  const [subscribe, setSubscribe] = useState<boolean>(follow);
 
   //구독 표시
-  console.log("구독에 필요한 데이터", handle, authorization, uuid);
+  // console.log("구독에 필요한 데이터", handle, authorization, uuid, follow);
 
   //팔로우 하기
   const handleSubscribeSellerAdd = async () => {
@@ -47,8 +47,8 @@ export default function ProfileInfo({
     );
 
     console.log(res);
-    const data = await res.json();
-    setFollow(data.isSubscribed);
+
+    setSubscribe(true);
   };
 
   //팔로우 취소
@@ -68,9 +68,7 @@ export default function ProfileInfo({
       }
     );
 
-    console.log(res);
-    const data = await res.json();
-    setFollow(data.isSubscribed);
+    setSubscribe(false);
   };
 
   return (
@@ -80,18 +78,18 @@ export default function ProfileInfo({
       </div>
       <div className={styles["profile-info"]}>
         <p className={styles["profile-info-name"]}>{name}</p>
-        {type === "server" && follow && (
+        {type === "server" && subscribe && (
           <div
             className={styles["profile-follow-btn"]}
-            onClick={handleSubscribeSellerAdd}
+            onClick={handleSubscribeSellerCancel}
           >
             팔로우 취소
           </div>
         )}
-        {type === "server" && !follow && (
+        {type === "server" && !subscribe && (
           <div
             className={styles["profile-follow-btn"]}
-            onClick={handleSubscribeSellerCancel}
+            onClick={handleSubscribeSellerAdd}
           >
             팔로우
           </div>
