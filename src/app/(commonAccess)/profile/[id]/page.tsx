@@ -13,7 +13,7 @@ export default async function Page(props: any) {
   const session = await auth();
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
-
+  console.log(data1);
   return (
     <main>
       <ProfileInfo
