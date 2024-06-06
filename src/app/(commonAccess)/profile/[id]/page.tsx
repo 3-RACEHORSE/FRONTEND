@@ -5,6 +5,9 @@ import SimpleBoardObject from "@/components/organism/main/SimpleBoardObject";
 import { getProfileInfoData } from "@/utils/profile/handleProfileInfoData";
 import { auth } from "@/auth";
 import { cookies } from "next/headers";
+import { getProfileBoardData } from "@/utils/profile/handleProfileBoardData";
+import Link from "next/link";
+import styles from "@/styles/main/main.module.scss";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
@@ -18,6 +21,11 @@ export default async function Page(props: any) {
     authorization,
     uuid
   );
+
+  console.log("fsdaf");
+  const data2 = await getProfileBoardData(pathName);
+
+  console.log(data2);
 
   console.log("상세데이터", data1);
   return (
@@ -36,38 +44,26 @@ export default async function Page(props: any) {
         careerInfo={data1.careerInfo}
         qualificationInfo={data1.qualificationInfo}
       />
-      {/* <div className="flex flex-col justify-center w-full h-200">
+      <div className="flex flex-col justify-center w-full h-200">
         <ul className="flex overflow-x-auto">
-          <SimpleBoardObject
-            category="세무·법무·노무"
-            title="G사 CTO 멘토링"
-            content="시니어 경력 17년차 프.."
-            src="/dummy/profile.jpg"
-            minPrice="9,999"
-          />
-          <SimpleBoardObject
-            category="세무·법무·노무"
-            title="G사 CTO 멘토링"
-            content="시니어 경력 17년차 프.."
-            src="/dummy/profile.jpg"
-            minPrice="9,999"
-          />
-          <SimpleBoardObject
-            category="세무·법무·노무"
-            title="G사 CTO 멘토링"
-            content="시니어 경력 17년차 프.."
-            src="/dummy/profile.jpg"
-            minPrice="9,999"
-          />
-          <SimpleBoardObject
-            category="세무·법무·노무"
-            title="G사 CTO 멘토링"
-            content="시니어 경력 17년차 프.."
-            src="/dummy/profile.jpg"
-            minPrice="9,999"
-          />
+          {data2.map((item: any, index: number) => (
+            <Link
+              href={`/detail/${item.auctionUuid}`}
+              key={item.auctionUuid}
+              className={styles["flexBox"]}
+            >
+              <SimpleBoardObject
+                // key={index}
+                category={item.category}
+                title={item.title}
+                content={item.content}
+                src={item.thumbnail}
+                minPrice={item.minimumBiddingPrice}
+              />
+            </Link>
+          ))}
         </ul>
-      </div> */}
+      </div>
       <Footer />
     </main>
   );
