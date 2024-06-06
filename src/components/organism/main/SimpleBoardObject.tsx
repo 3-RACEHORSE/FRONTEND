@@ -20,7 +20,7 @@ export default function SimpleBoardObject({
   minPrice,
 }: BoardProps) {
   return (
-    <div className={styles["flexBox"]}>
+    <div>
       <ImgWithCategory src={src} category={category} />
       <SimpleBoardInfo title={title} content={content} minPrice={minPrice} />
     </div>
