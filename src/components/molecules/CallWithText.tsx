@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "@/styles/organism/mypageProfile.module.scss";
 
 export default function CallWithText() {

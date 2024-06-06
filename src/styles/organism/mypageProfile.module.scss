@@ -32,6 +32,9 @@
   border-radius: 100px;
   border: 2px solid #e3e3e3;
   // background-color: red;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .profile-info {
@@ -42,6 +45,17 @@
   flex-direction: column;
   justify-content: center;
   padding-left: 3%;
+}
+
+.profile-img-btn {
+  padding-left: 8%;
+  padding-right: 8%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 5px;
+  background-color: #0000008a;
+  color: #ffffff;
+  font-size: 13px;
 }
 
 .profile-name {

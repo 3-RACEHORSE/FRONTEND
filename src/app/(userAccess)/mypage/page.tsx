@@ -44,6 +44,8 @@ export default async function Page() {
         email={data.email}
         phoneNum={data.phoneNum}
         categories={data.watchList}
+        authorization={authorization}
+        uuid={uuid}
       />
       <Footer />
       <NavBar />

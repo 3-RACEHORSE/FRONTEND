@@ -1,3 +1,5 @@
+"use clinet";
+
 import React, { ChangeEvent } from "react";
 import styles from "@/styles/organism/mypageProfile.module.scss";
 

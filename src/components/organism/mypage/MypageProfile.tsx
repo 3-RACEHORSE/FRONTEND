@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import AWS from "aws-sdk";
 import Modal from "@/components/organism/write/Modal";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
@@ -9,15 +8,18 @@ import styles from "@/styles/organism/mypageProfile.module.scss";
 import SettingWithBtn from "@/components/molecules/SettingWithBtn";
 import CallWithText from "@/components/molecules/CallWithText";
 import Link from "next/link";
-import { uploadImageToS3 } from "@/utils/write/aws"; // Make sure the path is correct
+import { uploadImageToS3 } from "@/utils/write/aws";
+import Swal from "sweetalert2";
 
 interface MypageProfileProps {
-  src?: string;
-  name?: string;
-  handle?: string;
-  email?: string;
-  phoneNum?: string;
-  categories?: string[];
+  src: string;
+  name: string;
+  handle: string;
+  email: string;
+  phoneNum: string;
+  categories: string[];
+  authorization: any;
+  uuid: any;
 }
 
 export default function MypageProfile({
@@ -27,6 +29,8 @@ export default function MypageProfile({
   email,
   phoneNum,
   categories = [],
+  authorization,
+  uuid,
 }: MypageProfileProps) {
   const [profileImage, setProfileImage] = useState(src);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,16 +62,56 @@ export default function MypageProfile({
     if (cropperRef.current) {
       const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas();
       const uploadedImageUrl = await uploadImageToS3(croppedCanvas);
+      console.log(uploadedImageUrl);
       setProfileImage(uploadedImageUrl);
       setIsModalOpen(false);
+      handleChangeImgData(
+        authorization,
+        uuid,
+        name,
+        phoneNum,
+        handle,
+        uploadedImageUrl
+      );
+    }
+  };
+
+  const handleChangeImgData = async (
+    authorization: any,
+    uuid: any,
+    name: string,
+    phoneNum: string,
+    handle: string,
+    uploadedImageUrl: string
+  ) => {
+    console.log("데이토 통신");
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/modify`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
+          },
+          body: JSON.stringify({
+            name: name,
+            phoneNum: phoneNum,
+            handle: handle,
+            profileImage: uploadedImageUrl,
+          }),
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  console.log(profileImage);
 
   return (
     <>
@@ -78,9 +122,12 @@ export default function MypageProfile({
             className={styles["profile-img"]}
             style={{
               backgroundImage: `url(${profileImage})`,
+              backgroundSize: "cover",
             }}
             onClick={handleChangeProfileImg}
-          ></div>
+          >
+            <p className={styles["profile-img-btn"]}>편집</p>
+          </div>
           <input
             type="file"
             ref={fileInputRef}
@@ -135,8 +182,8 @@ export default function MypageProfile({
           </div>
         )}
       </Modal>
-      {/* <SettingWithBtn />
-      <CallWithText /> */}
+      <SettingWithBtn />
+      <CallWithText />
     </>
   );
 }
