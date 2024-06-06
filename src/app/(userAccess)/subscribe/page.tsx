@@ -14,7 +14,7 @@ export default function Page() {
       <SubScribeInfo title="✅구독" />
       <HorizontalPage authorization={authorization} uuid={uuid} />
 
-      {/* <SubScribeInfo title="✅북마크" /> */}
+      <SubScribeInfo title="✅북마크" />
 
       <BoardObject
         src="/dummy/profile.jpg"
