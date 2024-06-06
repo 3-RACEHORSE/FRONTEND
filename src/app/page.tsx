@@ -12,13 +12,9 @@ import {
   getMainHighBiddingList,
   getMainSameCategoryList,
 } from "@/utils/main/handleMainListData";
+import Link from "next/link";
 
 export default async function Home() {
-  // git action을 위한 주석2
-
-  // const session = await auth(); // session 호출 추가
-  // console.log(session);
-  // promise all
   const data1 = await getMainStatistic();
   const data2 = await getMainHotActionList();
   const data3 = await getMainHighBiddingList();
@@ -42,14 +38,20 @@ export default async function Home() {
       <div className="flex flex-col justify-center w-30 h-200">
         <ul className="flex overflow-x-auto">
           {data2.map((item: any) => (
-            <SimpleBoardObject
+            <Link
+              href={`/detail/${item.auctionUuid}`}
               key={item.auctionUuid}
-              category={item.category}
-              title={item.title}
-              content={item.content}
-              src={item.thumbnail}
-              minPrice={item.minimumBiddingPrice.toLocaleString()}
-            />
+              className={styles["flexBox"]}
+            >
+              <SimpleBoardObject
+                key={item.auctionUuid}
+                category={item.category}
+                title={item.title}
+                content={item.content}
+                src={item.thumbnail}
+                minPrice={item.minimumBiddingPrice.toLocaleString()}
+              />
+            </Link>
           ))}
         </ul>
       </div>
@@ -62,14 +64,20 @@ export default async function Home() {
       <div className="flex flex-col justify-center w-30 h-200">
         <ul className="flex overflow-x-auto">
           {data3.map((item: any) => (
-            <SimpleBoardObject
+            <Link
+              href={`/detail/${item.auctionUuid}`}
               key={item.auctionUuid}
-              category={item.category}
-              title={item.title}
-              content={item.content}
-              src={item.thumbnail}
-              minPrice={item.minimumBiddingPrice.toLocaleString()}
-            />
+              className={styles["flexBox"]}
+            >
+              <SimpleBoardObject
+                key={item.auctionUuid}
+                category={item.category}
+                title={item.title}
+                content={item.content}
+                src={item.thumbnail}
+                minPrice={item.minimumBiddingPrice.toLocaleString()}
+              />
+            </Link>
           ))}
         </ul>
       </div>
@@ -82,14 +90,20 @@ export default async function Home() {
       <div className="flex flex-col justify-center w-30 h-200">
         <ul className="flex overflow-x-auto">
           {data4.map((item: any) => (
-            <SimpleBoardObject
+            <Link
+              href={`/detail/${item.auctionUuid}`}
               key={item.auctionUuid}
-              category={item.category}
-              title={item.title}
-              content={item.content}
-              src={item.thumbnail}
-              minPrice={item.minimumBiddingPrice.toLocaleString()}
-            />
+              className={styles["flexBox"]}
+            >
+              <SimpleBoardObject
+                key={item.auctionUuid}
+                category={item.category}
+                title={item.title}
+                content={item.content}
+                src={item.thumbnail}
+                minPrice={item.minimumBiddingPrice.toLocaleString()}
+              />
+            </Link>
           ))}
         </ul>
       </div>
