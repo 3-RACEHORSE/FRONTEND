@@ -6,13 +6,20 @@ import Text from "@/components/atoms/Text/InfoText";
 import InputWithButtonOne from "@/components/molecules/InputWithButtonOne";
 import { handleSendPhoneNum } from "@/utils/join/handleSendPhoneNum";
 import useJoinHook from "@/hooks/join/useJoinHook";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { handleEditMyInfo } from "@/utils/info/handleEditMyInfo";
+import { handleImageUpload } from "@/utils/write/imageHandlers";
+
+interface ImageData {
+  src: string;
+  croppedSrc: string | null;
+}
+
 interface MypageUserInfoProps {
   src?: string;
   name?: string;
@@ -87,6 +94,12 @@ export default function MyPageUserInfo({
     );
   };
 
+  const [images, setImages] = useState<ImageData[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
+    null
+  );
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   return (
     <main className={styles["container"]}>
       {/* 이름 */}
@@ -119,6 +132,7 @@ export default function MyPageUserInfo({
           buttonText="전송"
         />
       </div>
+
       {/* 인증 */}
       {checkValid1 && (
         <>

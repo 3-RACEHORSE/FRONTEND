@@ -22,12 +22,8 @@ export default async function Page(props: any) {
     uuid
   );
 
-  console.log("fsdaf");
   const data2 = await getProfileBoardData(pathName);
 
-  console.log(data2);
-
-  console.log("상세데이터", data1);
   return (
     <main>
       <ProfileInfo

@@ -32,7 +32,7 @@ export default async function Page() {
   const uuid = cookies().get("uuid")?.value;
 
   const data = await getUserPofileData();
-  console.log(data);
+  // console.log(data);
   return (
     <main>
       <BackHeader title="마이페이지 / 경럭·자격 관리" />

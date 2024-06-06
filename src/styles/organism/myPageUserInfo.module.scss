@@ -18,3 +18,20 @@
 .container {
   padding: 3%;
 }
+
+.fileInput {
+  width: 100%;
+  // background-color: blue;
+  border: none;
+  color: transparent;
+}
+
+.fileInput::file-selector-button {
+  width: 100%;
+  aspect-ratio: 10 / 1;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  background-color: #d9d9d9;
+}
