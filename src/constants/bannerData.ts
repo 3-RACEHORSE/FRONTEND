@@ -1,26 +1,20 @@
 const imageData = [
   {
     alt: "image1",
-    url: "/images/banner/banner1.png",
+    url: "/images/banner/banner1.jpg",
     index: 1,
   },
 
   {
     alt: "image2",
-    url: "/images/banner/banner2.png",
+    url: "/images/banner/banner2.jpg",
     index: 2,
   },
 
   {
     alt: "image3",
-    url: "/images/banner/banner3.png",
+    url: "/images/banner/banner3.jpg",
     index: 3,
-  },
-
-  {
-    alt: "image4",
-    url: "/images/banner/banner4.png",
-    index: 4,
   },
 ];
 

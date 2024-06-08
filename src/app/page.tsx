@@ -12,6 +12,12 @@ import {
   getMainHighBiddingList,
   getMainSameCategoryList,
 } from "@/utils/main/handleMainListData";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import imageData from "@/constants/bannerData";
 
 export default async function Home() {
   // git action을 위한 주석2
@@ -28,14 +34,14 @@ export default async function Home() {
     <main>
       <Header />
       <MainBanner />
-      <MainArticle data={data1} />
+      {/* <MainArticle data={data1} />
       <div className={styles["infoBar"]}>
         <div className={styles["infoText"]}>경매 통계(금일)</div>
         <div className={styles["detailLink"]}>상세보기</div>
-      </div>
+      </div> */}
 
       {/* 스크롤1  */}
-      <BoardTitle
+      {/* <BoardTitle
         title="HOT 경매글 📢"
         detail="지금 가장 인기있는 경매글을 찾아보세요!"
       />
@@ -52,10 +58,10 @@ export default async function Home() {
             />
           ))}
         </ul>
-      </div>
+      </div> */}
 
       {/* 스크롤2  */}
-      <BoardTitle
+      {/* <BoardTitle
         title="높은 입찰가 경매글 📢"
         detail="전체 경매에서 TOP10을 확인하세요!"
       />
@@ -72,10 +78,10 @@ export default async function Home() {
             />
           ))}
         </ul>
-      </div>
+      </div> */}
 
       {/* 스크롤2  */}
-      <BoardTitle
+      {/* <BoardTitle
         title="요즘 뜨는 분야 📢"
         detail="나도 오늘부터 개발자! 맥북 사러가자~"
       />
@@ -92,9 +98,9 @@ export default async function Home() {
             />
           ))}
         </ul>
-      </div>
+      </div> */}
 
-      <Footer />
+      {/* <Footer /> */}
       <NavBar />
     </main>
   );

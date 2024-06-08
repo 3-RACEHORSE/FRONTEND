@@ -14,14 +14,14 @@ export default function Header() {
       <div className={styles["main-header-container"]}>
         <SearchWithAlarm />
       </div>
-      {/* 추후 수정 필요 */}
-      {pathName === "/" ? (
+
+      {/* {pathName === "/" ? (
         <SliderWithCategory />
       ) : pathName.startsWith("/auction") ? (
         <BoardCategory />
       ) : (
         <></>
-      )}
+      )} */}
     </header>
   );
 }

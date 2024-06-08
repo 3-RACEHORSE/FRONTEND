@@ -7,6 +7,8 @@ import Link from "next/link";
 import BackBtn from "../atoms/button/BackBtn";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import { FaSearch } from "react-icons/fa";
+import styles from "@/styles/layout/header.module.scss";
 
 export default function SearchWithAlarm() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -49,8 +51,12 @@ export default function SearchWithAlarm() {
         onClick={darkModeHandler}
       />
       {/* <button onClick={darkModeHandler}>다크모드</button> */}
-      <SearchInput />
-      <Alarm />
+      {/* <SearchInput /> */}
+      <div className={styles["header-element-container"]}>
+        <FaSearch size={27} color="white" />
+
+        <Alarm />
+      </div>
     </>
   );
 }

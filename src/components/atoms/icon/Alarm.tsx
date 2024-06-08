@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { GoBell } from "react-icons/go";
+import { FaBell } from "react-icons/fa";
 
 import Link from "next/link";
 
 export default function Alarm() {
   return (
     <Link href={"/"}>
-      <GoBell size={27} />
+      <FaBell size={27} color="white" />
     </Link>
   );
 }

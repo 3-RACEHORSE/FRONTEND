@@ -47,12 +47,88 @@ function MainBanner() {
               index // 추후 bannerDataToUse로 바꿔야함
             ) => (
               <div key={index} style={{ position: "relative" }}>
-                <Image
+                <img
                   src={image.url}
                   alt={image.alt}
-                  width={1000}
-                  height={1000}
+                  style={{
+                    width: "100%",
+                    height: "100vh",
+                    objectFit: "cover",
+                    filter: "brightness(0.4)", // Adjust the value to make the image darker
+                  }}
                 />
+                <div
+                  style={{
+                    // background: "red",
+                    position: "absolute",
+                    bottom: "20vh",
+                    left: 0,
+                    width: "100%",
+                    height: "30vh",
+                    // background: "red",
+                    paddingLeft: "3%",
+                    paddingRight: "3%",
+                  }}
+                >
+                  <div
+                    style={{
+                      background: "#F9BDEC",
+                      borderRadius: "10px",
+                      paddingLeft: "3%",
+                      paddingRight: "3%",
+                      paddingTop: "0.5%",
+                      paddingBottom: "0.5%",
+                      width: "fit-content",
+                      fontSize: "14px",
+                      color: "white",
+                    }}
+                  >
+                    진행중
+                  </div>
+                  <h2
+                    style={{
+                      // background: "#F9BDEC",
+                      borderRadius: "10px",
+                      width: "100%",
+                      fontSize: "27px",
+                      color: "white",
+                      wordBreak: "break-word",
+                      overflowWrap: "break-word",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    광안리 바다 보며 아이유와 펩시 마시기!
+                  </h2>
+                  <p
+                    style={{
+                      // background: "#F9BDEC",
+                      borderRadius: "10px",
+                      width: "100%",
+                      fontSize: "17px",
+                      color: "white",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                      marginTop: "2vh",
+                    }}
+                  >
+                    2024.6.9 오후 2시
+                  </p>
+                  <button
+                    style={{
+                      // background: "#F9BDEC",
+                      borderRadius: "10px",
+                      width: "100%",
+                      fontSize: "20px",
+                      color: "white",
+                      textAlign: "left",
+                      fontWeight: "bold",
+                      marginTop: "4vh",
+                    }}
+                  >
+                    지금 참여하기 ▶
+                  </button>
+                </div>
               </div>
             )
           )}
