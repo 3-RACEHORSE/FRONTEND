@@ -45,6 +45,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.5",
     "@types/jest": "^29.5.12",
     "@types/js-cookie": "^3.0.6",
