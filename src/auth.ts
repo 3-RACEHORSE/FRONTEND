@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import KaKaoProvider from "next-auth/providers/kakao"
+import KaKaoProvider from "next-auth/providers/kakao";
 // import { stringify } from "querystring";
 // import { json } from "stream/consumers";
 import { cookies } from "next/headers";
@@ -20,20 +20,24 @@ export const {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     KaKaoProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
     }),
   ],
 
   callbacks: {
     jwt({ token, account }) {
       if (account) {
+        console.log(token, account);
         token.id = account?.providerAccountId;
+        token.type = account.provider;
       }
       return token;
     },
     session({ session, token }) {
       session.user.id = token.id;
+      session.user.type = token.type;
+
       return { ...session, ...token };
     },
     async signIn({ user, account }) {
@@ -47,7 +51,7 @@ export const {
             },
             body: JSON.stringify({
               email: user.email,
-              snsType: "google",
+              snsType: account?.provider,
               snsId: account?.providerAccountId,
             }),
           }

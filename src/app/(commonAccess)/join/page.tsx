@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 
 export default async function Page() {
   const session = await auth();
-  console.log("유저세션", session?.user);
+  console.log("회원가입 세션", session?.user);
 
   return (
     <>
@@ -14,7 +14,7 @@ export default async function Page() {
         <DataFetcher
           email={session?.user.email}
           name={session?.user.name}
-          snsType="google"
+          snsType={session?.user.type}
           snsId={session?.user.id}
         />
       </main>

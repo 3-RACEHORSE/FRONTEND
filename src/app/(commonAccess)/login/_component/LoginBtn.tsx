@@ -27,28 +27,21 @@ export default function LoginBtn() {
   };
 
   const onClickKaKaoSignIn = async () => {
-    await signIn("google", {
+    await signIn("kakao", {
       redirect: true,
-      callbackUrl: "/kakao", // 추후 변경 필요
+      callbackUrl: "/join", // 추후 변경 필요
     });
   };
 
-  const onClickGoogleSignOut = async () => {
-    await signOut();
-  };
-
-  const onClickKaKaoSignOut = async () => {
+  const onClickSignOut = async () => {
     await signOut();
   };
 
   return (
     <div>
       {isSession && (
-        <button
-          className={styles["login-main-btn"]}
-          onClick={onClickGoogleSignIn}
-        >
-          Get started with Google
+        <button className={styles["login-main-btn"]} onClick={onClickSignOut}>
+          로그아웃
         </button>
       )}
 
