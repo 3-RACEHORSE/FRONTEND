@@ -13,7 +13,7 @@ export default function Page() {
 
   useEffect(() => {
     setLogoSrc(
-      isDarkMode ? "/dummy/loginLogoDark.png" : "/dummy/loginLogo.png"
+      isDarkMode ? "/dummy/loginLogoDark.png" : "/images/login/loginLogo.png"
     );
   }, [isDarkMode]);
 
@@ -21,7 +21,7 @@ export default function Page() {
     <main>
       {/* <BackHeader title={"LOGIN"} /> */}
       <div className={styles["login-main-frame"]}>
-        <img src={logoSrc} alt="" width={220} height={220} />
+        <img src={logoSrc} alt="" width={260} height={220} />
       </div>
       <div className={styles["login-btn-frame"]}>
         <LoginBtn />
