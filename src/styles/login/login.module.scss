@@ -24,17 +24,33 @@
   // background-color: red;
   width: 100%;
   @include center-element;
-  padding-top: 21vh;
+  padding-top: 25vh;
+}
+.login-main-btn-container {
+  // background-color: green;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* 부모 요소의 높이에 맞추어 조정 */
 }
 
 .login-main-btn {
-  background: linear-gradient(to right, #30e2ef, #8aede7, #7ae5c0);
-  height: 50px;
-  width: 250px;
-  color: white;
-  border-radius: 7px;
+  // background: linear-gradient(to right, #30e2ef, #8aede7, #7ae5c0);
+  height: 55px;
+  width: 258px;
+  color: black;
+  border-radius: 999px;
   margin-top: 30px;
-  box-shadow: 0px 0px 3px 2px #e1e1e1;
+  border: 2px solid #e3e3e3;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-weight: 500;
+}
+
+.login-main-btn img {
+  width: 35px;
+  height: 35px;
 }
 
 .login-btn-frame {

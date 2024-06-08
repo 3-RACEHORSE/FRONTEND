@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import KaKaoProvider from "next-auth/providers/kakao"
 // import { stringify } from "querystring";
 // import { json } from "stream/consumers";
 import { cookies } from "next/headers";
@@ -15,6 +16,10 @@ export const {
   },
   providers: [
     GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    KaKaoProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),

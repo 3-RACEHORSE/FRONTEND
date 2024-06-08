@@ -19,7 +19,7 @@ export default function Page() {
 
   return (
     <main>
-      <BackHeader title={"LOGIN"} />
+      {/* <BackHeader title={"LOGIN"} /> */}
       <div className={styles["login-main-frame"]}>
         <img src={logoSrc} alt="" width={220} height={220} />
       </div>
