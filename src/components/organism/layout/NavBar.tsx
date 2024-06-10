@@ -4,15 +4,13 @@ import { usePathname } from "next/navigation";
 import styles from "@/styles/layout/nav.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import TSaved from "@/components/atoms/icon/true/TSaved";
 import TMy from "@/components/atoms/icon/true/TMy";
+import FMy from "@/components/atoms/icon/false/FMy";
 
 // Dynamic import for icons
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
 const FList = dynamic(() => import("@/components/atoms/icon/false/FList"));
-const FSaved = dynamic(() => import("@/components/atoms/icon/false/FSaved"));
 const FChat = dynamic(() => import("@/components/atoms/icon/false/FChat"));
-const FMy = dynamic(() => import("@/components/atoms/icon/false/FMy"));
 const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
 const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));
 
@@ -22,6 +20,16 @@ export default function NavBar() {
 
   return (
     <>
+      <div
+        style={{
+          position: "fixed",
+          background: "linear-gradient(to top, black 50%, transparent)",
+          height: "25vh",
+          width: "100%",
+          bottom: "0",
+          left: "0",
+        }}
+      ></div>
       <nav className={styles["nav-main-container"]}>
         {/* 버튼1 */}
         <Link href="/">
@@ -59,27 +67,6 @@ export default function NavBar() {
                 <FList />
                 <div className={styles["nav-iconWithText-container-text"]}>
                   AUCTION
-                </div>
-              </>
-            )}
-          </div>
-        </Link>
-
-        {/* 버튼3 */}
-        <Link href="/subscribe">
-          <div className={styles["nav-iconWithText-container"]}>
-            {pathNmae === "/subscribe" ? (
-              <>
-                <TSaved />
-                <div className={styles["nav-iconWithText-container-text-true"]}>
-                  SAVED
-                </div>
-              </>
-            ) : (
-              <>
-                <FSaved />
-                <div className={styles["nav-iconWithText-container-text"]}>
-                  SAVED
                 </div>
               </>
             )}

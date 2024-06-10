@@ -28,10 +28,17 @@
   margin-top: 25px;
 }
 
+.header-element-container {
+  // background-color: red;
+  display: flex;
+  width: 70px;
+  justify-content: space-between;
+}
+
 .main-header-layout {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background-color: var(--color-background);
+  // background-color: var(--color-background);
   width: 100%;
   z-index: 999;
 }

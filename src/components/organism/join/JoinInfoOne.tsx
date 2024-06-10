@@ -55,10 +55,10 @@ export default function DataFetcher({
   };
 
   //활성화된 버튼 체크 및 양식에 맞춰, 적용
-  const handleToggleClick = (index: number) => {
-    handleToggle(index, buttonStates, setButtonStates, setApple);
-  };
-  console.log(apple);
+  // const handleToggleClick = (index: number) => {
+  //   handleToggle(index, buttonStates, setButtonStates, setApple);
+  // };
+  // console.log(apple);
 
   //input 값 추적 - 전화번호
   const handleChangeOne = (event: ChangeEvent<HTMLInputElement>) => {
@@ -115,8 +115,8 @@ export default function DataFetcher({
       )}
 
       {/* 관심목록 */}
-      <Text title="관심목록을 선택해주세요🙌" />
-      <WatchList buttons={buttonStates} onClick={handleToggleClick} />
+      {/* <Text title="관심목록을 선택해주세요🙌" />
+      <WatchList buttons={buttonStates} onClick={handleToggleClick} /> */}
 
       {/* 로그인 버튼 유효*/}
       {Object.keys(apple[0] || {}).length !== 0 && checkValid2 ? (

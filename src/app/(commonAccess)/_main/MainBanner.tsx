@@ -7,6 +7,7 @@ import Image from "next/image";
 import bannerData from "@/constants/bannerData";
 import bannerDataDark from "@/constants/bannerDataDark";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import styles from "@/styles/main/main.module.scss"; // Import the SCSS module
 
 function MainBanner() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -28,9 +29,9 @@ function MainBanner() {
   }, [isDarkMode]);
 
   return (
-    <div style={{ position: "relative", overflow: "hidden" }}>
+    <div className={styles.container}>
       {/* 내부 이미지 */}
-      <div className="flex justify-center items-center " style={{ zIndex: 1 }}>
+      <div className={styles.innerImage}>
         <Carousel
           showArrows={false}
           autoPlay={true}
@@ -41,21 +42,19 @@ function MainBanner() {
           onChange={handleChange}
           showIndicators={false}
         >
-          {currentBannerData.map(
-            (
-              image,
-              index // 추후 bannerDataToUse로 바꿔야함
-            ) => (
-              <div key={index} style={{ position: "relative" }}>
-                <Image
-                  src={image.url}
-                  alt={image.alt}
-                  width={1000}
-                  height={1000}
-                />
+          {currentBannerData.map((image, index) => (
+            <div key={index} className={styles.imageContainer}>
+              <img src={image.url} alt={image.alt} className={styles.image} />
+              <div className={styles.textContainer}>
+                <div className={styles.status}>진행중</div>
+                <h2 className={styles.title}>
+                  광안리 바다 보며 아이유와 펩시 마시기!
+                </h2>
+                <p className={styles.date}>2024.6.9 오후 2시</p>
+                <button className={styles.button}> 지금 참여하기 &gt;</button>
               </div>
-            )
-          )}
+            </div>
+          ))}
         </Carousel>
       </div>
     </div>

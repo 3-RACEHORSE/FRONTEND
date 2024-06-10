@@ -19,27 +19,49 @@ export default function LoginBtn() {
     handleSession();
   }, []);
 
-  const onClick = async () => {
+  const onClickGoogleSignIn = async () => {
     await signIn("google", {
       redirect: true,
       callbackUrl: "/join", // 추후 변경 필요
     });
   };
 
-  const onClick2 = async () => {
+  const onClickKaKaoSignIn = async () => {
+    await signIn("kakao", {
+      redirect: true,
+      callbackUrl: "/join", // 추후 변경 필요
+    });
+  };
+
+  const onClickSignOut = async () => {
     await signOut();
   };
 
   return (
     <div>
-      {isSession ? (
-        <button className={styles["login-main-btn"]} onClick={onClick2}>
+      {isSession && (
+        <button className={styles["login-main-btn"]} onClick={onClickSignOut}>
           로그아웃
         </button>
-      ) : (
-        <button className={styles["login-main-btn"]} onClick={onClick}>
-          Get started with Google
-        </button>
+      )}
+
+      {!isSession && (
+        <div className={styles["login-main-btn-container"]}>
+          <button
+            className={styles["login-main-btn"]}
+            onClick={onClickGoogleSignIn}
+          >
+            <img src="/icons/googleIcon.png" />
+            Get started with Google
+          </button>
+          <button
+            className={styles["login-main-btn"]}
+            onClick={onClickKaKaoSignIn}
+          >
+            <img src="/icons/kakaoIcon.png" />
+            Get started with KaKao
+          </button>
+        </div>
       )}
     </div>
   );
