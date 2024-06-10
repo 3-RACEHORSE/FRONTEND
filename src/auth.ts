@@ -28,7 +28,7 @@ export const {
   callbacks: {
     jwt({ token, account }) {
       if (account) {
-        console.log(token, account);
+        // console.log(token, account);
         token.id = account?.providerAccountId;
         token.type = account.provider;
       }
@@ -43,7 +43,7 @@ export const {
     async signIn({ user, account }) {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/non-authorization/users/login`,
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/auth/login`,
           {
             method: "POST",
             headers: {
@@ -64,7 +64,7 @@ export const {
           const uuid: any = res.headers.get("uuid");
           cookies().set("authorization", authorization);
           cookies().set("uuid", uuid);
-
+          console.log(data);
           console.log("로그인되었습니다.");
           // return "/";
           return true;

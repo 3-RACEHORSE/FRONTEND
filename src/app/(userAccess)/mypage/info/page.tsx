@@ -9,7 +9,7 @@ async function getUserPofileData() {
   const uuid = cookies().get("uuid")?.value;
   console.log(authorization, uuid);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/myprofile`,
+    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/users/myprofile`,
     {
       headers: {
         authorization: `Bearer ${authorization}`, // Add Bearer if needed
