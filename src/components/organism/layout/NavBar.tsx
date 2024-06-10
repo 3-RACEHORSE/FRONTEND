@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import TMy from "@/components/atoms/icon/true/TMy";
 import FMy from "@/components/atoms/icon/false/FMy";
+import TChat from "@/components/atoms/icon/true/TChat";
 
 // Dynamic import for icons
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
@@ -20,16 +21,19 @@ export default function NavBar() {
 
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          background: "linear-gradient(to top, black 50%, transparent)",
-          height: "25vh",
-          width: "100%",
-          bottom: "0",
-          left: "0",
-        }}
-      ></div>
+      {pathNmae === "/" && (
+        <div
+          style={{
+            position: "fixed",
+            background: "linear-gradient(to top, black 50%, transparent)",
+            height: "25vh",
+            width: "100%",
+            bottom: "0",
+            left: "0",
+          }}
+        ></div>
+      )}
+
       <nav className={styles["nav-main-container"]}>
         {/* 버튼1 */}
         <Link href="/">
@@ -73,12 +77,28 @@ export default function NavBar() {
           </div>
         </Link>
 
-        {/* 버튼4 */}
-        <div className={styles["nav-iconWithText-container"]}>
-          <FChat />
-          <div className={styles["nav-iconWithText-container-text"]}>CHAT</div>
-        </div>
+        {/* 버튼3 */}
+        <Link href="/chat">
+          <div className={styles["nav-iconWithText-container"]}>
+            {pathNmae === "/chat" ? (
+              <>
+                <TChat />
+                <div className={styles["nav-iconWithText-container-text-true"]}>
+                  CHAT
+                </div>
+              </>
+            ) : (
+              <>
+                <FChat />
+                <div className={styles["nav-iconWithText-container-text"]}>
+                  CHAT
+                </div>
+              </>
+            )}
+          </div>
+        </Link>
 
+        {/* 버튼4 */}
         <Link href="/mypage">
           <div className={styles["nav-iconWithText-container"]}>
             {pathNmae === "/mypage" ? (
