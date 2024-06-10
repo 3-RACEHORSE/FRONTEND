@@ -7,6 +7,7 @@ import Image from "next/image";
 import bannerData from "@/constants/bannerData";
 import bannerDataDark from "@/constants/bannerDataDark";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import styles from "@/styles/main/main.module.scss"; // Import the SCSS module
 
 function MainBanner() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -28,9 +29,9 @@ function MainBanner() {
   }, [isDarkMode]);
 
   return (
-    <div style={{ position: "relative", overflow: "hidden" }}>
+    <div className={styles.container}>
       {/* 내부 이미지 */}
-      <div className="flex justify-center items-center " style={{ zIndex: 1 }}>
+      <div className={styles.innerImage}>
         <Carousel
           showArrows={false}
           autoPlay={true}
@@ -41,97 +42,19 @@ function MainBanner() {
           onChange={handleChange}
           showIndicators={false}
         >
-          {currentBannerData.map(
-            (
-              image,
-              index // 추후 bannerDataToUse로 바꿔야함
-            ) => (
-              <div key={index} style={{ position: "relative" }}>
-                <img
-                  src={image.url}
-                  alt={image.alt}
-                  style={{
-                    width: "100%",
-                    height: "100vh",
-                    objectFit: "cover",
-                    filter: "brightness(0.4)", // Adjust the value to make the image darker
-                  }}
-                />
-                <div
-                  style={{
-                    // background: "red",
-                    position: "absolute",
-                    bottom: "20vh",
-                    left: 0,
-                    width: "100%",
-                    height: "30vh",
-                    // background: "red",
-                    paddingLeft: "3%",
-                    paddingRight: "3%",
-                  }}
-                >
-                  <div
-                    style={{
-                      background: "#F9BDEC",
-                      borderRadius: "10px",
-                      paddingLeft: "3%",
-                      paddingRight: "3%",
-                      paddingTop: "0.5%",
-                      paddingBottom: "0.5%",
-                      width: "fit-content",
-                      fontSize: "14px",
-                      color: "white",
-                    }}
-                  >
-                    진행중
-                  </div>
-                  <h2
-                    style={{
-                      // background: "#F9BDEC",
-                      borderRadius: "10px",
-                      width: "100%",
-                      fontSize: "27px",
-                      color: "white",
-                      wordBreak: "break-word",
-                      overflowWrap: "break-word",
-                      textAlign: "left",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    광안리 바다 보며 아이유와 펩시 마시기!
-                  </h2>
-                  <p
-                    style={{
-                      // background: "#F9BDEC",
-                      borderRadius: "10px",
-                      width: "100%",
-                      fontSize: "17px",
-                      color: "white",
-                      textAlign: "left",
-                      fontWeight: "bold",
-                      marginTop: "2vh",
-                    }}
-                  >
-                    2024.6.9 오후 2시
-                  </p>
-                  <button
-                    style={{
-                      // background: "#F9BDEC",
-                      borderRadius: "10px",
-                      width: "100%",
-                      fontSize: "20px",
-                      color: "white",
-                      textAlign: "left",
-                      fontWeight: "bold",
-                      marginTop: "4vh",
-                    }}
-                  >
-                    지금 참여하기 ▶
-                  </button>
-                </div>
+          {currentBannerData.map((image, index) => (
+            <div key={index} className={styles.imageContainer}>
+              <img src={image.url} alt={image.alt} className={styles.image} />
+              <div className={styles.textContainer}>
+                <div className={styles.status}>진행중</div>
+                <h2 className={styles.title}>
+                  광안리 바다 보며 아이유와 펩시 마시기!
+                </h2>
+                <p className={styles.date}>2024.6.9 오후 2시</p>
+                <button className={styles.button}>지금 참여하기 ▶</button>
               </div>
-            )
-          )}
+            </div>
+          ))}
         </Carousel>
       </div>
     </div>

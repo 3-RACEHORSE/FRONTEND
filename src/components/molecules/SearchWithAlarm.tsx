@@ -9,6 +9,7 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { FaSearch } from "react-icons/fa";
 import styles from "@/styles/layout/header.module.scss";
+import Logo from "@/asset/svgs/Logo";
 
 export default function SearchWithAlarm() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -43,15 +44,17 @@ export default function SearchWithAlarm() {
 
   return (
     <>
-      <Image
+      {/* 아래를 활성화 하면 다크모드기능이미지 이다. */}
+      {/* <Image
         src={logoSrc}
         width={30}
         height={30}
         alt="logo"
         onClick={darkModeHandler}
-      />
+      /> */}
       {/* <button onClick={darkModeHandler}>다크모드</button> */}
       {/* <SearchInput /> */}
+      <Logo />
       <div className={styles["header-element-container"]}>
         <FaSearch size={27} color="white" />
 

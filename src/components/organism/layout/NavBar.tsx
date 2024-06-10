@@ -23,7 +23,7 @@ export default function NavBar() {
       <div
         style={{
           position: "fixed",
-          background: "linear-gradient(to top, black 60%, transparent)",
+          background: "linear-gradient(to top, black 50%, transparent)",
           height: "25vh",
           width: "100%",
           bottom: "0",
