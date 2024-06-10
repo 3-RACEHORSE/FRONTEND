@@ -17,5 +17,6 @@ export const config = {
     "/mypage/info:path*",
     "/write:path*",
     "/join:path*",
+    "/main:path*",
   ],
 };

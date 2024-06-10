@@ -7,9 +7,10 @@ const useLoginValidation = (email: string, snsType: string, snsId: string) => {
   const router = useRouter();
 
   const handleLoginValid = async () => {
+    console.log(email, snsType, snsId);
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/non-authorization/users/login`,
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/auth/login`,
         {
           method: "POST", // 또는 "POST" 등 필요한 메서드로 변경
           headers: {
@@ -25,12 +26,6 @@ const useLoginValidation = (email: string, snsType: string, snsId: string) => {
       if (res.status === 200) {
         console.log("회원가입된 사람");
         console.log("반환 헤더2", res);
-
-        // const access_token: any = res?.headers.get("Authorization");
-        // const uuid: any = res?.headers.get("Uuid");
-        // console.log(access_token, uuid);
-        // Cookies.set("access_token", access_token);
-        // Cookies.set("uuid", uuid);
 
         router.push("/");
       } else if (res.status === 201) {

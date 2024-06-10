@@ -51,7 +51,7 @@ function MainBanner() {
                   광안리 바다 보며 아이유와 펩시 마시기!
                 </h2>
                 <p className={styles.date}>2024.6.9 오후 2시</p>
-                <button className={styles.button}>지금 참여하기 ▶</button>
+                <button className={styles.button}> 지금 참여하기 &gt;</button>
               </div>
             </div>
           ))}
