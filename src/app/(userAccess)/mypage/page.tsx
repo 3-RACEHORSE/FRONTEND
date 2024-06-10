@@ -38,6 +38,8 @@ export default async function Page() {
     <main>
       <TextHeader title="마이페이지" />
       <MypageProfile
+        authorization={authorization}
+        uuid={uuid}
         src={data.profileImage}
         name={data.name}
         email={data.email}
