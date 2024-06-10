@@ -1,6 +1,8 @@
 import React from "react";
 import { RiChat1Line } from "react-icons/ri";
-
-export default function FChat() {
-  return <RiChat1Line size={35} color="rgb(88, 88, 88)" />;
+interface Props {
+  color: any;
+}
+export default function FChat({ color }: Props) {
+  return <RiChat1Line size={35} color={color} />;
 }

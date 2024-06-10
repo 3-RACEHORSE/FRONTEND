@@ -16,12 +16,18 @@ const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
 const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));
 
 export default function NavBar() {
-  const pathNmae = usePathname();
-  // console.log("pathNmae", pathNmae);
+  const pathName = usePathname();
+
+  let color;
+  let mainIconColor;
+  if (pathName == "/") {
+    mainIconColor = "white";
+    color = "rgb(100, 100, 100)";
+  } else color = "black";
 
   return (
     <>
-      {pathNmae === "/" && (
+      {pathName === "/" && (
         <div
           style={{
             position: "fixed",
@@ -34,20 +40,33 @@ export default function NavBar() {
         ></div>
       )}
 
-      <nav className={styles["nav-main-container"]}>
+      <nav
+        className={
+          pathName === "/"
+            ? styles["nav-main-container1"]
+            : styles["nav-main-container2"]
+        }
+      >
+        {" "}
         {/* 버튼1 */}
         <Link href="/">
           <div className={styles["nav-iconWithText-container"]}>
-            {pathNmae === "/" ? (
+            {pathName === "/" ? (
               <>
-                <THome />
-                <div className={styles["nav-iconWithText-container-text-true"]}>
+                <THome color={mainIconColor} />
+                <div
+                  className={
+                    pathName === "/"
+                      ? styles["nav-iconWithText-container-text-true-home"]
+                      : styles["nav-iconWithText-container-text-true"]
+                  }
+                >
                   HOME
                 </div>
               </>
             ) : (
               <>
-                <FHome />
+                <FHome color={color} />
                 <div className={styles["nav-iconWithText-container-text"]}>
                   HOME
                 </div>
@@ -55,63 +74,78 @@ export default function NavBar() {
             )}
           </div>
         </Link>
-
         {/* 버튼2 */}
         <Link href="/auction/all">
           <div className={styles["nav-iconWithText-container"]}>
-            {pathNmae.startsWith("/auction") ? (
+            {pathName.startsWith("/auction") ? (
               <>
-                <TList />
+                <TList color={color} />
                 <div className={styles["nav-iconWithText-container-text-true"]}>
                   AUCTION
                 </div>
               </>
             ) : (
               <>
-                <FList />
-                <div className={styles["nav-iconWithText-container-text"]}>
+                <FList color={color} />
+                <div
+                  className={
+                    pathName === "/"
+                      ? styles["nav-iconWithText-container-text-true-main"]
+                      : styles["nav-iconWithText-container-text-true"]
+                  }
+                >
                   AUCTION
                 </div>
               </>
             )}
           </div>
         </Link>
-
         {/* 버튼3 */}
         <Link href="/chat">
           <div className={styles["nav-iconWithText-container"]}>
-            {pathNmae === "/chat" ? (
+            {pathName === "/chat" ? (
               <>
-                <TChat />
+                <TChat color={color} />
                 <div className={styles["nav-iconWithText-container-text-true"]}>
                   CHAT
                 </div>
               </>
             ) : (
               <>
-                <FChat />
-                <div className={styles["nav-iconWithText-container-text"]}>
+                <FChat color={color} />
+                <div
+                  className={
+                    pathName === "/"
+                      ? styles["nav-iconWithText-container-text-true-main"]
+                      : styles["nav-iconWithText-container-text-true"]
+                  }
+                >
                   CHAT
                 </div>
               </>
             )}
           </div>
         </Link>
-
         {/* 버튼4 */}
         <Link href="/mypage">
           <div className={styles["nav-iconWithText-container"]}>
-            {pathNmae === "/mypage" ? (
+            {pathName === "/mypage" ? (
               <>
-                <TMy />
+                <TMy color={color} />
                 <div className={styles["nav-iconWithText-container-text-true"]}>
                   MY
                 </div>
               </>
             ) : (
               <>
-                <FMy />
-                <div className={styles["nav-iconWithText-container-text"]}>
+                <FMy color={color} />
+                <div
+                  className={
+                    pathName === "/"
+                      ? styles["nav-iconWithText-container-text-true-main"]
+                      : styles["nav-iconWithText-container-text-true"]
+                  }
+                >
                   MY
                 </div>
               </>

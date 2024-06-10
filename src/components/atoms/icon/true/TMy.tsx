@@ -1,6 +1,8 @@
 import React from "react";
 import { RiUser3Fill } from "react-icons/ri";
-
-export default function TMy() {
-  return <RiUser3Fill size={35} />;
+interface Props {
+  color: any;
+}
+export default function TMy({ color }: Props) {
+  return <RiUser3Fill size={35} color={color} />;
 }
