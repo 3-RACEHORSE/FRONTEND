@@ -20,7 +20,7 @@ export default function BoardCategory() {
   }
   return (
     <div className={styles["boardCategory-container"]}>
-      <Link
+      {/* <Link
         href="/auction/all"
         className={styles["boardCategory-container-element"]}
       >
@@ -48,7 +48,12 @@ export default function BoardCategory() {
             {pathWithoutAuction}
           </div>
         )}
-      </Link>
+      </Link> */}
+      <div className={styles["boardCategory-list"]}>
+        <div className={styles["boardCategory-list-element"]}>진행중</div>
+        <div className={styles["boardCategory-list-element-invalid"]}>예정</div>
+        <div className={styles["boardCategory-list-element-invalid"]}>마감</div>
+      </div>
     </div>
   );
 }

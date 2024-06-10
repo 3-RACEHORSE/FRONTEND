@@ -9,6 +9,7 @@ interface BoardProps {
   uuid?: any; //유유아이디
   isSession?: boolean; // 로그인 되어있는지의 여부
   src?: string;
+  status?: string;
   title: string;
   detail?: string;
   category?: string;
@@ -25,6 +26,7 @@ export default function BoardObject({
   uuid,
   isSession,
   src,
+  status,
   title,
   detail,
   category,
@@ -53,8 +55,8 @@ export default function BoardObject({
         authorization={authorization}
         uuid={uuid}
         isSession={isSession} // 로그인 되어있는지
+        status={status}
         title={title}
-        detail={detail}
         category={category}
         minPrice={minPrice}
         startDate={startDate}

@@ -11,6 +11,7 @@ import { FaSearch } from "react-icons/fa";
 import styles from "@/styles/layout/header.module.scss";
 import Logo from "@/asset/svgs/Logo";
 import { GoBell } from "react-icons/go";
+import { IoSearchOutline } from "react-icons/io5";
 
 export default function SearchInAuction() {
   return (
@@ -24,10 +25,11 @@ export default function SearchInAuction() {
         onClick={darkModeHandler}
       /> */}
       <Logo />
-      {/* <button onClick={darkModeHandler}>다크모드</button> */}
-      <SearchInput />
+      <div className={styles["header-element-container"]}>
+        <IoSearchOutline size={30} color="black" />
 
-      <GoBell size={30} />
+        <GoBell size={30} color="black" />
+      </div>
     </>
   );
 }

@@ -11,6 +11,7 @@ interface BoardProps {
   authorization?: any; // 토큰
   uuid?: any; //유유아이디
   isSession?: boolean; // 로그인 되어있는지의 여부
+  status?: string;
   title: string;
   detail?: string;
   category?: string;
@@ -25,6 +26,7 @@ export default function BoardInfo({
   authorization,
   uuid,
   isSession, // 로그인 여부
+  status,
   title,
   detail,
   category,
@@ -86,9 +88,18 @@ export default function BoardInfo({
     <>
       <div className={styles["boardObject-element2"]}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p className={styles["boardObject-element2-text1"]}>
-            {truncateText(title, 12)}
-          </p>
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <p className={styles["boardObject-element2-text0"]}>{status}</p>
+              <p className={styles["boardObject-element2-startDate"]}>
+                경매 시작 : 9999.99.99.99
+              </p>
+            </div>
+            <p className={styles["boardObject-element2-text1"]}>
+              {truncateText(title, 30)}
+            </p>
+          </div>
+
           <p className={styles["boardObject-element2-bookmark"]}>
             {isSession ? (
               <Switch
@@ -101,18 +112,26 @@ export default function BoardInfo({
             )}
           </p>
         </div>
-        <p className={styles["boardObject-element2-text2"]}>
-          {truncateText(detail || "", 20)}
-        </p>
-        <div className={styles["boardObject-element2-layout"]}>
-          <div className={styles["boardObject-element2-tag1"]}>{category}</div>
-          <div className={styles["boardObject-element2-tag2"]}>
-            ✅{minPrice}
+        <div>
+          <p className={styles["boardObject-element2-text3"]}>
+            {/* 나중에 주석 해제 필요 */}
+            {/* {startTime} {"~"} {endTime} */}
+            행사시작 : {"2024.99.99.99"}
+          </p>
+          <p className={styles["boardObject-element2-text3"]}>
+            {/* 나중에 주석 해제 필요 */}
+            {/* {startTime} {"~"} {endTime} */}
+            장소 : {"서울특별시 강남구 테헤란로 역삼역"}
+          </p>
+          <div className={styles["boardObject-element2-layout"]}>
+            <div className={styles["boardObject-element2-tag1"]}>
+              시작가 {"100000"}
+            </div>
+            <div className={styles["boardObject-element2-tag2"]}>
+              단위가 {"50000"}
+            </div>
           </div>
         </div>
-        <p className={styles["boardObject-element2-text3"]}>
-          {startTime} {"~"} {endTime}
-        </p>
       </div>
     </>
   );

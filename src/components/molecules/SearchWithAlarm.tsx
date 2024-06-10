@@ -7,9 +7,10 @@ import Link from "next/link";
 import BackBtn from "../atoms/button/BackBtn";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import { FaSearch } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
 import styles from "@/styles/layout/header.module.scss";
 import Logo from "@/asset/svgs/Logo";
+import { GoBell } from "react-icons/go";
 
 export default function SearchWithAlarm() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -56,9 +57,9 @@ export default function SearchWithAlarm() {
       {/* <SearchInput /> */}
       <Logo />
       <div className={styles["header-element-container"]}>
-        <FaSearch size={27} color="white" />
+        <IoSearchOutline size={30} color="white" />
 
-        <Alarm />
+        <GoBell size={30} color="white" />
       </div>
     </>
   );
