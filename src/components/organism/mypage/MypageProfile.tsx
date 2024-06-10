@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Modal from "@/components/organism/write/Modal";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
@@ -10,7 +10,8 @@ import CallWithText from "@/components/molecules/CallWithText";
 import Link from "next/link";
 import { uploadImageToS3 } from "@/utils/write/aws";
 import Swal from "sweetalert2";
-
+import Cookies from "js-cookie";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
 interface MypageProfileProps {
   src: string;
   name: string;
@@ -28,6 +29,29 @@ export default function MypageProfile({
   authorization,
   uuid,
 }: MypageProfileProps) {
+  //다크모드 시작
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const mode = useDarkMode();
+
+  useEffect(() => {
+    const savedMode = Cookies.get("mode");
+    if (!savedMode) {
+      Cookies.set("mode", "light");
+    } else if (savedMode === "dark") {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
+    }
+  }, [mode]);
+
+  const darkModeHandler = () => {
+    setIsDarkMode(!isDarkMode);
+    const newMode = isDarkMode ? "light" : "dark";
+    document.body.setAttribute("data-theme", newMode);
+    Cookies.set("mode", newMode);
+  };
+
+  //다크모드 끝
   const [profileImage, setProfileImage] = useState(src);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cropperSrc, setCropperSrc] = useState<string | null>(null);
@@ -145,8 +169,29 @@ export default function MypageProfile({
 
         <div className={styles["btn-container"]}>
           <Link href="/mypage/info" className={styles["btn-layout"]}>
-            <button>프로필 관리</button>
+            <button className={styles["btn-container-button1"]}>
+              프로필 관리
+            </button>
           </Link>
+          <div className={styles["btn-layout"]}>
+            {isDarkMode && (
+              <button
+                className={styles["btn-container-button2"]}
+                onClick={darkModeHandler}
+              >
+                다크모드 해제
+              </button>
+            )}
+            {!isDarkMode && (
+              <button
+                className={styles["btn-container-button2"]}
+                onClick={darkModeHandler}
+              >
+                다크모드
+              </button>
+            )}
+          </div>
+
           {/* <Link href="/mypage/resume" className={styles["btn-layout"]}>
             <button>이력서 관리</button>
           </Link> */}

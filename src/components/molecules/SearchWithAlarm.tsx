@@ -1,11 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import SearchInput from "../atoms/input/SearchInput";
-import Alarm from "../atoms/icon/Alarm";
-import Link from "next/link";
-import BackBtn from "../atoms/button/BackBtn";
-import Image from "next/image";
+
 import Cookies from "js-cookie";
 import { IoSearchOutline } from "react-icons/io5";
 import styles from "@/styles/layout/header.module.scss";
@@ -53,7 +49,7 @@ export default function SearchWithAlarm() {
         alt="logo"
         onClick={darkModeHandler}
       /> */}
-      {/* <button onClick={darkModeHandler}>다크모드</button> */}
+      <button onClick={darkModeHandler}>다크모드</button>
       {/* <SearchInput /> */}
       <Logo />
       <div className={styles["header-element-container"]}>
