@@ -16,9 +16,10 @@
 }
 
 .nav-main-container {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   background-color: #000000;
+
   padding-bottom: 12vh;
   padding-top: 5px;
   width: 100%;

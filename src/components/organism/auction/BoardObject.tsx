@@ -44,18 +44,17 @@ export default function BoardObject({
           src={src}
           alt={""}
           style={{
-            border: "1px solid #e3e3e3",
             width: "100%",
             height: "100%",
             borderRadius: "5px",
           }}
         />
+        <p className={styles["status"]}>{status}</p>
       </div>
       <BoardInfo
         authorization={authorization}
         uuid={uuid}
         isSession={isSession} // 로그인 되어있는지
-        status={status}
         title={title}
         category={category}
         minPrice={minPrice}

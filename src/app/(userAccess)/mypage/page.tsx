@@ -10,7 +10,7 @@ async function getUserPofileData() {
   console.log(authorization, uuid);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/myprofile`,
+    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/users/myprofile`,
     {
       cache: "no-store",
       headers: {
@@ -31,19 +31,23 @@ export default async function Page() {
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
 
-  const data = await getUserPofileData();
-  console.log(data);
+  // const data = await getUserPofileData();
+  // console.log(data);
 
   return (
     <main>
       <TextHeader title="마이페이지" />
-      <MypageProfile
+      {/* <MypageProfile
         src={data.profileImage}
         name={data.name}
-        handle={data.handle}
         email={data.email}
         phoneNum={data.phoneNum}
-        categories={data.watchList}
+      /> */}
+      <MypageProfile
+        src="/dummy/myprofile.jpg"
+        name="조윤찬"
+        email="whdbscks77@gmail.com"
+        phoneNum="01040503913"
       />
       <Footer />
       <NavBar />
