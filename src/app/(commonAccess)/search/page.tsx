@@ -21,7 +21,7 @@ export default function Page() {
   };
 
   return (
-    <main>
+    <div style={{ height: "100vh" }}>
       <header className={styles["main-header-layout"]}>
         <div className={styles["main-header-container"]}>
           <IoMdArrowRoundBack
@@ -32,9 +32,7 @@ export default function Page() {
           <Alarm />
         </div>
       </header>
-
       <RecentSearch />
-      <RecommendSearch />
-    </main>
+    </div>
   );
 }

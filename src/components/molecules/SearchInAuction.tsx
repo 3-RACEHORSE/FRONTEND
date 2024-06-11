@@ -18,7 +18,9 @@ export default function SearchInAuction() {
     <>
       <Logo />
       <div className={styles["header-element-container"]}>
-        <IoSearchOutline size={30} />
+        <Link href="/search">
+          <IoSearchOutline size={30} />
+        </Link>
         <GoBell size={30} />
       </div>
     </>

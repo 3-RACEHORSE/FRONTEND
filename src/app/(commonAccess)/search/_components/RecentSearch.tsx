@@ -24,8 +24,8 @@ export default function RecentSearch() {
   };
 
   return (
-    <div>
-      <div style={{ padding: "3%" }}>
+    <div style={{ marginTop: "90px" }}>
+      <div style={{ width: "100vw", padding: "3%" }}>
         <h2 style={{ fontSize: "13px", fontWeight: "bold" }}>최근 검색어</h2>
       </div>
 
