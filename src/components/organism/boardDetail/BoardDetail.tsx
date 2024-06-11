@@ -11,9 +11,13 @@ interface BoardDetailProps {
   detail?: string;
   endTime?: string;
   category?: string;
-  price?: string;
+  cast?: string;
+  versifier?: string;
+  unit?: string;
   boardTitle?: string;
   boardContent?: string;
+  startTime?: string;
+  place: string;
   imageData?: Array<{
     alt: string;
     url: string;
@@ -26,8 +30,12 @@ export default function BoardDetail({
   detail,
   endTime,
   category,
-  price,
+  cast,
+  versifier,
+  unit,
   boardTitle,
+  startTime,
+  place,
   boardContent,
   imageData = [],
 }: BoardDetailProps) {
@@ -50,9 +58,13 @@ export default function BoardDetail({
         detail={detail}
         endTime={endTime}
         category={category}
-        price={price}
+        cast={cast}
+        versifier={versifier}
+        unit={unit}
         boardTitle={boardTitle}
         boardContent={boardContent}
+        startTime={startTime}
+        place={place}
       />
     </>
   );

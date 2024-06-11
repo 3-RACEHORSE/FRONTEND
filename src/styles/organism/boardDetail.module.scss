@@ -37,7 +37,7 @@
 
 .deadline {
   height: 10px;
-  background: #52ebb6;
+  background: #e85175;
   align-self: center;
   padding: 8px;
   display: flex;
@@ -70,7 +70,7 @@
 .boardDetail-element1-content-info2 {
   font-size: 12px;
   margin-left: 5px;
-  color: #52ebb6;
+  color: #e85175;
   font-weight: bold;
   @include center-element;
 }
@@ -83,12 +83,43 @@
   font-size: 15px;
 }
 
-.boardDetail-element2-content1 {
-  font-size: 13px;
+.boardDetail-element2-content0 {
+  font-size: 12px;
+  border: 1px solid #e85175;
+  width: fit-content;
+  border-radius: 3px;
+  color: #e85175;
+  padding-left: 1%;
+  padding-right: 1%;
 }
-.boardDetail-element2-content2 {
-  font-size: 23px;
+
+.boardDetail-element2-content1 {
+  font-size: 12px;
+  margin-top: 4%;
+  border: 1px solid #e85175;
+  width: fit-content;
+  border-radius: 3px;
+  color: #e85175;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.boardDetail-element2-content2-1 {
+  font-size: 17px;
   font-weight: bold;
+}
+.boardDetail-element2-content2-2 {
+  margin-left: 2%;
+
+  font-size: 14px;
+  // border: 1px solid #e85175;
+  border-radius: 999px;
+  background-color: #e85175;
+  color: #ffffff;
+  padding-left: 2%;
+  padding-right: 2%;
+  height: fit-content;
+  @include center-element;
+  margin-top: 2px;
 }
 
 .boardDetail-element2-content3 {
@@ -98,8 +129,10 @@
   color: rgb(57, 57, 57);
 }
 .boardDetail-element2-content4 {
-  font-size: 13px;
-  color: gray;
+  font-size: 14px;
+  color: rgb(70, 70, 70);
+  font-weight: 500;
+  margin-top: 1%;
 }
 
 //다크모드
