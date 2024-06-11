@@ -13,19 +13,14 @@ import { title } from "process";
 interface ScrollProps {
   authorization?: any;
   uuid: any;
-  isSession: boolean;
 }
 
-export default function Scroll({
-  authorization,
-  uuid,
-  isSession,
-}: ScrollProps) {
+export default function Scroll({ authorization, uuid }: ScrollProps) {
   const pathName = usePathname();
 
   const { ref, inView } = useInView();
 
-  //동적으로 쿼리 변경
+  //동적으로 쿼리 변경 => 이부분도 수정 필요
   let queryKey: (string | undefined)[] = ["object"];
   let keyword: string | undefined;
   if (pathName === "/auction/progress") {
@@ -69,9 +64,8 @@ export default function Scroll({
     return data.auctionPostDtos;
   };
 
-  //추후, search 구현 필요
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey, // 위의 로직에서 path에 따라 변경
+    queryKey,
     queryFn: fetchListData,
     initialPageParam: 0,
     staleTime: 1000 * 20 * 20, // 1000 * 20 * 20
@@ -90,27 +84,8 @@ export default function Scroll({
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  console.log(authorization, uuid, isSession);
-
   const content = data?.pages.map((objects: boardObject[]) =>
     objects.map((object, index) => (
-      // <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
-      //   <BoardObject
-      //     authorization={authorization}
-      //     uuid={uuid}
-      //     isSession={isSession} // 로그인 되어있는지
-      //     src={object.thumbnail}
-      //     title={object.title}
-      //     detail={object.content}
-      //     category={object.category}
-      //     minPrice={object.minimumBiddingPrice}
-      //     startDate={object.createdAt}
-      //     endDate={object.endedAt}
-      //     auctionUuid={object.auctionUuid}
-      //     isSubscribed={object.subscribed} // 북마크 구독 여부
-      //     innerRef={index === objects.length - 1 ? ref : undefined}
-      //   />
-      // </Link>
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
           src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
@@ -119,6 +94,7 @@ export default function Scroll({
           startPrice={object.startPrice}
           auctionStartDate={object.auctionStartTime}
           eventStartDate={object.eventStartTime}
+          incrementUnit={50000} // 추후 {object.오는키값}으로 바꿔야함
           place={object.eventPlace}
         />
       </Link>

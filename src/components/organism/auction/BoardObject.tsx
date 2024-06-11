@@ -16,6 +16,7 @@ interface BoardProps {
   startPrice?: string;
   auctionStartDate?: string;
   eventStartDate?: string;
+  incrementUnit?: any;
   auctionUuid?: string;
   isSubscribed?: boolean; // 구독되어있는지의 여부
   place?: string;
@@ -34,6 +35,7 @@ export default function BoardObject({
   startPrice,
   auctionStartDate,
   eventStartDate,
+  incrementUnit,
   auctionUuid,
   isSubscribed,
   place,
@@ -62,6 +64,7 @@ export default function BoardObject({
         startPrice={startPrice}
         auctionStartDate={auctionStartDate}
         eventStartDate={eventStartDate}
+        incrementUnit={incrementUnit}
         auctionUuid={auctionUuid}
         isSubscribed={isSubscribed}
         place={place}
