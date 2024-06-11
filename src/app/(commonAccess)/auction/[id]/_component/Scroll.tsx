@@ -107,7 +107,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
           auctionStartDate={object.auctionStartTime}
           eventStartDate={object.eventStartTime}
           incrementUnit={50000} // 추후 {object.오는키값}으로 바꿔야함
-          place={object.eventPlace}
+          place={`${object.localName} ${object.eventPlace}`}
         />
       </Link>
     ))

@@ -9,14 +9,14 @@ import {
 interface BoardDetailProps {
   title: string;
   detail?: string;
-  endTime?: string;
+  auctionStartTime?: string;
   category?: string;
   cast?: string;
   versifier?: string;
   unit?: string;
   boardTitle?: string;
   boardContent?: string;
-  startTime?: string;
+  eventStartTime?: string;
   place: string;
   imageData?: Array<{
     alt: string;
@@ -28,13 +28,13 @@ interface BoardDetailProps {
 export default function BoardDetail({
   title,
   detail,
-  endTime,
+  auctionStartTime,
   category,
   cast,
   versifier,
   unit,
   boardTitle,
-  startTime,
+  eventStartTime,
   place,
   boardContent,
   imageData = [],
@@ -56,14 +56,14 @@ export default function BoardDetail({
       <BoardDetailInfoWithText
         title={title}
         detail={detail}
-        endTime={endTime}
+        auctionStartTime={auctionStartTime}
         category={category}
         cast={cast}
         versifier={versifier}
         unit={unit}
         boardTitle={boardTitle}
         boardContent={boardContent}
-        startTime={startTime}
+        eventStartTime={eventStartTime}
         place={place}
       />
     </>

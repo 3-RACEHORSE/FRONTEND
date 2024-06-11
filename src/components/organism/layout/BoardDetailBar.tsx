@@ -4,10 +4,10 @@ import { uToMilliseconds } from "@/utils/detail/uToMilliseconds";
 import Link from "next/link";
 
 interface BoardDetailBar {
-  endTime?: any;
+  auctionStartTime?: any;
 }
 
-export default function BoardDetailBar({ endTime }: BoardDetailBar) {
+export default function BoardDetailBar({ auctionStartTime }: BoardDetailBar) {
   return (
     <nav className={styles["nav-container"]}>
       <Link
@@ -22,7 +22,7 @@ export default function BoardDetailBar({ endTime }: BoardDetailBar) {
         <div className={styles["info3"]}>경매 시작</div>
         <div className={styles["info4"]}>
           <RemainTime
-            endedAtMilliseconds={uToMilliseconds(endTime) + 32400000}
+            endedAtMilliseconds={uToMilliseconds(auctionStartTime) + 32400000}
           />
         </div>
       </div>
