@@ -4,17 +4,17 @@ import { usePathname } from "next/navigation";
 import styles from "@/styles/layout/nav.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import TMy from "@/components/atoms/icon/true/TMy";
-import FMy from "@/components/atoms/icon/false/FMy";
-import TChat from "@/components/atoms/icon/true/TChat";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 // Dynamic import for icons
-const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
-const FList = dynamic(() => import("@/components/atoms/icon/false/FList"));
-const FChat = dynamic(() => import("@/components/atoms/icon/false/FChat"));
 const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
+const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
 const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));
+const FList = dynamic(() => import("@/components/atoms/icon/false/FList"));
+const TChat = dynamic(() => import("@/components/atoms/icon/true/TChat"));
+const FChat = dynamic(() => import("@/components/atoms/icon/false/FChat"));
+const TMy = dynamic(() => import("@/components/atoms/icon/true/TMy"));
+const FMy = dynamic(() => import("@/components/atoms/icon/false/FMy"));
 
 export default function NavBar() {
   const pathName = usePathname();

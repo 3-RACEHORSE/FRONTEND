@@ -32,7 +32,7 @@ export default async function Page() {
   const uuid = cookies().get("uuid")?.value;
 
   const data = await getUserPofileData();
-  console.log(data);
+  console.log("마이페이지에서 불러오는", authorization, uuid, data);
 
   return (
     <main>
