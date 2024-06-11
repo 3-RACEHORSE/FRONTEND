@@ -16,19 +16,10 @@ import { IoSearchOutline } from "react-icons/io5";
 export default function SearchInAuction() {
   return (
     <>
-      {/* 아래를 활성화 하면 다크모드기능이미지 이다. */}
-      {/* <Image
-        src={logoSrc}
-        width={30}
-        height={30}
-        alt="logo"
-        onClick={darkModeHandler}
-      /> */}
       <Logo />
       <div className={styles["header-element-container"]}>
-        <IoSearchOutline size={30} color="black" />
-
-        <GoBell size={30} color="black" />
+        <IoSearchOutline size={30} />
+        <GoBell size={30} />
       </div>
     </>
   );

@@ -7,6 +7,7 @@ import Link from "next/link";
 import TMy from "@/components/atoms/icon/true/TMy";
 import FMy from "@/components/atoms/icon/false/FMy";
 import TChat from "@/components/atoms/icon/true/TChat";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 // Dynamic import for icons
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
@@ -18,55 +19,29 @@ const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));
 export default function NavBar() {
   const pathName = usePathname();
 
-  let color;
-  let mainIconColor;
-  if (pathName == "/") {
-    mainIconColor = "white";
-    color = "rgb(100, 100, 100)";
-  } else color = "black";
+  //다크모드
+  const isDarkMode = useDarkMode();
+  console.log("nav에서 통제하는 ", isDarkMode, "입니다.");
 
   return (
     <>
-      {pathName === "/" && (
-        <div
-          style={{
-            position: "fixed",
-            background: "linear-gradient(to top, black 50%, transparent)",
-            height: "25vh",
-            width: "100%",
-            bottom: "0",
-            left: "0",
-          }}
-        ></div>
-      )}
+      {pathName === "/" && <div className={styles["home-effect"]}></div>}
 
-      <nav
-        className={
-          pathName === "/"
-            ? styles["nav-main-container1"]
-            : styles["nav-main-container2"]
-        }
-      >
+      <nav className={styles["nav-main-container"]}>
         {" "}
         {/* 버튼1 */}
         <Link href="/">
           <div className={styles["nav-iconWithText-container"]}>
             {pathName === "/" ? (
               <>
-                <THome color={mainIconColor} />
-                <div
-                  className={
-                    pathName === "/"
-                      ? styles["nav-iconWithText-container-text-true-home"]
-                      : styles["nav-iconWithText-container-text-true"]
-                  }
-                >
+                <THome />
+                <div className={styles["nav-iconWithText-container-text"]}>
                   HOME
                 </div>
               </>
             ) : (
               <>
-                <FHome color={color} />
+                <FHome />
                 <div className={styles["nav-iconWithText-container-text"]}>
                   HOME
                 </div>
@@ -79,21 +54,15 @@ export default function NavBar() {
           <div className={styles["nav-iconWithText-container"]}>
             {pathName.startsWith("/auction") ? (
               <>
-                <TList color={color} />
-                <div className={styles["nav-iconWithText-container-text-true"]}>
+                <TList />
+                <div className={styles["nav-iconWithText-container-text"]}>
                   AUCTION
                 </div>
               </>
             ) : (
               <>
-                <FList color={color} />
-                <div
-                  className={
-                    pathName === "/"
-                      ? styles["nav-iconWithText-container-text-true-main"]
-                      : styles["nav-iconWithText-container-text-true"]
-                  }
-                >
+                <FList />
+                <div className={styles["nav-iconWithText-container-text"]}>
                   AUCTION
                 </div>
               </>
@@ -105,21 +74,15 @@ export default function NavBar() {
           <div className={styles["nav-iconWithText-container"]}>
             {pathName === "/chat" ? (
               <>
-                <TChat color={color} />
-                <div className={styles["nav-iconWithText-container-text-true"]}>
+                <TChat />
+                <div className={styles["nav-iconWithText-container-text"]}>
                   CHAT
                 </div>
               </>
             ) : (
               <>
-                <FChat color={color} />
-                <div
-                  className={
-                    pathName === "/"
-                      ? styles["nav-iconWithText-container-text-true-main"]
-                      : styles["nav-iconWithText-container-text-true"]
-                  }
-                >
+                <FChat />
+                <div className={styles["nav-iconWithText-container-text"]}>
                   CHAT
                 </div>
               </>
@@ -131,21 +94,15 @@ export default function NavBar() {
           <div className={styles["nav-iconWithText-container"]}>
             {pathName === "/mypage" ? (
               <>
-                <TMy color={color} />
-                <div className={styles["nav-iconWithText-container-text-true"]}>
+                <TMy />
+                <div className={styles["nav-iconWithText-container-text"]}>
                   MY
                 </div>
               </>
             ) : (
               <>
-                <FMy color={color} />
-                <div
-                  className={
-                    pathName === "/"
-                      ? styles["nav-iconWithText-container-text-true-main"]
-                      : styles["nav-iconWithText-container-text-true"]
-                  }
-                >
+                <FMy />
+                <div className={styles["nav-iconWithText-container-text"]}>
                   MY
                 </div>
               </>
