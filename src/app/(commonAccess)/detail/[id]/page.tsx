@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import { auth } from "@/auth";
 import { sessionValid } from "@/utils/session/sessionValid";
 import BoardDetailNotice from "@/components/organism/boardDetail/BoardDetailNotice";
+import Link from "next/link";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
@@ -71,6 +72,7 @@ export default async function Page(props: any) {
         handle={data.handle}
         sellerUuid={data.readOnlyAuction.sellerUuid}
       /> */}
+      <BoardDetailBar endTime="999999" />
     </main>
   );
 }

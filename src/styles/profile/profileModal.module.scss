@@ -1,0 +1,49 @@
+@mixin center-element(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+.modalBackground {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.518);
+  backdrop-filter: blur(1.5px);
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.modalContainer {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: white;
+  width: 80%;
+  height: 90%;
+  border-radius: 10px;
+  // box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.5);
+  padding-top: 5%;
+}
+
+.modalBack {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e85175;
+  color: white;
+  padding: 20px 10px;
+  border-radius: 0px 0px 10px 10px;
+  @include center-element;
+}

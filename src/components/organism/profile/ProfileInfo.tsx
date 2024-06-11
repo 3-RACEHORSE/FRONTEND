@@ -6,21 +6,17 @@ import styles from "@/styles/organism/profileInfo.module.scss";
 interface ProfileInfoProps {
   name: string;
   src?: string;
-  categories?: string[];
   handle: string;
   authorization: any;
   uuid: any;
-  type: string;
   follow: boolean;
 }
 export default function ProfileInfo({
   name,
   src,
-  categories = [],
   handle,
   authorization,
   uuid,
-  type,
   follow,
 }: ProfileInfoProps) {
   //구독여부
@@ -77,8 +73,10 @@ export default function ProfileInfo({
         <img src={src} />
       </div>
       <div className={styles["profile-info"]}>
-        <p className={styles["profile-info-name"]}>{name}</p>
-        {type === "server" && subscribe && (
+        <p className={styles["profile-info-name"]}> {name}</p>
+        <p className={styles["profile-info-career"]}>🎉 대한민국 가수</p>
+        <p className={styles["profile-info-sns"]}>⭐ @iu394192</p>
+        {subscribe && (
           <div
             className={styles["profile-follow-btn"]}
             onClick={handleSubscribeSellerCancel}
@@ -86,7 +84,7 @@ export default function ProfileInfo({
             팔로우 취소
           </div>
         )}
-        {type === "server" && !subscribe && (
+        {!subscribe && (
           <div
             className={styles["profile-follow-btn"]}
             onClick={handleSubscribeSellerAdd}
@@ -94,13 +92,6 @@ export default function ProfileInfo({
             팔로우
           </div>
         )}
-        <ul className={styles["profile-info-category"]}>
-          {categories.map((category, index) => (
-            <p key={index} className={styles["element"]}>
-              {category}
-            </p>
-          ))}
-        </ul>
       </div>
     </div>
   );
