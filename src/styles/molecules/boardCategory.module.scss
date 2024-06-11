@@ -17,9 +17,42 @@
 
 .boardCategory-container {
   width: 100%;
+  // background-color: aqua;
   display: flex;
-  //   background-color: aqua;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.boardCategory-list {
+  // background-color: red;
+  width: 50%;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid #bdbdbd;
+  display: flex;
   justify-content: space-between;
+}
+
+.boardCategory-list-element {
+  // background-color: red;
+  width: 33.3%;
+  height: 100%;
+  border-radius: 999px;
+  border: 2px solid #e85175;
+  @include center-element;
+  font-size: 13px;
+  color: #e85175;
+}
+.boardCategory-list-element-invalid {
+  // background-color: red;
+  width: 33.3%;
+  height: 100%;
+  border-radius: 999px;
+  @include center-element;
+  font-size: 13px;
+  color: #bdbdbd;
 }
 
 .boardCategory-container-element {

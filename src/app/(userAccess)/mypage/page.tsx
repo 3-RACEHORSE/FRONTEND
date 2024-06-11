@@ -10,7 +10,7 @@ async function getUserPofileData() {
   console.log(authorization, uuid);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/authorization/users/myprofile`,
+    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/users/myprofile`,
     {
       cache: "no-store",
       headers: {
@@ -38,13 +38,19 @@ export default async function Page() {
     <main>
       <TextHeader title="마이페이지" />
       <MypageProfile
+        authorization={authorization}
+        uuid={uuid}
         src={data.profileImage}
         name={data.name}
-        handle={data.handle}
         email={data.email}
         phoneNum={data.phoneNum}
-        categories={data.watchList}
       />
+      {/* <MypageProfile
+        src="/dummy/myprofile.jpg"
+        name="조윤찬"
+        email="whdbscks77@gmail.com"
+        phoneNum="01040503913"
+      /> */}
       <Footer />
       <NavBar />
     </main>

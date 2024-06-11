@@ -18,15 +18,6 @@ function MainBanner() {
 
   //다크모드
   const [currentBannerData, setCurrentBannerData] = useState(bannerData);
-  const isDarkMode = useDarkMode();
-
-  useEffect(() => {
-    if (isDarkMode) {
-      setCurrentBannerData(bannerDataDark);
-    } else {
-      setCurrentBannerData(bannerData);
-    }
-  }, [isDarkMode]);
 
   return (
     <div className={styles.container}>

@@ -81,8 +81,8 @@ export default function MyPageUserInfo({
       authorization,
       uuid,
       inputNameValue,
-      inputHandleValue,
       inputValueOne,
+      src,
       router
     );
   };
@@ -98,15 +98,7 @@ export default function MyPageUserInfo({
           type={true}
         />
       </div>
-      {/* 핸들 */}
-      <Text title="핸들" />
-      <div>
-        <InputWithButtonOne
-          value={inputHandleValue}
-          onChange={handleChangeHandle}
-          type={true}
-        />
-      </div>
+
       {/* 전화번호 */}
       <Text title="전화번호" />
       <div>

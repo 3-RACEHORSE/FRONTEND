@@ -2,5 +2,5 @@ import React from "react";
 import { GoHomeFill } from "react-icons/go";
 
 export default function THome() {
-  return <GoHomeFill size={35} color="white" />;
+  return <GoHomeFill size={35} />;
 }

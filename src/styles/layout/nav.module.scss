@@ -15,17 +15,27 @@
   align-items: $align-items;
 }
 
-.nav-main-container {
+.home-effect {
   position: fixed;
+  background: linear-gradient(to top, var(--color-background) 50%, transparent);
+  height: 25vh;
+  width: 100%;
   bottom: 0;
-  background-color: #000000;
+  left: 0;
+}
+
+.nav-main-container {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--color-background);
+
   padding-bottom: 12vh;
   padding-top: 5px;
   width: 100%;
   height: 80px;
   display: flex;
   justify-content: space-evenly;
-  border-top: 0.5px solid rgb(0, 0, 0);
+  border-top: 0.5px solid rgb(236, 236, 236);
   z-index: 999;
 }
 
@@ -42,13 +52,18 @@
 
 .nav-iconWithText-container-text {
   font-size: 11px;
-  color: rgb(88, 88, 88);
-  font-weight: 500;
-}
-.nav-iconWithText-container-text-true {
-  font-size: 11px;
-  color: #ffffff;
   font-weight: 800;
+}
+
+.nav-iconWithText-container-text-true-main {
+  font-size: 11px;
+  font-weight: 800;
+  color: rgb(100, 100, 100);
+}
+.nav-iconWithText-container-text-true-home {
+  font-size: 11px;
+  font-weight: 800;
+  color: rgb(255, 255, 255);
 }
 
 body[data-theme="dark"] .nav-main-container {
@@ -56,9 +71,11 @@ body[data-theme="dark"] .nav-main-container {
 }
 
 body[data-theme="dark"] .nav-iconWithText-container-text {
-  color: rgb(123, 123, 123);
+  color: #ffffff;
 }
 
-body[data-theme="dark"] .nav-iconWithText-container-text-true {
-  color: #ffffff;
+body[data-theme="dark"] .nav-main-container2 {
+  background-color: #000000;
+
+  border-top: 0.5px solid rgb(0, 0, 0);
 }
