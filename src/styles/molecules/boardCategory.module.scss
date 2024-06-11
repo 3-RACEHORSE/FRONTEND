@@ -34,10 +34,14 @@
   display: flex;
   justify-content: space-between;
 }
+.boardCategory-list-link {
+  // background-color: red;
+  width: 33.3%;
+}
 
 .boardCategory-list-element {
   // background-color: red;
-  width: 33.3%;
+  width: 100%;
   height: 100%;
   border-radius: 999px;
   border: 2px solid #e85175;
@@ -47,7 +51,7 @@
 }
 .boardCategory-list-element-invalid {
   // background-color: red;
-  width: 33.3%;
+  width: 100%;
   height: 100%;
   border-radius: 999px;
   @include center-element;

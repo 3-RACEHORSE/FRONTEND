@@ -85,7 +85,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
   }, [inView, hasNextPage, fetchNextPage]);
 
   const content = data?.pages.map((objects: boardObject[]) =>
-    objects.map((object, index) => (
+    objects.map((object) => (
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
           src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
