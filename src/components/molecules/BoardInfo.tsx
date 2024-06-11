@@ -111,14 +111,10 @@ export default function BoardInfo({
 
         <div>
           <p className={styles["boardObject-element2-text3"]}>
-            {/* 나중에 주석 해제 필요 */}
-            {/* {startTime} {"~"} {endTime} */}
-            경매시작 : {auctionStartDate}
+            경매시작 : {auctionStartTime}
           </p>
           <p className={styles["boardObject-element2-text3"]}>
-            {/* 나중에 주석 해제 필요 */}
-            {/* {startTime} {"~"} {endTime} */}
-            행사시작 : {eventStartDate}
+            행사시작 : {eventStartTime}
           </p>
 
           <p className={styles["boardObject-element2-text3"]}>

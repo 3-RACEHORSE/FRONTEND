@@ -16,7 +16,18 @@ interface ScrollProps {
 }
 
 export default function Scroll({ authorization, uuid }: ScrollProps) {
+  //pathName에 따른 게시글 상태
   const pathName = usePathname();
+  let status;
+  if (pathName === "/auction/schedule") {
+    status = "예정";
+  } else if (pathName === "/auction/process") {
+    status = "진행중";
+  } else if (pathName === "/auction/end") {
+    status = "마감";
+  } else {
+    status = "알 수 없음";
+  }
 
   const { ref, inView } = useInView();
 
@@ -42,13 +53,16 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
     if (pathName === "/auction/progress") {
       // 진행중
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search?auctionState=AUCTION_IS_IN_PROGRESS&page=${pageParam}`;
-      console.log(1);
+    } else if (pathName === "/auction/schedule") {
+      // 예정
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search?auctionState=BEFORE_AUCTION&page=${pageParam}`;
+    } else if (pathName === "/auction/end") {
+      // 마감
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search?auctionState=AUCTION_NORMAL_CLOSING&page=${pageParam}`;
     } else if (category) {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?category=${keyword}&page=${pageParam}`;
-      console.log(2);
     } else {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
-      console.log(3);
     }
     const res = await fetch(url, {
       method: "GET", // 요청 방법 설정
@@ -58,9 +72,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
         uuid: `${uuid}`,
       },
     });
-    console.log(res);
     const data = await res.json();
-    console.log(data);
     return data.auctionPostDtos;
   };
 
@@ -89,7 +101,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
           src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
-          status="진행중" // 로직상 처리
+          status={status}
           title={object.title}
           startPrice={object.startPrice}
           auctionStartDate={object.auctionStartTime}
