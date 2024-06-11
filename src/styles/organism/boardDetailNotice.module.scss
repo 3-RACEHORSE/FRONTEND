@@ -23,6 +23,17 @@
   @include center-element;
   font-size: 13px;
 }
+.content-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #272727;
+  margin-top: 3%;
+}
+.content {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8a8a8a;
+}
 
 .list-title {
   display: flex;

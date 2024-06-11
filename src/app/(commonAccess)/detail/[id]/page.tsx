@@ -1,12 +1,12 @@
 import BoardDetail from "@/components/organism/boardDetail/BoardDetail";
 import BoardDetailBar from "@/components/organism/layout/BoardDetailBar";
-import BoardDetailInfo from "@/components/organism/boardDetail/BoardDetailInfo";
 import Footer from "@/components/organism/layout/Footer";
 import { combineImg } from "@/utils/detail/combineImg";
 import { getDetailListData } from "@/utils/detail/handleDetailListData";
 import { cookies } from "next/headers";
 import { auth } from "@/auth";
 import { sessionValid } from "@/utils/session/sessionValid";
+import BoardDetailNotice from "@/components/organism/boardDetail/BoardDetailNotice";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
@@ -62,7 +62,7 @@ export default async function Page(props: any) {
           },
         ]}
       />
-      <BoardDetailInfo />
+      <BoardDetailNotice />
       <Footer />
       {/* <BoardDetailBar
         subscribed={data.subscribed}
