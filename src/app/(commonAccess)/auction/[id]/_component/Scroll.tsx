@@ -28,7 +28,7 @@ export default function Scroll({
   //동적으로 쿼리 변경
   let queryKey: (string | undefined)[] = ["object"];
   let keyword: string | undefined;
-  if (pathName === "/auction/all") {
+  if (pathName === "/auction/progress") {
     // 전체검색
     queryKey = ["object"];
   } else if (pathName.startsWith("/auction/")) {
@@ -44,8 +44,9 @@ export default function Scroll({
   const fetchListData = async ({ pageParam }: { pageParam: number }) => {
     let url;
 
-    if (pathName === "/auction/all") {
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?page=${pageParam}`;
+    if (pathName === "/auction/progress") {
+      // 진행중
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search?auctionState=AUCTION_IS_IN_PROGRESS&page=${pageParam}`;
       console.log(1);
     } else if (category) {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?category=${keyword}&page=${pageParam}`;
@@ -54,25 +55,18 @@ export default function Scroll({
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
       console.log(3);
     }
-
-    if (isSession) {
-      const res = await fetch(url, {
-        method: "GET", // 요청 방법 설정
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `${authorization}`,
-          uuid: `${uuid}`,
-        },
-      });
-      console.log(res);
-      const data = await res.json();
-      console.log(data);
-      return data.auctionAndIsSubscribedDtos;
-    } else {
-      const res = await fetch(url);
-      const data = await res.json();
-      return data.auctionAndIsSubscribedDtos;
-    }
+    const res = await fetch(url, {
+      method: "GET", // 요청 방법 설정
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `${authorization}`,
+        uuid: `${uuid}`,
+      },
+    });
+    console.log(res);
+    const data = await res.json();
+    console.log(data);
+    return data.auctionPostDtos;
   };
 
   //추후, search 구현 필요
@@ -100,21 +94,32 @@ export default function Scroll({
 
   const content = data?.pages.map((objects: boardObject[]) =>
     objects.map((object, index) => (
+      // <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
+      //   <BoardObject
+      //     authorization={authorization}
+      //     uuid={uuid}
+      //     isSession={isSession} // 로그인 되어있는지
+      //     src={object.thumbnail}
+      //     title={object.title}
+      //     detail={object.content}
+      //     category={object.category}
+      //     minPrice={object.minimumBiddingPrice}
+      //     startDate={object.createdAt}
+      //     endDate={object.endedAt}
+      //     auctionUuid={object.auctionUuid}
+      //     isSubscribed={object.subscribed} // 북마크 구독 여부
+      //     innerRef={index === objects.length - 1 ? ref : undefined}
+      //   />
+      // </Link>
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
-          authorization={authorization}
-          uuid={uuid}
-          isSession={isSession} // 로그인 되어있는지
-          src={object.thumbnail}
+          src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
+          status="진행중" // 로직상 처리
           title={object.title}
-          detail={object.content}
-          category={object.category}
-          minPrice={object.minimumBiddingPrice}
-          startDate={object.createdAt}
-          endDate={object.endedAt}
-          auctionUuid={object.auctionUuid}
-          isSubscribed={object.subscribed} // 북마크 구독 여부
-          innerRef={index === objects.length - 1 ? ref : undefined}
+          startPrice={object.startPrice}
+          auctionStartDate={object.auctionStartTime}
+          eventStartDate={object.eventStartTime}
+          place={object.eventPlace}
         />
       </Link>
     ))

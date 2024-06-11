@@ -26,14 +26,15 @@ export default async function Page() {
       {/* 더미데이터 적용, 임시 링크*/}
       <Link href="/detail/1">
         <BoardObject
-          src="/dummy/profile.jpg"
-          status="진행중"
+          src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
+          status="진행중" // 로직상 처리
           title="광안리 바다 보며 아이유와 펩시 마시기!"
-          detail="시니어 경력 17년차 프론트엔드 개발자..."
-          category="세무·법무·노무"
-          minPrice="✅최소 9,999"
-          startDate="9999.99.99"
-          endDate="9999.99.99"
+          detail="시니어 경력 17년차 프론트엔드 개발자..." // 버릴거
+          category="세무·법무·노무" // 버릴거
+          startPrice="9,999" // 바꿀것 {object.thumbnail}
+          auctionStartDate="9999.99.99" // 바꿀것 {object.auctionStartTime}
+          eventStartDate="9999.99.99" // 바꿀것 {object.eventStartTime}
+          place="서울특별시 강남구 테헤란로 역삼역" // 바꿀것 {object.eventPlace}
         />
       </Link>
       {/* <WriteBar /> */}

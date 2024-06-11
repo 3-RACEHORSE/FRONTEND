@@ -1,4 +1,7 @@
 export interface boardObject {
+  startPrice: string | undefined;
+  eventPlace: string | undefined;
+  auctionStartTime: string | undefined;
   authorization?: any; // 토큰
   uuid?: any; //유유아이디
   isSession: boolean; // 로그인 되어있는지의 여부
@@ -11,4 +14,5 @@ export interface boardObject {
   title: string;
   content: string;
   subscribed: boolean;
+  eventStartTime: any;
 }

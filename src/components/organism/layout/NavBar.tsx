@@ -50,7 +50,7 @@ export default function NavBar() {
           </div>
         </Link>
         {/* 버튼2 */}
-        <Link href="/auction/all">
+        <Link href="/auction/progress">
           <div className={styles["nav-iconWithText-container"]}>
             {pathName.startsWith("/auction") ? (
               <>
