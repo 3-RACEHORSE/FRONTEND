@@ -16,6 +16,7 @@ interface BoardDetailProps {
   unit?: string;
   boardTitle?: string;
   boardContent?: string;
+  startTime?: string;
   place: string;
   imageData?: Array<{
     alt: string;
@@ -33,6 +34,7 @@ export default function BoardDetail({
   versifier,
   unit,
   boardTitle,
+  startTime,
   place,
   boardContent,
   imageData = [],
@@ -61,6 +63,7 @@ export default function BoardDetail({
         unit={unit}
         boardTitle={boardTitle}
         boardContent={boardContent}
+        startTime={startTime}
         place={place}
       />
     </>

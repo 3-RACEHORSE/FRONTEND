@@ -47,6 +47,7 @@ export default async function Page(props: any) {
         unit="50000"
         boardTitle="광안리 바다 보며 아이유와 펩시 마시기!"
         boardContent="광안리 근처 카페에서, 소규모 팬미팅을 진행합니다♥️ 또한, 취준생을 위해 기부예정이니 서로 함께 화이팅해요!"
+        startTime="9999.99.99.99"
         place="부산 수영구 광안리 롤뺑드파리 2층 3번째 좌석"
         imageData={[
           {

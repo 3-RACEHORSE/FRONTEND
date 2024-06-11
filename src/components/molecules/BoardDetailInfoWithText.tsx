@@ -13,6 +13,7 @@ interface BoardDetailProps {
   unit?: string;
   boardTitle?: string;
   boardContent?: string;
+  startTime?: string;
   place?: string;
 }
 
@@ -26,6 +27,7 @@ export default function BoardDetailInfoWithText({
   unit,
   boardTitle,
   boardContent,
+  startTime,
   place,
 }: BoardDetailProps) {
   return (
@@ -46,28 +48,32 @@ export default function BoardDetailInfoWithText({
               <RemainTime
                 endedAtMilliseconds={uToMilliseconds(endTime) + 32400000}
               />
-              🕛
+              ⌛
             </div>
           </div>
         </div>
       </div>
       <div className={styles["boardDetail-element2"]}>
-        <p className={styles["boardDetail-element2-content0"]}>{category}</p>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <p className={styles["boardDetail-element2-content0"]}>🎉 {category}</p>
+        <div style={{ display: "flex", alignItems: "center", marginTop: "1%" }}>
           <p className={styles["boardDetail-element2-content2-1"]}>{cast}</p>
           <p className={styles["boardDetail-element2-content2-2"]}>
             {versifier}
           </p>
           <p className={styles["boardDetail-element2-content2-2"]}>+{unit}</p>
         </div>
-        <p className={styles["boardDetail-element2-content1"]}>제목</p>
+        <p className={styles["boardDetail-element2-content1"]}>🙌 제목</p>
 
         <p className={styles["boardDetail-element2-content4"]}>{boardTitle}</p>
-        <p className={styles["boardDetail-element2-content1"]}>내용</p>
+        <p className={styles["boardDetail-element2-content1"]}>📢 내용</p>
         <p className={styles["boardDetail-element2-content4"]}>
           {boardContent}
         </p>
-        <p className={styles["boardDetail-element2-content1"]}>장소</p>
+        <p className={styles["boardDetail-element2-content1"]}>
+          🕛 행사시작 시간
+        </p>
+        <p className={styles["boardDetail-element2-content4"]}>{startTime}</p>
+        <p className={styles["boardDetail-element2-content1"]}>📌 장소</p>
         <p className={styles["boardDetail-element2-content4"]}>{place}</p>
       </div>
     </>
