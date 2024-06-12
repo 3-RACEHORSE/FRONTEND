@@ -21,7 +21,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
   let status;
   if (pathName === "/auction/schedule") {
     status = "예정";
-  } else if (pathName === "/auction/process") {
+  } else if (pathName === "/auction/progress") {
     status = "진행중";
   } else if (pathName === "/auction/end") {
     status = "마감";
@@ -52,13 +52,13 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
 
     if (pathName === "/auction/progress") {
       // 진행중
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search?auctionState=AUCTION_IS_IN_PROGRESS&page=${pageParam}`;
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/state?state=AUCTION_IS_IN_PROGRESS&page=${pageParam}`;
     } else if (pathName === "/auction/schedule") {
       // 예정
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search?auctionState=BEFORE_AUCTION&page=${pageParam}`;
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/state?state=BEFORE_AUCTION&page=${pageParam}`;
     } else if (pathName === "/auction/end") {
       // 마감
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search?auctionState=AUCTION_NORMAL_CLOSING&page=${pageParam}`;
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/state?state=AUCTION_NORMAL_CLOSING&page=${pageParam}`;
     } else if (category) {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?category=${keyword}&page=${pageParam}`;
     } else {
@@ -97,7 +97,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
   }, [inView, hasNextPage, fetchNextPage]);
 
   const content = data?.pages.map((objects: boardObject[]) =>
-    objects.map((object) => (
+    objects.map((object, index) => (
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
           src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
@@ -108,6 +108,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
           eventStartDate={object.eventStartTime}
           incrementUnit={50000} // 추후 {object.오는키값}으로 바꿔야함
           place={`${object.localName} ${object.eventPlace}`}
+          innerRef={index === objects.length - 1 ? ref : undefined}
         />
       </Link>
     ))

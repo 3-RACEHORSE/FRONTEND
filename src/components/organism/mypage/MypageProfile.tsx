@@ -158,6 +158,7 @@ export default function MypageProfile({
             style={{ display: "none" }}
             onChange={handleFileChange}
           />
+
           <div className={styles["profile-info"]}>
             <div style={{ display: "flex" }}>
               <p className={styles["profile-name"]}>{name}</p>
