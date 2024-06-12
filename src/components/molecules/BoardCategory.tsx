@@ -1,12 +1,25 @@
 "use client";
 
-import React, { ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { usePathname } from "next/navigation";
 import styles from "@/styles/molecules/boardCategory.module.scss";
 import Link from "next/link";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import watchListData from "@/constants/watchListData";
 
 export default function BoardCategory() {
   const pathName = usePathname();
+  const [category, setCategory] = useState<string>("");
+
+  const handleSelectChange = (value: string) => {
+    setCategory(value);
+  };
 
   return (
     <div className={styles["boardCategory-container"]}>
@@ -48,6 +61,18 @@ export default function BoardCategory() {
           )}
         </Link>
       </div>
+      {/* <Select onValueChange={handleSelectChange}>
+        <SelectTrigger className={styles["selectBar"]}>
+          <SelectValue placeholder="지역" />
+        </SelectTrigger>
+        <SelectContent>
+          {watchListData.map((item) => (
+            <SelectItem key={item.index} value={item.label}>
+              <Link href={`/auction/area/${item.label}`}>{item.label}</Link>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select> */}
     </div>
   );
 }
