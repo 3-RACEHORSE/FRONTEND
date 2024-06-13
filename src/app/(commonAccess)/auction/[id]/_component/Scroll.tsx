@@ -40,8 +40,19 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
   const decodeUrl = (encodedUrl: string): string =>
     decodeURIComponent(encodedUrl);
 
-  const modifiedUrl: string = removePrefix(pathName, "/auction/local");
-  const decodedString: string = decodeUrl(modifiedUrl);
+  const modifyAndDecodeUrl = (url: string): string => {
+    let modifiedUrl: string;
+
+    if (url.startsWith("/auction/local")) {
+      modifiedUrl = removePrefix(url, "/auction/local");
+    } else if (url.startsWith("/auction/search")) {
+      modifiedUrl = removePrefix(url, "/auction/search");
+    } else {
+      modifiedUrl = url;
+    }
+    return decodeUrl(modifiedUrl);
+  };
+  const decodedString: string = modifyAndDecodeUrl(pathName);
 
   const { ref, inView } = useInView();
 
@@ -77,6 +88,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
       // 지역
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/local?localName=${decodedString}&page=${pageParam}`;
     } else {
+      //검색결과
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
     }
     const res = await fetch(url, {

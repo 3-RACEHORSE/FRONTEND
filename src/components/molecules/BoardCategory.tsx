@@ -22,29 +22,22 @@ export default function BoardCategory() {
   const modifyAndDecodeUrl = (url: string): string => {
     let modifiedUrl: string;
 
-    // Check if url starts with "/auction/local"
     if (url.startsWith("/auction/local")) {
       modifiedUrl = removePrefix(url, "/auction/local");
-    }
-    // Check if url starts with "/auction/search"
-    else if (url.startsWith("/auction/search")) {
+    } else if (url.startsWith("/auction/search")) {
       modifiedUrl = removePrefix(url, "/auction/search");
-    }
-    // Default case: return the original url if no matching prefix found
-    else {
+    } else {
       modifiedUrl = url;
     }
-
-    // Decode the modified URL
     return decodeUrl(modifiedUrl);
   };
   const decodedString: string = modifyAndDecodeUrl(pathName);
-
+  console.log(pathName.startsWith("/auction/local"));
   return (
     <div className={styles["boardCategory-container"]}>
       <div className={styles["boardCategory-list"]}>
-        {!pathName.startsWith("/auction/local") ||
-          (!pathName.startsWith("/auction/search") && (
+        {!pathName.startsWith("/auction/local") &&
+          !pathName.startsWith("/auction/search") && (
             <>
               <Link
                 href="/auction/progress"
@@ -92,7 +85,7 @@ export default function BoardCategory() {
                 )}
               </Link>
             </>
-          ))}
+          )}
         {pathName.startsWith("/auction/local") && (
           <div className={styles["searchResult"]}>
             🔗 {decodedString} 검색결과
