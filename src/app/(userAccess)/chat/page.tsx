@@ -36,6 +36,18 @@ export default async function Page() {
       >
         채팅방
       </Link>
+      <Link
+        href={`/chatRoom/${data[1].roomNumber}`}
+        style={{ background: "blue" }}
+      >
+        채팅방
+      </Link>
+      <Link
+        href={`/chatRoom/${data[2].roomNumber}`}
+        style={{ background: "blue" }}
+      >
+        채팅방
+      </Link>
     </main>
   );
 }
