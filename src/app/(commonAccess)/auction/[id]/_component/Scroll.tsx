@@ -89,7 +89,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/local?localName=${decodedString}&page=${pageParam}`;
     } else {
       //검색결과
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/searchList?searchContent=${decodedString}&page=${pageParam}`;
     }
     const res = await fetch(url, {
       method: "GET", // 요청 방법 설정
