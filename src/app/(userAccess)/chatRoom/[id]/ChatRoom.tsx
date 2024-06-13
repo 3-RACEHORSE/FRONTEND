@@ -20,96 +20,92 @@ interface Props {
 }
 
 export default function ChatRoom() {
-  const roomNumber = useParams();
-  const [chatData, setChatData] = useState<ChatType[]>([]);
-  const [newMessage, setNewMessage] = useState<any>("");
+  // const roomNumber = useParams();
+  // const [chatData, setChatData] = useState<ChatType[]>([]);
+  // const [newMessage, setNewMessage] = useState<any>("");
 
-  useEffect(() => {
-    const fetchSessionAndConnect = async () => {
-      const result = await sessionValid();
+  // useEffect(() => {
+  //   const fetchSessionAndConnect = async () => {
+  //     const result = await sessionValid();
 
-      if (result) {
-        const connectToSSE = () => {
-          const eventSource = new EventSourcePolyfill(
-            `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}`,
-            {
-              headers: {
-                Authorization: `Bearer ${result.authorization}`,
-                uuid: `${result.uuid}`,
-              },
-              heartbeatTimeout: 99990000,
-            }
-          );
+  //     if (result) {
+  //       const connectToSSE = () => {
+  //         const eventSource = new EventSourcePolyfill(
+  //           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}`,
+  //           {
+  //             headers: {
+  //               Authorization: `Bearer ${result.authorization}`,
+  //               uuid: `${result.uuid}`,
+  //             },
+  //             heartbeatTimeout: 99990000,
+  //           }
+  //         );
 
-          eventSource.onmessage = (event) => {
-            const newData = JSON.parse(event.data);
-            setChatData((prevData) => [...prevData, newData]);
-            console.log(newData);
-          };
+  //         eventSource.onmessage = (event) => {
+  //           const newData = JSON.parse(event.data);
+  //           setChatData((prevData) => [...prevData, newData]);
+  //           console.log(newData);
+  //         };
 
-          eventSource.onerror = (error) => {
-            console.error("EventSource error:", error);
-            eventSource.close();
-            setTimeout(() => {
-              connectToSSE();
-            }, 5000);
-          };
+  //         eventSource.onerror = (error) => {
+  //           console.error("EventSource error:", error);
+  //           eventSource.close();
+  //           setTimeout(() => {
+  //             connectToSSE();
+  //           }, 5000);
+  //         };
 
-          return () => {
-            eventSource.close();
-          };
-        };
+  //         return () => {
+  //           eventSource.close();
+  //         };
+  //       };
 
-        connectToSSE();
-      }
-    };
+  //       connectToSSE();
+  //     }
+  //   };
 
-    fetchSessionAndConnect();
-  }, [roomNumber]);
+  //   fetchSessionAndConnect();
+  // }, [roomNumber]);
 
-  const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewMessage(event.target.value);
-  };
+  // const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNewMessage(event.target.value);
+  // };
 
-  const sendMessage = async () => {
-    const result = await sessionValid();
+  // const sendMessage = async () => {
+  //   const result = await sessionValid();
 
-    if (result) {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${result.authorization}`,
-              uuid: `${result.uuid}`,
-            },
-            body: JSON.stringify({
-              content: newMessage,
-              roomNumber: roomNumber,
-            }),
-          }
-        );
+  //   if (result) {
+  //     try {
+  //       const res = await fetch(
+  //         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Authorization: `Bearer ${result.authorization}`,
+  //             uuid: `${result.uuid}`,
+  //           },
+  //           body: JSON.stringify({
+  //             content: newMessage,
+  //             roomNumber: roomNumber,
+  //           }),
+  //         }
+  //       );
 
-        if (!res.ok) {
-          throw new Error("Failed to send message");
-        }
+  //       if (!res.ok) {
+  //         throw new Error("Failed to send message");
+  //       }
 
-        setNewMessage("");
-      } catch (error) {
-        console.error("Error sending message:", error);
-      }
-    }
-  };
-
-  // if (chatData.length === 0) {
-  //   return <>데이터를 불러오는 중...</>;
-  // }
+  //       setNewMessage("");
+  //     } catch (error) {
+  //       console.error("Error sending message:", error);
+  //     }
+  //   }
+  // };
 
   return (
     <div>
-      {chatData.map((chat, index) => (
+      {/* {chatData.map((chat, index) => (
         <div key={index}>
           <p>{chat.handle}</p>
           <p>{chat.content}</p>
@@ -126,7 +122,7 @@ export default function ChatRoom() {
           onChange={handleMessageChange}
         />
         <button onClick={sendMessage}>전송</button>
-      </div>
+      </div> */}
     </div>
   );
 }
