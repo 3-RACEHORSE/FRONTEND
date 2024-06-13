@@ -3,6 +3,7 @@ import BackHeader from "@/components/organism/layout/BackHeader";
 import styles from "@/styles/join/join.module.scss";
 import { auth } from "@/auth";
 import { cookies } from "next/headers";
+import Link from "next/link";
 
 export async function getMainStatistic(authorization: any, uuid: any) {
   const res = await fetch(
@@ -26,6 +27,15 @@ export default async function Page() {
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
   const data = await getMainStatistic(authorization, uuid);
-  console.log(data);
-  return <main>채팅</main>;
+  console.log(data[0].roomNumber); // 임시로 첫번째 배열 적용
+  return (
+    <main>
+      <Link
+        href={`/chatRoom/${data[0].roomNumber}`}
+        style={{ background: "red" }}
+      >
+        채팅방
+      </Link>
+    </main>
+  );
 }
