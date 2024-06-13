@@ -5,7 +5,9 @@ import { auth } from "@/auth";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-export async function getMainStatistic(authorization: any, uuid: any) {
+async function getChatListData() {
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/chatRooms`,
     {
@@ -24,9 +26,7 @@ export async function getMainStatistic(authorization: any, uuid: any) {
 }
 
 export default async function Page() {
-  const authorization = cookies().get("authorization")?.value;
-  const uuid = cookies().get("uuid")?.value;
-  const data = await getMainStatistic(authorization, uuid);
+  const data = await getChatListData();
   console.log(data[0].roomNumber); // 임시로 첫번째 배열 적용
   return (
     <main>
