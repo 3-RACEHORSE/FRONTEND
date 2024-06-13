@@ -6,12 +6,7 @@ import styles from "@/styles/main/main.module.scss";
 import BoardTitle from "@/components/organism/main/BoardTitle";
 import SimpleBoardObject from "@/components/organism/main/SimpleBoardObject";
 import Footer from "@/components/organism/layout/Footer";
-import {
-  getMainStatistic,
-  getMainHotActionList,
-  getMainHighBiddingList,
-  getMainSameCategoryList,
-} from "@/utils/main/handleMainListData";
+
 import {
   Carousel,
   CarouselContent,
@@ -26,11 +21,6 @@ export default async function Home() {
   // const session = await auth(); // session 호출 추가
   // console.log(session);
   // promise all
-  const data1 = await getMainStatistic();
-  const data2 = await getMainHotActionList();
-  const data3 = await getMainHighBiddingList();
-  const data4 = await getMainSameCategoryList();
-
   return (
     <main>
       <Header />
