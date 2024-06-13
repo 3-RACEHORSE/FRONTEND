@@ -5,7 +5,7 @@ export async function middleware(request: NextRequest) {
   const session = await auth();
 
   if (!session) {
-    return NextResponse.redirect("http://localhost:3000/login");
+    return NextResponse.redirect("/login");
   }
 }
 
