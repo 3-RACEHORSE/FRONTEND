@@ -8,6 +8,7 @@ import styles from "@/styles/layout/header.module.scss";
 import Logo from "@/asset/svgs/Logo";
 import { GoBell } from "react-icons/go";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function SearchWithAlarm() {
   const pathName = usePathname();
@@ -15,7 +16,9 @@ export default function SearchWithAlarm() {
     <>
       <Logo />
       <div className={styles["header-element-container"]}>
-        <IoSearchOutline size={30} color="white" />
+        <Link href="/search">
+          <IoSearchOutline size={30} color="white" />
+        </Link>
         <GoBell size={30} color="white" />
       </div>
     </>

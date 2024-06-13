@@ -13,22 +13,53 @@ import { title } from "process";
 interface ScrollProps {
   authorization?: any;
   uuid: any;
-  isSession: boolean;
 }
 
-export default function Scroll({
-  authorization,
-  uuid,
-  isSession,
-}: ScrollProps) {
+export default function Scroll({ authorization, uuid }: ScrollProps) {
+  //pathName에 따른 게시글 상태
   const pathName = usePathname();
+  let status;
+  if (pathName === "/auction/schedule") {
+    status = "예정";
+  } else if (pathName === "/auction/progress") {
+    status = "진행중";
+  } else if (pathName === "/auction/end") {
+    status = "마감";
+  } else {
+    status = "알 수 없음";
+  }
+
+  //지역 빼기
+  const removePrefix = (url: string, prefix: string): string => {
+    if (url.startsWith(prefix)) {
+      return url.slice(prefix.length);
+    }
+    return url;
+  };
+
+  const decodeUrl = (encodedUrl: string): string =>
+    decodeURIComponent(encodedUrl);
+
+  const modifyAndDecodeUrl = (url: string): string => {
+    let modifiedUrl: string;
+
+    if (url.startsWith("/auction/local")) {
+      modifiedUrl = removePrefix(url, "/auction/local");
+    } else if (url.startsWith("/auction/search")) {
+      modifiedUrl = removePrefix(url, "/auction/search");
+    } else {
+      modifiedUrl = url;
+    }
+    return decodeUrl(modifiedUrl);
+  };
+  const decodedString: string = modifyAndDecodeUrl(pathName);
 
   const { ref, inView } = useInView();
 
-  //동적으로 쿼리 변경
+  //동적으로 쿼리 변경 => 이부분도 수정 필요
   let queryKey: (string | undefined)[] = ["object"];
   let keyword: string | undefined;
-  if (pathName === "/auction/all") {
+  if (pathName === "/auction/progress") {
     // 전체검색
     queryKey = ["object"];
   } else if (pathName.startsWith("/auction/")) {
@@ -44,40 +75,36 @@ export default function Scroll({
   const fetchListData = async ({ pageParam }: { pageParam: number }) => {
     let url;
 
-    if (pathName === "/auction/all") {
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?page=${pageParam}`;
-      console.log(1);
-    } else if (category) {
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?category=${keyword}&page=${pageParam}`;
-      console.log(2);
+    if (pathName === "/auction/progress") {
+      // 진행중
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/state?state=AUCTION_IS_IN_PROGRESS&page=${pageParam}`;
+    } else if (pathName === "/auction/schedule") {
+      // 예정
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/state?state=BEFORE_AUCTION&page=${pageParam}`;
+    } else if (pathName === "/auction/end") {
+      // 마감
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/state?state=AUCTION_NORMAL_CLOSING&page=${pageParam}`;
+    } else if (pathName.startsWith("/auction/local")) {
+      // 지역
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/local?localName=${decodedString}&page=${pageParam}`;
     } else {
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
-      console.log(3);
+      //검색결과
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/searchList?searchContent=${decodedString}&page=${pageParam}`;
     }
-
-    if (isSession) {
-      const res = await fetch(url, {
-        method: "GET", // 요청 방법 설정
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `${authorization}`,
-          uuid: `${uuid}`,
-        },
-      });
-      console.log(res);
-      const data = await res.json();
-      console.log(data);
-      return data.auctionAndIsSubscribedDtos;
-    } else {
-      const res = await fetch(url);
-      const data = await res.json();
-      return data.auctionAndIsSubscribedDtos;
-    }
+    const res = await fetch(url, {
+      method: "GET", // 요청 방법 설정
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `${authorization}`,
+        uuid: `${uuid}`,
+      },
+    });
+    const data = await res.json();
+    return data.auctionPostDtos;
   };
 
-  //추후, search 구현 필요
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey, // 위의 로직에서 path에 따라 변경
+    queryKey,
     queryFn: fetchListData,
     initialPageParam: 0,
     staleTime: 1000 * 20 * 20, // 1000 * 20 * 20
@@ -96,24 +123,26 @@ export default function Scroll({
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  console.log(authorization, uuid, isSession);
-
   const content = data?.pages.map((objects: boardObject[]) =>
     objects.map((object, index) => (
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
-          authorization={authorization}
-          uuid={uuid}
-          isSession={isSession} // 로그인 되어있는지
-          src={object.thumbnail}
+          src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
+          status={
+            object.state === "BEFORE_AUCTION"
+              ? "예정"
+              : object.state === "AUCTION_IS_IN_PROGRESS"
+              ? "진행중"
+              : object.state === "AUCTION_NORMAL_CLOSING"
+              ? "마감"
+              : "마감"
+          }
           title={object.title}
-          detail={object.content}
-          category={object.category}
-          minPrice={object.minimumBiddingPrice}
-          startDate={object.createdAt}
-          endDate={object.endedAt}
-          auctionUuid={object.auctionUuid}
-          isSubscribed={object.subscribed} // 북마크 구독 여부
+          startPrice={object.startPrice}
+          auctionStartDate={object.auctionStartTime}
+          eventStartDate={object.eventStartTime}
+          incrementUnit={50000} // 추후 {object.오는키값}으로 바꿔야함
+          place={`${object.localName} ${object.eventPlace}`}
           innerRef={index === objects.length - 1 ? ref : undefined}
         />
       </Link>

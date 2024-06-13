@@ -5,9 +5,13 @@ import SearchList from "./SearchList";
 import { useRouter } from "next/navigation";
 import styles from "@/styles/organism/search.module.scss";
 import { IoSearchOutline } from "react-icons/io5";
+import { cookies } from "next/headers";
+import { sessionValid } from "@/utils/session/sessionValid";
 
 function SearchForm() {
   const router = useRouter();
+  // const session = sessionValid();
+  // console.log(sessionValid());
 
   const [searchText, setSearchText] = useState("");
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
@@ -62,7 +66,13 @@ function SearchForm() {
           <IoSearchOutline />
         </div>
       </form>
-      {searchText.trim() !== "" && <SearchList />}
+      {searchText.trim() !== "" && (
+        <SearchList
+          // authorization={authorization}
+          // uuid={uuid}
+          searchText={searchText}
+        />
+      )}
     </>
   );
 }

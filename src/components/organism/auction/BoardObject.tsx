@@ -13,11 +13,13 @@ interface BoardProps {
   title: string;
   detail?: string;
   category?: string;
-  minPrice?: string;
-  startDate?: string;
-  endDate?: string;
+  startPrice?: string;
+  auctionStartDate?: string;
+  eventStartDate?: string;
+  incrementUnit?: any;
   auctionUuid?: string;
   isSubscribed?: boolean; // 구독되어있는지의 여부
+  place?: string;
   innerRef?: React.Ref<HTMLParagraphElement>;
 }
 
@@ -30,11 +32,13 @@ export default function BoardObject({
   title,
   detail,
   category,
-  minPrice,
-  startDate,
-  endDate,
+  startPrice,
+  auctionStartDate,
+  eventStartDate,
+  incrementUnit,
   auctionUuid,
   isSubscribed,
+  place,
   innerRef,
 }: BoardProps) {
   return (
@@ -57,11 +61,13 @@ export default function BoardObject({
         isSession={isSession} // 로그인 되어있는지
         title={title}
         category={category}
-        minPrice={minPrice}
-        startDate={startDate}
-        endDate={endDate}
+        startPrice={startPrice}
+        auctionStartDate={auctionStartDate}
+        eventStartDate={eventStartDate}
+        incrementUnit={incrementUnit}
         auctionUuid={auctionUuid}
         isSubscribed={isSubscribed}
+        place={place}
       />
     </div>
   );

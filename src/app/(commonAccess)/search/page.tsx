@@ -10,6 +10,8 @@ import Alarm from "@/components/atoms/icon/Alarm";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import Search from "@/components/atoms/input/SearchInput";
+import SearchList from "./_components/SearchList";
 
 export default function Page() {
   useDarkMode(); // 하위요소에서 호출 가능
@@ -21,7 +23,7 @@ export default function Page() {
   };
 
   return (
-    <main>
+    <div style={{ height: "100vh" }}>
       <header className={styles["main-header-layout"]}>
         <div className={styles["main-header-container"]}>
           <IoMdArrowRoundBack
@@ -32,9 +34,8 @@ export default function Page() {
           <Alarm />
         </div>
       </header>
-
       <RecentSearch />
       <RecommendSearch />
-    </main>
+    </div>
   );
 }

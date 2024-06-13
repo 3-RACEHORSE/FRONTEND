@@ -14,11 +14,13 @@ interface BoardProps {
   title: string;
   detail?: string;
   category?: string;
-  minPrice?: string;
-  startDate?: string;
-  endDate?: string;
+  startPrice?: string;
+  auctionStartDate?: string;
+  eventStartDate?: string;
+  incrementUnit?: string;
   auctionUuid?: string;
   isSubscribed?: boolean; // 구독되어있는지의 여부
+  place?: string;
 }
 
 export default function BoardInfo({
@@ -28,16 +30,18 @@ export default function BoardInfo({
   title,
   detail,
   category,
-  minPrice,
-  startDate,
-  endDate,
+  startPrice,
+  auctionStartDate,
+  eventStartDate,
+  incrementUnit,
   auctionUuid,
   isSubscribed, // 구독 여부
+  place,
 }: BoardProps) {
   const [isBookmarked, setIsBookmarked] = useState(isSubscribed); // boolean
 
-  const startTime = convertUToKST(startDate);
-  const endTime = convertUToKST(endDate);
+  const auctionStartTime = convertUToKST(auctionStartDate);
+  const eventStartTime = convertUToKST(eventStartDate);
 
   //북마크 등록 api => 이것도 추후 설정 필요
   const handleToggle = async (e: { preventDefault: () => void }) => {
@@ -107,30 +111,26 @@ export default function BoardInfo({
 
         <div>
           <p className={styles["boardObject-element2-text3"]}>
-            {/* 나중에 주석 해제 필요 */}
-            {/* {startTime} {"~"} {endTime} */}
-            경매시작 : {"2024.99.99.99"}
+            경매시작 : {auctionStartTime}
           </p>
           <p className={styles["boardObject-element2-text3"]}>
-            {/* 나중에 주석 해제 필요 */}
-            {/* {startTime} {"~"} {endTime} */}
-            행사시작 : {"2024.99.99.99"}
+            행사시작 : {eventStartTime}
           </p>
 
           <p className={styles["boardObject-element2-text3"]}>
             {/* 나중에 주석 해제 필요 */}
             {/* {startTime} {"~"} {endTime} */}
-            장소 : {"서울특별시 강남구 테헤란로 역삼역"}
+            장소 : {place}
           </p>
         </div>
 
         <div>
           <div className={styles["boardObject-element2-layout"]}>
             <div className={styles["boardObject-element2-tag1"]}>
-              시작가 {"100000"}
+              시작가 {startPrice}
             </div>
             <div className={styles["boardObject-element2-tag2"]}>
-              단위가 {"50000"}
+              단위가 {incrementUnit}
             </div>
           </div>
         </div>

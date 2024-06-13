@@ -6,28 +6,28 @@ import { uToMilliseconds } from "@/utils/detail/uToMilliseconds";
 interface BoardDetailProps {
   title: string;
   detail?: string;
-  endTime?: any;
+  auctionStartTime?: any;
   category?: string;
   cast?: string;
   versifier?: string;
   unit?: string;
   boardTitle?: string;
   boardContent?: string;
-  startTime?: string;
+  eventStartTime?: string;
   place?: string;
 }
 
 export default function BoardDetailInfoWithText({
   title,
   detail,
-  endTime,
+  auctionStartTime,
   category,
   cast,
   versifier,
   unit,
   boardTitle,
   boardContent,
-  startTime,
+  eventStartTime,
   place,
 }: BoardDetailProps) {
   return (
@@ -40,15 +40,15 @@ export default function BoardDetailInfoWithText({
           </div>
           <div className={styles["boardDetail-element1-content-info"]}>
             <p className={styles["boardDetail-element1-content-info1"]}>
-              {/* {convertUToKST(endTime)} 에 시작 */}
-              {"9999.99.99.99에 시작"}
+              {convertUToKST(auctionStartTime)} 에 시작
             </p>
 
             <div className={styles["boardDetail-element1-content-info2"]}>
               <RemainTime
-                endedAtMilliseconds={uToMilliseconds(endTime) + 32400000}
+                endedAtMilliseconds={
+                  uToMilliseconds(auctionStartTime) + 32400000
+                }
               />
-              ⌛
             </div>
           </div>
         </div>
@@ -72,7 +72,9 @@ export default function BoardDetailInfoWithText({
         <p className={styles["boardDetail-element2-content1"]}>
           🕛 행사시작 시간
         </p>
-        <p className={styles["boardDetail-element2-content4"]}>{startTime}</p>
+        <p className={styles["boardDetail-element2-content4"]}>
+          {convertUToKST(eventStartTime)} 에 시작
+        </p>
         <p className={styles["boardDetail-element2-content1"]}>📌 장소</p>
         <p className={styles["boardDetail-element2-content4"]}>{place}</p>
       </div>

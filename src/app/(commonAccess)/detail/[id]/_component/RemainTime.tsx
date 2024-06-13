@@ -28,5 +28,5 @@ export default function RemainTime({ endedAtMilliseconds }: TimeProps) {
   const remainingTime = endedAtMilliseconds - currentTime;
   const formattedTime = formatTime(remainingTime);
 
-  return <div>{formattedTime}</div>;
+  return <div>{formattedTime}⌛</div>;
 }
