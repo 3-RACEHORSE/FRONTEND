@@ -4,4 +4,4 @@
 cd ../
 mkdir output
 cp -R ./[FRONTEND]/* ./output
-cp -R ./output ./[FE-MEETPLUS]/
+cp -R ./output ./[FRONTEND]/
