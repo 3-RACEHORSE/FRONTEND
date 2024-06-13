@@ -6,7 +6,9 @@ export async function middleware(request: NextRequest) {
 
   if (!session) {
     console.log("미들웨어 적용됨");
-    return NextResponse.redirect("/login");
+    return NextResponse.redirect(
+      "https://fe-meetplus-i95fk8i6h-yoon-ccs-projects.vercel.app//login"
+    );
   }
 }
 
