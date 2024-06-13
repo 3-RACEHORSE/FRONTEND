@@ -26,7 +26,7 @@ export const {
   ],
 
   callbacks: {
-    jwt({ token, account }) {
+    async jwt({ token, account }) {
       if (account) {
         // console.log(token, account);
         token.id = account?.providerAccountId;
@@ -34,7 +34,7 @@ export const {
       }
       return token;
     },
-    session({ session, token }) {
+    async session({ session, token }) {
       session.user.id = token.id;
       session.user.type = token.type;
 
