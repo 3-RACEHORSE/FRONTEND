@@ -62,7 +62,7 @@ function SearchForm() {
           <IoSearchOutline />
         </div>
       </form>
-      {searchText.trim() !== "" && <SearchList />}
+      {searchText.trim() !== "" && <SearchList searchText={searchText} />}
     </>
   );
 }
