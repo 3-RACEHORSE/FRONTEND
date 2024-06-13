@@ -15,13 +15,14 @@ interface ChatType {
 
 interface Props {
   params: {
-    id: string; // Assuming id is a string, adjust type if necessary
+    id: string;
   };
 }
 
 const Page: React.FC<Props> = (props) => {
   const roomNumber = props.params.id;
   const [chatData, setChatData] = useState<ChatType[]>([]);
+  const [newMessage, setNewMessage] = useState<string>("");
 
   useEffect(() => {
     const fetchSessionAndConnect = async () => {
@@ -36,13 +37,13 @@ const Page: React.FC<Props> = (props) => {
                 Authorization: `Bearer ${result.authorization}`,
                 uuid: `${result.uuid}`,
               },
-              heartbeatTimeout: 120000,
+              heartbeatTimeout: 99990000,
             }
           );
 
           eventSource.onmessage = (event) => {
             const newData = JSON.parse(event.data);
-            setChatData((prevData) => [...prevData, newData]); // Append new data to previous data
+            setChatData((prevData) => [...prevData, newData]);
             console.log(newData);
           };
 
@@ -66,14 +67,46 @@ const Page: React.FC<Props> = (props) => {
     fetchSessionAndConnect();
   }, [roomNumber]);
 
-  // Example conditional rendering while waiting for chatData
-  if (chatData.length === 0) {
-    return <>데이터를 불러오는 중...</>;
-  }
+  const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewMessage(event.target.value);
+  };
 
-  console.log(roomNumber);
+  const sendMessage = async () => {
+    const result = await sessionValid();
 
-  // Render chatData however you intend to display it
+    if (result) {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${result.authorization}`,
+              uuid: `${result.uuid}`,
+            },
+            body: JSON.stringify({
+              content: newMessage,
+              roomNumber: roomNumber,
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error("Failed to send message");
+        }
+
+        setNewMessage("");
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+    }
+  };
+
+  // if (chatData.length === 0) {
+  //   return <>데이터를 불러오는 중...</>;
+  // }
+
   return (
     <div>
       {chatData.map((chat, index) => (
@@ -84,6 +117,16 @@ const Page: React.FC<Props> = (props) => {
           <img src={chat.profileImage} alt={`${chat.handle}'s profile`} />
         </div>
       ))}
+
+      <div className={styles.chatInput}>
+        <input
+          type="text"
+          placeholder="메시지를 입력하세요..."
+          value={newMessage}
+          onChange={handleMessageChange}
+        />
+        <button onClick={sendMessage}>전송</button>
+      </div>
     </div>
   );
 };
