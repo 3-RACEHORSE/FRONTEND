@@ -16,7 +16,7 @@ import imageData from "@/constants/bannerData";
 import HomeNavBar from "@/components/organism/layout/HomeNavBar";
 
 export default async function Home() {
-  // git action을 위한 주석2
+  // git action을 위한 주석3
 
   // const session = await auth(); // session 호출 추가
   // console.log(session);

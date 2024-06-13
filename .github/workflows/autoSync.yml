@@ -20,9 +20,9 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.AUTO_UPDATE_BRANCH}}
         with:
-          source-directory: 'output'
-          destination-github-username: [YOON-CC]
-          destination-repository-name: [FE-MEETPLUS]
+          source-directory: "output"
+          destination-github-username: YOON-CC
+          destination-repository-name: FE-MEETPLUS
           user-email: ${{ secrets.EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
