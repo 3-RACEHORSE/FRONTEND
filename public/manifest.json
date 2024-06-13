@@ -1,9 +1,9 @@
 {
-  "name": "My awesome PWA app",
-  "short_name": "PWA App",
+  "name": "Meet Plus",
+  "short_name": "Meet Plus",
   "icons": [
     {
-      "src": "/icons/skyhorse.png",
+      "src": "/icons/PwaLogo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
