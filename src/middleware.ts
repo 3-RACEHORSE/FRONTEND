@@ -5,7 +5,8 @@ export async function middleware(request: NextRequest) {
   const session = await auth();
 
   if (!session) {
-    return NextResponse.redirect("/login");
+    console.log("미들웨어 적용됨");
+    return NextResponse.redirect("https://fe-meetplus.vercel.app//login");
   }
 }
 
