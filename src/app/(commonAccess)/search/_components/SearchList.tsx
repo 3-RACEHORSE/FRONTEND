@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/organism/search.module.scss";
 import { sessionValid } from "@/utils/session/sessionValid";
+import Link from "next/link";
 
 interface SearchListProps {
   // authorization?: any;
@@ -55,10 +56,14 @@ function SearchList({ searchText }: SearchListProps) {
   return (
     <div className={styles["fixed-container"]}>
       {items.map((item, index) => (
-        <div key={index} className={styles["search-keyword"]}>
+        <Link
+          href={`/auction/search${item}`}
+          key={index}
+          className={styles["search-keyword"]}
+        >
           <p>{item}</p>
           <span>↖</span>
-        </div>
+        </Link>
       ))}
     </div>
   );
