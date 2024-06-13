@@ -1,4 +1,5 @@
 export interface boardObject {
+  state: string;
   localName: string | undefined;
   startPrice: string | undefined;
   eventPlace: string | undefined;

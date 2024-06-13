@@ -96,6 +96,14 @@
   border-radius: 999px;
 }
 
+.searchResult {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+}
+
 body[data-theme="dark"] .boardCategory-container-element-valid {
   // color: #ffffff;
   border-bottom: 2px solid white;

@@ -29,6 +29,20 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
     status = "알 수 없음";
   }
 
+  //지역 빼기
+  const removePrefix = (url: string, prefix: string): string => {
+    if (url.startsWith(prefix)) {
+      return url.slice(prefix.length);
+    }
+    return url;
+  };
+
+  const decodeUrl = (encodedUrl: string): string =>
+    decodeURIComponent(encodedUrl);
+
+  const modifiedUrl: string = removePrefix(pathName, "/auction/local");
+  const decodedString: string = decodeUrl(modifiedUrl);
+
   const { ref, inView } = useInView();
 
   //동적으로 쿼리 변경 => 이부분도 수정 필요
@@ -59,8 +73,9 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
     } else if (pathName === "/auction/end") {
       // 마감
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/state?state=AUCTION_NORMAL_CLOSING&page=${pageParam}`;
-    } else if (category) {
-      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?category=${keyword}&page=${pageParam}`;
+    } else if (pathName.startsWith("/auction/local")) {
+      // 지역
+      url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search/local?localName=${decodedString}&page=${pageParam}`;
     } else {
       url = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/non-authorization/auction/search?keyword=${keyword}&page=${pageParam}`;
     }
@@ -101,7 +116,15 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
           src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
-          status={status}
+          status={
+            object.state === "BEFORE_AUCTION"
+              ? "예정"
+              : object.state === "AUCTION_IS_IN_PROGRESS"
+              ? "진행중"
+              : object.state === "AUCTION_NORMAL_CLOSING"
+              ? "마감"
+              : "마감"
+          }
           title={object.title}
           startPrice={object.startPrice}
           auctionStartDate={object.auctionStartTime}
