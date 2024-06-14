@@ -15,7 +15,9 @@ export default function ChatList({
 }: ChatListProps) {
   return (
     <div className={styles["chatListContainer"]}>
-      <img src={thumbnail} className={styles["thumbnail"]} />
+      <div className={styles["thumbnail"]}>
+        <img src={thumbnail} />
+      </div>
       <div className={styles["textContainer"]}>
         <p className={styles["title"]}>{truncateText(title, 13)}</p>
         <p className={styles["subtitle"]}>마지막 채팅 내용</p>
