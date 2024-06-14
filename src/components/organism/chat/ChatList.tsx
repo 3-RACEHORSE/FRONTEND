@@ -7,12 +7,14 @@ interface ChatListProps {
   thumbnail?: any;
   title?: any;
   updatedAt?: any;
+  content?: any;
 }
 
 export default function ChatList({
   thumbnail,
   title,
   updatedAt,
+  content,
 }: ChatListProps) {
   return (
     <div className={styles["chatListContainer"]}>
@@ -21,7 +23,7 @@ export default function ChatList({
       </div>
       <div className={styles["textContainer"]}>
         <p className={styles["title"]}>{truncateText(title, 13)}</p>
-        <p className={styles["subtitle"]}>마지막 채팅 내용</p>
+        <p className={styles["subtitle"]}>{content}</p>
       </div>
       <div className={styles["updatedAt"]}>{convertUToKST(updatedAt)}</div>
     </div>
