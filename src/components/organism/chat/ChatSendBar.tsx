@@ -13,7 +13,11 @@ export default function ChatSendBar({}: ChatListProps) {
     setNewMessage(event.target.value);
   };
 
-  const sendMessage = async () => {};
+  const sendMessage = async () => {
+    console.log("전송");
+  };
+
+  console.log(newMessage);
 
   return (
     <div className={styles.chatInput}>
@@ -23,7 +27,9 @@ export default function ChatSendBar({}: ChatListProps) {
         value={newMessage}
         onChange={handleMessageChange}
       />
-      <button onClick={sendMessage}>전송</button>
+      <div className={styles["sendBtn"]} onClick={sendMessage}>
+        <img src={"/icons/logoBtn.png"} />
+      </div>
     </div>
   );
 }
