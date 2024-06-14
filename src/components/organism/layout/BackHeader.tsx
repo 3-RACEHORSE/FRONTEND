@@ -10,9 +10,11 @@ import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
 interface TextProps {
   title: string;
+  thumbnail?: any;
+  type?: any;
 }
 
-export default function BackHeader({ title }: TextProps) {
+export default function BackHeader({ title, thumbnail, type }: TextProps) {
   useDarkMode();
   const router = useRouter();
   const pathName = usePathname();
@@ -28,8 +30,25 @@ export default function BackHeader({ title }: TextProps) {
     <>
       <header className={styles["header-main-container"]}>
         <BackBtn onClick={handleBack} />
+
         <TitleText title={title} />
-        <Gap width={30} height={30} />
+
+        {type === "chatroom" && (
+          <div
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={thumbnail}
+              style={{ height: "30px", width: "30px", borderRadius: "999px" }}
+            />
+          </div>
+        )}
+        {type !== "chatroom" && <Gap width={30} height={30} />}
       </header>
     </>
   );

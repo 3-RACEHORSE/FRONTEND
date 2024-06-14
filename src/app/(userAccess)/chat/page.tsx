@@ -3,12 +3,12 @@ import BackHeader from "@/components/organism/layout/BackHeader";
 import styles from "@/styles/join/join.module.scss";
 import { auth } from "@/auth";
 import { cookies } from "next/headers";
-import Link from "next/link";
 import NavBar from "@/components/organism/layout/NavBar";
 import Header from "@/components/organism/layout/Header";
 import ChatHeader from "@/components/organism/layout/ChatHeader";
 import ChatList from "@/components/organism/chat/ChatList";
 import chatData from "@/constants/chatData";
+import Link from "next/link";
 // async function getChatListData() {
 //   const authorization = cookies().get("authorization")?.value;
 //   const uuid = cookies().get("uuid")?.value;
@@ -54,12 +54,13 @@ export default async function Page() {
         채팅방
       </Link> */}
       {chatData.map((chat, index) => (
-        <ChatList
-          key={index}
-          thumbnail={chat.thumbnail}
-          title={chat.title}
-          updatedAt={chat.updatedAt}
-        />
+        <Link href={"/chatRoom/1"} key={index}>
+          <ChatList
+            thumbnail={chat.thumbnail}
+            title={chat.title}
+            updatedAt={chat.updatedAt}
+          />
+        </Link>
       ))}
 
       <NavBar />
