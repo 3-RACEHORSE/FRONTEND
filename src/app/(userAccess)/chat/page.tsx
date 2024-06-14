@@ -54,14 +54,14 @@ export default async function Page() {
         채팅방
       </Link> */}
       {chatData.map((chat, index) => (
-        // <Link href={"/chatRoom/1"} key={index}>
+        <Link href={"/chatRoom/1"} key={index}>
           <ChatList
-          key={index}
+            key={index}
             thumbnail={chat.thumbnail}
             title={chat.title}
             updatedAt={chat.updatedAt}
           />
-        // </Link>
+        </Link>
       ))}
 
       <NavBar />
