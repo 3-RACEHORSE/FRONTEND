@@ -8,7 +8,7 @@ import NavBar from "@/components/organism/layout/NavBar";
 import Header from "@/components/organism/layout/Header";
 import ChatHeader from "@/components/organism/layout/ChatHeader";
 import ChatList from "@/components/organism/chat/ChatList";
-
+import chatData from "@/constants/chatData";
 // async function getChatListData() {
 //   const authorization = cookies().get("authorization")?.value;
 //   const uuid = cookies().get("uuid")?.value;
@@ -53,11 +53,14 @@ export default async function Page() {
       >
         채팅방
       </Link> */}
-      <ChatList
-        thumbnail="/dummy/myprofile.jpg"
-        title="아이유 광안리 소모임 공지방입니다."
-        updatedAt="9999.99.99.99"
-      />
+      {chatData.map((chat, index) => (
+        <ChatList
+          key={index}
+          thumbnail={chat.thumbnail}
+          title={chat.title}
+          updatedAt={chat.updatedAt}
+        />
+      ))}
 
       <NavBar />
     </main>

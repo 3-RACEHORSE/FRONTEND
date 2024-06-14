@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "@/styles/organism/chat.module.scss";
 import { truncateText } from "@/utils/common/truncateText";
 
@@ -14,30 +14,13 @@ export default function ChatList({
   updatedAt,
 }: ChatListProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        aspectRatio: "5 / 1",
-        background: "red",
-        padding: "3%",
-        justifyContent: "space-between",
-      }}
-    >
-      <img
-        src={thumbnail}
-        style={{
-          aspectRatio: "1 / 1",
-          background: "blue",
-          borderRadius: "999px",
-        }}
-      />
-      <div style={{ aspectRatio: "3.5 / 1", background: "blue" }}>
-        <p>{truncateText(title, 13)}</p>
-        <p>fdsaf</p>
+    <div className={styles["chatListContainer"]}>
+      <img src={thumbnail} className={styles["thumbnail"]} />
+      <div className={styles["textContainer"]}>
+        <p className={styles["title"]}>{truncateText(title, 13)}</p>
+        <p className={styles["subtitle"]}>마지막 채팅 내용</p>
       </div>
-      <div style={{ aspectRatio: "2 / 1", background: "blue" }}>
-        {updatedAt}
-      </div>
+      <div className={styles["updatedAt"]}>{updatedAt}</div>
     </div>
   );
 }

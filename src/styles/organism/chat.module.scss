@@ -1,0 +1,35 @@
+.chatListContainer {
+  display: flex;
+  aspect-ratio: 5 / 1;
+  padding: 3%;
+  justify-content: space-between;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.thumbnail {
+  aspect-ratio: 1 / 1;
+  background: blue;
+  border-radius: 999px;
+}
+
+.textContainer {
+  aspect-ratio: 3.5 / 1;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.subtitle {
+  color: grey;
+  font-size: 14px;
+}
+
+.updatedAt {
+  aspect-ratio: 2 / 1;
+  color: grey;
+  font-size: 13px;
+  display: flex;
+  justify-content: end;
+}
