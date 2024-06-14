@@ -6,6 +6,7 @@ import styles from "@/styles/organism/boardObject.module.scss";
 import { sessionValid } from "@/utils/session/sessionValid";
 import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 import { useParams } from "next/navigation";
+import BackHeader from "../layout/BackHeader";
 interface ChatType {
   content: any;
   createdAt: any;
@@ -104,7 +105,7 @@ export default function ChatRoom() {
   // };
 
   return (
-    <div>
+    <main>
       {/* {chatData.map((chat, index) => (
         <div key={index}>
           <p>{chat.handle}</p>
@@ -123,6 +124,8 @@ export default function ChatRoom() {
         />
         <button onClick={sendMessage}>전송</button>
       </div> */}
-    </div>
+
+      {/* <ChatSendBar/> */}
+    </main>
   );
 }
