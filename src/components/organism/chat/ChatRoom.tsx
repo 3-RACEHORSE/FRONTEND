@@ -8,11 +8,13 @@ import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 import { useParams } from "next/navigation";
 import BackHeader from "../layout/BackHeader";
 import { convertUToKST } from "@/utils/common/convertUToKST";
+
 interface ChatType {
   content: any;
   createdAt: any;
   handle: any;
   profileImage: any;
+  uuid: any;
 }
 
 interface Props {
@@ -25,11 +27,14 @@ export default function ChatRoom() {
   const roomNumber = useParams();
   const [chatData, setChatData] = useState<ChatType[]>([]);
   const [newMessage, setNewMessage] = useState<any>("");
+  const [userUUID, setUserUUID] = useState<any>("");
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await sessionValid();
       if (result) {
+        setUserUUID(result.uuid);
+
         const eventSource = new EventSourcePolyfill(
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
           {
@@ -82,10 +87,18 @@ export default function ChatRoom() {
       {chatData.map((chat, index) => {
         const isSameHandleAsPrevious =
           index > 0 && chatData[index - 1].handle === chat.handle;
+        const isUserMessage = chat.uuid === userUUID;
 
         return (
-          <div key={index}>
-            {!isSameHandleAsPrevious && (
+          <div
+            key={index}
+            className={
+              isUserMessage
+                ? `${styles.chatLayout} ${styles.chatLayoutMy}`
+                : styles.chatLayout
+            }
+          >
+            {!isSameHandleAsPrevious && chat.uuid !== userUUID && (
               <div className={styles.chatContainer}>
                 <div className={styles.profileImageContainer}>
                   <img
@@ -102,7 +115,14 @@ export default function ChatRoom() {
                 </div>
               </div>
             )}
-            <p className={styles.chatContent}>{chat.content}</p>
+            {chat.uuid !== userUUID && (
+              <p className={styles.chatContent}>{chat.content}</p>
+            )}
+            {chat.uuid === userUUID && (
+              <div className={styles.chatContentMy}>
+                <div>{chat.content}</div>
+              </div>
+            )}
           </div>
         );
       })}
