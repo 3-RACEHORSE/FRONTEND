@@ -43,8 +43,9 @@
   aspect-ratio: 2 / 1;
   color: grey;
   font-size: 13px;
-  display: flex;
-  justify-content: end;
+  // display: flex;
+  // justify-content: end;
+  // align-items: center;
 }
 
 .chatInput {
@@ -84,4 +85,48 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.main {
+  height: 80vh;
+  padding: 3%;
+}
+
+.chatContainer {
+  display: flex;
+  margin-bottom: 1vh; /* Add some margin between chat messages */
+}
+
+.profileImageContainer {
+  height: 4vh;
+  width: 4vh;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+}
+
+.chatInfo {
+  margin-left: 1vh;
+}
+
+.handle {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.createdAt {
+  font-size: 10px;
+  color: grey;
+}
+
+.chatContent {
+  background: #e3e3e3;
+  width: fit-content;
+  padding: 2% 4%;
+  border-radius: 999px;
+  margin-top: 0.5vh;
+  margin-left: 5vh;
+  font-size: 17px;
 }

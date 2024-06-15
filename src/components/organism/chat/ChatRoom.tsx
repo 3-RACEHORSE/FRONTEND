@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import BoardInfo from "@/components/molecules/BoardInfo";
-import styles from "@/styles/organism/boardObject.module.scss";
+import styles from "@/styles/organism/chat.module.scss";
 import { sessionValid } from "@/utils/session/sessionValid";
 import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 import { useParams } from "next/navigation";
 import BackHeader from "../layout/BackHeader";
+import { convertUToKST } from "@/utils/common/convertUToKST";
 interface ChatType {
   content: any;
   createdAt: any;
@@ -21,111 +22,89 @@ interface Props {
 }
 
 export default function ChatRoom() {
-  // const roomNumber = useParams();
-  // const [chatData, setChatData] = useState<ChatType[]>([]);
-  // const [newMessage, setNewMessage] = useState<any>("");
+  const roomNumber = useParams();
+  const [chatData, setChatData] = useState<ChatType[]>([]);
+  const [newMessage, setNewMessage] = useState<any>("");
 
-  // useEffect(() => {
-  //   const fetchSessionAndConnect = async () => {
-  //     const result = await sessionValid();
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await sessionValid();
+      if (result) {
+        const eventSource = new EventSourcePolyfill(
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
+          {
+            withCredentials: true,
 
-  //     if (result) {
-  //       const connectToSSE = () => {
-  //         const eventSource = new EventSourcePolyfill(
-  //           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}`,
-  //           {
-  //             headers: {
-  //               Authorization: `Bearer ${result.authorization}`,
-  //               uuid: `${result.uuid}`,
-  //             },
-  //             heartbeatTimeout: 99990000,
-  //           }
-  //         );
+            headers: {
+              Authorization: `Bearer ${result.authorization}`,
+              uuid: `${result.uuid}`,
+            },
+            heartbeatTimeout: 120000,
+          }
+        );
+        eventSource.onmessage = (event) => {
+          const newData: ChatType = JSON.parse(event.data);
 
-  //         eventSource.onmessage = (event) => {
-  //           const newData = JSON.parse(event.data);
-  //           setChatData((prevData) => [...prevData, newData]);
-  //           console.log(newData);
-  //         };
+          // Check if the new data is already in chatData
+          setChatData((prevData) => {
+            const isDuplicate = prevData.some(
+              (chat) =>
+                chat.content === newData.content &&
+                chat.createdAt === newData.createdAt &&
+                chat.handle === newData.handle
+            );
 
-  //         eventSource.onerror = (error) => {
-  //           console.error("EventSource error:", error);
-  //           eventSource.close();
-  //           setTimeout(() => {
-  //             connectToSSE();
-  //           }, 5000);
-  //         };
+            if (!isDuplicate) {
+              return [...prevData, newData];
+            } else {
+              return prevData;
+            }
+          });
+        };
 
-  //         return () => {
-  //           eventSource.close();
-  //         };
-  //       };
+        eventSource.onerror = (error) => {
+          console.error("EventSource error:", error);
+          eventSource.close();
+        };
 
-  //       connectToSSE();
-  //     }
-  //   };
+        return () => {
+          eventSource.close();
+        };
+      }
+    };
 
-  //   fetchSessionAndConnect();
-  // }, [roomNumber]);
-
-  // const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setNewMessage(event.target.value);
-  // };
-
-  // const sendMessage = async () => {
-  //   const result = await sessionValid();
-
-  //   if (result) {
-  //     try {
-  //       const res = await fetch(
-  //         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: `Bearer ${result.authorization}`,
-  //             uuid: `${result.uuid}`,
-  //           },
-  //           body: JSON.stringify({
-  //             content: newMessage,
-  //             roomNumber: roomNumber,
-  //           }),
-  //         }
-  //       );
-
-  //       if (!res.ok) {
-  //         throw new Error("Failed to send message");
-  //       }
-
-  //       setNewMessage("");
-  //     } catch (error) {
-  //       console.error("Error sending message:", error);
-  //     }
-  //   }
-  // };
+    fetchData();
+  }, [roomNumber]);
 
   return (
-    <main>
-      {/* {chatData.map((chat, index) => (
-        <div key={index}>
-          <p>{chat.handle}</p>
-          <p>{chat.content}</p>
-          <p>{chat.createdAt}</p>
-          <img src={chat.profileImage} alt={`${chat.handle}'s profile`} />
-        </div>
-      ))}
+    <main className={styles.main}>
+      {chatData.map((chat, index) => {
+        const isSameHandleAsPrevious =
+          index > 0 && chatData[index - 1].handle === chat.handle;
 
-      <div className={styles.chatInput}>
-        <input
-          type="text"
-          placeholder="메시지를 입력하세요..."
-          value={newMessage}
-          onChange={handleMessageChange}
-        />
-        <button onClick={sendMessage}>전송</button>
-      </div> */}
-
-      {/* <ChatSendBar/> */}
+        return (
+          <div key={index}>
+            {!isSameHandleAsPrevious && (
+              <div className={styles.chatContainer}>
+                <div className={styles.profileImageContainer}>
+                  <img
+                    src={chat.profileImage}
+                    alt={`${chat.handle}'s profile`}
+                    className={styles.profileImage}
+                  />
+                </div>
+                <div className={styles.chatInfo}>
+                  <p className={styles.handle}>{chat.handle}</p>
+                  <p className={styles.createdAt}>
+                    {convertUToKST(chat.createdAt)}
+                  </p>
+                </div>
+              </div>
+            )}
+            <p className={styles.chatContent}>{chat.content}</p>
+          </div>
+        );
+      })}
     </main>
   );
 }
