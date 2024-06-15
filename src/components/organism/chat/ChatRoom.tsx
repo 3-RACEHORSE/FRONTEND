@@ -55,6 +55,7 @@ export default function ChatRoom() {
             );
 
             if (!isDuplicate) {
+              console.log(newData);
               return [...prevData, newData];
             } else {
               return prevData;
