@@ -4,34 +4,23 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { EventSourcePolyfill } from "event-source-polyfill";
 
-import BoardInfo from "@/components/molecules/BoardInfo";
-import BackHeader from "../layout/BackHeader";
 import { convertUToKST } from "@/utils/common/convertUToKST";
-import { sessionValid } from "@/utils/session/sessionValid";
 import styles from "@/styles/organism/chat.module.scss";
-
-interface ChatType {
-  content: string;
-  createdAt: string;
-  handle: string;
-  profileImage: string;
-  uuid: string;
-}
+import sendMessage from "@/utils/chat/handleSendMessage";
+import useScrollHandler from "@/hooks/chat/useScrollHandler";
+import { sessionValid } from "@/utils/session/sessionValid";
+import useChatEventSource from "@/hooks/chat/useChatEventSource";
 
 const ChatRoom: React.FC = () => {
   const roomNumber = useParams();
-  const [chatData, setChatData] = useState<ChatType[]>([]);
-  const [userUUID, setUserUUID] = useState<any>("");
   const [newMessage, setNewMessage] = useState<string>("");
   const [temp, setTemp] = useState<boolean>(false);
 
+  const { chatData, userUUID, setChatData } = useChatEventSource(roomNumber.id);
   const { ref, inView } = useInView();
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
-  const prevScrollHeight = useRef<number>(0);
-  const isAtBottom = useRef<boolean>(true);
+  const chatContainerRef = useScrollHandler(chatData);
 
   const fetchListData = useCallback(
     async ({ pageParam = 0 }) => {
@@ -42,10 +31,8 @@ const ChatRoom: React.FC = () => {
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/previous/${roomNumber.id}?enterTime=${enterTime}&page=${pageParam}`,
           {
             cache: "no-store",
-
             method: "GET",
             headers: {
-              // cache : {no-caches}
               "Content-Type": "application/json",
               Authorization: `Bearer ${result.authorization}`,
               uuid: `${result.uuid}`,
@@ -56,7 +43,7 @@ const ChatRoom: React.FC = () => {
         const data = await res.json();
         const reversedData = data.previousChatWithMemberInfoDtos.reverse();
 
-        setChatData((prevData) => [...reversedData, ...prevData]);
+        setChatData((prevData: any) => [...reversedData, ...prevData]);
         if (pageParam === 0) {
           setTemp(!temp);
         }
@@ -64,10 +51,10 @@ const ChatRoom: React.FC = () => {
         return reversedData;
       }
     },
-    [roomNumber.id]
+    [roomNumber.id, setChatData]
   );
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["message", "chat"],
     queryFn: fetchListData,
     initialPageParam: 0,
@@ -78,6 +65,7 @@ const ChatRoom: React.FC = () => {
       return nextPage;
     },
   });
+
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -89,123 +77,23 @@ const ChatRoom: React.FC = () => {
       messagesEndRef.current?.scrollIntoView();
     };
 
-    const fetchData = async () => {
-      const result = await sessionValid();
-      if (result) {
-        setUserUUID(result.uuid);
-
-        const eventSource = new EventSourcePolyfill(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
-          {
-            withCredentials: true,
-
-            headers: {
-              Authorization: `Bearer ${result.authorization}`,
-              uuid: `${result.uuid}`,
-            },
-            heartbeatTimeout: 86400000, // 24시간 유지
-          }
-        );
-
-        eventSource.onmessage = (event) => {
-          const newData: ChatType = JSON.parse(event.data);
-          setTemp(!temp);
-
-          setChatData((prevData) => {
-            if (
-              !prevData.some(
-                (chat) =>
-                  chat.content === newData.content &&
-                  chat.createdAt === newData.createdAt &&
-                  chat.handle === newData.handle
-              )
-            ) {
-              return [...prevData, newData];
-            }
-            return prevData;
-          });
-        };
-
-        eventSource.onerror = (error) => {
-          console.error("EventSource error:", error);
-          eventSource.close();
-        };
-
-        return () => eventSource.close();
-      }
-    };
-
-    fetchData();
     scrollToBottom();
-  }, [roomNumber.id, temp]);
-
-  useEffect(() => {
-    const chatContainer = chatContainerRef.current;
-    if (chatContainer) {
-      if (isAtBottom.current) {
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-      } else {
-        chatContainer.scrollTop +=
-          chatContainer.scrollHeight - prevScrollHeight.current;
-      }
-    }
   }, [chatData]);
-
-  useEffect(() => {
-    const chatContainer = chatContainerRef.current;
-    if (chatContainer) {
-      const handleScroll = () => {
-        isAtBottom.current =
-          chatContainer.scrollTop + chatContainer.clientHeight >=
-          chatContainer.scrollHeight;
-        prevScrollHeight.current = chatContainer.scrollHeight;
-      };
-
-      chatContainer.addEventListener("scroll", handleScroll);
-      return () => chatContainer.removeEventListener("scroll", handleScroll);
-    }
-  }, []);
 
   const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(event.target.value);
   };
 
-  const sendMessage = async () => {
-    const result = await sessionValid();
-    if (result) {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${result.authorization}`,
-              uuid: `${result.uuid}`,
-            },
-            body: JSON.stringify({
-              content: newMessage,
-              roomNumber: roomNumber.id,
-            }),
-          }
-        );
-
-        if (!res.ok) {
-          throw new Error("Failed to send message");
-        }
-
-        setNewMessage("");
-        setTemp(!temp);
-      } catch (error) {
-        console.error("Error sending message:", error);
-      }
-    }
+  const handleSendMessage = async () => {
+    await sendMessage(newMessage, roomNumber.id);
+    setNewMessage("");
+    setTemp(!temp);
   };
 
   return (
     <>
       <main className={styles.main} ref={chatContainerRef}>
-        {chatData.map((chat, index) => {
+        {chatData.map((chat: any, index: any) => {
           const isUserMessage = chat.uuid === userUUID;
           const isSameHandleAsPrevious =
             index > 0 && chatData[index - 1].handle === chat.handle;
@@ -257,7 +145,7 @@ const ChatRoom: React.FC = () => {
           value={newMessage}
           onChange={handleMessageChange}
         />
-        <div className={styles.sendBtn} onClick={sendMessage}>
+        <div className={styles.sendBtn} onClick={handleSendMessage}>
           <img src="/icons/logoBtn.png" alt="Send" />
         </div>
       </div>
