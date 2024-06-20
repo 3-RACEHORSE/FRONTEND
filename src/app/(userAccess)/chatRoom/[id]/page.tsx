@@ -15,7 +15,7 @@ export default async function Page() {
         type={"chatroom"}
       />
       <ChatRoom />
-      <ChatSendBar />
+      {/* <ChatSendBar /> */}
     </main>
   );
 }

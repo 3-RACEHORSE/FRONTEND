@@ -88,8 +88,10 @@
 }
 
 .main {
+  // background-color: blue;
   height: 80vh;
   padding: 3%;
+  overflow: auto; /* 수평 스크롤 생성 */
 }
 
 .chatLayout {
