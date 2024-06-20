@@ -22,11 +22,8 @@ export default function RecommendSearch() {
             <div
               key={index}
               style={{
-                // paddingLeft: "3%",
-                // paddingTop: "2%",
-                padding: "3%",
-                paddingLeft: "6%",
-                paddingRight: "6%",
+                paddingLeft: "3%",
+                paddingTop: "2%",
                 whiteSpace: "nowrap",
               }}
             >
