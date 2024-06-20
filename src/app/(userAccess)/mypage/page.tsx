@@ -24,11 +24,11 @@ async function getUserPofileData() {
   if (res.status === 401 || res.status === 500) {
     // 이후 에러코드 401로 수정 필요
     console.log("토큰없");
-    redirect("https://fe-meetplus.vercel.app/login/login");
+    redirect("https://fe-meetplus.vercel.app/login");
   }
   if (!res.ok) {
     // throw new Error("Network Error");
-    redirect("https://fe-meetplus.vercel.app/login/login");
+    redirect("https://fe-meetplus.vercel.app/login");
   }
   const data = await res.json();
   return data;
