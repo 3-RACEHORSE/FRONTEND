@@ -26,6 +26,7 @@ export default function RecommendSearch() {
                 // paddingTop: "2%",
                 padding: "3%",
                 width: "fit-content",
+                whiteSpace: "nowrap",
               }}
             >
               <Link href={`/auction/local${keyword.label}`}>
