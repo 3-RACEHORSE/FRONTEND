@@ -21,7 +21,7 @@ async function getUserPofileData() {
     }
   );
   console.log(res.status);
-  if (res.status === 500) {
+  if (res.status === 401 || res.status === 500) {
     // 이후 에러코드 401로 수정 필요
     console.log("토큰없");
     redirect("/login");
