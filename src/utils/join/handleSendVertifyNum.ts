@@ -9,7 +9,7 @@ export const handleSendVertifyNum = async (
   console.log(verificationCode);
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/non-authorization/users/verify`,
+      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/auth/sms/verify`,
       {
         method: "POST", // 또는 "POST" 등 필요한 메서드로 변경
         headers: {

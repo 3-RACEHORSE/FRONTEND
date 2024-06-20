@@ -4,24 +4,24 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-
 import { convertUToKST } from "@/utils/common/convertUToKST";
 import styles from "@/styles/organism/chat.module.scss";
 import sendMessage from "@/utils/chat/handleSendMessage";
 import useScrollHandler from "@/hooks/chat/useScrollHandler";
 import { sessionValid } from "@/utils/session/sessionValid";
 import useChatEventSource from "@/hooks/chat/useChatEventSource";
+import Logo from "@/asset/svgs/Logo";
 
 const ChatRoom: React.FC = () => {
   const roomNumber = useParams();
+  const { ref, inView } = useInView();
   const [newMessage, setNewMessage] = useState<string>("");
   const [temp, setTemp] = useState<boolean>(false);
-
   const { chatData, userUUID, setChatData } = useChatEventSource(roomNumber.id);
-  const { ref, inView } = useInView();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useScrollHandler(chatData);
 
+  //RQ fetch 로직
   const fetchListData = useCallback(
     async ({ pageParam = 0 }) => {
       const result = await sessionValid();
@@ -30,7 +30,7 @@ const ChatRoom: React.FC = () => {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/previous/${roomNumber.id}?enterTime=${enterTime}&page=${pageParam}`,
           {
-            cache: "no-store",
+            // cache: "no-store",
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -54,6 +54,7 @@ const ChatRoom: React.FC = () => {
     [roomNumber.id, setChatData]
   );
 
+  //RQ 관리
   const { fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["message", "chat"],
     queryFn: fetchListData,
@@ -80,10 +81,12 @@ const ChatRoom: React.FC = () => {
     scrollToBottom();
   }, [chatData]);
 
+  //메시지 텍스트 추적
   const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(event.target.value);
   };
 
+  //메시지 보내기
   const handleSendMessage = async () => {
     await sendMessage(newMessage, roomNumber.id);
     setNewMessage("");
@@ -146,7 +149,7 @@ const ChatRoom: React.FC = () => {
           onChange={handleMessageChange}
         />
         <div className={styles.sendBtn} onClick={handleSendMessage}>
-          <img src="/icons/logoBtn.png" alt="Send" />
+          <img src="/icons/sendBtn.png" alt="Send" />
         </div>
       </div>
     </>
