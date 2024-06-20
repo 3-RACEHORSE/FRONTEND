@@ -30,7 +30,7 @@ describe("회원가입 api 함수", () => {
     );
 
     expect(fetch).toHaveBeenCalledWith(
-      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/non-authorization/users/signup`,
+      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/auth/signup`,
       {
         method: "POST",
         headers: {
