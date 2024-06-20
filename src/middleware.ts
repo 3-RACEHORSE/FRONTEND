@@ -1,9 +1,18 @@
 import { auth } from "@/auth";
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
   const session = await auth();
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
 
+  // 엑세스 토큰이랑, uuid가 널일경우
+  if (authorization === null || uuid === null) {
+    return NextResponse.redirect("https://fe-meetplus.vercel.app/login");
+  }
+
+  // 로그인을 안했을때 만 해당
   if (!session) {
     console.log("미들웨어 적용됨");
     return NextResponse.redirect("https://fe-meetplus.vercel.app/login");
