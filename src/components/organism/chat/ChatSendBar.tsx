@@ -57,7 +57,7 @@ export default function ChatSendBar() {
         onChange={handleMessageChange}
       />
       <div className={styles["sendBtn"]} onClick={sendMessage}>
-        <img src={"/icons/logoBtn.png"} />
+        <img src="/icons/sendBtn.png" alt="Send" />
       </div>
     </div>
   );
