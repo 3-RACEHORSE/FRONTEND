@@ -36,12 +36,13 @@
   align-items: center;
 }
 .profile-img-btn {
-  font-size: 12px;
+  font-size: 11px;
   color: white;
   background-color: #000000a1;
-  padding: 2%;
+  // padding: 2%;
   // padding-left: 7%;
   // padding-right: 7%;
+  width: fit-content;
   border-radius: 7px;
 }
 

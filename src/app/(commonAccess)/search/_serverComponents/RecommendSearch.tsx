@@ -22,8 +22,10 @@ export default function RecommendSearch() {
             <div
               key={index}
               style={{
-                paddingLeft: "3%",
-                paddingTop: "2%",
+                // paddingLeft: "3%",
+                // paddingTop: "2%",
+                padding: "3%",
+                width: "fit-content",
               }}
             >
               <Link href={`/auction/local${keyword.label}`}>
