@@ -65,11 +65,13 @@
 
 .chatInput input {
   padding: 3%;
-  flex-grow: 1;
-  margin-right: 1%;
+  // flex-grow: 1;
+  // margin-right: 1%;
   border-radius: 999px;
   background: #f1f1f1;
   border: none;
+  height: 5.8vh;
+  width: 35vh;
 }
 
 .sendBtn {
