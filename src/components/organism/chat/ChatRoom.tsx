@@ -41,8 +41,11 @@ const ChatRoom: React.FC = () => {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/previous/${roomNumber.id}?enterTime=${enterTime}&page=${pageParam}`,
           {
+            cache: "no-store",
+
             method: "GET",
             headers: {
+              // cache : {no-caches}
               "Content-Type": "application/json",
               Authorization: `Bearer ${result.authorization}`,
               uuid: `${result.uuid}`,
@@ -68,8 +71,8 @@ const ChatRoom: React.FC = () => {
     queryKey: ["message", "chat"],
     queryFn: fetchListData,
     initialPageParam: 0,
-    staleTime: 1000 * 20 * 20,
-    gcTime: 300 * 1000,
+    staleTime: 1000 * 20 * 20, // 이거 나중에 0
+    gcTime: 300 * 1000, // 이거 나중에 0, 그래야 다나옴 따로 연구
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = lastPage.length ? allPages.length : undefined;
       return nextPage;
@@ -95,11 +98,12 @@ const ChatRoom: React.FC = () => {
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
           {
             withCredentials: true,
+
             headers: {
               Authorization: `Bearer ${result.authorization}`,
               uuid: `${result.uuid}`,
             },
-            heartbeatTimeout: 120000,
+            heartbeatTimeout: 86400000, // 24시간 유지
           }
         );
 
