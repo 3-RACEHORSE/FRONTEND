@@ -59,8 +59,8 @@ const ChatRoom: React.FC = () => {
     queryKey: ["message", "chat"],
     queryFn: fetchListData,
     initialPageParam: 0,
-    staleTime: 1000 * 20 * 20, // 이거 나중에 0
-    gcTime: 300 * 1000, // 이거 나중에 0, 그래야 다나옴 따로 연구
+    staleTime: 0, // 이거 나중에 0
+    gcTime: 0, // 이거 나중에 0, 그래야 다나옴 따로 연구
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = lastPage.length ? allPages.length : undefined;
       return nextPage;
