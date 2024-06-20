@@ -119,7 +119,7 @@ export default function DataFetcher({
       <WatchList buttons={buttonStates} onClick={handleToggleClick} /> */}
 
       {/* 로그인 버튼 유효*/}
-      {Object.keys(apple[0] || {}).length !== 0 && checkValid2 ? (
+      {checkValid2 ? (
         <SendBtn onClick={handleJoinClick} buttonText="가입하기" />
       ) : (
         <SendBtnInValid buttonText="가입하기" />
