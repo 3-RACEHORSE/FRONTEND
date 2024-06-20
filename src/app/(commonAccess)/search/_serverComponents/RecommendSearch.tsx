@@ -25,7 +25,8 @@ export default function RecommendSearch() {
                 // paddingLeft: "3%",
                 // paddingTop: "2%",
                 padding: "3%",
-                width: "fit-content",
+                paddingLeft: "6%",
+                paddingRight: "6%",
                 whiteSpace: "nowrap",
               }}
             >
