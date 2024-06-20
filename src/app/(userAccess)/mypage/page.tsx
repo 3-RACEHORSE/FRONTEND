@@ -3,6 +3,7 @@ import NavBar from "@/components/organism/layout/NavBar";
 import TextHeader from "@/components/organism/layout/TextHeader";
 import MypageProfile from "@/components/organism/mypage/MypageProfile";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 async function getUserPofileData() {
   const authorization = cookies().get("authorization")?.value;
@@ -20,9 +21,14 @@ async function getUserPofileData() {
     }
   );
   console.log(res.status);
-  if (!res.ok) {
-    throw new Error("Network Error");
+  if (res.status === 500) {
+    // 이후 에러코드 401로 수정 필요
+    console.log("토큰없");
+    redirect("/login");
   }
+  // if (!res.ok) {
+  //   throw new Error("Network Error");
+  // }
   const data = await res.json();
   return data;
 }

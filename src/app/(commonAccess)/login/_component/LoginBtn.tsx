@@ -37,6 +37,11 @@ export default function LoginBtn() {
     await signOut();
   };
 
+  if (isSession) {
+    // 세션이 연결되어있다면, 하지만, 토큰은 만료
+    onClickSignOut();
+  }
+
   return (
     <div>
       {isSession && (
