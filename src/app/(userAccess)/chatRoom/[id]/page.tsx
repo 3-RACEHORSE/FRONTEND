@@ -5,13 +5,40 @@ import MypageProfile from "@/components/organism/mypage/MypageProfile";
 import ChatRoom from "@/components/organism/chat/ChatRoom";
 import BackHeader from "@/components/organism/layout/BackHeader";
 import ChatSendBar from "@/components/organism/chat/ChatSendBar";
+import { cookies } from "next/headers";
 
-export default async function Page() {
+async function getUserPofileData(roomNumber: any) {
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
+  console.log(authorization, uuid);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}/title`,
+    {
+      cache: "no-store",
+      headers: {
+        authorization: `Bearer ${authorization}`, // Add Bearer if needed
+        uuid: `${uuid}`,
+      },
+    }
+  );
+  if (!res.ok) {
+    throw new Error("Network Error");
+  }
+  const data = await res.json();
+  return data;
+}
+
+export default async function Page(props: any) {
+  const roomNumber = props.params.id;
+
+  const data = await getUserPofileData(roomNumber);
+  console.log(data);
   return (
     <main>
       <BackHeader
         thumbnail={"/dummy/iuprofile.jpg"}
-        title={"방제목입니다방제목"}
+        title={data.title}
         type={"chatroom"}
       />
       <ChatRoom />
