@@ -6,7 +6,7 @@ import BoardCategory from "@/components/molecules/BoardCategory";
 import SearchInAuction from "@/components/molecules/SearchInAuction";
 export default function ChatHeader() {
   return (
-    <header className={styles["auction-header-layout "]}>
+    <header className={styles["auction-header-layout"]}>
       <div className={styles["main-header-container"]}>
         <SearchInAuction />
       </div>

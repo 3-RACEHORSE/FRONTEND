@@ -12,6 +12,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
 import Search from "@/components/atoms/input/SearchInput";
 import SearchList from "./_components/SearchList";
+import { GoBell } from "react-icons/go";
 
 export default function Page() {
   useDarkMode(); // 하위요소에서 호출 가능
@@ -31,7 +32,7 @@ export default function Page() {
             style={{ width: "30px", height: "30px" }}
           />
           <SearchForm />
-          <Alarm />
+          <GoBell size={27} />
         </div>
       </header>
       <RecentSearch />

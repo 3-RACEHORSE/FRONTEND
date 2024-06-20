@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Alarm() {
   return (
     <Link href={"/"}>
-      <FaBell size={27} color="white" />
+      <FaBell size={27} />
     </Link>
   );
 }

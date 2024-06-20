@@ -57,7 +57,7 @@
   bottom: 0;
   left: 0;
   box-sizing: border-box;
-  height: 12vh;
+  height: 13vh;
   padding-bottom: 5vh;
   justify-content: space-between;
   border-top: 1px solid #e3e3e3;
@@ -105,10 +105,11 @@
 }
 
 .chatContainer {
-  // background-color: red;
+  // background-color: yellow;
   display: flex;
   // align-items: flex-start;
   margin-bottom: 10px;
+  margin-top: 25px;
   // additional styles for chat container
 }
 
