@@ -1,108 +1,68 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import BoardInfo from "@/components/molecules/BoardInfo";
-import styles from "@/styles/organism/chat.module.scss";
-import { sessionValid } from "@/utils/session/sessionValid";
-import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "next/navigation";
-import BackHeader from "../layout/BackHeader";
-import { convertUToKST } from "@/utils/common/convertUToKST";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { EventSourcePolyfill } from "event-source-polyfill";
+
+import BoardInfo from "@/components/molecules/BoardInfo";
+import BackHeader from "../layout/BackHeader";
+import { convertUToKST } from "@/utils/common/convertUToKST";
+import { sessionValid } from "@/utils/session/sessionValid";
+import styles from "@/styles/organism/chat.module.scss";
 
 interface ChatType {
-  content: any;
-  createdAt: any;
-  handle: any;
-  profileImage: any;
-  uuid: any;
+  content: string;
+  createdAt: string;
+  handle: string;
+  profileImage: string;
+  uuid: string;
 }
 
-export default function ChatRoom() {
+const ChatRoom: React.FC = () => {
   const roomNumber = useParams();
   const [chatData, setChatData] = useState<ChatType[]>([]);
   const [userUUID, setUserUUID] = useState<any>("");
+  const [newMessage, setNewMessage] = useState<string>("");
+  const [temp, setTemp] = useState<boolean>(false);
+
   const { ref, inView } = useInView();
-  const messagesEndRef = useRef<HTMLDivElement>(null); // Ref for the last message
-  const [firstMessageIndex, setFirstMessageIndex] = useState(0); // State to track the index of the first message
-  const [temp, setTemp] = useState(false); // State to track the index of the first message
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const prevScrollHeight = useRef<number>(0);
+  const isAtBottom = useRef<boolean>(true);
 
-  //채팅
-  const [newMessage, setNewMessage] = useState<any>("");
-  const pathName = useParams();
-
-  const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewMessage(event.target.value);
-  };
-
-  const sendMessage = async () => {
-    const result = await sessionValid();
-
-    if (result) {
-      try {
+  const fetchListData = useCallback(
+    async ({ pageParam = 0 }) => {
+      const result = await sessionValid();
+      if (result) {
+        const enterTime = new Date().toISOString();
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/previous/${roomNumber.id}?enterTime=${enterTime}&page=${pageParam}`,
           {
-            method: "POST",
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${result.authorization}`,
               uuid: `${result.uuid}`,
             },
-            body: JSON.stringify({
-              content: newMessage,
-              roomNumber: pathName.id,
-            }),
           }
         );
 
-        if (!res.ok) {
-          throw new Error("Failed to send message");
+        const data = await res.json();
+        const reversedData = data.previousChatWithMemberInfoDtos.reverse();
+
+        setChatData((prevData) => [...reversedData, ...prevData]);
+        if (pageParam === 0) {
+          setTemp(!temp);
         }
 
-        setNewMessage("");
-        setTemp(!temp);
-      } catch (error) {
-        console.error("Error sending message:", error);
+        return reversedData;
       }
-    }
-  };
-
-  const fetchListData = async ({ pageParam }: { pageParam: number }) => {
-    console.log("훅보다 시작됨");
-    const enterTime = new Date().toISOString();
-    const result = await sessionValid();
-    if (result) {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/previous/${roomNumber.id}?enterTime=${enterTime}&page=${pageParam}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${result.authorization}`,
-            uuid: `${result.uuid}`,
-          },
-        }
-      );
-      const data = await res.json();
-      console.log(data);
-      const reversedData = data.previousChatWithMemberInfoDtos.reverse();
-      setChatData((prevData) => [...reversedData, ...prevData]);
-
-      setFirstMessageIndex(reversedData.length); // Set the new index
-      scrollToFirstMessage(); // Scroll to the first message
-      if (data.currentPage == 1) {
-        setTemp(!temp);
-      }
-      // if (data.currentPage === 1) {
-      //   console.log("일번 이제 시작");
-      //   alert("왜 안돼지?");
-      // }
-
-      return reversedData;
-    }
-  };
+    },
+    [roomNumber.id]
+  );
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["message", "chat"],
@@ -115,37 +75,17 @@ export default function ChatRoom() {
       return nextPage;
     },
   });
-
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  // useEffect for scrolling to the bottom
   useEffect(() => {
-    console.log("훅이 시작");
-    scrollToBottom();
-  }, [temp]);
+    const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView();
+    };
 
-  const scrollToBottom = () => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView();
-    }
-  };
-
-  const scrollToFirstMessage = () => {
-    if (firstMessageIndex !== 0 && chatData[firstMessageIndex - 1]) {
-      const firstMessageElement = document.getElementById(
-        `message-${firstMessageIndex - 1}`
-      );
-      if (firstMessageElement) {
-        firstMessageElement.scrollIntoView();
-      }
-    }
-  };
-
-  useEffect(() => {
     const fetchData = async () => {
       const result = await sessionValid();
       if (result) {
@@ -165,23 +105,20 @@ export default function ChatRoom() {
 
         eventSource.onmessage = (event) => {
           const newData: ChatType = JSON.parse(event.data);
+          setTemp(!temp);
 
           setChatData((prevData) => {
-            console.log("받음");
-            setTemp(!temp);
-
-            const isDuplicate = prevData.some(
-              (chat) =>
-                chat.content === newData.content &&
-                chat.createdAt === newData.createdAt &&
-                chat.handle === newData.handle
-            );
-
-            if (!isDuplicate) {
+            if (
+              !prevData.some(
+                (chat) =>
+                  chat.content === newData.content &&
+                  chat.createdAt === newData.createdAt &&
+                  chat.handle === newData.handle
+              )
+            ) {
               return [...prevData, newData];
-            } else {
-              return prevData;
             }
+            return prevData;
           });
         };
 
@@ -190,35 +127,97 @@ export default function ChatRoom() {
           eventSource.close();
         };
 
-        return () => {
-          eventSource.close();
-        };
+        return () => eventSource.close();
       }
     };
 
     fetchData();
-  }, [roomNumber]);
+    scrollToBottom();
+  }, [roomNumber.id, temp]);
+
+  useEffect(() => {
+    const chatContainer = chatContainerRef.current;
+    if (chatContainer) {
+      if (isAtBottom.current) {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      } else {
+        chatContainer.scrollTop +=
+          chatContainer.scrollHeight - prevScrollHeight.current;
+      }
+    }
+  }, [chatData]);
+
+  useEffect(() => {
+    const chatContainer = chatContainerRef.current;
+    if (chatContainer) {
+      const handleScroll = () => {
+        isAtBottom.current =
+          chatContainer.scrollTop + chatContainer.clientHeight >=
+          chatContainer.scrollHeight;
+        prevScrollHeight.current = chatContainer.scrollHeight;
+      };
+
+      chatContainer.addEventListener("scroll", handleScroll);
+      return () => chatContainer.removeEventListener("scroll", handleScroll);
+    }
+  }, []);
+
+  const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewMessage(event.target.value);
+  };
+
+  const sendMessage = async () => {
+    const result = await sessionValid();
+    if (result) {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${result.authorization}`,
+              uuid: `${result.uuid}`,
+            },
+            body: JSON.stringify({
+              content: newMessage,
+              roomNumber: roomNumber.id,
+            }),
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error("Failed to send message");
+        }
+
+        setNewMessage("");
+        setTemp(!temp);
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
+    }
+  };
 
   return (
     <>
-      <main className={styles.main}>
+      <main className={styles.main} ref={chatContainerRef}>
         {chatData.map((chat, index) => {
+          const isUserMessage = chat.uuid === userUUID;
           const isSameHandleAsPrevious =
             index > 0 && chatData[index - 1].handle === chat.handle;
-          const isUserMessage = chat.uuid === userUUID;
 
           return (
             <div
               key={index}
               id={`message-${index}`}
-              ref={index === 0 ? ref : null} // Apply ref to the first message
+              ref={index === 0 ? ref : null}
               className={
                 isUserMessage
                   ? `${styles.chatLayout} ${styles.chatLayoutMy}`
                   : styles.chatLayout
               }
             >
-              {!isSameHandleAsPrevious && chat.uuid !== userUUID && (
+              {!isUserMessage && !isSameHandleAsPrevious && (
                 <div className={styles.chatContainer}>
                   <div className={styles.profileImageContainer}>
                     <img
@@ -235,18 +234,16 @@ export default function ChatRoom() {
                   </div>
                 </div>
               )}
-              {chat.uuid !== userUUID && (
-                <p className={styles.chatContent}>{chat.content}</p>
-              )}
-              {chat.uuid === userUUID && (
-                <div className={styles.chatContentMy}>
-                  <div>{chat.content}</div>
-                </div>
-              )}
+              <div
+                className={
+                  isUserMessage ? styles.chatContentMy : styles.chatContent
+                }
+              >
+                {chat.content}
+              </div>
             </div>
           );
         })}
-        {/* Empty div to serve as the scroll target */}
         <div ref={messagesEndRef} />
       </main>
       <div className={styles.chatInput}>
@@ -256,10 +253,12 @@ export default function ChatRoom() {
           value={newMessage}
           onChange={handleMessageChange}
         />
-        <div className={styles["sendBtn"]} onClick={sendMessage}>
-          <img src={"/icons/logoBtn.png"} />
+        <div className={styles.sendBtn} onClick={sendMessage}>
+          <img src="/icons/logoBtn.png" alt="Send" />
         </div>
       </div>
     </>
   );
-}
+};
+
+export default ChatRoom;
