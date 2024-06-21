@@ -10,7 +10,8 @@ const themeMode = cookies().get("mode")?.value;
 console.log(themeMode);
 export const viewport: Viewport = {
   // themeColor: cookies().get("mode")?.value === "dark" ? "#000000" : "#ffffff",
-  themeColor: themeMode == "light" ? "#151515" : "blue",
+  // themeColor: themeMode == "light" ? "#151515" : "blue",
+  themeColor: "#151515",
 };
 
 export const metadata: Metadata = {
