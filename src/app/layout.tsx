@@ -11,7 +11,8 @@ console.log(themeMode);
 export const viewport: Viewport = {
   // themeColor: cookies().get("mode")?.value === "dark" ? "#000000" : "#ffffff",
   // themeColor: themeMode == "light" ? "#151515" : "blue",
-  themeColor: "#151515",
+  // themeColor: "#151515",
+  themeColor: "black",
 };
 
 export const metadata: Metadata = {
