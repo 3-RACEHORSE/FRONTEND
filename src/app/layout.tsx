@@ -1,9 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/organism/layout/NavBar";
 import AuthSession from "@/AuthSession";
 import RQProvider from "./RQProvider";
+
+export const viewport: Viewport = {
+  // initialScale: 1,
+  themeColor: "red",
+};
 
 export const metadata: Metadata = {
   //메타랑 오지
