@@ -168,9 +168,7 @@ const ChatRoom: React.FC = () => {
     setNewMessage(event.target.value);
   };
 
-  const sendMessage = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-
+  const sendMessage = async () => {
     if (!newMessage.trim()) {
       return;
     }
@@ -202,8 +200,9 @@ const ChatRoom: React.FC = () => {
         setNewMessage("");
         setTemp(!temp);
 
-        // Refocus the input field after sending a message
-        inputRef.current?.focus();
+        if (inputRef.current) {
+          inputRef.current.click();
+        }
       } catch (error) {
         console.error("Error sending message:", error);
       }
