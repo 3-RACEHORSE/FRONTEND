@@ -103,7 +103,7 @@ const ChatRoom: React.FC = () => {
               Authorization: `Bearer ${result.authorization}`,
               uuid: `${result.uuid}`,
             },
-            heartbeatTimeout: 120000,
+            // heartbeatTimeout: 120000,
           }
         );
 
@@ -124,6 +124,7 @@ const ChatRoom: React.FC = () => {
             }
             return prevData;
           });
+          scrollToBottom(); // 안되면 이부분 수정 필요
         };
 
         eventSource.onerror = (error) => {
@@ -177,6 +178,14 @@ const ChatRoom: React.FC = () => {
     setNewMessage(event.target.value);
   };
 
+  //메시지 엔터 1
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  };
+
+  //메시지 엔터 2
   const sendMessage = async () => {
     if (!newMessage.trim()) {
       return;
@@ -279,6 +288,7 @@ const ChatRoom: React.FC = () => {
           placeholder="메시지를 입력하세요..."
           value={newMessage}
           onChange={handleMessageChange}
+          onKeyPress={handleKeyPress}
         />
         <div className={styles.sendBtn} onClick={sendMessage}>
           <img src="/icons/sendBtn.png" alt="Send" />
