@@ -4,14 +4,8 @@ import "./globals.css";
 import NavBar from "@/components/organism/layout/NavBar";
 import AuthSession from "@/AuthSession";
 import RQProvider from "./RQProvider";
-import { cookies } from "next/headers";
 
-const themeMode = cookies().get("mode")?.value;
-console.log(themeMode);
 export const viewport: Viewport = {
-  // themeColor: cookies().get("mode")?.value === "dark" ? "#000000" : "#ffffff",
-  // themeColor: themeMode == "light" ? "#151515" : "blue",
-  // themeColor: "#151515",
   themeColor: "black",
 };
 
