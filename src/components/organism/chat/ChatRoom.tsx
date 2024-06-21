@@ -26,6 +26,7 @@ const ChatRoom: React.FC = () => {
   const [userUUID, setUserUUID] = useState<any>("");
   const [newMessage, setNewMessage] = useState<string>("");
   const [temp, setTemp] = useState<boolean>(false);
+  const [focus, setFocus] = useState<boolean>(false);
 
   const { ref, inView } = useInView();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -199,15 +200,18 @@ const ChatRoom: React.FC = () => {
 
         setNewMessage("");
         setTemp(!temp);
-
-        if (inputRef.current) {
-          inputRef.current.click();
-        }
+        setFocus(!focus);
       } catch (error) {
         console.error("Error sending message:", error);
       }
     }
   };
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.click();
+    }
+  }, []);
 
   return (
     <>
