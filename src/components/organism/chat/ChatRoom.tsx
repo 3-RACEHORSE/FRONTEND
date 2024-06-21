@@ -168,7 +168,9 @@ const ChatRoom: React.FC = () => {
     setNewMessage(event.target.value);
   };
 
-  const sendMessage = async () => {
+  const sendMessage = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
     if (!newMessage.trim()) {
       return;
     }
