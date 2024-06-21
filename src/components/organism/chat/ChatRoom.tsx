@@ -32,12 +32,14 @@ const ChatRoom: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const prevScrollHeight = useRef<number>(0);
   const isAtBottom = useRef<boolean>(true);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const fetchListData = useCallback(
     async ({ pageParam = 0 }) => {
       const result = await sessionValid();
       if (result) {
         const enterTime = new Date().toISOString();
+        console.log(enterTime);
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/previous/${roomNumber.id}?enterTime=${enterTime}&page=${pageParam}`,
           {
@@ -167,8 +169,13 @@ const ChatRoom: React.FC = () => {
   };
 
   const sendMessage = async () => {
+    if (!newMessage.trim()) {
+      return;
+    }
     const result = await sessionValid();
     if (result) {
+      console.log(result.authorization, result.uuid);
+
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
@@ -192,6 +199,9 @@ const ChatRoom: React.FC = () => {
 
         setNewMessage("");
         setTemp(!temp);
+
+        // Refocus the input field after sending a message
+        inputRef.current?.focus();
       } catch (error) {
         console.error("Error sending message:", error);
       }
@@ -249,6 +259,7 @@ const ChatRoom: React.FC = () => {
       <div className={styles.chatInput}>
         <input
           type="text"
+          ref={inputRef} // Attach the ref to the input field
           placeholder="메시지를 입력하세요..."
           value={newMessage}
           onChange={handleMessageChange}

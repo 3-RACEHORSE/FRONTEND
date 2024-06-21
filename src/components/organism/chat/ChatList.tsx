@@ -18,12 +18,14 @@ export default function ChatList({
 }: ChatListProps) {
   return (
     <div className={styles["chatListContainer"]}>
-      <div className={styles["thumbnail"]}>
-        <img src={thumbnail} />
-      </div>
-      <div className={styles["textContainer"]}>
-        <p className={styles["title"]}>{truncateText(title, 13)}</p>
-        <p className={styles["subtitle"]}>{content}</p>
+      <div style={{ display: "flex" }}>
+        <div className={styles["thumbnail"]}>
+          <img src={thumbnail} />
+        </div>
+        <div className={styles["textContainer"]}>
+          <p className={styles["title"]}>{truncateText(title, 13)}</p>
+          <p className={styles["subtitle"]}>{content}</p>
+        </div>
       </div>
       <div className={styles["updatedAt"]}>{convertUToKST(updatedAt)}</div>
     </div>
