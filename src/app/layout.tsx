@@ -6,7 +6,7 @@ import AuthSession from "@/AuthSession";
 import RQProvider from "./RQProvider";
 
 export const viewport: Viewport = {
-  themeColor: "black",
+  themeColor: "#00000000",
 };
 
 export const metadata: Metadata = {
