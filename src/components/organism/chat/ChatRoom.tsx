@@ -29,10 +29,10 @@ const ChatRoom: React.FC = () => {
   // const [focus, setFocus] = useState<boolean>(false);
 
   const { ref, inView } = useInView();
-  // const messagesEndRef = useRef<HTMLDivElement>(null);
-  // const chatContainerRef = useRef<HTMLDivElement>(null);
-  // const prevScrollHeight = useRef<number>(0);
-  // const isAtBottom = useRef<boolean>(true);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const prevScrollHeight = useRef<number>(0);
+  const isAtBottom = useRef<boolean>(true);
   // const inputRef = useRef<HTMLInputElement>(null);
 
   const fetchListData = useCallback(
@@ -54,6 +54,7 @@ const ChatRoom: React.FC = () => {
         );
 
         const data = await res.json();
+        console.log(data);
         const reversedData = data.previousChatWithMemberInfoDtos.reverse();
 
         setChatData((prevData) => [...reversedData, ...prevData]);
@@ -138,32 +139,39 @@ const ChatRoom: React.FC = () => {
     // scrollToBottom();
   }, [roomNumber.id]);
 
-  // useEffect(() => {
-  //   const chatContainer = chatContainerRef.current;
-  //   if (chatContainer) {
-  //     if (isAtBottom.current) {
-  //       chatContainer.scrollTop = chatContainer.scrollHeight;
-  //     } else {
-  //       chatContainer.scrollTop +=
-  //         chatContainer.scrollHeight - prevScrollHeight.current;
-  //     }
-  //   }
-  // }, [chatData]);
+  // useEffect(()=>{
+  //   scrollToBottom()
+  // },[])
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView();
+  };
 
-  // useEffect(() => {
-  //   const chatContainer = chatContainerRef.current;
-  //   if (chatContainer) {
-  //     const handleScroll = () => {
-  //       isAtBottom.current =
-  //         chatContainer.scrollTop + chatContainer.clientHeight >=
-  //         chatContainer.scrollHeight;
-  //       prevScrollHeight.current = chatContainer.scrollHeight;
-  //     };
+  useEffect(() => {
+    const chatContainer = chatContainerRef.current;
+    if (chatContainer) {
+      if (isAtBottom.current) {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      } else {
+        chatContainer.scrollTop +=
+          chatContainer.scrollHeight - prevScrollHeight.current;
+      }
+    }
+  }, [chatData]);
 
-  //     chatContainer.addEventListener("scroll", handleScroll);
-  //     return () => chatContainer.removeEventListener("scroll", handleScroll);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const chatContainer = chatContainerRef.current;
+    if (chatContainer) {
+      const handleScroll = () => {
+        isAtBottom.current =
+          chatContainer.scrollTop + chatContainer.clientHeight >=
+          chatContainer.scrollHeight;
+        prevScrollHeight.current = chatContainer.scrollHeight;
+      };
+
+      chatContainer.addEventListener("scroll", handleScroll);
+      return () => chatContainer.removeEventListener("scroll", handleScroll);
+    }
+  }, []);
 
   const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(event.target.value);
@@ -199,6 +207,7 @@ const ChatRoom: React.FC = () => {
         }
 
         setNewMessage("");
+        scrollToBottom();
         // setTemp(!temp);
         // setFocus(!focus);
       } catch (error) {
@@ -215,8 +224,8 @@ const ChatRoom: React.FC = () => {
 
   return (
     <>
-      {/* <main className={styles.main} ref={chatContainerRef}> */}
-      <main className={styles.main}>
+      <main className={styles.main} ref={chatContainerRef}>
+        {/* <main className={styles.main}> */}
         {chatData.map((chat, index) => {
           const isUserMessage = chat.uuid === userUUID;
           const isSameHandleAsPrevious =
@@ -260,8 +269,9 @@ const ChatRoom: React.FC = () => {
             </div>
           );
         })}
-        {/* <div ref={messagesEndRef} /> */}
+        <div ref={messagesEndRef} />
       </main>
+
       <div className={styles.chatInput}>
         <input
           type="text"

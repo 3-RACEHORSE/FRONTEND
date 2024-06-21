@@ -4,12 +4,11 @@ import "./globals.css";
 import NavBar from "@/components/organism/layout/NavBar";
 import AuthSession from "@/AuthSession";
 import RQProvider from "./RQProvider";
-import { cookies } from "next/headers";
 
 // const themeMode = cookies().get("mode")?.value;
 
 export const viewport: Viewport = {
-  themeColor: cookies().get("mode")?.value === "dark" ? "#000000" : "#ffffff",
+  // themeColor: cookies().get("mode")?.value === "dark" ? "#000000" : "#ffffff",
 };
 
 export const metadata: Metadata = {
