@@ -10,8 +10,8 @@ import { cookies } from "next/headers";
 //뷰포트 수정
 export const viewport: Viewport = {
   width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
+  initialScale: 1, //
+  maximumScale: 1, // 확대 막기
   userScalable: false,
   viewportFit: "cover",
 };
@@ -33,9 +33,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // const mode = cookies().get("mode")?.value;
+  // const isDarkMode = mode === "dark";
+  // const themeColor = isDarkMode ? "#000000" : "#ffffff";
 
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+        />
+        {/* <meta name="theme-color" content={themeColor} /> */}
+      </head>
       <body className={noto.className}>
         <AuthSession>
           <RQProvider>{children}</RQProvider>
