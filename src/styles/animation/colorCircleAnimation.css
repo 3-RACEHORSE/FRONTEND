@@ -1,4 +1,4 @@
-.wrapper .bubble {
+.wrapper .bubble2 {
   height: 30px;
   width: 30px;
   border: 1px solid #e85175;
@@ -8,77 +8,77 @@
   animation: animate 10s linear infinite;
 }
 
-.wrapper .bubble:nth-child(1) {
+.wrapper .bubble2:nth-child(1) {
   top: 100%;
   left: 20%;
   animation-duration: 8s;
 }
-.wrapper .bubble:nth-child(2) {
+.wrapper .bubble2:nth-child(2) {
   top: 100%;
   left: 80%;
   animation-duration: 10s;
 }
-.wrapper .bubble:nth-child(3) {
+.wrapper .bubble2:nth-child(3) {
   top: 100%;
   left: 40%;
   animation-duration: 3s;
 }
-.wrapper .bubble:nth-child(4) {
+.wrapper .bubble2:nth-child(4) {
   top: 100%;
   left: 30%;
   animation-duration: 7s;
 }
-.wrapper .bubble:nth-child(5) {
+.wrapper .bubble2:nth-child(5) {
   top: 100%;
   left: 10%;
   animation-duration: 9s;
 }
-.wrapper .bubble:nth-child(6) {
+.wrapper .bubble2:nth-child(6) {
   top: 100%;
   left: 60%;
   animation-duration: 5s;
 }
-.wrapper .bubble:nth-child(7) {
+.wrapper .bubble2:nth-child(7) {
   top: 100%;
   left: 20%;
   animation-duration: 8s;
 }
-.wrapper .bubble:nth-child(8) {
+.wrapper .bubble2:nth-child(8) {
   top: 100%;
   left: 60%;
   animation-duration: 10s;
 }
-.wrapper .bubble:nth-child(9) {
+.wrapper .bubble2:nth-child(9) {
   top: 100%;
   left: 50%;
   animation-duration: 6s;
 }
-.wrapper .bubble:nth-child(10) {
+.wrapper .bubble2:nth-child(10) {
   top: 100%;
   left: 20%;
   animation-duration: 10s;
 }
-.wrapper .bubble:nth-child(11) {
+.wrapper .bubble2:nth-child(11) {
   top: 100%;
   left: 90%;
   animation-duration: 9s;
 }
-.wrapper .bubble:nth-child(12) {
+.wrapper .bubble2:nth-child(12) {
   top: 100%;
   left: 70%;
   animation-duration: 7s;
 }
-.wrapper .bubble:nth-child(13) {
+.wrapper .bubble2:nth-child(13) {
   top: 100%;
   left: 20%;
   animation-duration: 8s;
 }
-.wrapper .bubble:nth-child(14) {
+.wrapper .bubble2:nth-child(14) {
   top: 100%;
   left: 5%;
   animation-duration: 6s;
 }
-.wrapper .bubble:nth-child(15) {
+.wrapper .bubble2:nth-child(15) {
   top: 100%;
   left: 80%;
   animation-duration: 9s;
