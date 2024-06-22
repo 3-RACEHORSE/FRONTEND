@@ -25,11 +25,14 @@ export default function BackHeader({ title, thumbnail, type }: TextProps) {
       router.back();
     }
   };
-
+  const backHeaderContainer =
+    type === "auction"
+      ? `${styles["back-header-container"]} ${styles["no-background"]}`
+      : styles["back-header-container"];
   return (
     <>
       <header className={styles["back-header-layout"]}>
-        <div className={styles["back-header-container"]}>
+        <div className={backHeaderContainer}>
           <BackBtn onClick={handleBack} />
 
           <TitleText title={title} />

@@ -37,8 +37,10 @@ export default function BoardDetailBar({
         )}
         {state === "AUCTION_IS_IN_PROGRESS" && (
           <>
-            <div className={styles["info3"]}>진행중 경매</div>
-            <div className={styles["info4"]}>경매가 진행중입니다.🔥</div>
+            <Link href="/auctionProgress/1">
+              <div className={styles["info3"]}>진행중 경매</div>
+              <div className={styles["info4"]}>경매가 진행중입니다.🔥</div>
+            </Link>
           </>
         )}
         {state === "AUCTION_NORMAL_CLOSING" && (

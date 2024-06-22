@@ -1,0 +1,179 @@
+.roundInfo {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-70%, -80%);
+  background-color: #ff3f6c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  padding-left: 10%;
+  padding-right: 10%;
+  border-radius: 99px;
+  color: white;
+  z-index: 1;
+  font-size: 23px;
+}
+.priceInfo {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-30%, -5%);
+  background-color: #ff3f6c8e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  padding-left: 10%;
+  padding-right: 10%;
+  border-radius: 99px;
+  color: white;
+  font-size: 17px;
+}
+
+.bidBtn {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #00000022;
+  padding: 5%;
+  width: 70vw;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #434343;
+  font-weight: 500;
+  box-shadow: 0px 0px 5px 1px #b5b5b5;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: blue; */
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wave-one {
+  width: 33vh;
+  height: 33vh;
+  /* position: absolute; */
+  border-radius: 45%;
+  background: #ff3f6c6b;
+  /* background: black; */
+  animation: move 3s infinite linear;
+}
+
+.wave-two {
+  width: 31vh;
+  height: 31vh;
+  position: absolute;
+  border-radius: 45%;
+  background: #ff3f6cae;
+  animation: move 5s infinite linear;
+}
+
+.wave-three {
+  width: 30vh;
+  height: 30vh;
+  position: absolute;
+  border-radius: 45%;
+  background: rgba(255, 182, 199, 0.875);
+  animation: move 7s infinite linear;
+}
+
+.wave-four {
+  width: 32vh;
+  height: 32vh;
+  position: absolute;
+  border-radius: 46%;
+  animation: move 8s infinite linear;
+  background: #ff3f6c6b;
+}
+.center-circle-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: blue; */
+  width: 100%;
+  height: 325px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.center-circle {
+  width: 30vh;
+  height: 30vh;
+  position: absolute;
+  border-radius: 999%;
+  /* background-color: rgb(28, 146, 69); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.leftCount {
+  font-size: 70px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #e85175;
+}
+.leftTime {
+  font-size: 15px;
+}
+
+@keyframes move {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 버튼 */
+
+button {
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.button {
+  background-color: #0000004c;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 5%;
+  width: 70vw;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+}
+
+/* .button:active {
+  transform: scale(1.01);
+} */
+
+.auction-effect {
+  position: fixed;
+  background: linear-gradient(to top, #e85175 15%, transparent);
+  height: 25vh;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
