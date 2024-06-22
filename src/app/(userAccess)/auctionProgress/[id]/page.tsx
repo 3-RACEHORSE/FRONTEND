@@ -9,6 +9,8 @@ import BoardObject from "@/components/organism/auction/BoardObject";
 import Link from "next/link";
 import BackHeader from "@/components/organism/layout/BackHeader";
 import AuctionProgressInfo from "@/components/organism/auctionProgress/AuctionProgressInfo";
+import "@/styles/auctionProgress/auctionProgress.css";
+
 export default async function Page(props: any) {
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
@@ -17,7 +19,7 @@ export default async function Page(props: any) {
   // console.log(props.params.id);
   return (
     <main>
-      {/* <BackHeader title="" /> */}
+      <BackHeader title="" />
       <AuctionProgressInfo
         authorization={authorization}
         uuid={uuid}
