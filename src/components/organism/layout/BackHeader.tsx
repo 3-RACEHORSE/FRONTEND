@@ -28,27 +28,29 @@ export default function BackHeader({ title, thumbnail, type }: TextProps) {
 
   return (
     <>
-      <header className={styles["header-main-container"]}>
-        <BackBtn onClick={handleBack} />
+      <header className={styles["back-header-layout"]}>
+        <div className={styles["back-header-container"]}>
+          <BackBtn onClick={handleBack} />
 
-        <TitleText title={title} />
+          <TitleText title={title} />
 
-        {type === "chatroom" && (
-          <div
-            style={{
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src={thumbnail}
-              style={{ height: "30px", width: "30px", borderRadius: "999px" }}
-            />
-          </div>
-        )}
-        {type !== "chatroom" && <Gap width={30} height={30} />}
+          {type === "chatroom" && (
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src={thumbnail}
+                style={{ height: "30px", width: "30px", borderRadius: "999px" }}
+              />
+            </div>
+          )}
+          {type !== "chatroom" && <Gap width={30} height={30} />}
+        </div>
       </header>
     </>
   );

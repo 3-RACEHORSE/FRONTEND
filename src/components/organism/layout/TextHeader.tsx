@@ -9,15 +9,26 @@ interface TextProps {
 export default function TextHeader({ title }: TextProps) {
   return (
     <>
-      <header
+      <header className={styles["text-header-layout"]}>
+        <div
+          className={styles["text-header-container"]}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* <header
         className={styles["header-main-container"]}
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
-      >
-        <TitleText title={title} />
+      > */}
+          <TitleText title={title} />
+          {/* </header> */}
+        </div>
       </header>
     </>
   );

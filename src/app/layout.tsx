@@ -34,12 +34,12 @@ export default function RootLayout({
 }>) {
   const mode = cookies().get("mode")?.value;
 
-  let isDarkMode;
-  if (mode === "dark") {
-    isDarkMode = "#151515";
-  } else {
-    isDarkMode = "#ffffff";
-  }
+  // let isDarkMode;
+  // if (mode === "dark") {
+  //   isDarkMode = "#151515";
+  // } else {
+  //   isDarkMode = "#ffffff";
+  // }
   return (
     <html lang="en">
       <head>

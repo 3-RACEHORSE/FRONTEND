@@ -63,17 +63,19 @@ export default async function Page() {
   return (
     <main>
       <ChatHeader />
-      {data.map((chat: any, index: any) => (
-        <Link href={`/chatRoom/${chat.roomNumber}`} key={index}>
-          <ChatList
-            key={index}
-            thumbnail={chat.thumbnail}
-            title={chat.title}
-            updatedAt={content[index]?.createdAt}
-            content={content[index]?.content}
-          />
-        </Link>
-      ))}
+      <div className={styles["chatListLayout"]}>
+        {data.map((chat: any, index: any) => (
+          <Link href={`/chatRoom/${chat.roomNumber}`} key={index}>
+            <ChatList
+              key={index}
+              thumbnail={chat.thumbnail}
+              title={chat.title}
+              updatedAt={content[index]?.createdAt}
+              content={content[index]?.content}
+            />
+          </Link>
+        ))}
+      </div>
       <NavBar />
     </main>
   );
