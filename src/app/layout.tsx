@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   const mode = cookies().get("mode")?.value;
   const isDarkMode = mode === "dark";
-  const themeColor = isDarkMode ? "#000000" : "#ffffff";
+  const themeColor = isDarkMode ? "#ffffff" : "#000000";
 
   return (
     <html lang="en" style={{ colorScheme: isDarkMode ? "dark" : "light" }}>
