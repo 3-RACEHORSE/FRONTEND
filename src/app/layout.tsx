@@ -4,9 +4,16 @@ import "./globals.css";
 import NavBar from "@/components/organism/layout/NavBar";
 import AuthSession from "@/AuthSession";
 import RQProvider from "./RQProvider";
+import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { cookies } from "next/headers";
 
+//뷰포트 수정
 export const viewport: Viewport = {
-  themeColor: "#00000000",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
@@ -25,6 +32,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const mode = cookies().get("mode")?.value;
+
   return (
     <html lang="en">
       <body className={noto.className}>
