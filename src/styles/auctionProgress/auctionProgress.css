@@ -147,7 +147,7 @@ button {
 }
 
 .button {
-  background-color: #000000;
+  background-color: #0000004c;
   color: #ffffff;
   font-size: 17px;
   font-weight: 500;
@@ -157,7 +157,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 1vw;
   position: absolute;
   top: 85%;
   left: 50%;
@@ -168,3 +168,12 @@ button {
 /* .button:active {
   transform: scale(1.01);
 } */
+
+.auction-effect {
+  position: fixed;
+  background: linear-gradient(to top, #e85175 15%, transparent);
+  height: 25vh;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}

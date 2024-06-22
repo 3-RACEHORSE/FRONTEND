@@ -64,6 +64,17 @@
   padding-bottom: 3%;
 }
 
+.no-background {
+  background-color: #00000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5vh;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 3%;
+}
+
 //text 헤더
 .text-header-layout {
   position: fixed;

@@ -10,6 +10,8 @@ import Link from "next/link";
 import BackHeader from "@/components/organism/layout/BackHeader";
 import AuctionProgressInfo from "@/components/organism/auctionProgress/AuctionProgressInfo";
 import "@/styles/auctionProgress/auctionProgress.css";
+import CircleAnimation from "@/components/organism/animation/CircleAnimation";
+import ColorCircleAnimation from "@/components/organism/animation/ColorCircleAnimation";
 
 export default async function Page(props: any) {
   const authorization = cookies().get("authorization")?.value;
@@ -19,12 +21,14 @@ export default async function Page(props: any) {
   // console.log(props.params.id);
   return (
     <main>
-      <BackHeader title="" />
+      <BackHeader title="" type="auction" />
       <AuctionProgressInfo
         authorization={authorization}
         uuid={uuid}
         pathName={pathName}
       />{" "}
+      <ColorCircleAnimation />
+      <div className="auction-effect"></div>
     </main>
   );
 }
