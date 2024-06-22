@@ -1,6 +1,6 @@
 import DataFetcher from "@/components/organism/join/JoinInfoOne";
 import BackHeader from "@/components/organism/layout/BackHeader";
-import styles from "@/styles/join/join.module.scss";
+import styles from "@/styles/organism/chat.module.scss";
 import { auth } from "@/auth";
 import { cookies } from "next/headers";
 import NavBar from "@/components/organism/layout/NavBar";
