@@ -25,8 +25,6 @@ export default function NavBar() {
 
   return (
     <>
-      {pathName === "/" && <div className={styles["home-effect"]}></div>}
-
       <nav className={styles["nav-main-container"]}>
         {" "}
         {/* 버튼1 */}

@@ -17,10 +17,29 @@
 
 .home-effect {
   position: fixed;
-  background: linear-gradient(to top, var(--color-background) 50%, transparent);
+  background: linear-gradient(
+    to top,
+    var(--color-background) 50%,
+
+    transparent
+  );
   height: 25vh;
   width: 100%;
   bottom: 0;
+  left: 0;
+}
+
+.home-nav-container {
+  position: fixed;
+  bottom: 0;
+  background-color: var(--color-background);
+  padding-bottom: 12vh;
+  padding-top: 5px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+  z-index: 999;
   left: 0;
 }
 

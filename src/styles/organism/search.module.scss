@@ -30,13 +30,13 @@
 
 .fixed-container {
   width: 100%;
-  height: calc(100% - 80px);
+  height: calc(100% - 90px);
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 999;
   padding: 3%;
-  background-color: white;
+  // background-color: rgb(240, 39, 39);
 }
 
 body[data-theme="dark"] .fixed-container {

@@ -32,6 +32,7 @@ function MainBanner() {
           selectedItem={currentIndex}
           onChange={handleChange}
           showIndicators={false}
+          showStatus={false}
         >
           {currentBannerData.map((image, index) => (
             <div key={index} className={styles.imageContainer}>
