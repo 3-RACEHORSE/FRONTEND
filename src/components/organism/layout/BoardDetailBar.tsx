@@ -5,9 +5,13 @@ import Link from "next/link";
 
 interface BoardDetailBar {
   auctionStartTime?: any;
+  state?: any;
 }
 
-export default function BoardDetailBar({ auctionStartTime }: BoardDetailBar) {
+export default function BoardDetailBar({
+  auctionStartTime,
+  state,
+}: BoardDetailBar) {
   return (
     <nav className={styles["nav-container"]}>
       <Link
@@ -19,12 +23,30 @@ export default function BoardDetailBar({ auctionStartTime }: BoardDetailBar) {
         <div className={styles["info2"]}>출연진 정보를 확인하세요!</div>
       </Link>
       <div className={styles["button-container2"]}>
-        <div className={styles["info3"]}>경매 시작</div>
-        <div className={styles["info4"]}>
-          <RemainTime
-            endedAtMilliseconds={uToMilliseconds(auctionStartTime) + 32400000}
-          />
-        </div>
+        {state === "BEFORE_AUCTION" && (
+          <>
+            <div className={styles["info3"]}>예정된 경매</div>
+            <div className={styles["info4"]}>
+              <RemainTime
+                endedAtMilliseconds={
+                  uToMilliseconds(auctionStartTime) + 32400000
+                }
+              />
+            </div>
+          </>
+        )}
+        {state === "AUCTION_IS_IN_PROGRESS" && (
+          <>
+            <div className={styles["info3"]}>진행중 경매</div>
+            <div className={styles["info4"]}>경매가 진행중입니다.🔥</div>
+          </>
+        )}
+        {state === "AUCTION_NORMAL_CLOSING" && (
+          <>
+            <div className={styles["info3"]}>마감된 경매</div>
+            <div className={styles["info4"]}>마감되었습니다.</div>
+          </>
+        )}
       </div>
     </nav>
   );

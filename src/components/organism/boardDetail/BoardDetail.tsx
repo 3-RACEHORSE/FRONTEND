@@ -7,9 +7,7 @@ import {
 } from "@/components/ui/carousel";
 
 interface BoardDetailProps {
-  title: string;
-  detail?: string;
-  auctionStartTime?: string;
+  auctionStartTime?: any;
   category?: string;
   cast?: string;
   versifier?: string;
@@ -23,11 +21,10 @@ interface BoardDetailProps {
     url: string;
     index: number;
   }>;
+  state: string;
 }
 
 export default function BoardDetail({
-  title,
-  detail,
   auctionStartTime,
   category,
   cast,
@@ -38,7 +35,9 @@ export default function BoardDetail({
   place,
   boardContent,
   imageData = [],
+  state,
 }: BoardDetailProps) {
+  console.log(auctionStartTime);
   return (
     <>
       <Carousel>
@@ -54,8 +53,6 @@ export default function BoardDetail({
         </CarouselContent>
       </Carousel>
       <BoardDetailInfoWithText
-        title={title}
-        detail={detail}
         auctionStartTime={auctionStartTime}
         category={category}
         cast={cast}
@@ -65,6 +62,7 @@ export default function BoardDetail({
         boardContent={boardContent}
         eventStartTime={eventStartTime}
         place={place}
+        state={state}
       />
     </>
   );

@@ -15,5 +15,5 @@ export async function getDetailListData(
 
   const data = await res.json();
   console.log(data);
-  return data.readAuctionPost;
+  return data;
 }

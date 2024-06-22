@@ -28,6 +28,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
   } else {
     status = "알 수 없음";
   }
+  console.log("받은것", authorization, uuid);
 
   //지역 빼기
   const removePrefix = (url: string, prefix: string): string => {
@@ -158,5 +159,5 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
     ))
   );
 
-  return <main>{content}</main>;
+  return <main style={{ height: "39.5vh", overflow: "auto" }}>{content}</main>;
 }

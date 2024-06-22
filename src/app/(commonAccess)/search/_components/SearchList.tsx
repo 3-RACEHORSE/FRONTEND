@@ -33,6 +33,7 @@ function SearchList({ searchText }: SearchListProps) {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auctionpost-service/api/v1/auction-post/search-title?data=${searchText}`,
         {
+          cache: "no-store",
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${result.authorization}`,

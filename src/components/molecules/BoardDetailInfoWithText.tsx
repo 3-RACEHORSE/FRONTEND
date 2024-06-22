@@ -4,8 +4,6 @@ import { convertUToKST } from "@/utils/common/convertUToKST";
 import { uToMilliseconds } from "@/utils/detail/uToMilliseconds";
 
 interface BoardDetailProps {
-  title: string;
-  detail?: string;
   auctionStartTime?: any;
   category?: string;
   cast?: string;
@@ -15,11 +13,10 @@ interface BoardDetailProps {
   boardContent?: string;
   eventStartTime?: string;
   place?: string;
+  state: string;
 }
 
 export default function BoardDetailInfoWithText({
-  title,
-  detail,
   auctionStartTime,
   category,
   cast,
@@ -29,28 +26,50 @@ export default function BoardDetailInfoWithText({
   boardContent,
   eventStartTime,
   place,
+  state,
 }: BoardDetailProps) {
   return (
     <>
       <div className={styles["boardDetail-element1"]}>
         <div className={styles["boardDetail-element1-content"]}>
           <div className={styles["boardDetail-element1-content-title"]}>
-            <p className={styles["deadline"]}>{title}</p>
-            <p className={styles["deadlineNotice"]}>{detail}</p>
+            {/* 분기 */}
+            {state === "BEFORE_AUCTION" && (
+              <p className={styles["deadline"]}>예정</p>
+            )}
+            {state === "AUCTION_IS_IN_PROGRESS" && (
+              <p className={styles["deadline"]}>진행중</p>
+            )}
+            {state === "AUCTION_NORMAL_CLOSING" && (
+              <p className={styles["deadline"]}>마감</p>
+            )}
+            {/* 분기 */}
+            {state === "BEFORE_AUCTION" && (
+              <p className={styles["deadlineNotice"]}>경매 진행 예정입니다.</p>
+            )}
+            {state === "AUCTION_IS_IN_PROGRESS" && (
+              <p className={styles["deadlineNotice"]}>현재 진행 중입니다.</p>
+            )}
+            {state === "AUCTION_NORMAL_CLOSING" && (
+              <p className={styles["deadlineNotice"]}>마감된 경매입니다.</p>
+            )}
           </div>
-          <div className={styles["boardDetail-element1-content-info"]}>
-            <p className={styles["boardDetail-element1-content-info1"]}>
-              {convertUToKST(auctionStartTime)} 에 시작
-            </p>
+          {/* 분기 */}
+          {state === "BEFORE_AUCTION" && (
+            <div className={styles["boardDetail-element1-content-info"]}>
+              <p className={styles["boardDetail-element1-content-info1"]}>
+                {convertUToKST(auctionStartTime)} 에 시작
+              </p>
 
-            <div className={styles["boardDetail-element1-content-info2"]}>
-              <RemainTime
-                endedAtMilliseconds={
-                  uToMilliseconds(auctionStartTime) + 32400000
-                }
-              />
+              <div className={styles["boardDetail-element1-content-info2"]}>
+                <RemainTime
+                  endedAtMilliseconds={
+                    uToMilliseconds(auctionStartTime) + 32400000
+                  }
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className={styles["boardDetail-element2"]}>

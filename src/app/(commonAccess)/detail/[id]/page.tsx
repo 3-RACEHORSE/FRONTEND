@@ -13,12 +13,11 @@ export default async function Page(props: any) {
 
   const data = await getDetailListData(pathName, authorization, uuid);
   console.log("pathName", pathName, "받은 데이터", data);
+  console.log("문제상황", data.auctionStartTime);
 
   return (
-    <main>
+    <main style={{ paddingTop: "12vh" }}>
       <BoardDetail
-        title="경매시작 시간"
-        detail="시작시간이 되면, 경매가 진행됩니다."
         auctionStartTime={data.auctionStartTime}
         category={`출연진 / 시작가 / 단위가`}
         cast={data.influencerName}
@@ -40,11 +39,15 @@ export default async function Page(props: any) {
             index: 2,
           },
         ]}
+        state={data.state}
       />
       <BoardDetailNotice />
       <Footer />
 
-      <BoardDetailBar auctionStartTime={data.auctionStartTime} />
+      <BoardDetailBar
+        auctionStartTime={data.auctionStartTime}
+        state={data.state}
+      />
     </main>
   );
 }
