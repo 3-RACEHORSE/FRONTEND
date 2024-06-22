@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { boardObject } from "@/lib/interface/boardObject";
 import BoardObject from "@/components/organism/auction/BoardObject";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import watchListData from "@/constants/watchListData";
 import Link from "next/link";
 import { title } from "process";
@@ -99,6 +99,15 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
         uuid: `${uuid}`,
       },
     });
+    if (res.status === 401 || res.status === 500) {
+      // 이후 에러코드 401로 수정 필요
+      console.log("토큰없");
+      redirect("https://fe-meetplus.vercel.app/login");
+    }
+    if (!res.ok) {
+      // throw new Error("Network Error");
+      redirect("https://fe-meetplus.vercel.app/login");
+    }
     const data = await res.json();
     return data.auctionPostDtos;
   };
