@@ -33,19 +33,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const mode = cookies().get("mode")?.value;
-  const isDarkMode = mode === "dark";
-  const themeColor = isDarkMode ? "#ffffff" : "#000000";
 
+  let isDarkMode;
+  if (mode === "dark") {
+    isDarkMode = "#000000";
+  } else {
+    isDarkMode = "#ffffff";
+  }
   return (
-    <html lang="en" style={{ colorScheme: isDarkMode ? "dark" : "light" }}>
+    <html lang="en">
       <head>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
         />
-        <meta name="theme-color" content={themeColor} />
+        <meta name="theme-color" content={isDarkMode} />
       </head>
-      <body className={noto.className} style={{ backgroundColor: themeColor }}>
+      <body className={noto.className}>
         <AuthSession>
           <RQProvider>{children}</RQProvider>
         </AuthSession>
