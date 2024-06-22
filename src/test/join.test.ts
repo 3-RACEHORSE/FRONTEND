@@ -25,7 +25,7 @@ describe("회원가입 api 함수", () => {
       "google.@gmail.com",
       "MrGoogle",
       "010-1234-5678",
-      [{ 0: "관심목록1" }, { 1: "관심목록2" }],
+      // [{ 0: "관심목록1" }, { 1: "관심목록2" }],
       routerMock
     );
 
@@ -42,7 +42,7 @@ describe("회원가입 api 함수", () => {
           email: "google.@gmail.com",
           name: "MrGoogle",
           phoneNum: "010-1234-5678",
-          interestCategories: [{ 0: "관심목록1" }, { 1: "관심목록2" }],
+          // interestCategories: [{ 0: "관심목록1" }, { 1: "관심목록2" }],
         }),
       }
     );

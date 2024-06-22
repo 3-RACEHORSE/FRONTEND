@@ -7,7 +7,7 @@ export const handleJoin = async (
   email: string,
   name: string,
   inputValueOne: string,
-  apple: { [index: number]: string }[],
+  // apple: { [index: number]: string }[],
   router: any
 ) => {
   try {
@@ -24,7 +24,7 @@ export const handleJoin = async (
           email: email,
           name: name,
           phoneNum: inputValueOne,
-          interestCategories: apple,
+          // interestCategories: apple,
         }),
       }
     );

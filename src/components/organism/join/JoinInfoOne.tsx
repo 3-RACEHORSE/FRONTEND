@@ -51,7 +51,7 @@ export default function DataFetcher({
 
   //가입하기
   const handleJoinClick = async () => {
-    handleJoin(snsId, snsType, email, name, inputValueOne, apple, router);
+    handleJoin(snsId, snsType, email, name, inputValueOne, router);
   };
 
   //활성화된 버튼 체크 및 양식에 맞춰, 적용
