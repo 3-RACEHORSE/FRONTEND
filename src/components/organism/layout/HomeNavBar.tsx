@@ -5,6 +5,7 @@ import styles from "@/styles/layout/nav.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import CircleAnimation from "@/components/organism/animation/CircleAnimation";
 
 // Dynamic import for icons
 const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
@@ -26,6 +27,8 @@ export default function NavBar() {
   return (
     <>
       <div className={styles["home-effect"]}></div>
+      <CircleAnimation />
+      {/*네브바*/}
       <nav className={styles["home-nav-container"]}>
         {" "}
         {/* 버튼1 */}

@@ -18,7 +18,6 @@ export default async function Home() {
     <main>
       <Header />
       <MainBanner />
-      {/* <NavBar /> */}
       <HomeNavBar />
     </main>
   );

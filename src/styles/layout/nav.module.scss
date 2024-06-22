@@ -17,22 +17,18 @@
 
 .home-effect {
   position: fixed;
-  background: linear-gradient(
-    to top,
-    var(--color-background) 50%,
-
-    transparent
-  );
+  background: linear-gradient(to top, var(--color-background) 30%, transparent);
   height: 25vh;
   width: 100%;
   bottom: 0;
   left: 0;
+  animation: gradient-shift 5s infinite alternate;
 }
 
 .home-nav-container {
   position: fixed;
   bottom: 0;
-  background-color: var(--color-background);
+  // background-color: var(--color-background);
   padding-bottom: 12vh;
   padding-top: 5px;
   width: 100%;
@@ -97,3 +93,5 @@ body[data-theme="dark"] .nav-main-container2 {
 
   border-top: 0.5px solid rgb(0, 0, 0);
 }
+
+// home nav

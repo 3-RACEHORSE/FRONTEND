@@ -1,0 +1,148 @@
+.wrapper .bubble {
+  height: 30px;
+  width: 30px;
+  border: 1px solid var(--color-background);
+  border-radius: 50%;
+  position: absolute;
+  bottom: -10vh;
+  animation: animate 10s linear infinite;
+}
+
+.wrapper .bubble:nth-child(1) {
+  top: 100%;
+  left: 20%;
+  animation-duration: 8s;
+}
+.wrapper .bubble:nth-child(2) {
+  top: 100%;
+  left: 80%;
+  animation-duration: 10s;
+}
+.wrapper .bubble:nth-child(3) {
+  top: 100%;
+  left: 40%;
+  animation-duration: 3s;
+}
+.wrapper .bubble:nth-child(4) {
+  top: 100%;
+  left: 30%;
+  animation-duration: 7s;
+}
+.wrapper .bubble:nth-child(5) {
+  top: 100%;
+  left: 10%;
+  animation-duration: 9s;
+}
+.wrapper .bubble:nth-child(6) {
+  top: 100%;
+  left: 60%;
+  animation-duration: 5s;
+}
+.wrapper .bubble:nth-child(7) {
+  top: 100%;
+  left: 20%;
+  animation-duration: 8s;
+}
+.wrapper .bubble:nth-child(8) {
+  top: 100%;
+  left: 60%;
+  animation-duration: 10s;
+}
+.wrapper .bubble:nth-child(9) {
+  top: 100%;
+  left: 50%;
+  animation-duration: 6s;
+}
+.wrapper .bubble:nth-child(10) {
+  top: 100%;
+  left: 20%;
+  animation-duration: 10s;
+}
+.wrapper .bubble:nth-child(11) {
+  top: 100%;
+  left: 90%;
+  animation-duration: 9s;
+}
+.wrapper .bubble:nth-child(12) {
+  top: 100%;
+  left: 70%;
+  animation-duration: 7s;
+}
+.wrapper .bubble:nth-child(13) {
+  top: 100%;
+  left: 20%;
+  animation-duration: 8s;
+}
+.wrapper .bubble:nth-child(14) {
+  top: 100%;
+  left: 5%;
+  animation-duration: 6s;
+}
+.wrapper .bubble:nth-child(15) {
+  top: 100%;
+  left: 80%;
+  animation-duration: 9s;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.wrapper .bubble:nth-child(1) {
+  transform: scale(0.8);
+}
+.wrapper .bubble:nth-child(2) {
+  transform: scale(1);
+}
+.wrapper .bubble:nth-child(3) {
+  transform: scale(0.6);
+}
+.wrapper .bubble:nth-child(4) {
+  transform: scale(0.9);
+}
+.wrapper .bubble:nth-child(5) {
+  transform: scale(0.7);
+}
+.wrapper .bubble:nth-child(6) {
+  transform: scale(1.2);
+}
+.wrapper .bubble:nth-child(7) {
+  transform: scale(0.5);
+}
+.wrapper .bubble:nth-child(8) {
+  transform: scale(1.1);
+}
+.wrapper .bubble:nth-child(9) {
+  transform: scale(0.4);
+}
+.wrapper .bubble:nth-child(10) {
+  transform: scale(1.3);
+}
+.wrapper .bubble:nth-child(11) {
+  transform: scale(0.7);
+}
+.wrapper .bubble:nth-child(12) {
+  transform: scale(1.2);
+}
+.wrapper .bubble:nth-child(13) {
+  transform: scale(0.6);
+}
+.wrapper .bubble:nth-child(14) {
+  transform: scale(0.9);
+}
+.wrapper .bubble:nth-child(15) {
+  transform: scale(0.8);
+}
