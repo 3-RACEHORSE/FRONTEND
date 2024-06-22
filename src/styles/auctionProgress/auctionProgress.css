@@ -1,0 +1,70 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: blue; */
+  width: 100%;
+  height: 325px;
+}
+
+.wave-one {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  border-radius: 45%;
+  background: #e85175;
+  animation: move 3s infinite linear;
+}
+
+.wave-two {
+  width: 335px;
+  height: 335px;
+  position: absolute;
+  border-radius: 45%;
+  background: #e85175;
+  animation: move 5s infinite linear;
+}
+
+.wave-three {
+  width: 325px;
+  height: 325px;
+  position: absolute;
+  border-radius: 45%;
+  background: #e85175;
+  border: 6px solid #e85175;
+  animation: move 7s infinite linear;
+}
+
+.wave-four {
+  width: 325px;
+  height: 325px;
+  position: absolute;
+  border-radius: 46%;
+  animation: move 8s infinite linear;
+  background: #e85175;
+}
+.center-circle-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: blue; */
+  width: 100%;
+  height: 325px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.center-circle {
+  width: 315px;
+  height: 315px;
+  position: absolute;
+  border-radius: 999%;
+  background-color: white;
+}
+@keyframes move {
+  100% {
+    transform: rotate(360deg);
+  }
+}
