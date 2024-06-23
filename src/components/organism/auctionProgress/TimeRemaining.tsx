@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { convertUToKST } from "@/utils/common/convertUToKST";
 import { isAbsolute } from "path";
@@ -103,7 +105,11 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
     triggerStayEndNotification();
   }
 
-  return <div className="leftTime">남은시간 : {remainingTime}초</div>;
+  return (
+    <div className="leftTime">
+      {isNaN(remainingTime) ? "로딩중..." : `남은시간 : ${remainingTime}초`}
+    </div>
+  );
 };
 
 export default TimeRemaining;
