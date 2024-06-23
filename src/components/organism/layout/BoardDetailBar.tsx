@@ -6,11 +6,13 @@ import Link from "next/link";
 interface BoardDetailBar {
   auctionStartTime?: any;
   state?: any;
+  pathName?: any;
 }
 
 export default function BoardDetailBar({
   auctionStartTime,
   state,
+  pathName,
 }: BoardDetailBar) {
   return (
     <nav className={styles["nav-container"]}>
@@ -37,7 +39,7 @@ export default function BoardDetailBar({
         )}
         {state === "AUCTION_IS_IN_PROGRESS" && (
           <>
-            <Link href="/auctionProgress/1">
+            <Link href={`/auctionProgress/${pathName}`}>
               <div className={styles["info3"]}>진행중 경매</div>
               <div className={styles["info4"]}>경매가 진행중입니다.🔥</div>
             </Link>

@@ -2,6 +2,8 @@
 
 import "@/styles/auctionProgress/auctionProgress.css";
 import confetti from "canvas-confetti";
+import { EventSourcePolyfill } from "event-source-polyfill";
+import { useEffect } from "react";
 
 interface AuctionProgressInfoProps {
   authorization?: any;
@@ -20,6 +22,40 @@ export default function AuctionProgressInfo({
       spread: 60,
     });
   };
+
+  //초반연결
+  useEffect(() => {
+    // const scrollToBottom = () => {
+    //   messagesEndRef.current?.scrollIntoView();
+    // };
+    console.log(authorization, uuid, pathName);
+    const fetchData = async () => {
+      const eventSource = new EventSourcePolyfill(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/auction/auction-page/${pathName}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${authorization}`,
+          },
+          // heartbeatTimeout: 120000,
+        }
+      );
+
+      eventSource.onmessage = (event) => {
+        console.log(JSON.parse(event.data));
+      };
+
+      eventSource.onerror = (error) => {
+        console.error("EventSource error:", error);
+        eventSource.close();
+      };
+
+      return () => eventSource.close();
+    };
+
+    fetchData();
+    // scrollToBottom();
+  }, []);
 
   return (
     <>

@@ -47,6 +47,7 @@ export default async function Page(props: any) {
       <BoardDetailBar
         auctionStartTime={data.auctionStartTime}
         state={data.state}
+        pathName={pathName}
       />
     </main>
   );
