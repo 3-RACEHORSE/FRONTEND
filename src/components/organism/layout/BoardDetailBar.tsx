@@ -27,14 +27,16 @@ export default function BoardDetailBar({
       <div className={styles["button-container2"]}>
         {state === "BEFORE_AUCTION" && (
           <>
-            <div className={styles["info3"]}>예정된 경매</div>
-            <div className={styles["info4"]}>
-              <RemainTime
-                endedAtMilliseconds={
-                  uToMilliseconds(auctionStartTime) + 32400000
-                }
-              />
-            </div>
+            <Link href={`/auctionProgress/${pathName}`}>
+              <div className={styles["info3"]}>예정된 경매</div>
+              <div className={styles["info4"]}>
+                <RemainTime
+                  endedAtMilliseconds={
+                    uToMilliseconds(auctionStartTime) + 32400000
+                  }
+                />
+              </div>
+            </Link>
           </>
         )}
         {state === "AUCTION_IS_IN_PROGRESS" && (
@@ -47,8 +49,10 @@ export default function BoardDetailBar({
         )}
         {state === "AUCTION_NORMAL_CLOSING" && (
           <>
-            <div className={styles["info3"]}>마감된 경매</div>
-            <div className={styles["info4"]}>마감되었습니다.</div>
+            <Link href={`/auctionProgress/${pathName}`}>
+              <div className={styles["info3"]}>마감된 경매</div>
+              <div className={styles["info4"]}>마감되었습니다.</div>
+            </Link>
           </>
         )}
       </div>

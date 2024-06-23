@@ -86,16 +86,12 @@ const ChatRoom: React.FC = () => {
   }, [inView, hasNextPage, fetchNextPage]);
 
   useEffect(() => {
-    // const scrollToBottom = () => {
-    //   messagesEndRef.current?.scrollIntoView();
-    // };
-
     const fetchData = async () => {
       const result = await sessionValid();
       if (result) {
         setUserUUID(result.uuid);
 
-        const eventSource = new EventSourcePolyfill(
+        let eventSource = new EventSourcePolyfill(
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
           {
             withCredentials: true,
@@ -107,10 +103,41 @@ const ChatRoom: React.FC = () => {
           }
         );
 
+        const handleEventSourceError = () => {
+          console.log("재연결");
+          // Attempt to reconnect
+          eventSource = new EventSourcePolyfill(
+            `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
+            {
+              withCredentials: true,
+              headers: {
+                Authorization: `Bearer ${result.authorization}`,
+                uuid: `${result.uuid}`,
+              },
+            }
+          );
+          eventSource.onmessage = (event) => {
+            const newData: ChatType = JSON.parse(event.data);
+            setChatData((prevData) => {
+              if (
+                !prevData.some(
+                  (chat) =>
+                    chat.content === newData.content &&
+                    chat.createdAt === newData.createdAt &&
+                    chat.handle === newData.handle
+                )
+              ) {
+                return [...prevData, newData];
+              }
+              return prevData;
+            });
+            scrollToBottom();
+          };
+          eventSource.onerror = handleEventSourceError;
+        };
+
         eventSource.onmessage = (event) => {
           const newData: ChatType = JSON.parse(event.data);
-          // setTemp(!temp);
-
           setChatData((prevData) => {
             if (
               !prevData.some(
@@ -124,20 +151,18 @@ const ChatRoom: React.FC = () => {
             }
             return prevData;
           });
-          scrollToBottom(); // 안되면 이부분 수정 필요
+          scrollToBottom();
         };
 
-        eventSource.onerror = (error) => {
-          console.error("EventSource error:", error);
+        eventSource.onerror = handleEventSourceError;
+
+        return () => {
           eventSource.close();
         };
-
-        return () => eventSource.close();
       }
     };
 
     fetchData();
-    // scrollToBottom();
   }, [roomNumber.id]);
 
   // useEffect(()=>{
