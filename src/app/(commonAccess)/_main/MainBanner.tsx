@@ -84,9 +84,17 @@ function MainBanner({ data }: MainBannerProps) {
                 <p className={styles.date}>
                   행사시작 {formatDate(item.eventStartTime)}
                 </p>
-                <Link href={`/auctionProgress/${item.auctionUuid}`}>
-                  <button className={styles.button}> 지금 참여하기 &gt;</button>
-                </Link>
+                {item.state === "AUCTION_IS_IN_PROGRESS" && (
+                  <Link href={`/auctionProgress/${item.auctionUuid}`}>
+                    <button className={styles.button}>
+                      {" "}
+                      지금 참여하기 &gt;
+                    </button>
+                  </Link>
+                )}
+                {item.state !== "AUCTION_IS_IN_PROGRESS" && (
+                  <button className={styles.button}> 경매 예정⌛</button>
+                )}
               </div>
             </div>
           ))}

@@ -110,6 +110,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
       redirect("https://fe-meetplus.vercel.app/login");
     }
     const data = await res.json();
+    console.log(data.auctionPostDtos);
     return data.auctionPostDtos;
   };
 
@@ -137,7 +138,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
     objects.map((object, index) => (
       <Link href={`/detail/${object.auctionUuid}`} key={object.auctionUuid}>
         <BoardObject
-          src="/dummy/profile.jpg" // 바꿀것 {object.thumbnail}
+          src={object.thumbnail} // 바꿀것 {object.thumbnail}
           status={
             object.state === "BEFORE_AUCTION"
               ? "예정"
@@ -151,7 +152,7 @@ export default function Scroll({ authorization, uuid }: ScrollProps) {
           startPrice={object.startPrice}
           auctionStartDate={object.auctionStartTime}
           eventStartDate={object.eventStartTime}
-          incrementUnit={50000} // 추후 {object.오는키값}으로 바꿔야함
+          incrementUnit={object.incrementUnit} // 추후 {object.오는키값}으로 바꿔야함
           place={`${object.localName} ${object.eventPlace}`}
           innerRef={index === objects.length - 1 ? ref : undefined}
         />
