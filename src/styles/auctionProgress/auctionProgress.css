@@ -147,8 +147,8 @@ button {
 }
 
 .button {
-  background-color: #0000004c;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   font-size: 17px;
   font-weight: 500;
   padding: 5%;
@@ -163,6 +163,7 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 999px;
+  box-shadow: 0px 0px 3px 1px #dadada;
 }
 
 /* .button:active {
@@ -176,4 +177,24 @@ button {
   width: 100%;
   bottom: 0;
   left: 0;
+}
+
+/*라운드 대기시간*/
+.round-stay {
+  /* position: absolute;
+  top: 20%;
+  left: 50%;
+
+  transform: translate(-50%); */
+  background: linear-gradient(to bottom, #e85175 15%, transparent);
+  display: flex;
+  flex-direction: column; /* 자식 요소를 위아래로 정렬 */
+  justify-content: center; /* 수직 가운데 정렬 */
+  align-items: center; /* 수평 가운데 정렬 */
+  width: 100%; /* 가로를 100vh로 설정 */
+  padding-top: 15vh;
+  padding-bottom: 10vh;
+
+  color: rgb(255, 255, 255);
+  font-size: 13px;
 }
