@@ -13,7 +13,12 @@ export default async function Page(props: any) {
 
   const data = await getDetailListData(pathName, authorization, uuid);
   console.log("pathName", pathName, "받은 데이터", data);
-  console.log("문제상황", data.auctionStartTime);
+
+  const imageData = data.images.map((url: string, index: number) => ({
+    alt: `image${index + 1}`,
+    url,
+    index,
+  }));
 
   return (
     <main style={{ paddingTop: "12vh" }}>
@@ -27,18 +32,7 @@ export default async function Page(props: any) {
         boardContent={data.content}
         eventStartTime={data.eventStartTime}
         place={`${data.localName} ${data.eventPlace}`}
-        imageData={[
-          {
-            alt: "image2",
-            url: "/images/bannerDark/bannerD2.png",
-            index: 2,
-          },
-          {
-            alt: "image2",
-            url: "/images/bannerDark/bannerD2.png",
-            index: 2,
-          },
-        ]}
+        imageData={imageData}
         state={data.state}
       />
       <BoardDetailNotice />
@@ -47,6 +41,7 @@ export default async function Page(props: any) {
       <BoardDetailBar
         auctionStartTime={data.auctionStartTime}
         state={data.state}
+        pathName={pathName}
       />
     </main>
   );

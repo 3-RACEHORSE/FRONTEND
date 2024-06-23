@@ -51,6 +51,8 @@ export default function BoardObject({
             width: "100%",
             height: "100%",
             borderRadius: "5px",
+            objectFit: "cover",
+            objectPosition: "center",
           }}
         />
         <p className={styles["status"]}>{status}</p>
