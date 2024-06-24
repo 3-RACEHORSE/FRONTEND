@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 
 interface TimeRemainingProps {
   auctionUuid?: any;
@@ -63,6 +64,7 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
       console.log(response.status);
       console.log("마감요청 성공 - 경매 끝");
       // 리다이렉션 필요 => 경매 마감
+      redirect(`http://localhost:3000/paymentStay/${auctionUuid}`);
     }
   };
 
@@ -104,7 +106,11 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
 
   return (
     <div className="leftTime">
-      {isNaN(remainingTime) ? "로딩중..." : `남은시간 : ${remainingTime}초`}
+      {isNaN(remainingTime)
+        ? "로딩중..."
+        : remainingTime === -1
+        ? "로딩중..."
+        : `남은시간 : ${remainingTime}초`}
     </div>
   );
 };

@@ -96,7 +96,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
         );
         eventSource.onmessage = (event) => {
           const data = JSON.parse(event.data);
-          console.log(data);
+          // console.log(data);
 
           //입찰버튼 활성화
           setValid(true);
@@ -114,7 +114,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
 
       eventSource.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data);
+        // console.log(data);
 
         //입찰버튼 활성화
         setValid(true);
@@ -146,23 +146,25 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
       )}
 
       {roundInfo.isActive && (
-        <div className="container">
-          <div className="wave-one"></div>
-          <div className="wave-two"></div>
-          <div className="wave-three"></div>
-          <div className="wave-four"></div>
-          <div className="center-circle-container">
-            <div className="center-circle">
-              <h2 className="leftCount">
-                {roundInfo.leftNumberOfParticipants}
-              </h2>
+        <div className="round-stay-layout">
+          <div className="container">
+            <div className="wave-one"></div>
+            <div className="wave-two"></div>
+            <div className="wave-three"></div>
+            <div className="wave-four"></div>
+            <div className="center-circle-container">
+              <div className="center-circle">
+                <h2 className="leftCount">
+                  {roundInfo.leftNumberOfParticipants}
+                </h2>
 
-              <TimeRemaining
-                auctionUuid={pathName}
-                authorization={authorization}
-                endTime={roundInfo.roundEndTime}
-                isActive={roundInfo.isActive}
-              />
+                <TimeRemaining
+                  auctionUuid={pathName}
+                  authorization={authorization}
+                  endTime={roundInfo.roundEndTime}
+                  isActive={roundInfo.isActive}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -200,11 +202,11 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
               <span>입찰가는</span>{" "}
               <span style={{ fontSize: "35px", fontWeight: "bold" }}>
                 {roundInfo.price}
-              </span>{" "}
+              </span>
               <span>원 입니다.</span>
             </p>
           </div>
-          <div className="loader">
+          <div className="loader" style={{ color: "white" }}>
             <TimeRemaining
               auctionUuid={pathName}
               authorization={authorization}
