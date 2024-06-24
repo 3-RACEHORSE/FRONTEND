@@ -106,7 +106,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
             roundEndTime: data.roundEndTime,
             leftNumberOfParticipants: data.leftNumberOfParticipants,
             price: data.price,
-            isActive: data.isActive,
+            isActive: data.isActive, //data.isActive
           });
         };
         eventSource.onerror = handleEventSourceError;
@@ -124,7 +124,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
           roundEndTime: data.roundEndTime,
           leftNumberOfParticipants: data.leftNumberOfParticipants,
           price: data.price,
-          isActive: data.isActive,
+          isActive: data.isActive, //data.isActive
         });
       };
 
@@ -144,48 +144,30 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
           <div className="priceInfo">{roundInfo.round} ROUND</div>
         </>
       )}
-      {!roundInfo.isActive && (
-        <div className="round-stay">
-          <p>
-            <span>다음은</span>{" "}
-            <span style={{ fontWeight: "bold" }}>{roundInfo.round}</span>{" "}
-            <span>ROUND 입니다.</span>
-          </p>
-          <p>
-            <span>입찰가는</span>{" "}
-            <span style={{ fontSize: "35px", fontWeight: "bold" }}>
-              {roundInfo.price}
-            </span>{" "}
-            <span>원 입니다.</span>
-          </p>
-        </div>
-      )}
-      <div className="container">
-        {roundInfo.isActive && (
-          <>
-            <div className="wave-one"></div>
-            <div className="wave-two"></div>
-            <div className="wave-three"></div>
-            <div className="wave-four"></div>
-          </>
-        )}
 
-        <div className="center-circle-container">
-          <div className="center-circle">
-            {roundInfo.isActive && (
+      {roundInfo.isActive && (
+        <div className="container">
+          <div className="wave-one"></div>
+          <div className="wave-two"></div>
+          <div className="wave-three"></div>
+          <div className="wave-four"></div>
+          <div className="center-circle-container">
+            <div className="center-circle">
               <h2 className="leftCount">
                 {roundInfo.leftNumberOfParticipants}
               </h2>
-            )}
-            <TimeRemaining
-              auctionUuid={pathName}
-              authorization={authorization}
-              endTime={roundInfo.roundEndTime}
-              isActive={roundInfo.isActive}
-            />
+
+              <TimeRemaining
+                auctionUuid={pathName}
+                authorization={authorization}
+                endTime={roundInfo.roundEndTime}
+                isActive={roundInfo.isActive}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
       {/* 입찰전 그리고 라운드진행중 */}
       {valid && roundInfo.isActive && (
         <button className="button" onClick={onClick}>
@@ -203,6 +185,34 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
           </span>
           <span>입찰완료</span>
         </button>
+      )}
+
+      {/* 대기화면 */}
+      {!roundInfo.isActive && (
+        <div className="round-stay-layout">
+          <div className="round-stay">
+            <p>
+              <span>다음은</span>{" "}
+              <span style={{ fontWeight: "bold" }}>{roundInfo.round}</span>{" "}
+              <span>ROUND 입니다.</span>
+            </p>
+            <p>
+              <span>입찰가는</span>{" "}
+              <span style={{ fontSize: "35px", fontWeight: "bold" }}>
+                {roundInfo.price}
+              </span>{" "}
+              <span>원 입니다.</span>
+            </p>
+          </div>
+          <div className="loader">
+            <TimeRemaining
+              auctionUuid={pathName}
+              authorization={authorization}
+              endTime={roundInfo.roundEndTime}
+              isActive={roundInfo.isActive}
+            />
+          </div>
+        </div>
       )}
     </>
   );

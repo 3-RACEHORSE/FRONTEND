@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { convertUToKST } from "@/utils/common/convertUToKST";
-import { isAbsolute } from "path";
-import RemainTime from "@/app/(commonAccess)/detail/[id]/_component/RemainTime";
 
 interface TimeRemainingProps {
   auctionUuid?: any;
