@@ -1,9 +1,13 @@
+/* body {
+  background: linear-gradient(135deg, #fad0c4, #ffd1ff);
+} */
+
 .roundInfo {
   position: absolute;
   top: 20%;
   left: 50%;
-  transform: translate(-70%, -80%);
-  background-color: #ff3f6c;
+  transform: translate(-50%, -80%);
+  background-color: #00000025;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,19 +21,20 @@
 }
 .priceInfo {
   position: absolute;
-  top: 20%;
+  top: 15.5%;
   left: 50%;
-  transform: translate(-30%, -5%);
-  background-color: #ff3f6c8e;
+  transform: translate(-50%, -80%);
+  background-color: #ff9996;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3%;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
   border-radius: 99px;
   color: white;
-  font-size: 17px;
+  font-size: 12px;
+  z-index: 999;
 }
 
 .bidBtn {
@@ -65,9 +70,10 @@
   height: 33vh;
   /* position: absolute; */
   border-radius: 45%;
-  background: #ff3f6c6b;
+  /* background: #ff3f6c6b; */
   /* background: black; */
   animation: move 3s infinite linear;
+  border: 3px solid #ffffff5d;
 }
 
 .wave-two {
@@ -75,8 +81,9 @@
   height: 31vh;
   position: absolute;
   border-radius: 45%;
-  background: #ff3f6cae;
+  /* background: #ff3f6cae; */
   animation: move 5s infinite linear;
+  border: 4px solid #ffffff5d;
 }
 
 .wave-three {
@@ -84,8 +91,9 @@
   height: 30vh;
   position: absolute;
   border-radius: 45%;
-  background: rgba(255, 182, 199, 0.875);
+  /* background: rgba(255, 182, 199, 0.875); */
   animation: move 7s infinite linear;
+  border: 4px solid rgba(255, 182, 199, 0.565);
 }
 
 .wave-four {
@@ -94,7 +102,8 @@
   position: absolute;
   border-radius: 46%;
   animation: move 8s infinite linear;
-  background: #ff3f6c6b;
+  /* background: #ff3f6c6b; */
+  border: 4px solid #ffffff28;
 }
 .center-circle-container {
   position: absolute;
@@ -118,14 +127,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .leftCount {
   font-size: 70px;
   font-weight: bold;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #e85175;
+  color: #ffffff;
 }
 .leftTime {
   font-size: 15px;
@@ -147,10 +156,10 @@ button {
 }
 
 .button {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #00000025;
+  color: #ffffff;
   font-size: 17px;
-  font-weight: 500;
+  /* font-weight: 500; */
   padding: 5%;
   width: 70vw;
   z-index: 999;
@@ -163,7 +172,7 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 999px;
-  box-shadow: 0px 0px 3px 1px #dadada;
+  box-shadow: 0px 0px 3px 1px #ff68682d;
 }
 
 /* .button:active {
@@ -172,13 +181,20 @@ button {
 
 .auction-effect {
   position: fixed;
-  background: linear-gradient(to top, #e85175 15%, transparent);
+  /* background: linear-gradient(to top, #e85175 15%, transparent); */
   height: 25vh;
   width: 100%;
   bottom: 0;
   left: 0;
 }
 
+/*대기시간*/
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+.round-stay-layout {
+  height: 100vh;
+  background: linear-gradient(135deg, #e85175, #ffad96);
+}
 /*라운드 대기시간*/
 .round-stay {
   /* position: absolute;
@@ -186,15 +202,78 @@ button {
   left: 50%;
 
   transform: translate(-50%); */
-  background: linear-gradient(to bottom, #e85175 15%, transparent);
   display: flex;
   flex-direction: column; /* 자식 요소를 위아래로 정렬 */
   justify-content: center; /* 수직 가운데 정렬 */
   align-items: center; /* 수평 가운데 정렬 */
   width: 100%; /* 가로를 100vh로 설정 */
   padding-top: 15vh;
-  padding-bottom: 10vh;
+  /* padding-bottom: 5vh; */
 
   color: rgb(255, 255, 255);
   font-size: 13px;
+}
+
+/* body {
+  background: linear-gradient(135deg, #e85175, #ff7f98);
+  color: #ccc;
+  font-family: sans-serif;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.loader {
+  width: 270px;
+  height: 270px;
+  line-height: 150px;
+  margin: 100px auto;
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 0;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader:before,
+.loader:after {
+  opacity: 0;
+  box-sizing: border-box;
+  content: "\0020";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  border: 5px solid #fff;
+  box-shadow: 0 0 50px #fff, inset 0 0 50px #fff;
+}
+
+.loader:after {
+  z-index: 1;
+  -webkit-animation: gogoloader 2s infinite 1s;
+}
+
+.loader:before {
+  z-index: 2;
+  -webkit-animation: gogoloader 2s infinite;
+}
+
+@-webkit-keyframes gogoloader {
+  0% {
+    -webkit-transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
 }

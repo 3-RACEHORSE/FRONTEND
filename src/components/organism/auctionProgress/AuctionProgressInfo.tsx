@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import confetti from "canvas-confetti";
-import { EventSourcePolyfill } from "event-source-polyfill";
+import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 import TimeRemaining from "@/components/organism/auctionProgress/TimeRemaining";
 
 interface AuctionProgressInfoProps {
@@ -70,9 +70,11 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
   };
 
   // Fetch initial data
+  const eventSource = useRef<null | EventSource>(null);
+
   useEffect(() => {
-    const fetchData = async () => {
-      let eventSource = new EventSourcePolyfill(
+    const fetchSSE = () => {
+      eventSource.current = new EventSourcePolyfill(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/auction/auction-page/${pathName}`,
         {
           withCredentials: true,
@@ -82,60 +84,48 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
         }
       );
 
-      const handleEventSourceError = () => {
-        console.error("EventSource error. Reconnecting...");
-        // Attempt to reconnect
-        eventSource = new EventSourcePolyfill(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/auction/auction-page/${pathName}`,
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${authorization}`,
-            },
-          }
-        );
-        eventSource.onmessage = (event) => {
-          const data = JSON.parse(event.data);
-          console.log(data);
-
-          //입찰버튼 활성화
-          setValid(true);
-
-          setRoundInfo({
-            round: data.round,
-            roundEndTime: data.roundEndTime,
-            leftNumberOfParticipants: data.leftNumberOfParticipants,
-            price: data.price,
-            isActive: data.isActive,
-          });
-        };
-        eventSource.onerror = handleEventSourceError;
-      };
-
-      eventSource.onmessage = (event) => {
+      eventSource.current.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data);
+
+        if (data.round === null) {
+          console.log("데이터가 null입니다. 재연결 시도 중...");
+          eventSource.current?.close();
+          // setTimeout(fetchSSE, 3000);
+          fetchSSE();
+          console.log("연결됨");
+          return;
+        }
 
         //입찰버튼 활성화
         setValid(true);
+        console.log(data);
 
         setRoundInfo({
           round: data.round,
           roundEndTime: data.roundEndTime,
           leftNumberOfParticipants: data.leftNumberOfParticipants,
           price: data.price,
-          isActive: data.isActive,
+          isActive: data.isActive, //data.isActive
         });
       };
 
-      eventSource.onerror = handleEventSourceError;
-
-      return () => eventSource.close();
+      eventSource.current.onerror = async () => {
+        console.log("에러");
+        eventSource.current?.close();
+        setTimeout(fetchSSE, 3000);
+      };
+      eventSource.current.onopen = (event) => {
+        console.log("onopen");
+        console.log("연결 성공:", event);
+      };
     };
 
-    fetchData();
-  }, [authorization, pathName]);
-
+    fetchSSE();
+    console.log("안녕");
+    return () => {
+      eventSource.current?.close();
+    };
+  }, [valid]);
   return (
     <>
       {roundInfo.isActive && (
@@ -144,48 +134,32 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
           <div className="priceInfo">{roundInfo.round} ROUND</div>
         </>
       )}
-      {!roundInfo.isActive && (
-        <div className="round-stay">
-          <p>
-            <span>다음은</span>{" "}
-            <span style={{ fontWeight: "bold" }}>{roundInfo.round}</span>{" "}
-            <span>ROUND 입니다.</span>
-          </p>
-          <p>
-            <span>입찰가는</span>{" "}
-            <span style={{ fontSize: "35px", fontWeight: "bold" }}>
-              {roundInfo.price}
-            </span>{" "}
-            <span>원 입니다.</span>
-          </p>
-        </div>
-      )}
-      <div className="container">
-        {roundInfo.isActive && (
-          <>
+
+      {roundInfo.isActive && roundInfo.roundEndTime && (
+        <div className="round-stay-layout">
+          <div className="container">
             <div className="wave-one"></div>
             <div className="wave-two"></div>
             <div className="wave-three"></div>
             <div className="wave-four"></div>
-          </>
-        )}
+            <div className="center-circle-container">
+              <div className="center-circle">
+                <h2 className="leftCount">
+                  {roundInfo.leftNumberOfParticipants}
+                </h2>
 
-        <div className="center-circle-container">
-          <div className="center-circle">
-            {roundInfo.isActive && (
-              <h2 className="leftCount">
-                {roundInfo.leftNumberOfParticipants}
-              </h2>
-            )}
-            <TimeRemaining
-              auctionUuid={pathName}
-              authorization={authorization}
-              endTime={roundInfo.roundEndTime}
-              isActive={roundInfo.isActive}
-            />
+                <TimeRemaining
+                  auctionUuid={pathName}
+                  authorization={authorization}
+                  endTime={roundInfo.roundEndTime}
+                  isActive={roundInfo.isActive}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
       {/* 입찰전 그리고 라운드진행중 */}
       {valid && roundInfo.isActive && (
         <button className="button" onClick={onClick}>
@@ -203,6 +177,34 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
           </span>
           <span>입찰완료</span>
         </button>
+      )}
+
+      {/* 대기화면 */}
+      {!roundInfo.isActive && (
+        <div className="round-stay-layout">
+          <div className="round-stay">
+            <p>
+              <span>다음은</span>{" "}
+              <span style={{ fontWeight: "bold" }}>{roundInfo.round}</span>{" "}
+              <span>ROUND 입니다.</span>
+            </p>
+            <p>
+              <span>입찰가는</span>{" "}
+              <span style={{ fontSize: "35px", fontWeight: "bold" }}>
+                {roundInfo.price}
+              </span>
+              <span>원 입니다.</span>
+            </p>
+          </div>
+          <div className="loader" style={{ color: "white" }}>
+            <TimeRemaining
+              auctionUuid={pathName}
+              authorization={authorization}
+              endTime={roundInfo.roundEndTime}
+              isActive={roundInfo.isActive}
+            />
+          </div>
+        </div>
       )}
     </>
   );

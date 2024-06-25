@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { convertUToKST } from "@/utils/common/convertUToKST";
-import { isAbsolute } from "path";
-import RemainTime from "@/app/(commonAccess)/detail/[id]/_component/RemainTime";
+import { redirect, useRouter } from "next/navigation";
 
 interface TimeRemainingProps {
   auctionUuid?: any;
@@ -18,6 +16,8 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
   endTime,
   isActive,
 }) => {
+  const router = useRouter();
+
   const [remainingTime, setRemainingTime] = useState<number>(-1);
   const [toggle, setToggle] = useState(true); // false일경우, 라운드마감, true일 경우 대기마감
 
@@ -66,6 +66,8 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
       console.log(response.status);
       console.log("마감요청 성공 - 경매 끝");
       // 리다이렉션 필요 => 경매 마감
+      // redirect(`http://localhost:3000/paymentStay/${auctionUuid}`);
+      router.push(`http://localhost:3000/paymentStay/${auctionUuid}`);
     }
   };
 
@@ -106,8 +108,12 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
   }
 
   return (
-    <div className="leftTime">
-      {isNaN(remainingTime) ? "로딩중..." : `남은시간 : ${remainingTime}초`}
+    <div className="leftTime" style={{ color: "#ffffff" }}>
+      {isNaN(remainingTime)
+        ? "로딩중..."
+        : remainingTime === -1
+        ? "로딩중..."
+        : `남은시간 : ${remainingTime}초`}
     </div>
   );
 };
