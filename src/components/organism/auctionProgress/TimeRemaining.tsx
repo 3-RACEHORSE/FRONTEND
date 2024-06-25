@@ -69,7 +69,7 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
       console.log("마감요청 성공 - 경매 끝");
       // 리다이렉션 필요 => 경매 마감
       // redirect(`http://localhost:3000/paymentStay/${auctionUuid}`);
-      router.push(`http://localhost:3000/paymentStay/${auctionUuid}`);
+      router.push(`https://fe-meetplus.vercel.app//paymentStay/${auctionUuid}`);
     }
   };
 
