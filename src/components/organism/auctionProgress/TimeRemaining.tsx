@@ -18,8 +18,6 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
   isActive,
   setValid,
 }) => {
-  const router = useRouter();
-
   const [remainingTime, setRemainingTime] = useState<number>(-1);
   const [toggle, setToggle] = useState(true); // false일경우, 라운드마감, true일 경우 대기마감
 
@@ -68,8 +66,9 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
       console.log(response.status);
       console.log("마감요청 성공 - 경매 끝");
       // 리다이렉션 필요 => 경매 마감
-      // redirect(`http://localhost:3000/paymentStay/${auctionUuid}`);
-      router.push(`https://fe-meetplus.vercel.app//paymentStay/${auctionUuid}`);
+      redirect(`http://localhost:3000/paymentStay/${auctionUuid}`);
+
+      // router.push(`https://fe-meetplus.vercel.app//paymentStay/${auctionUuid}`);
     }
   };
 

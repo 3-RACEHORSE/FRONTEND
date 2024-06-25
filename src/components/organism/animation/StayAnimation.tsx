@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import "@/styles/animation/paymentStay.css";
+import { redirect, useRouter } from "next/navigation";
 
 interface StayAnimationProps {
   authorization: any;
@@ -46,6 +47,17 @@ const StayAnimation = ({
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
+
+    // false면, 메인페이지
+    // true면, 결제페이지로
+    // {
+    //   "price" : 0,
+    //   "bidder" : true
+    // }
+    if (data.bidder) {
+      redirect(`http://localhost:3000/payment/${auctionUuid}`);
+    }
+
     console.log(data);
   };
 
