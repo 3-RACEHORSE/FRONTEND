@@ -32,7 +32,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
     isActive: true,
   });
 
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(true);
 
   // 입찰 이펙트
   const onClick = async (): Promise<void> => {
@@ -96,8 +96,6 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
           return;
         }
 
-        //입찰버튼 활성화
-        setValid(true);
         console.log(data);
 
         setRoundInfo({
@@ -153,6 +151,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
                   authorization={authorization}
                   endTime={roundInfo.roundEndTime}
                   isActive={roundInfo.isActive}
+                  setValid={setValid}
                 />
               </div>
             </div>
@@ -202,6 +201,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
               authorization={authorization}
               endTime={roundInfo.roundEndTime}
               isActive={roundInfo.isActive}
+              setValid={setValid}
             />
           </div>
         </div>

@@ -9,7 +9,11 @@ export default async function Page(props: any) {
 
   return (
     <main>
-      <StayAnimation />
+      <StayAnimation
+        authorization={authorization}
+        auctionUuid={pathName}
+        uuid={uuid}
+      />
     </main>
   );
 }

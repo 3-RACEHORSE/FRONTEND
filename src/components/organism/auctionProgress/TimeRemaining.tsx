@@ -8,6 +8,7 @@ interface TimeRemainingProps {
   authorization?: any;
   endTime: string;
   isActive: boolean;
+  setValid: (value: boolean) => void;
 }
 
 const TimeRemaining: React.FC<TimeRemainingProps> = ({
@@ -15,6 +16,7 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
   authorization,
   endTime,
   isActive,
+  setValid,
 }) => {
   const router = useRouter();
 
@@ -89,6 +91,7 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
       // setToggle(false);
       console.log(response.status);
       console.log("대기마감요청 성공");
+      setValid(true);
     }
   };
 

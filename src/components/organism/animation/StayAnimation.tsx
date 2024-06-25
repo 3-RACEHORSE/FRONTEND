@@ -3,7 +3,17 @@
 import React, { useEffect, useState } from "react";
 import "@/styles/animation/paymentStay.css";
 
-const StayAnimation = () => {
+interface StayAnimationProps {
+  authorization: any;
+  auctionUuid: any;
+  uuid: any;
+}
+
+const StayAnimation = ({
+  authorization,
+  auctionUuid,
+  uuid,
+}: StayAnimationProps) => {
   const messages = [
     "경매가 종료되었습니다.",
     "고생하셨습니다.",
@@ -22,17 +32,27 @@ const StayAnimation = () => {
   }, []);
 
   /* 결제 유효 확인*/
+  const fetchData = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/auction/result/${auctionUuid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${authorization}`,
+          uuid: `${uuid}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    console.log(data);
+  };
+
   useEffect(() => {
-    // const fetchData = async () => {
-    //   const response = await fetch(
-    //     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/auction/auction-page/${pathName}`
-    //   );
-    //   if (!response.ok) {
-    //     throw new Error("Network response was not ok");
-    //   }
-    //   const data = await response.json();
-    // };
-    // fetchData();
+    setTimeout(() => {
+      fetchData();
+    }, 15000);
   }, []);
 
   return (
