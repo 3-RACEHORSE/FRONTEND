@@ -24,6 +24,7 @@ export default function PaymentInfo() {
               <p style={{ color: "#a3a3a3" }}>회사명</p>
               <p style={{ color: "#333333" }}>(주)경주마</p>
             </div>
+            <div className={styles["elment2-line"]}></div>
             <div className={styles["elment2-info2"]}>
               <p style={{ color: "#a3a3a3" }}>경매명</p>
               <p style={{ color: "#333333" }}>SHIN-875</p>
