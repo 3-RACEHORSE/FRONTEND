@@ -1,5 +1,5 @@
 .payment-header {
-  background: linear-gradient(135deg, #e85175, #ff7f98);
+  background: linear-gradient(135deg, #e85175, #ff9060, #ff7f98);
   width: 100%;
   aspect-ratio: 1.5 / 1;
 }
@@ -65,11 +65,39 @@
 }
 
 .payment-header-element2 {
-  //   padding: 3%;
-}
-
-.payment-header-element2 img {
   position: absolute;
   //   margin-top: 17%;
   padding: 3%;
+}
+
+.elment2-img {
+  position: relative;
+  margin-bottom: 10px; /* 이미지 아래 여백 추가 */
+}
+
+.elment2-info {
+  position: absolute;
+  top: 40%; /* 예시: 이미지의 중앙에 위치하도록 설정 */
+  left: 50%; /* 예시: 이미지의 중앙에 위치하도록 설정 */
+  transform: translate(-50%, -50%); /* 부모 요소의 가운데 정렬 */
+  padding: 5px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center; /* 텍스트 가운데 정렬 */
+  width: 80vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: column; /* 요소를 세로로 배치 */
+  justify-content: space-between; /* 요소 사이에 공간 분배 */
+}
+
+.elment2-info1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.elment2-info2 {
+  display: flex;
+  justify-content: space-between;
 }
