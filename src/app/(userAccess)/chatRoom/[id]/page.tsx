@@ -34,6 +34,9 @@ export default async function Page(props: any) {
 
   const data = await getUserPofileData(roomNumber);
   console.log(data);
+
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
   return (
     <main>
       <BackHeader
@@ -41,7 +44,7 @@ export default async function Page(props: any) {
         title={data.title}
         type={"chatroom"}
       />
-      <ChatRoom />
+      <ChatRoom authorization={authorization} uuid={uuid} />
       {/* <ChatSendBar /> */}
     </main>
   );

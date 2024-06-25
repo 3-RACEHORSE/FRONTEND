@@ -12,6 +12,11 @@ import { convertUToKST } from "@/utils/common/convertUToKST";
 import { sessionValid } from "@/utils/session/sessionValid";
 import styles from "@/styles/organism/chat.module.scss";
 
+interface ChatProps {
+  authorization: any;
+  uuid: any;
+}
+
 interface ChatType {
   content: string;
   createdAt: string;
@@ -20,7 +25,7 @@ interface ChatType {
   uuid: string;
 }
 
-const ChatRoom: React.FC = () => {
+const ChatRoom: React.FC<ChatProps> = ({ authorization, uuid }) => {
   const roomNumber = useParams();
   const [chatData, setChatData] = useState<ChatType[]>([]);
   const [userUUID, setUserUUID] = useState<any>("");
@@ -85,85 +90,66 @@ const ChatRoom: React.FC = () => {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
+  const eventSource = useRef<null | EventSource>(null);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await sessionValid();
-      if (result) {
-        setUserUUID(result.uuid);
+    const fetchSSE = () => {
+      eventSource.current = new EventSourcePolyfill(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
+          },
+        }
+      );
 
-        let eventSource = new EventSourcePolyfill(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${result.authorization}`,
-              uuid: `${result.uuid}`,
-            },
-            // heartbeatTimeout: 120000,
+      eventSource.current.onmessage = (event) => {
+        const newData: ChatType = JSON.parse(event.data);
+        console.log("새로 받은 데이터", newData);
+        // if (data.round === null) {
+        //   console.log("데이터가 null입니다. 재연결 시도 중...");
+        //   eventSource.current?.close();
+        //   // setTimeout(fetchSSE, 3000);
+        //   fetchSSE();
+        //   console.log("연결됨");
+        //   return;
+        // }
+        setChatData((prevData) => {
+          if (
+            !prevData.some(
+              (chat) =>
+                chat.content === newData.content &&
+                chat.createdAt === newData.createdAt &&
+                chat.handle === newData.handle
+            )
+          ) {
+            return [...prevData, newData];
           }
-        );
+          return prevData;
+        });
+        scrollToBottom();
+      };
 
-        const handleEventSourceError = () => {
-          console.log("재연결");
-          // Attempt to reconnect
-          eventSource = new EventSourcePolyfill(
-            `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber.id}`,
-            {
-              withCredentials: true,
-              headers: {
-                Authorization: `Bearer ${result.authorization}`,
-                uuid: `${result.uuid}`,
-              },
-            }
-          );
-          eventSource.onmessage = (event) => {
-            const newData: ChatType = JSON.parse(event.data);
-            setChatData((prevData) => {
-              if (
-                !prevData.some(
-                  (chat) =>
-                    chat.content === newData.content &&
-                    chat.createdAt === newData.createdAt &&
-                    chat.handle === newData.handle
-                )
-              ) {
-                return [...prevData, newData];
-              }
-              return prevData;
-            });
-            scrollToBottom();
-          };
-          eventSource.onerror = handleEventSourceError;
-        };
-
-        eventSource.onmessage = (event) => {
-          const newData: ChatType = JSON.parse(event.data);
-          setChatData((prevData) => {
-            if (
-              !prevData.some(
-                (chat) =>
-                  chat.content === newData.content &&
-                  chat.createdAt === newData.createdAt &&
-                  chat.handle === newData.handle
-              )
-            ) {
-              return [...prevData, newData];
-            }
-            return prevData;
-          });
-          scrollToBottom();
-        };
-
-        eventSource.onerror = handleEventSourceError;
-
-        return () => {
-          eventSource.close();
-        };
-      }
+      eventSource.current.onerror = async () => {
+        console.log("에러");
+        eventSource.current?.close();
+        // setTimeout(fetchSSE, 3000);
+        fetchSSE();
+      };
+      eventSource.current.onopen = (event) => {
+        console.log("onopen");
+        console.log("연결 성공:", event);
+      };
     };
 
-    fetchData();
-  }, [roomNumber.id]);
+    fetchSSE();
+    console.log("안녕");
+    return () => {
+      eventSource.current?.close();
+    };
+  }, []);
 
   // useEffect(()=>{
   //   scrollToBottom()
@@ -172,6 +158,7 @@ const ChatRoom: React.FC = () => {
     messagesEndRef.current?.scrollIntoView();
   };
 
+  //스크롤 유지 로직
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
     if (chatContainer) {
@@ -250,18 +237,11 @@ const ChatRoom: React.FC = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (inputRef.current) {
-  //     inputRef.current.click();
-  //   }
-  // }, []);
-
   return (
     <>
       <main className={styles.main} ref={chatContainerRef}>
-        {/* <main className={styles.main}> */}
         {chatData.map((chat, index) => {
-          const isUserMessage = chat.uuid === userUUID;
+          const isUserMessage = chat.uuid === uuid;
           const isSameHandleAsPrevious =
             index > 0 && chatData[index - 1].handle === chat.handle;
 
