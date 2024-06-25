@@ -1,4 +1,4 @@
-body {
+.container {
   color: #e85175;
   font-family: sans-serif;
   font-size: 14px;
@@ -6,6 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   animation: fadeIn 2s ease-in-out;
+  height: 100vh;
 }
 
 .loader {
