@@ -57,9 +57,9 @@ const StayAnimation = ({
     if (data.bidder) {
       // redirect(`http://localhost:3000/payment/${auctionUuid}`);
       console.log("dd");
-      router.push(`http://localhost:3000/payment/${auctionUuid}`);
+      router.push(`/payment/${auctionUuid}`);
     } else {
-      router.push("http://localhost:3000");
+      router.push("/");
     }
   };
 

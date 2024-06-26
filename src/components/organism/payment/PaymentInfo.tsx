@@ -1,6 +1,11 @@
 import styles from "@/styles/organism/payment.module.scss";
 
-export default function PaymentInfo() {
+interface PaymentInfoProps {
+  price?: any;
+  title?: any;
+}
+
+export default function PaymentInfo({ price, title }: PaymentInfoProps) {
   return (
     <>
       <header className={styles["payment-header"]}>
@@ -11,7 +16,7 @@ export default function PaymentInfo() {
             <div className={styles["payment-header-div2"]}>
               <p>결제금액</p>
             </div>
-            <div className={styles["payment-header-div3"]}>10,000</div>
+            <div className={styles["payment-header-div3"]}>{price}</div>
           </div>
         </section>
         <section className={styles["payment-header-element2"]}>
@@ -27,7 +32,7 @@ export default function PaymentInfo() {
             <div className={styles["elment2-line"]}></div>
             <div className={styles["elment2-info2"]}>
               <p style={{ color: "#a3a3a3" }}>경매명</p>
-              <p style={{ color: "#333333" }}>SHIN-875</p>
+              <p style={{ color: "#333333" }}>{title}</p>
             </div>
           </div>
         </section>
