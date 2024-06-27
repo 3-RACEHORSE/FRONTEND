@@ -9,6 +9,9 @@ interface AlarmListProps {
   alarmUrl: any;
   message: any;
   alarmTime?: any;
+  id?: any;
+  authorization?: any;
+  uuid?: any;
 }
 
 const AlarmList: FC<AlarmListProps> = ({
@@ -16,6 +19,9 @@ const AlarmList: FC<AlarmListProps> = ({
   alarmUrl,
   message,
   alarmTime,
+  id,
+  authorization,
+  uuid,
 }) => {
   const [startX, setStartX] = useState<number>(0);
   const [currentX, setCurrentX] = useState<number>(0);
@@ -26,12 +32,12 @@ const AlarmList: FC<AlarmListProps> = ({
     const now = new Date();
     const utcDate = new Date(utcTime);
     const diffMilliseconds = now.getTime() - utcDate.getTime();
-    // console.log(utcDate.getTime());
-    const diffSeconds = Math.abs(diffMilliseconds - 32400) / 1000;
-
-    const days = Math.floor(diffSeconds / 86400);
-    const hours = Math.floor(diffSeconds / 3600) % 24;
-    const minutes = Math.floor(diffSeconds / 60) % 60;
+    console.log(now.getTime(), utcDate.getTime());
+    const diffSeconds = Math.abs(diffMilliseconds) / 1000;
+    const resultTime = diffSeconds - 32400;
+    const days = Math.floor(resultTime / 86400);
+    const hours = Math.floor(resultTime / 3600) % 24;
+    const minutes = Math.floor(resultTime / 60) % 60;
 
     if (days > 0) {
       if (days === 1) {
@@ -57,14 +63,36 @@ const AlarmList: FC<AlarmListProps> = ({
       const deltaX = touchX - startX;
       if (deltaX < 0) {
         setCurrentX(deltaX);
+        //삭제
       }
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = async () => {
     if (isSwiping) {
       if (-currentX - window.innerWidth / 2 > 0) {
-        setIsVisible(false);
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/notification-service/api/v1/alarm/delete/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${authorization}`,
+                uuid: `${uuid}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          setIsVisible(false);
+          console.log(response.status);
+        } catch (error) {
+          console.error("Error deleting alarm:", error);
+        }
       }
       setIsSwiping(false);
       setCurrentX(0);

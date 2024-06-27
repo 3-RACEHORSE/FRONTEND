@@ -63,9 +63,7 @@ export default function BoardDetailInfoWithText({
 
               <div className={styles["boardDetail-element1-content-info2"]}>
                 <RemainTime
-                  endedAtMilliseconds={
-                    uToMilliseconds(auctionStartTime) + 32400000
-                  }
+                  endedAtMilliseconds={uToMilliseconds(auctionStartTime)}
                 />
               </div>
             </div>

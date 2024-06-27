@@ -41,6 +41,9 @@ export default async function Page() {
             alarmUrl="url"
             message={notification.message}
             alarmTime={notification.alarmTime}
+            id={notification.id}
+            authorization={authorization}
+            uuid={uuid}
           />
         ))}
       </div>
