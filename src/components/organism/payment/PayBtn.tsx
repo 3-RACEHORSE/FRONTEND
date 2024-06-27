@@ -50,7 +50,7 @@ export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
       buyer_email: "14279625@gmail.com",
       buyer_addr: "경주마로 000-00",
       buyer_postalcode: "01234",
-      m_redirect_url: `http://localhost:3000/payment/${pathName}`,
+      m_redirect_url: `https://fe-meetplus.vercel.app/payment/${pathName}`,
     };
     IMP.request_pay(data);
   };
