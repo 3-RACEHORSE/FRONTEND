@@ -63,6 +63,9 @@ async function getChatListLastMessage(roomNumber: any) {
 }
 
 export default async function Page() {
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
+
   const data = await getChatListData();
   const roomNumbers = data.map((chat: { roomNumber: any }) => chat.roomNumber);
 
@@ -83,6 +86,9 @@ export default async function Page() {
               title={chat.title}
               updatedAt={content[index]?.createdAt}
               content={content[index]?.content}
+              authorization={authorization}
+              uuid={uuid}
+              roomNumber={chat.roomNumber}
             />
           </Link>
         ))}
