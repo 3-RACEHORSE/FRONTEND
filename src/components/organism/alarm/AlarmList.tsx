@@ -63,7 +63,6 @@ const AlarmList: FC<AlarmListProps> = ({
       const deltaX = touchX - startX;
       if (deltaX < 0) {
         setCurrentX(deltaX);
-        //삭제
       }
     }
   };
@@ -102,10 +101,16 @@ const AlarmList: FC<AlarmListProps> = ({
 
   if (!isVisible) return null;
 
+  const brightness = Math.max(1 + currentX / 200, 0.3);
+
   return (
     <div
       className={`${styles.alarmContainer} ${isSwiping ? styles.swiping : ""}`}
-      style={{ marginTop: "1vh", transform: `translateX(${currentX}px)` }}
+      style={{
+        marginTop: "1vh",
+        transform: `translateX(${currentX}px)`,
+        filter: `brightness(${brightness})`,
+      }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
