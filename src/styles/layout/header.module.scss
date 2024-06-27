@@ -112,3 +112,13 @@
   font-weight: bold;
   color: #2f2f2f;
 }
+
+.alarm {
+  position: absolute;
+  background: #ff003c;
+  border-radius: 999px;
+  height: 1vh;
+  width: 1vh;
+  right: 0;
+  margin-right: 3%;
+}

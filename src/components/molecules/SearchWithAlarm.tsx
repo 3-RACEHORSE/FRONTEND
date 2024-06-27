@@ -12,6 +12,7 @@ import Link from "next/link";
 
 export default function SearchWithAlarm() {
   const pathName = usePathname();
+
   return (
     <>
       <Logo />

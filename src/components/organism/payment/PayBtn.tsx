@@ -50,42 +50,35 @@ export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
       buyer_email: "14279625@gmail.com",
       buyer_addr: "경주마로 000-00",
       buyer_postalcode: "01234",
-      m_redirect_url: `http://localhost:3000/payment/${auctionUuid}`,
+      m_redirect_url: `http://localhost:3000/payment/${pathName}`,
     };
     IMP.request_pay(data);
   };
 
   /*결제 api - 백엔드 통신*/
-  const handlePaymentSend = async (
-    auctionUuid: any,
-    merchantUid: any,
-    impUid: any
-  ) => {
+  const handlePaymentSend = async (auctionUuid: any, impUid: any) => {
+    console.log(authorization, uuid, impUid, auctionUuid);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/payment-service/api/v1/payment`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          token: `Bearer ${authorization}`,
+          Authorization: `Bearer ${authorization}`,
           uuid: `${uuid}`,
+          impUid: impUid,
         },
         body: JSON.stringify({
           auctionUuid: auctionUuid,
-          paymentMethod: "아임포트 결제",
-          amountPaid: 100, // 나중에 동적 조정 필요
-          paymentNumber: merchantUid,
-          impUid: impUid,
         }),
       }
     );
-
     if (response.ok) {
       // const data = await response.json();
-      // console.log("결제 성공", data);
+      console.log("결제 성공", response.status);
       router.push("/");
     } else {
-      router.push("/");
+      // router.push("/");
 
       console.error("결제 실패", response.statusText);
     }
@@ -107,14 +100,14 @@ export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
       setMerchantUid(merchantUid);
       setImpSuccess(impSuccess);
 
-      // console.log("auctionUuid:", auctionUuid);
-      // console.log("imp_uid:", impUid);
-      // console.log("merchant_uid:", merchantUid);
-      // console.log("imp_success:", impSuccess);
+      console.log("auctionUuid:", auctionUuid);
+      console.log("imp_uid:", impUid);
+      console.log("merchant_uid:", merchantUid);
+      console.log("imp_success:", impSuccess);
 
       // 여기 post
       if (impSuccess) {
-        handlePaymentSend(auctionUuid, merchantUid, impUid);
+        handlePaymentSend(auctionUuid, impUid);
       }
     }
   }, []);

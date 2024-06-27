@@ -5,6 +5,7 @@ import SearchWithAlarm from "@/components/molecules/SearchWithAlarm";
 import SliderWithCategory from "@/components/molecules/SliderWithCategory";
 import { usePathname } from "next/navigation";
 import BoardCategory from "@/components/molecules/BoardCategory";
+import AlarmConnect from "@/components/organism/alarm/AlarmConnect";
 
 export default function Header() {
   const pathName = usePathname();
@@ -12,7 +13,7 @@ export default function Header() {
   return (
     <header className={styles["main-header-layout"]}>
       <div className={styles["main-header-container"]}>
-        <SearchWithAlarm />
+        <AlarmConnect />
       </div>
 
       {/* {pathName === "/" ? (
