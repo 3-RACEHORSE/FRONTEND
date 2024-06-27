@@ -10,11 +10,13 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import imageData from "@/constants/bannerDataDark";
+import AlarmConnect from "@/components/organism/alarm/AlarmConnect";
+
 export default function AuctionHeader() {
   return (
     <header className={styles["auction-header-layout "]}>
       <div className={styles["main-header-container"]}>
-        <SearchInAuction />
+        <AlarmConnect />
       </div>
       <Carousel>
         <CarouselContent>

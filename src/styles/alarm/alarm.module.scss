@@ -1,0 +1,36 @@
+.alarmContainer {
+  background: linear-gradient(to right, rgb(255, 139, 139), #e85175);
+  padding: 3%;
+  border-radius: 7px;
+  display: flex;
+  transition: transform 0.3s ease;
+
+  &.swiping {
+    transition: none;
+  }
+}
+
+.alarmLayout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.alarmContent {
+  display: flex;
+  flex-direction: column;
+  color: #942a42;
+
+  width: 100%;
+}
+.alarmTime {
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alarmTitle {
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+}

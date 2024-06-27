@@ -1,21 +1,22 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import SearchInput from "../atoms/input/SearchInput";
-import Alarm from "../atoms/icon/Alarm";
-import Link from "next/link";
-import BackBtn from "../atoms/button/BackBtn";
-import Image from "next/image";
 import Cookies from "js-cookie";
-import { FaSearch } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
 import styles from "@/styles/layout/header.module.scss";
 import Logo from "@/asset/svgs/Logo";
 import { GoBell } from "react-icons/go";
-import { IoSearchOutline } from "react-icons/io5";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 import { sessionValid } from "@/utils/session/sessionValid";
+import path from "path";
 
-export default function SearchInAuction() {
+export default function AlarmConnect() {
+  const pathName = usePathname();
+  console.log("알람", pathName);
+
+  const [count, setCount] = useState(0);
   const eventSource = useRef<null | EventSource>(null);
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function SearchInAuction() {
 
           eventSource.current.onmessage = (event) => {
             const data = JSON.parse(event.data);
+            setCount(data.alarmCount);
             console.log(data);
           };
 
@@ -62,16 +64,34 @@ export default function SearchInAuction() {
     return () => {
       eventSource.current?.close();
     };
-  }, []);
+  }, [count]);
 
   return (
     <>
       <Logo />
       <div className={styles["header-element-container"]}>
-        <Link href="/search">
-          <IoSearchOutline size={30} />
-        </Link>
-        <GoBell size={30} />
+        {pathName === "/" && (
+          <>
+            <Link href="/search">
+              <IoSearchOutline size={30} color="white" />
+            </Link>
+            <Link href="/alarm">
+              <GoBell size={30} color="white" />
+            </Link>
+            {count > 0 && <div className={styles["alarm"]}></div>}
+          </>
+        )}
+        {pathName !== "/" && (
+          <>
+            <Link href="/search">
+              <IoSearchOutline size={30} />
+            </Link>
+            <Link href="/alarm">
+              <GoBell size={30} />
+            </Link>
+            {count > 0 && <div className={styles["alarm"]}></div>}
+          </>
+        )}
       </div>
     </>
   );

@@ -21,7 +21,7 @@ const StayAnimation = ({
     "낙찰자는 결제페이지로 이동합니다",
     "행복한 하루되세요!",
   ];
-
+  const router = useRouter();
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const StayAnimation = ({
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-
+    console.log(data);
     // false면, 메인페이지
     // true면, 결제페이지로
     // {
@@ -55,10 +55,12 @@ const StayAnimation = ({
     //   "bidder" : true
     // }
     if (data.bidder) {
-      redirect(`http://localhost:3000/payment/${auctionUuid}`);
+      // redirect(`http://localhost:3000/payment/${auctionUuid}`);
+      console.log("dd");
+      router.push(`/payment/${auctionUuid}`);
+    } else {
+      router.push("/");
     }
-
-    console.log(data);
   };
 
   useEffect(() => {
@@ -68,9 +70,9 @@ const StayAnimation = ({
   }, []);
 
   return (
-    <>
+    <main className="container">
       <div className="loader fade-in">{messages[currentMessageIndex]}</div>
-    </>
+    </main>
   );
 };
 
