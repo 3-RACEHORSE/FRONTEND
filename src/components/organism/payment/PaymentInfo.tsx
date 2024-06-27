@@ -10,15 +10,17 @@ export default function PaymentInfo({ price, title }: PaymentInfoProps) {
     <>
       <header className={styles["payment-header"]}>
         <section className={styles["payment-header-element1"]}>
-          <img src="/icons/paymentIcon.png" />
+          <div className={styles["payment-header-element1-img"]}>
+            <img src="/icons/paymentIcon.png" />
+          </div>
           <div className={styles["payment-header-flex-column"]}>
-            <div className={styles["payment-header-div1"]}></div>
             <div className={styles["payment-header-div2"]}>
               <p>결제금액</p>
             </div>
             <div className={styles["payment-header-div3"]}>{price}</div>
           </div>
         </section>
+
         <section className={styles["payment-header-element2"]}>
           <img
             className={styles["elment2-img"]}

@@ -76,7 +76,7 @@ export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
     if (response.ok) {
       // const data = await response.json();
       console.log("결제 성공", response.status);
-      router.push("/");
+      router.push("https://fe-meetplus.vercel.app");
     } else {
       // router.push("/");
 
