@@ -64,7 +64,7 @@ export default function AlarmConnect() {
     return () => {
       eventSource.current?.close();
     };
-  }, []);
+  }, [count]);
 
   return (
     <>

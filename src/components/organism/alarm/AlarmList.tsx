@@ -26,7 +26,8 @@ const AlarmList: FC<AlarmListProps> = ({
     const now = new Date();
     const utcDate = new Date(utcTime);
     const diffMilliseconds = now.getTime() - utcDate.getTime();
-    const diffSeconds = Math.abs(diffMilliseconds) / 1000;
+    // console.log(utcDate.getTime());
+    const diffSeconds = Math.abs(diffMilliseconds - 32400) / 1000;
 
     const days = Math.floor(diffSeconds / 86400);
     const hours = Math.floor(diffSeconds / 3600) % 24;
