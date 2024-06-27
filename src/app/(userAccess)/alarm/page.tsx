@@ -22,7 +22,7 @@ async function getUserAlarmData() {
     throw new Error("Network Error");
   }
   const data = await res.json();
-  return data;
+  return data.notificationDtoList;
 }
 
 export default async function Page() {
@@ -32,13 +32,17 @@ export default async function Page() {
   console.log(data);
   return (
     <main>
-      <BackHeader title="" />
+      <BackHeader title="알림" />
       <div style={{ padding: "3%", paddingTop: "12vh" }}>
-        <AlarmList
-          eventType="경매"
-          alarmUrl="url"
-          message="경매 낙찰되었습니다."
-        />
+        {data.map((notification: any) => (
+          <AlarmList
+            key={notification.alarmTime}
+            eventType={notification.eventType}
+            alarmUrl="url"
+            message={notification.message}
+            alarmTime={notification.alarmTime}
+          />
+        ))}
       </div>
     </main>
   );
