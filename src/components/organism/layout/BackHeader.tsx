@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import styles from "@/styles/layout/header.module.scss";
 import BackBtn from "@/components/atoms/button/BackBtn";
 import TitleText from "@/components/atoms/Text/TitleText";
@@ -29,6 +30,13 @@ export default function BackHeader({ title, thumbnail, type }: TextProps) {
     type === "auction"
       ? `${styles["back-header-container"]} ${styles["no-background"]}`
       : styles["back-header-container"];
+
+  const [isBannerClicked, setIsBannerClicked] = useState(false);
+
+  const handleBannerClick = () => {
+    setIsBannerClicked(!isBannerClicked);
+    console.log("나옴");
+  };
   return (
     <>
       <header className={styles["back-header-layout"]}>
@@ -49,11 +57,17 @@ export default function BackHeader({ title, thumbnail, type }: TextProps) {
               <img
                 src={thumbnail}
                 style={{ height: "30px", width: "30px", borderRadius: "999px" }}
+                onClick={handleBannerClick}
               />
             </div>
           )}
           {type !== "chatroom" && <Gap width={30} height={30} />}
         </div>
+        {isBannerClicked && (
+          <div className={styles["slide-out-background"]}>
+            <div className={styles["slide-out-div"]}></div>
+          </div>
+        )}
       </header>
     </>
   );
