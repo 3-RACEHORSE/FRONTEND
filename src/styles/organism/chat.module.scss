@@ -57,8 +57,21 @@
   width: 20%;
   // background-color: blue;
   display: flex;
-  justify-content: end;
-  // align-items: end;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.count {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  height: 23px;
+  width: 23px;
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chatInput {

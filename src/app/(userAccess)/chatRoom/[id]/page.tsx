@@ -43,6 +43,8 @@ export default async function Page(props: any) {
         thumbnail={"/dummy/iuprofile.jpg"}
         title={data.title}
         type={"chatroom"}
+        authorization={authorization}
+        uuid={uuid}
       />
       <ChatRoom authorization={authorization} uuid={uuid} />
       {/* <ChatSendBar /> */}

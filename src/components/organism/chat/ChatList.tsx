@@ -34,6 +34,8 @@ export default function ChatList({
     createdAt: updatedAt,
   });
 
+  const [chatNum, setChatNum] = useState(0);
+
   const calculateRelativeTime = (utcTime: string) => {
     const now = new Date();
     const utcDate = new Date(utcTime);
@@ -81,6 +83,8 @@ export default function ChatList({
           content: data.content,
           createdAt: data.createdAt,
         });
+        console.log("데이터");
+        setChatNum((prev) => prev + 1);
 
         if (data.round === null) {
           console.log("데이터가 null입니다. 재연결 시도 중...");
@@ -110,6 +114,28 @@ export default function ChatList({
     };
   }, [authorization]);
 
+  const fetchInitialData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}/unread`,
+        {
+          headers: {
+            Authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setChatNum(data.count);
+    } catch (error) {
+      console.error("Error fetching initial data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchInitialData();
+  }, []);
+
   return (
     <div className={styles["chatListContainer"]}>
       <div style={{ display: "flex", width: "80%" }}>
@@ -123,6 +149,7 @@ export default function ChatList({
       </div>
       <div className={styles["updatedAt"]}>
         {calculateRelativeTime(chatInfo.createdAt)}
+        {chatNum > 0 && <p className={styles["count"]}>{chatNum}</p>}
       </div>
     </div>
   );

@@ -13,9 +13,17 @@ interface TextProps {
   title: string;
   thumbnail?: any;
   type?: any;
+  authorization?: any;
+  uuid?: any;
 }
 
-export default function BackHeader({ title, thumbnail, type }: TextProps) {
+export default function BackHeader({
+  title,
+  thumbnail,
+  type,
+  authorization,
+  uuid,
+}: TextProps) {
   useDarkMode();
   const router = useRouter();
   const pathName = usePathname();
@@ -26,6 +34,35 @@ export default function BackHeader({ title, thumbnail, type }: TextProps) {
       router.back();
     }
   };
+
+  const handleBackinChatRoom = async () => {
+    console.log(authorization, uuid, pathName);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/leaveChatRoom`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+
+            Authorization: `Bearer ${authorization}`,
+          },
+          body: JSON.stringify({
+            roomNumber: "3ee5670d-de8b-48d0-be86-c52f6e922b00",
+            uuid: uuid,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        console.log(response.status);
+        router.back();
+      }
+    } catch (error) {
+      console.error("Error fetching initial data:", error);
+    }
+  };
+
   const backHeaderContainer =
     type === "auction"
       ? `${styles["back-header-container"]} ${styles["no-background"]}`
@@ -41,7 +78,8 @@ export default function BackHeader({ title, thumbnail, type }: TextProps) {
     <>
       <header className={styles["back-header-layout"]}>
         <div className={backHeaderContainer}>
-          <BackBtn onClick={handleBack} />
+          {type !== "chatroom" && <BackBtn onClick={handleBack} />}
+          {type === "chatroom" && <BackBtn onClick={handleBackinChatRoom} />}
 
           <TitleText title={title} />
 
