@@ -44,6 +44,7 @@ async function getChatListLastMessage(roomNumber: any) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}/last`,
     {
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${authorization}`,
@@ -51,6 +52,7 @@ async function getChatListLastMessage(roomNumber: any) {
       },
     }
   );
+
   if (!res.ok) {
     if (res.status == 404) {
       console.log("404");
@@ -59,6 +61,7 @@ async function getChatListLastMessage(roomNumber: any) {
   }
 
   const data = await res.json();
+
   return data;
 }
 
@@ -73,6 +76,7 @@ export default async function Page() {
     getChatListLastMessage(roomNumber)
   );
   const content = await Promise.all(contentPromises);
+  console.log("ddddddd");
 
   return (
     <main>

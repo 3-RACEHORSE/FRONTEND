@@ -153,3 +153,37 @@
     transform: translate(-30%, -50%);
   }
 }
+
+.slide-header {
+  // background-color: #ff003c;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 3%;
+  padding-top: 5vh;
+  font-weight: bold;
+}
+
+.slide-info {
+  padding: 3%;
+}
+
+.slide-info-element {
+  display: flex;
+  // margin-top: 1vh;
+  border-bottom: 1px solid #e3e3e3;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.slide-info-element img {
+  height: 5vh;
+}
+
+.slide-info-element p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 3vw;
+}

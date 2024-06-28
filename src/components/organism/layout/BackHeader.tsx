@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "@/styles/layout/header.module.scss";
 import BackBtn from "@/components/atoms/button/BackBtn";
 import TitleText from "@/components/atoms/Text/TitleText";
@@ -8,6 +8,7 @@ import Gap from "@/components/atoms/etc/Gap";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 interface TextProps {
   title: string;
@@ -17,6 +18,12 @@ interface TextProps {
   uuid?: any;
 }
 
+interface MemberInfo {
+  memberUuid: any;
+  profileImage: any;
+  handle: any;
+}
+
 export default function BackHeader({
   title,
   thumbnail,
@@ -24,9 +31,12 @@ export default function BackHeader({
   authorization,
   uuid,
 }: TextProps) {
+  const [members, setMembers] = useState<MemberInfo[]>([]);
+
   useDarkMode();
   const router = useRouter();
   const pathName = usePathname();
+  const roomNumber = pathName.replace("/chatRoom/", "");
   const handleBack = () => {
     if (pathName === "/join") {
       router.push("/");
@@ -36,7 +46,7 @@ export default function BackHeader({
   };
 
   const handleBackinChatRoom = async () => {
-    console.log(authorization, uuid, pathName);
+    console.log(authorization, uuid, roomNumber);
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/leaveChatRoom`,
@@ -48,7 +58,7 @@ export default function BackHeader({
             Authorization: `Bearer ${authorization}`,
           },
           body: JSON.stringify({
-            roomNumber: "3ee5670d-de8b-48d0-be86-c52f6e922b00",
+            roomNumber: roomNumber,
             uuid: uuid,
           }),
         }
@@ -70,10 +80,34 @@ export default function BackHeader({
 
   const [isBannerClicked, setIsBannerClicked] = useState(false);
 
-  const handleBannerClick = () => {
+  const handleBannerClick = (e: any) => {
     setIsBannerClicked(!isBannerClicked);
     console.log("나옴");
   };
+
+  const fetchInitialData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}/member`,
+        {
+          headers: {
+            Authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setMembers(data);
+    } catch (error) {
+      console.error("Error fetching initial data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchInitialData();
+  }, []);
+
   return (
     <>
       <header className={styles["back-header-layout"]}>
@@ -102,8 +136,29 @@ export default function BackHeader({
           {type !== "chatroom" && <Gap width={30} height={30} />}
         </div>
         {isBannerClicked && (
-          <div className={styles["slide-out-background"]}>
-            <div className={styles["slide-out-div"]}></div>
+          <div
+            className={styles["slide-out-background"]}
+            onClick={handleBannerClick}
+          >
+            <div className={styles["slide-out-div"]}>
+              <div className={styles["slide-header"]}>
+                <p>참여중인 사람 {members.length}명</p>
+              </div>
+
+              <div className={styles["slide-info"]}>
+                {members.map((member) => (
+                  <div
+                    className={styles["slide-info-element"]}
+                    key={member.memberUuid}
+                  >
+                    <img src={member.profileImage} alt={member.handle} />
+                    <p>{member.handle}</p>
+                  </div>
+                ))}
+                {/* <img src={member.profileImage} />
+                <p>{member.handle}</p> */}
+              </div>
+            </div>
           </div>
         )}
       </header>
