@@ -3,16 +3,24 @@
 import styles from "@/styles/organism/payment.module.scss";
 import React, { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface PayBtnProps {
   authorization: any;
   uuid: any;
   pathName: any;
+  price: any;
 }
 
-export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
+export default function PayBtn({
+  authorization,
+  uuid,
+  pathName,
+  price,
+}: PayBtnProps) {
   const router = useRouter();
 
+  const [btnValid, setBtnValid] = useState(false);
   const [impUid, setImpUid] = useState<string | null>(null);
   const [merchantUid, setMerchantUid] = useState<string | null>(null);
   const [impSuccess, setImpSuccess] = useState<boolean | null>(null);
@@ -40,7 +48,7 @@ export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
       pay_method: "card",
       merchant_uid: `mid_${new Date().getTime()}`,
       name: "결제 테스트",
-      amount: "100",
+      amount: `${price}`,
       custom_data: {
         name: "부가정보",
         desc: "세부 부가정보",
@@ -77,8 +85,10 @@ export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
       // const data = await response.json();
       console.log("결제 성공", response.status);
       router.push("https://fe-meetplus.vercel.app");
+      setBtnValid(true);
     } else {
       // router.push("/");
+      alert("결제 실패");
 
       console.error("결제 실패", response.statusText);
     }
@@ -114,9 +124,16 @@ export default function PayBtn({ authorization, uuid, pathName }: PayBtnProps) {
 
   return (
     <div className={styles["pay-button-layout"]}>
-      <button className={styles["pay-button"]} onClick={onClickPayment}>
-        버튼
-      </button>
+      {!btnValid && (
+        <button className={styles["pay-button"]} onClick={onClickPayment}>
+          버튼
+        </button>
+      )}
+      {btnValid && (
+        <Link href="/">
+          <button className={styles["pay-button"]}>완료</button>
+        </Link>
+      )}
     </div>
   );
 }

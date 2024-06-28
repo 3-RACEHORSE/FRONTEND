@@ -61,7 +61,12 @@ export default async function Page(props: any) {
     <main>
       <PaymentInfo price={data1.price} title={data2.title} />
       <PaymentAgree />
-      <PayBtn authorization={authorization} uuid={uuid} pathName={pathName} />
+      <PayBtn
+        authorization={authorization}
+        uuid={uuid}
+        pathName={pathName}
+        price={data1.price}
+      />
     </main>
   );
 }
