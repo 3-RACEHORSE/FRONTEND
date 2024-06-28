@@ -38,45 +38,11 @@ async function getChatListData() {
   return data;
 }
 
-async function getChatListLastMessage(roomNumber: any) {
-  const authorization = cookies().get("authorization")?.value;
-  const uuid = cookies().get("uuid")?.value;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}/last`,
-    {
-      cache: "no-store",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${authorization}`,
-        uuid: `${uuid}`,
-      },
-    }
-  );
-
-  if (!res.ok) {
-    if (res.status == 404) {
-      console.log("404");
-    }
-    return { content: "채팅이 시작되지 않았습니다.", createdAt: null };
-  }
-
-  const data = await res.json();
-
-  return data;
-}
-
 export default async function Page() {
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
 
   const data = await getChatListData();
-  const roomNumbers = data.map((chat: { roomNumber: any }) => chat.roomNumber);
-
-  const contentPromises = roomNumbers.map((roomNumber: any) =>
-    getChatListLastMessage(roomNumber)
-  );
-  const content = await Promise.all(contentPromises);
-  console.log("ddddddd");
 
   return (
     <main>
@@ -88,8 +54,6 @@ export default async function Page() {
               key={index}
               thumbnail={chat.thumbnail}
               title={chat.title}
-              updatedAt={content[index]?.createdAt}
-              content={content[index]?.content}
               authorization={authorization}
               uuid={uuid}
               roomNumber={chat.roomNumber}

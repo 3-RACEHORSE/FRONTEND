@@ -8,8 +8,6 @@ import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
 interface ChatListProps {
   thumbnail?: any;
   title?: any;
-  updatedAt?: any;
-  content?: any;
   authorization?: any;
   uuid?: any;
   roomNumber?: any;
@@ -23,15 +21,13 @@ interface ChatListInfo {
 export default function ChatList({
   thumbnail,
   title,
-  updatedAt,
-  content,
   authorization,
   uuid,
   roomNumber,
 }: ChatListProps) {
   const [chatInfo, setChatInfo] = useState<ChatListInfo>({
-    content: content,
-    createdAt: updatedAt,
+    content: "",
+    createdAt: "",
   });
 
   const [chatNum, setChatNum] = useState(0);
@@ -56,11 +52,13 @@ export default function ChatList({
     } else if (hours > 0) {
       return `${hours}시간전`;
     } else {
+      if (minutes === 0) {
+        return "지금";
+      }
       return `${minutes} 분전`;
     }
   };
 
-  // Fetch initial data
   const eventSource = useRef<null | EventSource>(null);
 
   useEffect(() => {
@@ -132,8 +130,34 @@ export default function ChatList({
     }
   };
 
+  const fetchLastChatData = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}/last`,
+        {
+          cache: "no-store",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${authorization}`,
+            uuid: `${uuid}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setChatInfo({
+        content: data.content,
+        createdAt: data.createdAt,
+      });
+      console.log(data, "@@@@@@@@@@");
+      return data;
+    } catch (error) {
+      console.error("Error fetching initial data:", error);
+    }
+  };
+
   useEffect(() => {
     fetchInitialData();
+    fetchLastChatData();
   }, []);
 
   return (
