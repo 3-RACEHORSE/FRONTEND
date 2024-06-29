@@ -12,15 +12,9 @@ import styles from "@/styles/main/main.module.scss";
 export default async function Page(props: any) {
   const pathName = props.params.id;
 
-  // const session = await auth();
-  // const authorization = cookies().get("authorization")?.value;
-  // const uuid = cookies().get("uuid")?.value;
-  // const data1 = await getProfileInfoData(
-  //   pathName,
-  //   session,
-  //   authorization,
-  //   uuid
-  // );
+  const authorization = cookies().get("authorization")?.value;
+  const uuid = cookies().get("uuid")?.value;
+  const data1 = await getProfileInfoData(pathName, authorization, uuid);
 
   // console.log("fsdaf");
   // const data2 = await getProfileBoardData(pathName);
@@ -31,7 +25,7 @@ export default async function Page(props: any) {
   return (
     <main className={styles.modalBackground}>
       <div className={styles.modalContainer}>
-        <ProfileInfo
+        {/* <ProfileInfo
           name="아이유"
           src="https://wimg.mk.co.kr/meet/neds/2021/03/image_readtop_2021_291080_16167514554588643.jpg"
           handle={pathName}
@@ -41,7 +35,7 @@ export default async function Page(props: any) {
           authorization={undefined}
           uuid={undefined}
         />
-        <ProfileDetail />
+        <ProfileDetail /> */}
       </div>
       {/* <ProfileInfo
         name={data1.handle}

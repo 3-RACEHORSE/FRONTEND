@@ -9,7 +9,6 @@ export default async function Page() {
 
   return (
     <>
-      <BackHeader title="회원가입" />
       <main className={styles["join-main-container"]}>
         <DataFetcher
           email={session?.user.email}

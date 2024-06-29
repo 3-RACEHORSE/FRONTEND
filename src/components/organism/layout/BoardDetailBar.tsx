@@ -7,18 +7,20 @@ interface BoardDetailBar {
   auctionStartTime?: any;
   state?: any;
   pathName?: any;
+  influencerUuid?: any;
 }
 
 export default function BoardDetailBar({
   auctionStartTime,
   state,
   pathName,
+  influencerUuid,
 }: BoardDetailBar) {
   return (
     <nav className={styles["nav-container"]}>
       <Link
         // href={`/profile/${handle}`}
-        href="/i/flow/profile/fsdaf"
+        href={`/i/flow/profile/${influencerUuid}`}
         className={styles["button-container1"]}
       >
         <div className={styles["info1"]}>출연진 정보 </div>

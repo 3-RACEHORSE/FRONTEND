@@ -14,6 +14,7 @@ import { handleSendPhoneNum } from "@/utils/join/handleSendPhoneNum";
 import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
 import { handleToggle } from "@/utils/join/handleToggle";
 import { handleJoin } from "@/utils/join/handleJoin";
+import BackHeader from "@/components/organism/layout/BackHeader";
 
 interface DataFetcherProps {
   email: string;
@@ -29,7 +30,6 @@ export default function DataFetcher({
 }: DataFetcherProps) {
   //리다이렉션
   const router = useRouter();
-
   //커스텀 훅
   const {
     inputValueOne,
@@ -47,7 +47,7 @@ export default function DataFetcher({
   } = useJoinHook();
 
   // 로그인 or 회원가입 유효성 검사 api => useEffect로 자동 실행
-  useLoginValidation(email, snsType, snsId);
+  const loading = useLoginValidation(email, snsType, snsId);
 
   //가입하기
   const handleJoinClick = async () => {
@@ -70,8 +70,26 @@ export default function DataFetcher({
     setInputValueTwo(event.target.value);
   };
 
+  if (loading) {
+    return (
+      <div
+        style={{
+          height: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "#E85175",
+          paddingBottom: "10vh",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <>
+      <BackHeader title="회원가입" />
       <div>
         <AuthWithText title="아이디(이메일)" value={email} />
       </div>

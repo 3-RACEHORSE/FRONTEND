@@ -23,11 +23,11 @@ async function getChatListData() {
       },
     }
   );
-
+  console.log(res.status, "입니다");
   if (res.status === 401 || res.status === 500) {
     // 이후 에러코드 401로 수정 필요
     console.log("토큰없");
-    redirect("https://fe-meetplus.vercel.app/login");
+    // redirect("https://fe-meetplus.vercel.app/login");
   }
   if (!res.ok) {
     // throw new Error("Network Error");

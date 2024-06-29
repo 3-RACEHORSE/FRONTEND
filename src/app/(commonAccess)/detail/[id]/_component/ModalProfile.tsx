@@ -12,12 +12,30 @@ import Link from "next/link";
 import styles from "@/styles/profile/profileModal.module.scss";
 import { useRouter } from "next/navigation";
 
-export default function ModalProfile() {
-  // 추후 여기 props로 받아야함
-  // const pathName = props.params.id;
+interface ModalProfileProps {
+  name?: any;
+  profileImage?: any;
+  birth?: any;
+  description?: any;
+  authorization?: any;
+  uuid?: any;
+  influencerUuid?: any;
+  reviewWriterName?: any;
+  reviewRate?: any;
+  reviewContent?: any;
+  review?: any;
+}
 
-  // const authorization = cookies().get("authorization")?.value;
-  // const uuid = cookies().get("uuid")?.value;
+export default function ModalProfile({
+  name,
+  profileImage,
+  birth,
+  description,
+  authorization,
+  uuid,
+  influencerUuid,
+  review,
+}: ModalProfileProps) {
   const router = useRouter();
   const handleBack = () => {
     router.back();
@@ -26,15 +44,16 @@ export default function ModalProfile() {
     <main className={styles.modalBackground}>
       <div className={styles.modalContainer}>
         <ProfileInfo
-          name="아이유"
-          src="https://wimg.mk.co.kr/meet/neds/2021/03/image_readtop_2021_291080_16167514554588643.jpg"
-          handle="@dkdldb"
-          authorization="Fsfsdfsdafsa"
-          uuid="21938581"
-          follow={true}
+          name={name}
+          src={profileImage}
+          description={description}
+          authorization={authorization}
+          uuid={uuid}
+          birth={birth}
+          influencerUuid={influencerUuid}
         />
         {/* 이거 스크롤 필요 */}
-        <ProfileDetail />
+        <ProfileDetail review={review} />
 
         <div className={styles.modalBack} onClick={handleBack}>
           돌아가기

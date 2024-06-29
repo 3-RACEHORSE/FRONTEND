@@ -20,6 +20,7 @@ export default async function Page(props: any) {
     index,
   }));
 
+  console.log(data.influencerUuid);
   return (
     <main style={{ paddingTop: "12vh" }}>
       <BoardDetail
@@ -42,6 +43,7 @@ export default async function Page(props: any) {
         auctionStartTime={data.auctionStartTime}
         state={data.state}
         pathName={pathName}
+        influencerUuid={data.influencerUuid}
       />
     </main>
   );

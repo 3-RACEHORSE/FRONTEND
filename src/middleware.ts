@@ -22,11 +22,19 @@ export async function middleware(request: NextRequest) {
 export const config = {
   // 적용이 되는 곳 선정
   matcher: [
+    "/alarm/:path*",
     "/mypage:path*",
+    "/chat:path*",
+    "/chatRoom/:path*",
+    "/auction:path*",
+    "/auctionProgress/:path*",
+    "/payment/:path*",
+    "/paymentStay/:path*",
+    "/detail/:path*",
+    "/i/flow/profile/:path*",
     "/mypage/resume:path*",
     "/mypage/info:path*",
-    "/write:path*",
     "/join:path*",
-    "/main:path*",
+    "/",
   ],
 };

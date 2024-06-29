@@ -4,15 +4,32 @@ import ProfileWithText from "@/components/molecules/ProfileWithText";
 import { Key } from "react";
 import { convertUToKST } from "@/utils/common/convertUToKST";
 
-export default function ProfileDetail() {
+interface Review {
+  reviewWriterName: any;
+  influencerName: any;
+  reviewRate: any;
+  reviewContent: any;
+}
+
+interface ProfileDetailProps {
+  review?: Review[];
+}
+
+export default function ProfileDetail({ review }: ProfileDetailProps) {
+  console.log("최종적으로 받은", review);
+
   return (
     <>
       <IconWithTitle title="🔗REVIEW" detail="출연진 리뷰 정보입니다." />
-      <ProfileWithText title="whdbscks" info1="좋네요!" info2="⭐⭐⭐" />
-      <ProfileWithText title="wjdwodbs" info1="굉장해요!" info2="⭐⭐⭐⭐⭐" />
-      <ProfileWithText title="dltjdyd" info1="좋네요!" info2="⭐⭐⭐" />
-      <ProfileWithText title="rlaguswns" info1="굉장해요!" info2="⭐⭐⭐⭐⭐" />
-      <ProfileWithText title="qkrcksdnd" info1="좋네요!" info2="⭐⭐⭐" />
+      {review &&
+        review.map((item, index) => (
+          <ProfileWithText
+            key={index}
+            title={item.reviewWriterName}
+            info1={item.reviewContent}
+            info2={`⭐⭐⭐⭐⭐`.slice(0, item.reviewRate + 1)}
+          />
+        ))}
     </>
   );
 }

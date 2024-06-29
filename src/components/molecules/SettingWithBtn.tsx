@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ChangeEvent } from "react";
 import styles from "@/styles/organism/mypageProfile.module.scss";
 
@@ -7,12 +9,20 @@ import {
   PiSpeakerSimpleNoneThin,
 } from "react-icons/pi";
 import { CiViewList, CiHeadphones, CiCircleAlert } from "react-icons/ci";
+import { signOut } from "next-auth/react";
 
 export default function SettingWithBtn() {
+  const onClickSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <div className={styles["setting-container"]}>
       <div className={styles["setting-element1"]}>
-        <div className={styles["setting-element-layout"]}>
+        <div
+          className={styles["setting-element-layout"]}
+          onClick={onClickSignOut}
+        >
           <PiUserLight style={{ width: "25px", height: "25px" }} />
           <p>로그아웃</p>
         </div>
