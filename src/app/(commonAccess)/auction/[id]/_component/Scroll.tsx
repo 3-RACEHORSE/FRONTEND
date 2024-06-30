@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { BoardObjectType } from "@/interface/BoardObjectType";
 import BoardObject from "@/components/organism/auction/BoardObject";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { modifyAndDecodeUrl } from "@/utils/text/editPath";
 import { getQueryKey } from "@/utils/text/queryKeyUtils";

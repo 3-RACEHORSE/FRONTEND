@@ -12,7 +12,6 @@ export default async function Page(props: any) {
   const uuid = cookies().get("uuid")?.value;
 
   const data = await getDetailListData(pathName, authorization, uuid);
-  console.log("pathName", pathName, "받은 데이터", data);
 
   const imageData = data.images.map((url: string, index: number) => ({
     alt: `image${index + 1}`,
