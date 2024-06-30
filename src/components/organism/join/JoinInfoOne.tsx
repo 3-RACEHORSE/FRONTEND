@@ -4,7 +4,6 @@ import React, { ChangeEvent } from "react";
 import InputWithButtonOne from "../../molecules/InputWithButtonOne";
 import Text from "../../atoms/Text/InfoText";
 import AuthWithText from "@/components/molecules/AuthWithText";
-import WatchList from "@/components/molecules/WatchList";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
 import { useRouter } from "next/navigation";
@@ -53,12 +52,6 @@ export default function DataFetcher({
   const handleJoinClick = async () => {
     handleJoin(snsId, snsType, email, name, inputValueOne, router);
   };
-
-  //활성화된 버튼 체크 및 양식에 맞춰, 적용
-  // const handleToggleClick = (index: number) => {
-  //   handleToggle(index, buttonStates, setButtonStates, setApple);
-  // };
-  // console.log(apple);
 
   //input 값 추적 - 전화번호
   const handleChangeOne = (event: ChangeEvent<HTMLInputElement>) => {
@@ -131,10 +124,6 @@ export default function DataFetcher({
           </div>
         </>
       )}
-
-      {/* 관심목록 */}
-      {/* <Text title="관심목록을 선택해주세요🙌" />
-      <WatchList buttons={buttonStates} onClick={handleToggleClick} /> */}
 
       {/* 로그인 버튼 유효*/}
       {checkValid2 ? (

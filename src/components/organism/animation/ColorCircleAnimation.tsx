@@ -2,23 +2,13 @@ import React from "react";
 import "@/styles/animation/colorCircleAnimation.css";
 
 const ColorCircleAnimation = () => {
+  const bubbles = Array.from({ length: 15 });
+
   return (
     <div className="wrapper">
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
-      <div className="bubble2"></div>
+      {bubbles.map((_, index) => (
+        <div key={index} className="bubble2"></div>
+      ))}
     </div>
   );
 };
