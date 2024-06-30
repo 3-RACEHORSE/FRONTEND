@@ -1,6 +1,5 @@
 "use client";
 
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
 import React, { useEffect, useState } from "react";
 
 export default function RecentSearch() {
@@ -15,11 +14,8 @@ export default function RecentSearch() {
   }, []);
 
   const handleSearchClick = (index: any) => {
-    // 클릭한 항목 제외한 나머지 항목들을 필터링하여 새로운 배열 생성
     const updatedSearches = recentSearches.filter((_, i) => i !== index);
-    // 새로운 배열을 로컬 스토리지에 저장
     localStorage.setItem("searchHistory", JSON.stringify(updatedSearches));
-    // 상태 업데이트
     setRecentSearches(updatedSearches);
   };
 

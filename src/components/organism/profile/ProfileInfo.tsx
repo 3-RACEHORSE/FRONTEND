@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/organism/profileInfo.module.scss";
+import { getCheckSubscription } from "@/apis/getCheckSubscription";
+import { postSubscribeAdd } from "@/apis/postSubscribeAdd";
+import { patchSubscribeCancel } from "@/apis/patchSubscribeCancel";
 
 interface ProfileInfoProps {
   name: string;
@@ -21,73 +24,35 @@ export default function ProfileInfo({
   birth,
   influencerUuid,
 }: ProfileInfoProps) {
-  //구독여부 조회
-  useEffect(() => {
-    const checkSubscriptionStatus = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/subscription/influencer/${influencerUuid}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${authorization}`,
-            uuid: `${uuid}`,
-          },
-        }
-      );
-
-      if (res.ok) {
-        const data = await res.json();
-        setSubscribe(data);
-      }
-    };
-
-    checkSubscriptionStatus();
-  }, []);
-
   //구독여부
   const [subscribe, setSubscribe] = useState<boolean>(false);
 
+  //구독여부 조회
+  useEffect(() => {
+    const checkSubscription = async () => {
+      const result = await getCheckSubscription(
+        authorization,
+        uuid,
+        influencerUuid
+      );
+      setSubscribe(result);
+    };
+
+    checkSubscription();
+  }, []);
+
   //팔로우 하기
-  const handleSubscribeSellerAdd = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/subscription/influencer`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${authorization}`,
-          uuid: `${uuid}`,
-        },
-        body: JSON.stringify({
-          influencerUuid: influencerUuid,
-        }),
-      }
-    );
-
-    console.log(res.status);
-
-    setSubscribe(true);
+  const handleSubscribeAdd = async () => {
+    if (await postSubscribeAdd(authorization, uuid, influencerUuid)) {
+      setSubscribe(true);
+    }
   };
 
   //팔로우 취소
-  const handleSubscribeSellerCancel = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/subscription/influencer`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${authorization}`,
-          uuid: `${uuid}`,
-        },
-        body: JSON.stringify({
-          influencerUuid: influencerUuid,
-        }),
-      }
-    );
-
-    console.log(res.status);
-    setSubscribe(false);
+  const handleSubscribeCancel = async () => {
+    if (await patchSubscribeCancel(authorization, uuid, influencerUuid)) {
+      setSubscribe(false);
+    }
   };
 
   return (
@@ -104,7 +69,7 @@ export default function ProfileInfo({
         {subscribe && (
           <div
             className={styles["profile-follow-btn"]}
-            onClick={handleSubscribeSellerCancel}
+            onClick={handleSubscribeCancel}
           >
             팔로우 취소
           </div>
@@ -112,7 +77,7 @@ export default function ProfileInfo({
         {!subscribe && (
           <div
             className={styles["profile-follow-btn"]}
-            onClick={handleSubscribeSellerAdd}
+            onClick={handleSubscribeAdd}
           >
             팔로우
           </div>

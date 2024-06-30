@@ -1,48 +1,16 @@
-import DataFetcher from "@/components/organism/join/JoinInfoOne";
-import BackHeader from "@/components/organism/layout/BackHeader";
 import styles from "@/styles/organism/chat.module.scss";
-import { auth } from "@/auth";
 import { cookies } from "next/headers";
 import NavBar from "@/components/organism/layout/NavBar";
-import Header from "@/components/organism/layout/Header";
 import ChatHeader from "@/components/organism/layout/ChatHeader";
 import ChatList from "@/components/organism/chat/ChatList";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-
-async function getChatListData() {
-  const authorization = cookies().get("authorization")?.value;
-  const uuid = cookies().get("uuid")?.value;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/chatRooms`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${authorization}`,
-        uuid: `${uuid}`,
-      },
-    }
-  );
-  console.log(res.status, "입니다");
-  if (res.status === 401 || res.status === 500) {
-    // 이후 에러코드 401로 수정 필요
-    console.log("토큰없");
-    // redirect("https://fe-meetplus.vercel.app/login");
-  }
-  if (!res.ok) {
-    // throw new Error("Network Error");
-    redirect("https://fe-meetplus.vercel.app/login");
-  }
-
-  const data = await res.json();
-  return data;
-}
+import { getChatListData } from "@/apis/getChatListData";
 
 export default async function Page() {
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
 
-  const data = await getChatListData();
+  const data = await getChatListData(authorization, uuid);
 
   return (
     <main>

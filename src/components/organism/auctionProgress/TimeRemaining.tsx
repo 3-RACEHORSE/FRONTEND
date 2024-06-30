@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface TimeRemainingProps {
   auctionUuid?: any;
   authorization?: any;
   endTime: string;
   isActive: boolean;
-  setValid: (value: boolean) => void;
 }
 
 const TimeRemaining: React.FC<TimeRemainingProps> = ({
@@ -16,7 +15,6 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
   authorization,
   endTime,
   isActive,
-  setValid,
 }) => {
   const router = useRouter();
   const [remainingTime, setRemainingTime] = useState<number>(-1);
@@ -64,13 +62,8 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
     );
 
     if (response.ok) {
-      console.log(response.status);
       console.log("마감요청 성공 - 경매 끝");
-      // 리다이렉션 필요 => 경매 마감
-      // redirect(`http://localhost:3000/paymentStay/${auctionUuid}`);
       router.push(`/paymentStay/${auctionUuid}`);
-
-      // router.push(`https://fe-meetplus.vercel.app//paymentStay/${auctionUuid}`);
     }
   };
 
@@ -88,17 +81,14 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
     );
 
     if (response.ok) {
-      // setRemainingTime(-1);
-      // setToggle(false);
-      console.log(response.status);
       console.log("대기마감요청 성공");
-      setValid(true);
     }
   };
 
   if (remainingTime == 0) {
     console.log("현재 isActive, toogle정보입니다.", isActive, toggle);
   }
+
   // 경매 마감알림
   // 0초 그리고 라운드중 그리고
   if (remainingTime == 0 && isActive && !toggle) {

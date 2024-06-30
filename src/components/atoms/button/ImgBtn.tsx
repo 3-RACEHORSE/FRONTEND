@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import ImageComponentProps from "@/lib/interface/imageBtn";
+import ImageComponentProps from "@/interface/ImageBtn";
 
 export default function ImgBtn({
   src,

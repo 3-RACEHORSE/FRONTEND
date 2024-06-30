@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import styles from "@/styles/layout/header.module.scss";
+import React from "react";
 import IconWithTitle from "@/components/molecules/IconWithTitle";
 
 interface BoardTitleProps {

@@ -1,27 +1,9 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React from "react";
 import BoardInfo from "@/components/molecules/BoardInfo";
 import styles from "@/styles/organism/boardObject.module.scss";
-
-interface BoardProps {
-  authorization?: any; // 토큰
-  uuid?: any; //유유아이디
-  isSession?: boolean; // 로그인 되어있는지의 여부
-  src?: string;
-  status?: string;
-  title: string;
-  detail?: string;
-  category?: string;
-  startPrice?: string;
-  auctionStartDate?: string;
-  eventStartDate?: string;
-  incrementUnit?: any;
-  auctionUuid?: string;
-  isSubscribed?: boolean; // 구독되어있는지의 여부
-  place?: string;
-  innerRef?: React.Ref<HTMLParagraphElement>;
-}
+import { BoardProps } from "@/interface/BoardProps";
 
 export default function BoardObject({
   authorization,
@@ -30,7 +12,6 @@ export default function BoardObject({
   src,
   status,
   title,
-  detail,
   category,
   startPrice,
   auctionStartDate,
@@ -60,7 +41,7 @@ export default function BoardObject({
       <BoardInfo
         authorization={authorization}
         uuid={uuid}
-        isSession={isSession} // 로그인 되어있는지
+        isSession={isSession}
         title={title}
         category={category}
         startPrice={startPrice}

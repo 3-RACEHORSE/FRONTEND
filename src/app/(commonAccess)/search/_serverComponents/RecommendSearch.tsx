@@ -1,5 +1,3 @@
-// "use client";
-
 import styles from "@/styles/organism/search.module.scss";
 import watchListData from "@/constants/watchListData";
 import Link from "next/link";

@@ -2,22 +2,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import confetti from "canvas-confetti";
-import { EventSourcePolyfill, NativeEventSource } from "event-source-polyfill";
+import { EventSourcePolyfill } from "event-source-polyfill";
 import TimeRemaining from "@/components/organism/auctionProgress/TimeRemaining";
-
-interface AuctionProgressInfoProps {
-  authorization?: any;
-  uuid?: any;
-  pathName?: any;
-}
-
-interface AuctionRoundInfo {
-  round: number;
-  roundEndTime: string;
-  leftNumberOfParticipants: number;
-  price: any;
-  isActive: any;
-}
+import { AuctionRoundInfo } from "@/interface/AuctionProgressInfo";
+import { AuctionProgressInfoProps } from "@/interface/AuctionProgressInfoProps";
+import { json } from "stream/consumers";
 
 const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
   authorization,
@@ -32,18 +21,11 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
     isActive: true,
   });
 
-  const [valid, setValid] = useState(true);
-
-  // 입찰 이펙트
   const onClick = async (): Promise<void> => {
-    setValid(false);
-
     confetti({
       particleCount: 150,
       spread: 60,
     });
-
-    console.log(pathName, roundInfo.price, roundInfo);
 
     setTimeout(async () => {
       const response = await fetch(
@@ -63,13 +45,13 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
         }
       );
 
-      if (response.status == 200) {
-        console.log("입찰성공");
+      const data = await response.json();
+      if (!data) {
+        alert("이미 입찰 했습니다");
       }
     }, 1500);
   };
 
-  // Fetch initial data
   const eventSource = useRef<null | EventSource>(null);
 
   useEffect(() => {
@@ -123,7 +105,7 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
     return () => {
       eventSource.current?.close();
     };
-  }, [valid]);
+  }, []);
   return (
     <>
       {roundInfo.isActive && (
@@ -151,7 +133,6 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
                   authorization={authorization}
                   endTime={roundInfo.roundEndTime}
                   isActive={roundInfo.isActive}
-                  setValid={setValid}
                 />
               </div>
             </div>
@@ -160,21 +141,12 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
       )}
 
       {/* 입찰전 그리고 라운드진행중 */}
-      {valid && roundInfo.isActive && (
+      {roundInfo.isActive && (
         <button className="button" onClick={onClick}>
           <span role="img" aria-label="confetti">
             🎉
           </span>
           <span>입찰하기</span>
-        </button>
-      )}
-      {/* 입찰후 그리고 라운드 진행중 */}
-      {!valid && roundInfo.isActive && (
-        <button className="button">
-          <span role="img" aria-label="confetti">
-            🙌
-          </span>
-          <span>입찰완료</span>
         </button>
       )}
 
@@ -201,7 +173,6 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
               authorization={authorization}
               endTime={roundInfo.roundEndTime}
               isActive={roundInfo.isActive}
-              setValid={setValid}
             />
           </div>
         </div>

@@ -66,11 +66,9 @@ export const {
           cookies().set("uuid", uuid);
           console.log(data);
           console.log("로그인되었습니다.");
-          // return "/";
           return true;
         } else if (data.statusCodeValue === 201) {
           console.log("회원가입이 필요합니다.");
-          // return "/join";
           return true;
         } else {
           throw data.message;

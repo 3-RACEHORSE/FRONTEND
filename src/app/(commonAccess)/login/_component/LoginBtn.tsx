@@ -22,14 +22,14 @@ export default function LoginBtn() {
   const onClickGoogleSignIn = async () => {
     await signIn("google", {
       redirect: true,
-      callbackUrl: "/join", // 추후 변경 필요
+      callbackUrl: "/join",
     });
   };
 
   const onClickKaKaoSignIn = async () => {
     await signIn("kakao", {
       redirect: true,
-      callbackUrl: "/join", // 추후 변경 필요
+      callbackUrl: "/join",
     });
   };
 
@@ -38,7 +38,6 @@ export default function LoginBtn() {
   };
 
   if (isSession) {
-    // 세션이 연결되어있다면, 하지만, 토큰은 만료
     onClickSignOut();
   }
 

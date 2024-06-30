@@ -1,21 +1,16 @@
 "use client";
 
 import SearchForm from "@/app/(commonAccess)/search/_components/SearchForm";
-import Image from "next/image";
 import styles from "@/styles/layout/header.module.scss";
-
 import RecommendSearch from "@/app/(commonAccess)/search/_serverComponents/RecommendSearch";
 import RecentSearch from "./_components/RecentSearch";
-import Alarm from "@/components/atoms/icon/Alarm";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
-import Search from "@/components/atoms/input/SearchInput";
-import SearchList from "./_components/SearchList";
-import { GoBell } from "react-icons/go";
+import Gap from "@/components/atoms/etc/Gap";
 
 export default function Page() {
-  useDarkMode(); // 하위요소에서 호출 가능
+  useDarkMode();
 
   const router = useRouter();
 
@@ -32,7 +27,8 @@ export default function Page() {
             style={{ width: "30px", height: "30px" }}
           />
           <SearchForm />
-          <GoBell size={27} />
+          {/* <GoBell size={27} /> */}
+          <Gap width={30} height={30} />
         </div>
       </header>
       <RecentSearch />

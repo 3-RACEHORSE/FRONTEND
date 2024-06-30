@@ -1,16 +1,7 @@
 import React from "react";
-import styles from "@/styles/main/main.module.scss";
-import BoardInfo from "@/components/molecules/SimpleBoardInfo";
 import SimpleBoardInfo from "@/components/molecules/SimpleBoardInfo";
 import ImgWithCategory from "@/components/molecules/ImgWithCategory";
-
-interface BoardProps {
-  category?: string;
-  title: string;
-  content: string;
-  src?: string;
-  minPrice?: string;
-}
+import { SimpleBoardObjectProps } from "@/interface/SimpleBoardObjectProps";
 
 export default function SimpleBoardObject({
   category,
@@ -18,7 +9,7 @@ export default function SimpleBoardObject({
   content,
   src,
   minPrice,
-}: BoardProps) {
+}: SimpleBoardObjectProps) {
   return (
     <div>
       <ImgWithCategory src={src} category={category} />

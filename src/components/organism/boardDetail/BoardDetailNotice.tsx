@@ -1,5 +1,4 @@
 import styles from "@/styles/organism/boardDetailNotice.module.scss";
-import AreaChart from "@/components/organism/chart/AreaChart";
 
 export default function BoardDetailNotice() {
   return (
