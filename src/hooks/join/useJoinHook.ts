@@ -18,6 +18,7 @@ const useJoinHook = () => {
   const [inputValueTwo, setInputValueTwo] = useState<string>("");
   const [checkValid2, setCheckValid2] = useState<boolean>(false);
 
+  //더미 추후 삭제 필요
   const [apple, setApple] = useState<{ [index: number]: string }[]>([]);
   const [buttonStates, setButtonStates] = useState(watchListData);
 

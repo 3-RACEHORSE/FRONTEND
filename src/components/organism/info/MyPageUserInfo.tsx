@@ -10,15 +10,8 @@ import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
 import { useRouter } from "next/navigation";
-import { handleEditMyInfo } from "@/utils/info/handleEditMyInfo";
-interface MypageUserInfoProps {
-  src?: string;
-  name?: string;
-  handle?: string;
-  phoneNum?: string;
-  authorization?: any;
-  uuid?: any;
-}
+import { patchEditMyInfo } from "@/apis/patchEditMyInfo";
+import { MypageUserInfoProps } from "@/interface/MypageUserInfoProps";
 
 export default function MyPageUserInfo({
   src,
@@ -34,7 +27,6 @@ export default function MyPageUserInfo({
   const {
     inputNameValue,
     setInputNameValue,
-    inputHandleValue,
     setInputHandleValue,
 
     inputValueOne,
@@ -70,7 +62,7 @@ export default function MyPageUserInfo({
 
   //수정하기 api
   const handleEditClick = async () => {
-    await handleEditMyInfo(
+    await patchEditMyInfo(
       authorization,
       uuid,
       inputNameValue,

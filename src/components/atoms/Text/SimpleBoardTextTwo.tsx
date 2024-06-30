@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import styles from "@/styles/main/main.module.scss";
-import { truncateText } from "@/utils/common/truncateText";
+import { truncateText } from "@/utils/text/truncateText";
 
 interface TextProps {
   content: string;

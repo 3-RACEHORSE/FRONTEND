@@ -1,7 +1,7 @@
 import RemainTime from "@/app/(commonAccess)/detail/[id]/_component/RemainTime";
 import styles from "@/styles/organism/boardDetail.module.scss";
-import { convertUToKST } from "@/utils/common/convertUToKST";
-import { uToMilliseconds } from "@/utils/detail/uToMilliseconds";
+import { convertUToKST } from "@/utils/time/convertUToKST";
+import { uToMilliseconds } from "@/utils/time/uToMilliseconds";
 
 interface BoardDetailProps {
   auctionStartTime?: any;

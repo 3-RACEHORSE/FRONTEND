@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import BoardInfo from "@/components/molecules/BoardInfo";
 import styles from "@/styles/organism/boardObject.module.scss";
 import { BoardProps } from "@/interface/BoardProps";
+import BoardInfo from "@/components/molecules/BoardInfo";
 
 export default function BoardObject({
   authorization,

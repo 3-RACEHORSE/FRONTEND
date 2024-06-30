@@ -6,7 +6,7 @@ import SettingWithBtn from "@/components/molecules/SettingWithBtn";
 import CallWithText from "@/components/molecules/CallWithText";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 import CropperModal from "@/components/molecules/CropperComponent";
 import { MypageProfileProps } from "@/interface/MypageProfileProps";
 import { useImageHandlers } from "@/hooks/mypage/useImageHandlers";

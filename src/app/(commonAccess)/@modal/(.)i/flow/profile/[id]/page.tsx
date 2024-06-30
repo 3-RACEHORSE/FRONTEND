@@ -1,13 +1,13 @@
 import getinfluencerUuidReviewData from "@/apis/getInfluencerUuidReviewData";
+import { getProfileInfoData } from "@/apis/getProfileInfoData";
 import ModalProfile from "@/app/(commonAccess)/detail/[id]/_component/ModalProfile";
-import { getProfileInfoData } from "@/utils/profile/handleProfileInfoData";
 import { cookies } from "next/headers";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;
   const authorization = cookies().get("authorization")?.value;
   const uuid = cookies().get("uuid")?.value;
-  const data1 = await getProfileInfoData(pathName, authorization, uuid);
+  const data1 = await getProfileInfoData(pathName, authorization);
   const data2 = await getinfluencerUuidReviewData(
     authorization,
     uuid,

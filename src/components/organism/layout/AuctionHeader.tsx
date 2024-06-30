@@ -1,9 +1,7 @@
 "use client";
 
 import styles from "@/styles/layout/header.module.scss";
-import { usePathname } from "next/navigation";
 import BoardCategory from "@/components/molecules/BoardCategory";
-import SearchInAuction from "@/components/molecules/SearchInAuction";
 import {
   Carousel,
   CarouselContent,

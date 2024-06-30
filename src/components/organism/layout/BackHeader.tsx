@@ -7,22 +7,11 @@ import TitleText from "@/components/atoms/Text/TitleText";
 import Gap from "@/components/atoms/etc/Gap";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
-import { IoMdArrowRoundBack } from "react-icons/io";
-
-interface TextProps {
-  title: string;
-  thumbnail?: any;
-  type?: any;
-  authorization?: any;
-  uuid?: any;
-}
-
-interface MemberInfo {
-  memberUuid: any;
-  profileImage: any;
-  handle: any;
-}
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
+import putLeaveChatRoom from "@/apis/putLeaveChatRoom";
+import getChatRoomMember from "@/apis/getChatRoomMember";
+import { MemberInfo } from "@/interface/MemberInfo";
+import { BackHeaderProps } from "@/interface/BackHeaderProps";
 
 export default function BackHeader({
   title,
@@ -30,13 +19,15 @@ export default function BackHeader({
   type,
   authorization,
   uuid,
-}: TextProps) {
+}: BackHeaderProps) {
   const [members, setMembers] = useState<MemberInfo[]>([]);
 
   useDarkMode();
   const router = useRouter();
   const pathName = usePathname();
   const roomNumber = pathName.replace("/chatRoom/", "");
+
+  // 분기처리
   const handleBack = () => {
     if (pathName === "/join") {
       router.push("/");
@@ -45,31 +36,11 @@ export default function BackHeader({
     }
   };
 
+  //채팅방 나가는 api 함수 호출
   const handleBackinChatRoom = async () => {
-    console.log(authorization, uuid, roomNumber);
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/leaveChatRoom`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-
-            Authorization: `Bearer ${authorization}`,
-          },
-          body: JSON.stringify({
-            roomNumber: roomNumber,
-            uuid: uuid,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        console.log(response.status);
-        router.back();
-      }
-    } catch (error) {
-      console.error("Error fetching initial data:", error);
+    const success = await putLeaveChatRoom(authorization, uuid, roomNumber);
+    if (success) {
+      router.back();
     }
   };
 
@@ -78,30 +49,17 @@ export default function BackHeader({
       ? `${styles["back-header-container"]} ${styles["no-background"]}`
       : styles["back-header-container"];
 
+  // 채팅방 헤더, 토글 관리
   const [isBannerClicked, setIsBannerClicked] = useState(false);
 
   const handleBannerClick = (e: any) => {
     setIsBannerClicked(!isBannerClicked);
-    console.log("나옴");
   };
 
+  //참여하는 사람들 체크
   const fetchInitialData = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/roomNumber/${roomNumber}/member`,
-        {
-          headers: {
-            Authorization: `Bearer ${authorization}`,
-            uuid: `${uuid}`,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setMembers(data);
-    } catch (error) {
-      console.error("Error fetching initial data:", error);
-    }
+    const members = await getChatRoomMember(authorization, uuid, roomNumber);
+    setMembers(members);
   };
 
   useEffect(() => {
@@ -155,8 +113,6 @@ export default function BackHeader({
                     <p>{member.handle}</p>
                   </div>
                 ))}
-                {/* <img src={member.profileImage} />
-                <p>{member.handle}</p> */}
               </div>
             </div>
           </div>

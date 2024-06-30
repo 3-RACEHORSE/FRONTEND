@@ -4,13 +4,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { convertUToKST } from "@/utils/common/convertUToKST";
 import styles from "@/styles/organism/chat.module.scss";
 import { postSubmitChatData } from "@/apis/postSubmitChatData";
 import useChatScroll from "@/hooks/chat/useChatScroll";
 import useChatRoomSSE from "@/hooks/sse/useChatRoomSSE";
 import { useFetchListData } from "@/apis/getChatRoomPrevData";
 import { ChatObjectType } from "@/interface/ChatObjectType";
+import { convertUToKST } from "@/utils/time/convertUToKST";
 
 interface ChatProps {
   authorization: any;

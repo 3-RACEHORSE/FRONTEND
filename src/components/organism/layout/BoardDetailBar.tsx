@@ -1,6 +1,6 @@
 import RemainTime from "@/app/(commonAccess)/detail/[id]/_component/RemainTime";
 import styles from "@/styles/organism/boardDetailBar.module.scss";
-import { uToMilliseconds } from "@/utils/detail/uToMilliseconds";
+import { uToMilliseconds } from "@/utils/time/uToMilliseconds";
 import Link from "next/link";
 
 interface BoardDetailBar {
@@ -19,7 +19,6 @@ export default function BoardDetailBar({
   return (
     <nav className={styles["nav-container"]}>
       <Link
-        // href={`/profile/${handle}`}
         href={`/i/flow/profile/${influencerUuid}`}
         className={styles["button-container1"]}
       >

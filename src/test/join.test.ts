@@ -1,6 +1,7 @@
+// handleJoin.test.ts
+import { postSubmitJoin } from "../apis/postSubmitJoin";
 import fetchMock from "jest-fetch-mock";
 import Swal from "sweetalert2";
-import { handleJoin } from "../utils/join/handleJoin";
 
 fetchMock.enableMocks();
 
@@ -8,28 +9,27 @@ jest.mock("sweetalert2", () => ({
   fire: jest.fn().mockResolvedValue({ isConfirmed: true }),
 }));
 
-describe("회원가입 api 함수", () => {
-  const routerMock = { push: jest.fn() };
+describe("postSubmitJoin", () => {
+  const mockRouter = { push: jest.fn() };
 
   beforeEach(() => {
     fetchMock.resetMocks();
     jest.clearAllMocks();
   });
 
-  test("회원가입 성공 시", async () => {
+  it("should successfully sign up and redirect to login page", async () => {
     fetchMock.mockResponseOnce(JSON.stringify({}), { status: 200 });
 
-    await handleJoin(
-      "googleId",
-      "google",
-      "google.@gmail.com",
-      "MrGoogle",
-      "010-1234-5678",
-      // [{ 0: "관심목록1" }, { 1: "관심목록2" }],
-      routerMock
+    await postSubmitJoin(
+      "testSnsId",
+      "testSnsType",
+      "test@example.com",
+      "testName",
+      "1234567890",
+      mockRouter
     );
 
-    expect(fetch).toHaveBeenCalledWith(
+    expect(fetchMock).toHaveBeenCalledWith(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/auth/signup`,
       {
         method: "POST",
@@ -37,20 +37,21 @@ describe("회원가입 api 함수", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          snsId: "googleId",
-          snsType: "google",
-          email: "google.@gmail.com",
-          name: "MrGoogle",
-          phoneNum: "010-1234-5678",
-          // interestCategories: [{ 0: "관심목록1" }, { 1: "관심목록2" }],
+          snsId: "testSnsId",
+          snsType: "testSnsType",
+          email: "test@example.com",
+          name: "testName",
+          phoneNum: "1234567890",
         }),
       }
     );
+
     expect(Swal.fire).toHaveBeenCalledWith({
       title: "회원가입을 축하드립니다!",
       icon: "success",
       confirmButtonText: "확인",
     });
-    expect(routerMock.push).toHaveBeenCalledWith("/login");
+
+    expect(mockRouter.push).toHaveBeenCalledWith("/login");
   });
 });

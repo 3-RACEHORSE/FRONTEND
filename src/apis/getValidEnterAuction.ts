@@ -18,7 +18,7 @@ export default async function getVaildEnterAuction(pathName: any) {
 
   const valid = await res.json();
   if (!valid) {
-    redirect(`http://localhost:3000/detail/${pathName}`);
+    redirect(`https://fe-meetplus.vercel.app/paymentStay/${pathName}`);
   }
   return;
 }

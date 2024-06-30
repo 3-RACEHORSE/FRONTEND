@@ -4,7 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/organism/layout/NavBar";
 import AuthSession from "@/AuthSession";
 import RQProvider from "./RQProvider";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 import { cookies } from "next/headers";
 
 // 뷰포트 수정
