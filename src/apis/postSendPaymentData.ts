@@ -12,10 +12,10 @@ export async function postSendPaymentData(
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authorization}`,
-        },
-        body: JSON.stringify({
           uuid: uuid,
           impUid: impUid,
+        },
+        body: JSON.stringify({
           auctionUuid: auctionUuid,
         }),
       }
