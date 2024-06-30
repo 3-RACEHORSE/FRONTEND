@@ -1,6 +1,6 @@
+import { postSubmitJoin } from "@/apis/postSubmitJoin";
 import fetchMock from "jest-fetch-mock";
 import Swal from "sweetalert2";
-import { handleJoin } from "../utils/join/handleJoin";
 
 fetchMock.enableMocks();
 
@@ -19,13 +19,12 @@ describe("회원가입 api 함수", () => {
   test("회원가입 성공 시", async () => {
     fetchMock.mockResponseOnce(JSON.stringify({}), { status: 200 });
 
-    await handleJoin(
+    await postSubmitJoin(
       "googleId",
       "google",
       "google.@gmail.com",
       "MrGoogle",
       "010-1234-5678",
-      // [{ 0: "관심목록1" }, { 1: "관심목록2" }],
       routerMock
     );
 
