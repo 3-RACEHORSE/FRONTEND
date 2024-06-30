@@ -1,4 +1,4 @@
-export interface boardObject {
+export interface BoardObjectType {
   [x: string]: any;
   state: string;
   localName: string | undefined;

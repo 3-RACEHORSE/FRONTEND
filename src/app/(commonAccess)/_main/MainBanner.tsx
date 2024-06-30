@@ -3,28 +3,19 @@
 import { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Image from "next/image";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
-import styles from "@/styles/main/main.module.scss"; // Import the SCSS module
+import styles from "@/styles/main/main.module.scss";
 import Link from "next/link";
-
-interface BannerItem {
-  auctionUuid: string;
-  title: string;
-  eventStartTime: number;
-  state: string;
-  thumbnail: string;
-}
+import { BannerItem } from "@/interface/BannerItem";
+import { formatDate } from "@/utils/time/formatDate";
 
 interface MainBannerProps {
   data?: BannerItem[];
 }
 
-// Assuming you can update bannerData to the correct structure
 const bannerData: BannerItem[] = [
   {
-    auctionUuid: "default-uuid-1",
-    title: "Default Title 1",
+    auctionUuid: "진행중인 경매가 없습니다.",
+    title: "진행중인 경매 없음",
     eventStartTime: Date.now(),
     state: "BEFORE_AUCTION",
     thumbnail: "https://example.com/default1.jpg",
@@ -32,7 +23,6 @@ const bannerData: BannerItem[] = [
 ];
 
 function MainBanner({ data }: MainBannerProps) {
-  // console.log(data);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentBannerData, setCurrentBannerData] =
     useState<BannerItem[]>(bannerData);
@@ -47,16 +37,8 @@ function MainBanner({ data }: MainBannerProps) {
     }
   }, [data]);
 
-  const formatDate = (timestamp: number): string => {
-    const date = new Date(timestamp);
-    return `${date.getFullYear()}.${
-      date.getMonth() + 1
-    }.${date.getDate()} ${date.getHours()}시`;
-  };
-
   return (
     <div className={styles.container}>
-      {/* 내부 이미지 */}
       <div className={styles.innerImage}>
         <Carousel
           showArrows={false}
@@ -87,7 +69,6 @@ function MainBanner({ data }: MainBannerProps) {
                 {item.state === "AUCTION_IS_IN_PROGRESS" && (
                   <Link href={`/auctionProgress/${item.auctionUuid}`}>
                     <button className={styles.button}>
-                      {" "}
                       지금 참여하기 &gt;
                     </button>
                   </Link>
