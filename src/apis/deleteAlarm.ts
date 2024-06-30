@@ -15,8 +15,6 @@ export const deleteAlarm = async (id: any, authorization: any, uuid: any) => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-    console.log(response.status);
   } catch (error) {
     console.error("Error deleting alarm:", error);
   }

@@ -9,7 +9,7 @@ jest.mock("sweetalert2", () => ({
   fire: jest.fn().mockResolvedValue({ isConfirmed: true }),
 }));
 
-describe("postSubmitJoin", () => {
+describe("회원가입 api", () => {
   const mockRouter = { push: jest.fn() };
 
   beforeEach(() => {
