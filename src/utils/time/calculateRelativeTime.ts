@@ -18,6 +18,9 @@ export const calculateRelativeTime = (utcTime: string) => {
   } else if (hours > 0) {
     return `${hours}시간전`;
   } else {
+    if (minutes === 0) {
+      return "지금";
+    }
     return `${minutes} 분전`;
   }
 };

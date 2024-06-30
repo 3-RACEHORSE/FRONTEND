@@ -1,10 +1,14 @@
-"use server";
+import { SendMessageParams } from "@/interface/SendMessageParams";
 
-import { cookies } from "next/headers";
-
-export const postSendMessage = async (newMessage: any, roomNumber: any) => {
-  const authorization = cookies().get("authorization")?.value;
-  const uuid = cookies().get("uuid")?.value;
+export const postSubmitChatData = async ({
+  authorization,
+  uuid,
+  newMessage,
+  roomNumber,
+}: SendMessageParams): Promise<void> => {
+  if (!newMessage.trim()) {
+    return;
+  }
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
@@ -22,12 +26,9 @@ export const postSendMessage = async (newMessage: any, roomNumber: any) => {
       }
     );
 
+    console.log(res.status);
     if (!res.ok) {
       throw new Error("Failed to send message");
-    }
-
-    if (res.ok) {
-      return true;
     }
   } catch (error) {
     console.error("Error sending message:", error);
