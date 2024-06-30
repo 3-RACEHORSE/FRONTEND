@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/organism/chat.module.scss";
 import { truncateText } from "@/utils/common/truncateText";
-import { EventSourcePolyfill } from "event-source-polyfill";
 import { calculateRelativeTime } from "@/utils/time/calculateRelativeTime";
 import { ChatListProps } from "@/interface/ChatListProps";
 import { getLastChatData } from "@/apis/getLastChatData";
