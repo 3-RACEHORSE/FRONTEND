@@ -35,30 +35,6 @@ const AlarmList: FC<AlarmListProps> = ({
     handleTouchEnd,
   } = useSwipe();
 
-  const handleDelete = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/notification-service/api/v1/alarm/delete/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${authorization}`,
-            uuid: `${uuid}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      console.log(response.status);
-    } catch (error) {
-      console.error("Error deleting alarm:", error);
-    }
-  };
-
   if (!isVisible) return null;
 
   const brightness = Math.max(1 + currentX / 200, 0.3);

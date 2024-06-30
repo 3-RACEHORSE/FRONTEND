@@ -1,6 +1,6 @@
 // utils/imageHandlers.ts
 import { ChangeEvent, Dispatch, SetStateAction, MutableRefObject } from "react";
-import { uploadImageToS3 } from "@/utils/write/aws";
+import { uploadImageToS3 } from "@/utils/s3/aws";
 
 interface ImageData {
   src: string;
@@ -23,7 +23,7 @@ export const handleImageUpload = (
         newImages.push({ src: reader.result as string, croppedSrc: null });
         if (newImages.length === files.length) {
           setImages((prevImages) => [...prevImages, ...newImages]);
-          setCurrentImageIndex(images.length); // 현재 인덱스를 새로 추가된 첫 번째 이미지로 설정
+          setCurrentImageIndex(images.length);
           setIsModalOpen(true);
         }
       };
