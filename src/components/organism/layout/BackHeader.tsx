@@ -7,7 +7,7 @@ import TitleText from "@/components/atoms/Text/TitleText";
 import Gap from "@/components/atoms/etc/Gap";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 import putLeaveChatRoom from "@/apis/putLeaveChatRoom";
 import getChatRoomMember from "@/apis/getChatRoomMember";
 import { MemberInfo } from "@/interface/MemberInfo";

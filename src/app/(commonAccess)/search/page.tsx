@@ -6,7 +6,7 @@ import RecommendSearch from "@/app/(commonAccess)/search/_serverComponents/Recom
 import RecentSearch from "./_components/RecentSearch";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 import Gap from "@/components/atoms/etc/Gap";
 
 export default function Page() {

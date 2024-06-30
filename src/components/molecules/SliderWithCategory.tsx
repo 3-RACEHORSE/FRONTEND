@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import CategoryText from "../atoms/Text/CategoryText";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 
 export default function SliderWithCategory() {
   const isDarkMode = useDarkMode();

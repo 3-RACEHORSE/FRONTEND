@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import styles from "@/styles/layout/nav.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 import CircleAnimation from "@/components/organism/animation/CircleAnimation";
 
 // Dynamic

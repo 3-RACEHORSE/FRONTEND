@@ -1,13 +1,12 @@
 // handleJoin.ts
 import Swal from "sweetalert2";
 
-export const handleJoin = async (
+export const postSubmitJoin = async (
   snsId: string,
   snsType: string,
   email: string,
   name: string,
   inputValueOne: string,
-  // apple: { [index: number]: string }[],
   router: any
 ) => {
   try {

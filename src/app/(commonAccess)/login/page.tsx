@@ -3,7 +3,7 @@
 import styles from "@/styles/login/login.module.scss";
 import LoginBtn from "./_component/LoginBtn";
 import React from "react";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 import LoginLogo from "@/asset/svgs/LoginLogo";
 import LoginLogoD from "@/asset/svgs/LoginLogoD";
 

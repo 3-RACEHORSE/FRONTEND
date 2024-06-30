@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import styles from "@/styles/layout/nav.module.scss";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useDarkMode } from "@/hooks/common/checkDarkMode";
+import { useDarkMode } from "@/hooks/system/checkDarkMode";
 
 const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));

@@ -1,9 +1,9 @@
 import BoardDetail from "@/components/organism/boardDetail/BoardDetail";
 import BoardDetailBar from "@/components/organism/layout/BoardDetailBar";
 import Footer from "@/components/organism/layout/Footer";
-import { getDetailListData } from "@/utils/detail/handleDetailListData";
 import { cookies } from "next/headers";
 import BoardDetailNotice from "@/components/organism/boardDetail/BoardDetailNotice";
+import { getDetailListData } from "@/apis/getDetailListData";
 
 export default async function Page(props: any) {
   const pathName = props.params.id;

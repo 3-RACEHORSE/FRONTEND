@@ -11,8 +11,8 @@ import useJoinHook from "@/hooks/join/useJoinHook";
 import useLoginValidation from "@/hooks/join/useJoinValidation";
 import { handleSendPhoneNum } from "@/utils/join/handleSendPhoneNum";
 import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
-import { handleJoin } from "@/utils/join/handleJoin";
 import BackHeader from "@/components/organism/layout/BackHeader";
+import { postSubmitJoin } from "@/apis/postSubmitJoin";
 
 interface DataFetcherProps {
   email: string;
@@ -38,10 +38,6 @@ export default function DataFetcher({
     setInputValueTwo,
     checkValid2,
     setCheckValid2,
-    apple,
-    setApple,
-    buttonStates,
-    setButtonStates,
   } = useJoinHook();
 
   // 로그인 or 회원가입 유효성 검사 api => useEffect로 자동 실행
@@ -49,7 +45,7 @@ export default function DataFetcher({
 
   //가입하기
   const handleJoinClick = async () => {
-    handleJoin(snsId, snsType, email, name, inputValueOne, router);
+    postSubmitJoin(snsId, snsType, email, name, inputValueOne, router);
   };
 
   //input 값 추적 - 전화번호

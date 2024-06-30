@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export const handleEditMyInfo = async (
+export const patchEditMyInfo = async (
   authorization: string,
   uuid: string,
   inputNameValue: string,
@@ -22,7 +22,7 @@ export const handleEditMyInfo = async (
         body: JSON.stringify({
           name: inputNameValue,
           phoneNum: inputValueOne,
-          profileImage: src, // 추후 변경 필요
+          profileImage: src,
         }),
       }
     );
@@ -33,7 +33,6 @@ export const handleEditMyInfo = async (
         confirmButtonText: "확인",
       }).then((result) => {
         if (result.isConfirmed) {
-          // router.refresh();
           router.push("/mypage");
         }
       });
