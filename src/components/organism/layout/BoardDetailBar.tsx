@@ -19,7 +19,6 @@ export default function BoardDetailBar({
   return (
     <nav className={styles["nav-container"]}>
       <Link
-        // href={`/profile/${handle}`}
         href={`/i/flow/profile/${influencerUuid}`}
         className={styles["button-container1"]}
       >

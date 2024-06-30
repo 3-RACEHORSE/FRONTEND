@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
 
-// Dynamic import for icons
 const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
 const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));

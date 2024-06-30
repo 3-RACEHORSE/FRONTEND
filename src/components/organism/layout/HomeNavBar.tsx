@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
 import CircleAnimation from "@/components/organism/animation/CircleAnimation";
 
-// Dynamic import for icons
+// Dynamic
 const THome = dynamic(() => import("@/components/atoms/icon/true/THome"));
 const FHome = dynamic(() => import("@/components/atoms/icon/false/FHome"));
 const TList = dynamic(() => import("@/components/atoms/icon/true/TList"));
@@ -22,7 +22,6 @@ export default function NavBar() {
 
   //다크모드
   const isDarkMode = useDarkMode();
-  console.log("nav에서 통제하는 ", isDarkMode, "입니다.");
 
   return (
     <>
