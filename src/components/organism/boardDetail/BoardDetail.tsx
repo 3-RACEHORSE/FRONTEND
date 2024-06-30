@@ -5,24 +5,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-
-interface BoardDetailProps {
-  auctionStartTime?: any;
-  category?: string;
-  cast?: string;
-  versifier?: string;
-  unit?: string;
-  boardTitle?: string;
-  boardContent?: string;
-  eventStartTime?: string;
-  place: string;
-  imageData?: Array<{
-    alt: string;
-    url: string;
-    index: number;
-  }>;
-  state: string;
-}
+import { BoardDetailProps } from "@/interface/BoardDetailProps";
 
 export default function BoardDetail({
   auctionStartTime,
@@ -37,7 +20,6 @@ export default function BoardDetail({
   imageData = [],
   state,
 }: BoardDetailProps) {
-  console.log(auctionStartTime);
   return (
     <>
       <Carousel>

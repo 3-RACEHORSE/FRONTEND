@@ -2,9 +2,8 @@
 
 import React, { useState } from "react";
 import styles from "@/styles/organism/chat.module.scss";
-import { truncateText } from "@/utils/common/truncateText";
-import { sessionValid } from "@/utils/session/sessionValid";
 import { useParams } from "next/navigation";
+import { postSendMessage } from "@/apis/postSendMessage";
 
 export default function ChatSendBar() {
   const [newMessage, setNewMessage] = useState<any>("");
@@ -15,38 +14,10 @@ export default function ChatSendBar() {
   };
 
   const sendMessage = async () => {
-    const result = await sessionValid();
-
-    if (result) {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${result.authorization}`,
-              uuid: `${result.uuid}`,
-            },
-            body: JSON.stringify({
-              content: newMessage,
-              roomNumber: pathName.id,
-            }),
-          }
-        );
-
-        if (!res.ok) {
-          throw new Error("Failed to send message");
-        }
-
-        setNewMessage("");
-      } catch (error) {
-        console.error("Error sending message:", error);
-      }
+    if (await postSendMessage(newMessage, pathName.id)) {
+      setNewMessage("");
     }
   };
-
-  console.log(newMessage);
 
   return (
     <div className={styles.chatInput}>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import Modal from "@/components/organism/write/Modal";
+import Modal from "@/components/molecules/Modal";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import styles from "@/styles/organism/mypageProfile.module.scss";
@@ -9,7 +9,6 @@ import SettingWithBtn from "@/components/molecules/SettingWithBtn";
 import CallWithText from "@/components/molecules/CallWithText";
 import Link from "next/link";
 import { uploadImageToS3 } from "@/utils/write/aws";
-import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import { useDarkMode } from "@/hooks/common/checkDarkMode";
 interface MypageProfileProps {
@@ -194,10 +193,6 @@ export default function MypageProfile({
               </button>
             )}
           </div>
-
-          {/* <Link href="/mypage/resume" className={styles["btn-layout"]}>
-            <button>이력서 관리</button>
-          </Link> */}
         </div>
       </div>
       {/* Modal for cropping */}

@@ -1,8 +1,5 @@
-import styles from "@/styles/organism/profileDetail.module.scss";
 import IconWithTitle from "@/components/molecules/IconWithTitle";
 import ProfileWithText from "@/components/molecules/ProfileWithText";
-import { Key } from "react";
-import { convertUToKST } from "@/utils/common/convertUToKST";
 
 interface Review {
   reviewWriterName: any;

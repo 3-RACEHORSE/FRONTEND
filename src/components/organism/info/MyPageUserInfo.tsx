@@ -1,6 +1,5 @@
 "use client";
 
-import AuthWithText from "@/components/molecules/AuthWithText";
 import styles from "@/styles/organism/myPageUserInfo.module.scss";
 import Text from "@/components/atoms/Text/InfoText";
 import InputWithButtonOne from "@/components/molecules/InputWithButtonOne";
@@ -10,7 +9,6 @@ import { ChangeEvent, useEffect } from "react";
 import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
 import SendBtn from "@/components/atoms/button/SendBtn";
 import SendBtnInValid from "@/components/atoms/button/SendBtnInValid";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { handleEditMyInfo } from "@/utils/info/handleEditMyInfo";
 interface MypageUserInfoProps {
@@ -58,11 +56,6 @@ export default function MyPageUserInfo({
   //이름
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNameValue(event.target.value);
-  };
-
-  //핸들
-  const handleChangeHandle = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputHandleValue(event.target.value);
   };
 
   //번호

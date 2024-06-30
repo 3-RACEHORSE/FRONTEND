@@ -11,7 +11,6 @@ import useJoinHook from "@/hooks/join/useJoinHook";
 import useLoginValidation from "@/hooks/join/useJoinValidation";
 import { handleSendPhoneNum } from "@/utils/join/handleSendPhoneNum";
 import { handleSendVertifyNum } from "@/utils/join/handleSendVertifyNum";
-import { handleToggle } from "@/utils/join/handleToggle";
 import { handleJoin } from "@/utils/join/handleJoin";
 import BackHeader from "@/components/organism/layout/BackHeader";
 
