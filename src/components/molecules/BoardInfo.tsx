@@ -5,8 +5,9 @@ import styles from "@/styles/organism/boardObject.module.scss";
 import { Switch } from "@/components/ui/switch";
 import { toggleValid } from "@/utils/auction/toggleValid";
 import Swal from "sweetalert2";
-import { convertUToKST } from "@/utils/common/convertUToKST";
-import { truncateText } from "@/utils/common/truncateText";
+import { convertUToKST } from "@/utils/time/convertUToKST";
+import { truncateText } from "@/utils/text/truncateText";
+
 interface BoardProps {
   authorization?: any; // 토큰
   uuid?: any; //유유아이디

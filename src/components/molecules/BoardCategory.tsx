@@ -4,7 +4,7 @@ import React, { useState, ChangeEvent } from "react";
 import { usePathname } from "next/navigation";
 import styles from "@/styles/molecules/boardCategory.module.scss";
 import Link from "next/link";
-import { truncateText } from "@/utils/common/truncateText";
+import { truncateText } from "@/utils/text/truncateText";
 
 export default function BoardCategory() {
   const pathName = usePathname();

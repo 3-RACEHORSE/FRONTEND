@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/organism/chat.module.scss";
-import { truncateText } from "@/utils/common/truncateText";
 import { calculateRelativeTime } from "@/utils/time/calculateRelativeTime";
 import { ChatListProps } from "@/interface/ChatListProps";
 import { getLastChatData } from "@/apis/getLastChatData";
 import { getInitialData } from "@/apis/getInitialData";
 import useChatListSSE from "@/hooks/sse/useChatListSSE";
+import { truncateText } from "@/utils/text/truncateText";
 
 interface ChatListInfo {
   content: any;
