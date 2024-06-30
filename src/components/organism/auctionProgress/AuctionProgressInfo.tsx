@@ -6,13 +6,15 @@ import { EventSourcePolyfill } from "event-source-polyfill";
 import TimeRemaining from "@/components/organism/auctionProgress/TimeRemaining";
 import { AuctionRoundInfo } from "@/interface/AuctionProgressInfo";
 import { AuctionProgressInfoProps } from "@/interface/AuctionProgressInfoProps";
-import { json } from "stream/consumers";
+import { useRouter } from "next/navigation";
 
 const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
   authorization,
   uuid,
   pathName,
 }) => {
+  const router = useRouter();
+
   const [roundInfo, setRoundInfo] = useState<AuctionRoundInfo>({
     round: 0,
     roundEndTime: "",
@@ -72,7 +74,6 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
         if (data.round === null) {
           console.log("데이터가 null입니다. 재연결 시도 중...");
           eventSource.current?.close();
-          // setTimeout(fetchSSE, 3000);
           fetchSSE();
           console.log("연결됨");
           return;
@@ -87,6 +88,11 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
           price: data.price,
           isActive: data.isActive, //data.isActive
         });
+
+        //경매 마감
+        if (data.endStatus) {
+          router.push(`/paymentStay/${pathName}`);
+        }
       };
 
       eventSource.current.onerror = async () => {
@@ -95,13 +101,11 @@ const AuctionProgressInfo: React.FC<AuctionProgressInfoProps> = ({
         setTimeout(fetchSSE, 3000);
       };
       eventSource.current.onopen = (event) => {
-        console.log("onopen");
         console.log("연결 성공:", event);
       };
     };
 
     fetchSSE();
-    console.log("안녕");
     return () => {
       eventSource.current?.close();
     };
