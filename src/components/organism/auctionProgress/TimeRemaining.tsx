@@ -2,13 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-interface TimeRemainingProps {
-  auctionUuid?: any;
-  authorization?: any;
-  endTime: string;
-  isActive: boolean;
-}
+import { TimeRemainingProps } from "@/interface/TimeRemaining";
 
 const TimeRemaining: React.FC<TimeRemainingProps> = ({
   auctionUuid,
