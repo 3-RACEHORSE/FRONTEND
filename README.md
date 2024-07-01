@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center" >
 
-## Getting Started
+# 🎉MEET PLUS
 
-First, run the development server:
+![image](./readme-img/readme_1.png)
 
-```bash
+### MEET PLUS는 실시간 경매를 통한, 인플루언서 팬미팅 서비스 입니다.
+
+</div>
+
+<div>
+
+</br>
+
+<div align="center">
+
+`2024/04/18 ~ 2024/07/04`
+
+</br>
+
+[MEET PLUS 바로가기](https://fe-meetplus.vercel.app/)
+
+</div>
+</div>
+
+</br>
+
+## 🔗목차
+
+<div align="center">
+
+[로컬 실행방법](#🔗로컬-실행-방법)
+
+[버전](#🔗Version)
+
+[서비스 화면](#🔗서비스-화면)
+
+[개발 과정](#🔗개발-과정)
+
+[구현 방법](#🔗구현-방법)
+
+[고민 과정](#🔗고민-과정)
+
+</div>
+
+## 🔗로컬 실행 방법
+
+```
+npm i
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+</br>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔗버전
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+node 18.17.1
 
-## Learn More
+next 14.2.3
 
-To learn more about Next.js, take a look at the following resources:
+jest 29.7.0
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+eslint 8
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+next-auth 5.0.0-beta.17
 
-## Deploy on Vercel
+react-query 5.40.0
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+sass 1.77.0
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+</br>
+
+## 🔗서비스 화면
+
+<div align="center" >
+
+|               메인 페이지               |               경매 페이지                |           경매 리스트 페이지            |
+| :-------------------------------------: | :--------------------------------------: | :-------------------------------------: |
+| ![alt text](/public/README/image-9.png) | ![alt text](/public/README/image-11.png) | ![alt text](/public/README/image-7.png) |
+
+|             경메 상세 페이지             |            인플루언서 페이지            |               알림 페이지               |
+| :--------------------------------------: | :-------------------------------------: | :-------------------------------------: |
+| ![alt text](/public/README/image-10.png) | ![alt text](/public/README/image-8.png) | ![alt text](/public/README/image-2.png) |
+
+|              채팅방 페이지              |              채팅룸 페이지              |               결제 페이지                |
+| :-------------------------------------: | :-------------------------------------: | :--------------------------------------: |
+| ![alt text](/public/README/image-3.png) | ![alt text](/public/README/image-4.png) | ![alt text](/public/README/image-12.png) |
+
+|          회원가입 관련 페이지           |              마이페이지               |          서비스 다크모드 적용           |
+| :-------------------------------------: | :-----------------------------------: | :-------------------------------------: |
+| ![alt text](/public/README/image-1.png) | ![alt text](/public/README/image.png) | ![alt text](/public/README/image-5.png) |
+
+</div>
+
+## 🔗개발 과정
+
+### 🧑‍💻개발 개요 <br>
+
+- 팀에서, 프론트엔드를 전체를 담당하게 된 만큼, 책임감과 서비스의 완성에 많이 고민을 했습니다.
+
+<br>
+
+### 🪚설계 방향 선택 <br>
+
+- 현재 서비스는 `데드라인` 이 있으며, `확장성`을 고려해야 합니다.
+- 기능을 독립적인 모듈로 분리하여 여러 기능 요구사항을 구현하고, 모듈 재사용 가능성을 고려하여 확장성을 확보하고자 합니다. 또한, 효율적인 관리를 통해 성능을 향상시키고, 각 모듈이 독립적으로 구현되어 식별하는 것이 용이하여 데드라인을 충족할 수 있다고 판단했습니다.
+- 따라서, 선택한 설계 방향은 `아토믹 디자인`입니다. ATOM, MOLECULES, ORGANISMS 그리고, 서버컴포넌트를 TEMPLATES로 기준을 세웠습니다.
+
+### 🪚테스트 코드 <br>
+
+- 수정이 많은 api를 기준으로, `jest`를 사용하여 api 테스트 코드를 작성했습니다. 그리고 `github action`을 통해, 모든 테스트 코드가 통과시, merge되도록 하여, main 과 배포 서버를 보호했습니다.
+
+<br>
