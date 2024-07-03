@@ -8,7 +8,6 @@ export const patchEditMyInfo = async (
   src: any,
   router: any
 ) => {
-  console.log(authorization, uuid, inputNameValue, inputValueOne, src);
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/users/modify`,

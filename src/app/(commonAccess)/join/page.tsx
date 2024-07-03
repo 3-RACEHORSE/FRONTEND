@@ -4,7 +4,6 @@ import { auth } from "@/auth";
 
 export default async function Page() {
   const session = await auth();
-  console.log("회원가입 세션", session?.user);
 
   return (
     <main className={styles["join-main-container"]}>

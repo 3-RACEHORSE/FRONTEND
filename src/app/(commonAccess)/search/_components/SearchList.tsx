@@ -22,7 +22,6 @@ function SearchList({ searchText }: SearchListProps) {
       return;
     }
     const data = await getSearchTextData(searchText);
-    console.log(data);
     setItems(data);
   };
 

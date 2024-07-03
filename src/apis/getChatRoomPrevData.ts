@@ -10,7 +10,6 @@ export const useFetchListData = (
       const result = await sessionValid();
       if (result) {
         const enterTime = new Date().toISOString();
-        console.log(enterTime);
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/chat-service/api/v1/authorization/chat/previous/${roomNumber}?enterTime=${enterTime}&page=${pageParam}`,
           {
@@ -24,7 +23,6 @@ export const useFetchListData = (
         );
 
         const data = await res.json();
-        console.log(data);
         const reversedData = data.previousChatWithMemberInfoDtos.reverse();
 
         setChatData((prevData) => [...reversedData, ...prevData]);

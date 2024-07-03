@@ -32,32 +32,26 @@ const useChatListSSE = (
 
       eventSource.current.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data);
         setChatInfo({
           content: data.content,
           createdAt: data.createdAt,
         });
-        console.log("데이터");
         setChatNum((prev) => prev + 1);
 
         if (data.round === null) {
-          console.log("데이터가 null입니다. 재연결 시도 중...");
           eventSource.current?.close();
           // setTimeout(fetchSSE, 3000);
           fetchSSE();
-          console.log("연결됨");
           return;
         }
       };
 
       eventSource.current.onerror = async () => {
-        console.log("에러");
         eventSource.current?.close();
         setTimeout(fetchSSE, 3000);
       };
 
       eventSource.current.onopen = (event) => {
-        console.log("onopen");
         console.log("연결 성공:", event);
       };
     };

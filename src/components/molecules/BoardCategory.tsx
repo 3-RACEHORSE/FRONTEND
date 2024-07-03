@@ -32,7 +32,6 @@ export default function BoardCategory() {
     return decodeUrl(modifiedUrl);
   };
   const decodedString: string = modifyAndDecodeUrl(pathName);
-  console.log(pathName.startsWith("/auction/local"));
   return (
     <div className={styles["boardCategory-container"]}>
       <div className={styles["boardCategory-list"]}>

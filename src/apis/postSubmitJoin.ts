@@ -29,7 +29,6 @@ export const postSubmitJoin = async (
     );
 
     if (res.status === 200) {
-      console.log("회원가입 완료");
       Swal.fire({
         title: "회원가입을 축하드립니다!",
         icon: "success",

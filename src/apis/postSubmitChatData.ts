@@ -26,7 +26,6 @@ export const postSubmitChatData = async ({
       }
     );
 
-    console.log(res.status);
     if (!res.ok) {
       throw new Error("Failed to send message");
     }

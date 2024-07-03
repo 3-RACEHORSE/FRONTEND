@@ -14,9 +14,6 @@ export default async function Page(props: any) {
     pathName
   );
 
-  console.log(data1);
-  console.log(data2);
-
   return (
     <ModalProfile
       name={data1.name}

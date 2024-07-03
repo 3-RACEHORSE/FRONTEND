@@ -13,7 +13,6 @@ import { sessionValid } from "@/utils/session/sessionValid";
 
 export default function AlarmConnect() {
   const pathName = usePathname();
-  console.log("알람", pathName);
 
   const [count, setCount] = useState(0);
   const eventSource = useRef<null | EventSource>(null);
@@ -38,18 +37,15 @@ export default function AlarmConnect() {
           eventSource.current.onmessage = (event) => {
             const data = JSON.parse(event.data);
             setCount(data.alarmCount);
-            console.log(data);
           };
 
           eventSource.current.onerror = () => {
-            console.log("에러");
             eventSource.current?.close();
             setTimeout(fetchSSE, 3000);
           };
 
           eventSource.current.onopen = (event) => {
             console.log("onopen");
-            console.log("연결 성공:", event);
           };
         };
 

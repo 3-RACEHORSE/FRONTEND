@@ -50,7 +50,6 @@ const useChatEventSource = (roomId: any) => {
         };
 
         eventSource.onerror = (error) => {
-          console.error("EventSource error:", error);
           eventSource.close();
         };
 

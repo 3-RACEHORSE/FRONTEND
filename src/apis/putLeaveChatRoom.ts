@@ -20,7 +20,6 @@ const putLeaveChatRoom = async (
     );
 
     if (response.ok) {
-      console.log(response.status);
       return true;
     } else {
       console.error("Failed to leave chat room:", response.statusText);

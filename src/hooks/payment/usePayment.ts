@@ -55,7 +55,6 @@ const usePayment = (
   };
 
   const handlePaymentSend = async (auctionUuid: any, impUid: any) => {
-    console.log(authorization, uuid, impUid, auctionUuid);
     try {
       const success = await postSendPaymentData(
         authorization,
@@ -70,7 +69,6 @@ const usePayment = (
         alert("결제 실패");
       }
     } catch (error) {
-      console.error("결제 처리 중 오류", error);
       alert("결제 처리 중 오류가 발생했습니다.");
     }
   };

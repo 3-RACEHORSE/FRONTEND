@@ -6,7 +6,6 @@ export const handleSendVertifyNum = async (
   setCheckValid2: (value: boolean) => void,
   checkValid2: boolean
 ) => {
-  console.log(verificationCode);
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/auth/sms/verify`,

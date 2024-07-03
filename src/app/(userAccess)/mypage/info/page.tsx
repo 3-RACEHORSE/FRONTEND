@@ -8,7 +8,6 @@ export default async function Page() {
   const uuid = cookies().get("uuid")?.value;
 
   const data = await getUserProfileData(authorization, uuid);
-  console.log(data);
 
   return (
     <main>

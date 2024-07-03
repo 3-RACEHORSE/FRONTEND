@@ -8,7 +8,6 @@ const useLoginValidation = (email: string, snsType: string, snsId: string) => {
   const [loading, setLoading] = useState(true);
 
   const handleLoginValid = async () => {
-    console.log(email, snsType, snsId);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/member-service/api/v1/auth/login`,
@@ -25,12 +24,8 @@ const useLoginValidation = (email: string, snsType: string, snsId: string) => {
         }
       );
       if (res.status === 200) {
-        console.log("회원가입된 사람");
-        console.log("반환 헤더2", res);
-
         router.push("/");
       } else if (res.status === 201) {
-        console.log("회원가입이 필요한 사람");
         setLoading(false);
       }
     } catch (error) {

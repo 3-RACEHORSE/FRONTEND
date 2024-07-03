@@ -7,17 +7,14 @@ const useCareerState = () => {
 
   const handleCareerChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCareer1(event.target.value);
-    console.log(career1);
   };
 
   const handleCareerChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCareer2(event.target.value);
-    console.log(career2);
   };
 
   const handleCareerChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCareer3(event.target.value);
-    console.log(career3);
   };
 
   return {

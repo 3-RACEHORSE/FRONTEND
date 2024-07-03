@@ -21,14 +21,11 @@ export async function postSendPaymentData(
       }
     );
     if (response.ok) {
-      console.log("결제 성공", response.status);
       return true;
     } else {
-      console.error("결제 실패", response.status);
       return false;
     }
   } catch (error) {
-    console.error("API 호출 중 오류 발생", error);
     throw new Error("결제 처리 중 오류가 발생했습니다.");
   }
 }

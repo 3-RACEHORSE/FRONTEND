@@ -17,7 +17,6 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      // console.log("utc받은 데이터입니다.", endTime, "지금시간입니다", now);
       const endTimeDate = new Date(endTime);
       const timeDiff = (endTimeDate.getTime() - now.getTime()) / 1000;
       const remainingSeconds = Math.floor(timeDiff);
@@ -26,12 +25,10 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
         // 경매중일때
         setRemainingTime(remainingSeconds + 32400); // UTC, KST 차이 간극 하드코딩
         setToggle(false); // 기존에 false로 바꿨던것을 여기서, true로 변경
-        console.log("경매중", remainingTime);
       } else if (!isActive) {
         // 대기시간일때
         setRemainingTime(remainingSeconds + 32400 - 60); // UTC, KST 차이 간극 하드코딩
         setToggle(true); // 기존에 false로 바꿨던것을 여기서, true로 변경
-        console.log("대기중", remainingTime);
       }
 
       if (remainingSeconds <= 0) {
@@ -44,8 +41,6 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
 
   //경매 마감알림 api
   const triggerAuctionEndNotification = async () => {
-    console.log("경매 마감 api");
-
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/auction/auction-close/${auctionUuid}`,
       {
@@ -56,14 +51,12 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
     );
 
     if (response.ok) {
-      console.log("마감요청 성공 - 경매 끝");
       router.push(`/paymentStay/${auctionUuid}`);
     }
   };
 
   //경매 대기 마감 알림 api
   const triggerStayEndNotification = async () => {
-    console.log("대기 마감 api");
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/auction-service/api/v1/auction/auction-standby-end/${auctionUuid}`,
       {
@@ -73,15 +66,7 @@ const TimeRemaining: React.FC<TimeRemainingProps> = ({
         },
       }
     );
-
-    if (response.ok) {
-      console.log("대기마감요청 성공");
-    }
   };
-
-  if (remainingTime == 0) {
-    console.log("현재 isActive, toogle정보입니다.", isActive, toggle);
-  }
 
   // 경매 마감알림
   // 0초 그리고 라운드중 그리고

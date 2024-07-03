@@ -7,17 +7,14 @@ const useCertifyState = () => {
 
   const handleCertifyChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCertify1(event.target.value);
-    console.log(certify1);
   };
 
   const handleCertifyChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCertify2(event.target.value);
-    console.log(certify2);
   };
 
   const handleCertifyChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCertify3(event.target.value);
-    console.log(certify3);
   };
 
   return {

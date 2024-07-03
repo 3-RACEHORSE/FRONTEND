@@ -41,7 +41,6 @@ export const handleCrop = (
   const cropper = cropperRef.current?.cropper;
   if (cropper && currentImageIndex !== null) {
     const croppedCanvas = cropper.getCroppedCanvas();
-    console.log("사진 이미지", croppedCanvas);
     // 이미지를 S3에 업로드하고 URL을 얻어옴
     uploadImageToS3(croppedCanvas)
       .then((imageUrl: any) => {

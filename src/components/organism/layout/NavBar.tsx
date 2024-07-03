@@ -20,7 +20,6 @@ export default function NavBar() {
 
   //다크모드
   const isDarkMode = useDarkMode();
-  console.log("nav에서 통제하는 ", isDarkMode, "입니다.");
 
   return (
     <>

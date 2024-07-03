@@ -36,14 +36,10 @@ const useAuctionSSE = (
         const data = JSON.parse(event.data);
 
         if (data.round === null) {
-          console.log("데이터가 null입니다. 재연결 시도 중...");
           eventSource.current?.close();
           fetchSSE();
-          console.log("연결됨");
           return;
         }
-
-        console.log(data);
 
         setRoundInfo({
           round: data.round,
@@ -60,13 +56,11 @@ const useAuctionSSE = (
       };
 
       eventSource.current.onerror = async () => {
-        console.log("에러");
         eventSource.current?.close();
         setTimeout(fetchSSE, 3000);
       };
 
       eventSource.current.onopen = (event) => {
-        console.log("연결 성공:", event);
         setConnected(true);
       };
     };

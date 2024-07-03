@@ -31,7 +31,6 @@ const useChatRoomSSE = (
       );
       eventSource.current.onmessage = (event) => {
         const newData: ChatType = JSON.parse(event.data);
-        console.log("새로 받은 데이터", newData);
         setChatData((prevData) => {
           if (
             !prevData.some(
@@ -52,12 +51,10 @@ const useChatRoomSSE = (
         fetchSSE();
       };
       eventSource.current.onopen = (event) => {
-        console.log("onopen");
         console.log("채팅방 연결 성공:", event);
       };
     };
     fetchSSE();
-    console.log("안녕");
     return () => {
       eventSource.current?.close();
     };

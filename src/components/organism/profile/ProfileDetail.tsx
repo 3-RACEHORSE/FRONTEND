@@ -13,8 +13,6 @@ interface ProfileDetailProps {
 }
 
 export default function ProfileDetail({ review }: ProfileDetailProps) {
-  console.log("최종적으로 받은", review);
-
   return (
     <>
       <IconWithTitle title="🔗REVIEW" detail="출연진 리뷰 정보입니다." />

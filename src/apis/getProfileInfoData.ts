@@ -10,8 +10,6 @@ export async function getProfileInfoData(pathName: any, authorization: any) {
       },
     }
   );
-  console.log(res.status, "입니다");
   const data = await res.json();
-  console.log(data);
   return data;
 }

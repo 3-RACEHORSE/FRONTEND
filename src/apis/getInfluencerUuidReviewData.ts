@@ -13,7 +13,6 @@ export default async function getinfluencerUuidReviewData(
       },
     }
   );
-  console.log(res.status);
 
   const data = await res.json();
   return data;

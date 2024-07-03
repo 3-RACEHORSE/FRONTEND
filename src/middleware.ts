@@ -14,7 +14,6 @@ export async function middleware(request: NextRequest) {
 
   // 로그인을 안했을때 만 해당
   if (!session) {
-    console.log("미들웨어 적용됨");
     return NextResponse.redirect("https://fe-meetplus.vercel.app/login");
   }
 }
